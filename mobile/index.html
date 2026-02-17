@@ -3,60 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Designer Portfolio | ANIL TAHMAZ</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PC Projects | Technical Game Design</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="project-page">
 
-    <header>
-        <div class="container">
-            <h1>ANIL TAHMAZ</h1>
-            <p class="subtitle">Game Designer & Unity Developer</p>
-            <p class="location">Warsaw, Poland</p>
-        </div>
+    <nav>
+        <a href="/" class="back-btn">← Back to Hub</a>
+    </nav>
+
+    <header class="project-header">
+        <h1>PC & Console Portfolio</h1>
+        <p>Technical Design focus with Unity DOTS and ECS architecture.</p>
     </header>
 
-    <section class="projects">
-        <div class="container">
-            <h2>Featured Projects</h2>
-            <div class="grid">
-                
-                <div class="card">
-                    <div class="card-image project-one"></div>
-                    <div class="card-content">
-                        <h3>Roguelike Card-Strategy</h3>
-                        <p>Developed with <strong>Unity DOTS/ECS</strong>. Features high-performance troop summoning (60+ units) and LOTR-inspired parody mechanics.</p>
-                        <span class="tag">C#</span> <span class="tag">DOTS</span> <span class="tag">Unity</span>
-                    </div>
+    <main class="project-container">
+        
+        <div class="project-card">
+            <div class="webgl-container">
+                <iframe src="roguelike-build/index.html" frameborder="0" allowfullscreen></iframe>
+                <div class="webgl-overlay">Click to Play Build</div>
+            </div>
+            
+            <div class="project-info">
+                <h2>Roguelike Deck-Builder</h2>
+                <p>A high-performance strategy game featuring LOTR-inspired parody mechanics. Developed to showcase unit-batching and complex system architecture.</p>
+                <div class="technical-specs">
+                    <h3>Technical Highlights:</h3>
+                    <ul>
+                        <li>Implemented **Unity DOTS/ECS** for 60+ active units.</li>
+                        <li>Designed custom card-logic systems for modularity.</li>
+                    </ul>
                 </div>
-
-                <div class="card">
-                    <div class="card-image project-two"></div>
-                    <div class="card-content">
-                        <h3>Parkour Movement System</h3>
-                        <p>Fluid movement mechanics focusing on animation state machines and custom physics in Unity.</p>
-                        <span class="tag">Level Design</span> <span class="tag">Mechanics</span>
-                    </div>
+                <div class="tags">
+                    <span>Unity DOTS</span>
+                    <span>C#</span>
+                    <span>Systems Design</span>
                 </div>
-
+                <a href="https://github.com/yourusername/repo" class="repo-link">Source Code (GitHub)</a>
             </div>
         </div>
-    </section>
 
-    <section class="skills">
-        <div class="container">
-            <h2>Technical Proficiency</h2>
-            <ul>
-                <li><strong>Engine:</strong> Unity (Pro Level), Unreal Engine</li>
-                <li><strong>Systems:</strong> DOTS/ECS, NavMesh, Cinemachine, FMOD</li>
-                <li><strong>Languages:</strong> C#, C++, HTML/CSS</li>
-            </ul>
+        <div class="project-card">
+            <div class="webgl-container">
+                <iframe src="parkour-build/index.html" frameborder="0" allowfullscreen></iframe>
+                <div class="webgl-overlay">Click to Play Build</div>
+            </div>
+            
+            <div class="project-info">
+                <h2>2.5D Parkour System</h2>
+                <p>Focuses on fluid character movement, custom physics interactions, and animation state machine optimization.</p>
+                <div class="tags">
+                    <span>Physics</span>
+                    <span>Animation</span>
+                    <span>Mechanics</span>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2026 | Portfolio Created by Anil Tahmaz</p>
-    </footer>
+    </main>
 
 </body>
 </html>
