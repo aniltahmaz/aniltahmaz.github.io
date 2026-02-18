@@ -1,97 +1,524 @@
+﻿/* ════════════════════════════════════════════
+   SINGLE PAGE PORTFOLIO — SIDEBAR LAYOUT
+   ════════════════════════════════════════════ */
+
 :root {
-    --pc-color: #00d4ff;
-    --mobile-color: #ff0055;
-    --bg-dark: #0a0a0a;
+    --bg:          #0a0a0a;
+    --sidebar-bg:  #111111;
+    --card-bg:     #161616;
+    --border:      #222;
+    --accent:      #00d4ff;
+    --accent-glow: rgba(0, 212, 255, 0.15);
+    --mobile-clr:  #ff0055;
+    --text:        #e0e0e0;
+    --text-dim:    #777;
+    --radius:      10px;
 }
 
-body, html {
-    height: 100%;
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-dark);
-    overflow: hidden; /* Prevents scrolling on the hub page */
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
 }
 
-.split-container {
+/* ══════════════════════════
+   LAYOUT
+   ══════════════════════════ */
+.layout {
     display: flex;
+    min-height: 100vh;
+}
+
+/* ══════════════════════════
+   SIDEBAR
+   ══════════════════════════ */
+.sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Hide scrollbar but keep functionality */
+.sidebar::-webkit-scrollbar { width: 0; }
+.sidebar { scrollbar-width: none; }
+
+.sidebar-inner {
+    padding: 40px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Profile Photo ── */
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--border);
+    margin-bottom: 20px;
+    transition: border-color 0.4s;
+}
+
+.profile-photo:hover { border-color: var(--accent); }
+
+.profile-photo img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ── Name & Title ── */
+.name {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+}
+
+.title {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 6px 0 0;
+    text-align: center;
+}
+
+/* ── Divider ── */
+.divider {
+    width: 60px;
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+}
+
+/* ── Info Block ── */
+.info-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.info-icon {
+    font-size: 1rem;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* ── Sidebar Sections ── */
+.sidebar-section {
     width: 100%;
 }
 
-.split {
-    flex: 1;
+.sidebar-section h3 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin: 0 0 12px;
+}
+
+/* ── Skill Tags ── */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.skill-tag {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    color: #ccc;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.skill-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ── Social Links ── */
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 6px 0;
+    transition: color 0.3s;
+}
+
+.social-link:hover { color: var(--accent); }
+
+.social-icon {
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
-    transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-/* PC Side Styles */
-.left {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('pc-bg.jpg'); /* Add a PC game screenshot here */
-    background-size: cover;
-    background-position: center;
-    border-right: 1px solid #333;
-}
-
-/* Mobile Side Styles */
-.right {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('mobile-bg.jpg'); /* Add a Mobile game screenshot here */
-    background-size: cover;
-    background-position: center;
-}
-
-.content {
-    text-align: center;
-    color: white;
-    z-index: 2;
-    padding: 20px;
-}
-
-h1 {
-    font-size: 4rem;
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    font-size: 0.8rem;
     font-weight: 900;
+    flex-shrink: 0;
+}
+
+/* ── Resume Button ── */
+.resume-btn {
+    display: block;
+    width: 100%;
+    margin-top: 28px;
+    padding: 14px 20px;
+    background: var(--accent);
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: var(--radius);
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.resume-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+}
+
+/* ══════════════════════════
+   MAIN CONTENT
+   ══════════════════════════ */
+.content {
+    flex: 1;
+    min-width: 0;
+    padding: 50px 50px 0;
+}
+
+/* ── Sections ── */
+.section {
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid var(--border);
+}
+
+.section:last-of-type { border-bottom: none; }
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin: 0 0 16px;
+    color: #fff;
+}
+
+.about-section p {
+    font-size: 1.05rem;
+    color: #bbb;
+    max-width: 650px;
     margin: 0;
-    letter-spacing: -2px;
-    text-transform: uppercase;
 }
 
-p {
-    font-size: 1.1rem;
+/* ══════════════════════════
+   PROJECT CARDS
+   ══════════════════════════ */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 8px;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.35s ease,
+                border-color 0.35s,
+                box-shadow 0.35s;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5),
+                0 0 0 1px var(--accent);
+}
+
+/* ── Thumbnail ── */
+.card-thumbnail {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    background: #222;
+}
+
+.card-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .card-thumbnail img {
+    transform: scale(1.08);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.play-badge {
+    background: var(--accent);
+    color: #000;
+    font-weight: 900;
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
     letter-spacing: 1px;
-    opacity: 0.8;
 }
 
-.button {
-    margin-top: 20px;
-    padding: 12px 30px;
-    border: 2px solid white;
+.store-badge {
+    background: var(--mobile-clr);
+    color: #fff;
+}
+
+/* ── Card Body ── */
+.card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-platform {
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
-    font-weight: bold;
-    display: inline-block;
-    transition: 0.3s;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 6px;
 }
 
-/* Hover Effects */
-.split:hover {
-    flex: 1.5; /* Makes the hovered side wider */
+.card-platform.mobile { color: var(--mobile-clr); }
+
+.card-body h3 {
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #fff;
 }
 
-.left:hover { background-color: rgba(0, 212, 255, 0.2); }
-.right:hover { background-color: rgba(255, 0, 85, 0.2); }
-
-.split:hover .button {
-    background: white;
-    color: black;
+.card-body p {
+    font-size: 0.88rem;
+    color: #999;
+    margin: 0 0 14px;
+    flex: 1;
 }
 
-/* Mobile Responsive */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.tag {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    font-size: 0.72rem;
+    border-radius: 4px;
+    color: #aaa;
+}
+
+.card-arrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.project-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ══════════════════════════
+   EXPERIENCE TIMELINE
+   ══════════════════════════ */
+.timeline {
+    position: relative;
+    padding-left: 32px;
+    margin-top: 8px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--border);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 36px;
+}
+
+.timeline-item:last-child { margin-bottom: 0; }
+
+.timeline-dot {
+    position: absolute;
+    left: -29px;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+}
+
+.timeline-content {}
+
+.timeline-date {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timeline-content h3 {
+    margin: 4px 0 2px;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.timeline-company {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin: 0 0 8px;
+}
+
+.timeline-content p:last-child {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin: 0;
+}
+
+/* ══════════════════════════
+   FOOTER
+   ══════════════════════════ */
+footer {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 0.78rem;
+    color: #444;
+}
+
+/* ══════════════════════════
+   RESPONSIVE
+   ══════════════════════════ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .content { padding: 40px 30px 0; }
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile — sidebar stacks on top */
 @media (max-width: 768px) {
-    .split-container {
+    .layout {
         flex-direction: column;
     }
-    h1 { font-size: 2.5rem; }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-inner {
+        padding: 30px 20px;
+    }
+
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .name { font-size: 1.3rem; }
+
+    .content {
+        padding: 30px 20px 0;
+    }
+
+    .section-title { font-size: 1.3rem; }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-thumbnail { height: 180px; }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+    .sidebar-inner { padding: 24px 16px; }
+    .content { padding: 24px 16px 0; }
+    .card-body h3 { font-size: 1.05rem; }
 }
