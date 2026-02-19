@@ -1,0 +1,674 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanted Curve Bullet | ANIL TAHMAZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:       #0a0a0a;
+            --surface:  #141414;
+            --border:   #222;
+            --accent:   #00d4ff;
+            --accent-glow: rgba(0, 212, 255, 0.15);
+            --itch:     #fa5c5c;
+            --text:     #e0e0e0;
+            --text-dim: #777;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* ── Navigation ── */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 40px;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links { display: flex; gap: 24px; }
+
+        .nav-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover { color: var(--accent); }
+
+        /* ── Container ── */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            font-weight: 900;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 0 0 12px;
+            letter-spacing: -1px;
+            color: #fff;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #999;
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .btn-play-top {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--accent);
+            color: #000;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn-play-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        /* ── Info Bar ── */
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-item {
+            padding: 20px 40px;
+            text-align: center;
+            border-right: 1px solid var(--border);
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .info-item:last-child { border-right: none; }
+
+        .info-label {
+            display: block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* ── Sections ── */
+        .section {
+            padding: 50px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin: 0 0 16px;
+            color: #fff;
+        }
+
+        .section p {
+            color: #bbb;
+            max-width: 700px;
+        }
+
+        /* ── Contribution Cards ── */
+        .contribution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contribution-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .contribution-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .contribution-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .contribution-card h3 {
+            margin: 0 0 8px;
+            font-size: 1.05rem;
+            color: #fff;
+        }
+
+        .contribution-card p {
+            font-size: 0.88rem;
+            color: #999;
+            margin: 0;
+        }
+
+        /* ══════════════════════════════════
+           ITCH.IO GAME EMBED
+           ══════════════════════════════════ */
+        .game-section {
+            padding: 50px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .game-section h2 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin: 0 0 8px;
+            color: #fff;
+        }
+
+        .play-instructions {
+            color: #999;
+            font-size: 0.95rem;
+            margin: 0 0 24px;
+        }
+
+        .itch-embed-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #000;
+            transition: border-color 0.3s;
+        }
+
+        .itch-embed-wrapper:hover {
+            border-color: var(--accent);
+        }
+
+        .itch-game-frame {
+            width: 100%;
+            height: 620px;
+            border: none;
+            display: block;
+        }
+
+        .itch-link-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .itch-branding {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .itch-logo { font-size: 1.2rem; }
+
+        .itch-text {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .itch-text a {
+            color: var(--itch);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .itch-text a:hover { text-decoration: underline; }
+
+        .btn-fullscreen-itch {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            color: #ccc;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .btn-fullscreen-itch:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── Gallery ── */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .gallery-item:hover { border-color: var(--accent); }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        /* ── Lightbox ── */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            cursor: zoom-out;
+        }
+
+        .lightbox.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+        }
+
+        /* ── Video ── */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-top: 16px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+
+        /* ── Tech tags ── */
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .tech-tag {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: border-color 0.3s;
+        }
+
+        .tech-tag:hover { border-color: var(--accent); }
+
+        /* ── Back link ── */
+        .back-link {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .back-link a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            transition: opacity 0.3s;
+        }
+
+        .back-link a:hover { opacity: 0.7; }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.78rem;
+            color: #444;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .top-nav {
+                flex-direction: column;
+                padding: 12px 20px;
+                gap: 10px;
+            }
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 40px 20px 30px; }
+            .info-bar { flex-direction: column; }
+            .info-item {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            .itch-game-frame { height: 400px; }
+            .itch-link-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ───── Navigation ───── -->
+    <nav class="top-nav">
+        <a href="/" class="nav-logo">ANIL TAHMAZ</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">← Back to Portfolio</a>
+        </div>
+    </nav>
+
+    <!-- ───── Hero ───── -->
+    <section class="hero">
+        <span class="badge">PC Game</span>
+        <h1>Wanted Curve Bullet</h1>
+        <p class="hero-sub">
+            A physics-based shooter inspired by the movie "Wanted" 
+            where you bend bullets around obstacles to hit targets.
+        </p>
+        <a href="#play" class="btn-play-top">▶ Play Now</a>
+    </section>
+
+    <!-- ───── Info Bar ───── -->
+    <section class="info-bar">
+        <div class="info-item">
+            <span class="info-label">Role</span>
+            <span class="info-value">Designer / Developer</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Engine</span>
+            <span class="info-value">Unity</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Duration</span>
+            <span class="info-value">3 Months</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Team</span>
+            <span class="info-value">Solo</span>
+        </div>
+    </section>
+
+    <main class="container">
+
+        <!-- ───── Overview ───── -->
+        <section class="section">
+            <h2>Project Overview</h2>
+            <p>
+                Wanted Curve Bullet is a physics-based shooter where players
+                control bullet trajectory in real-time, bending them around
+                corners and obstacles to eliminate targets. Inspired by the
+                iconic curved bullet scenes from the movie "Wanted," the game
+                challenges players to master precise trajectory control with
+                satisfying slow-motion kill cams.
+            </p>
+        </section>
+
+        <!-- ───── My Contributions ───── -->
+        <section class="section">
+            <h2>My Contributions</h2>
+            <div class="contribution-grid">
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">🎯</div>
+                    <h3>Bullet Curving Mechanic</h3>
+                    <p>
+                        Designed and implemented the core curving system
+                        using bezier curves and real-time player input
+                        for trajectory control.
+                    </p>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">⚙️</div>
+                    <h3>Physics System</h3>
+                    <p>
+                        Custom physics for bullet flight, collision
+                        detection, and ricochet mechanics with
+                        satisfying impact feedback.
+                    </p>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">🗺️</div>
+                    <h3>Level Design</h3>
+                    <p>
+                        Created increasingly complex levels that teach
+                        players the curving mechanic through environmental
+                        puzzles and obstacles.
+                    </p>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">🎨</div>
+                    <h3>Game Feel & Juice</h3>
+                    <p>
+                        Trail renderers, slow-motion kill cam, screen
+                        shake, and particle effects on impact for
+                        satisfying game feel.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════
+             ITCH.IO PLAYABLE EMBED — METHOD 1
+             ═══════════════════════════════════════════ -->
+        <section class="game-section" id="play">
+            <h2>▶ Play the Game</h2>
+            <p class="play-instructions">
+                Play directly in your browser below.
+                <br><em>Controls: Mouse to aim · Left click to shoot ·
+                Drag to curve bullet trajectory</em>
+            </p>
+
+            <div class="itch-embed-wrapper">
+
+                <iframe
+                    class="itch-game-frame"
+                    src="https://itch.io/embed-upload/16521010?color=0a0a0a"
+                    allowfullscreen>
+                </iframe>
+
+                <div class="itch-link-bar">
+                    <div class="itch-branding">
+                        <span class="itch-logo">🎮</span>
+                        <span class="itch-text">
+                            Also available on
+                            <a href="https://aniltahmaz.itch.io/wanted-curve-bullet"
+                               target="_blank">itch.io</a>
+                        </span>
+                    </div>
+                    <button class="btn-fullscreen-itch"
+                            onclick="goFullscreen()">
+                        ⛶ Fullscreen
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ───── Screenshots ───── -->
+        <section class="section">
+            <h2>Screenshots</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="/assets/images/curving-bullet-1.jpg"
+                         alt="Gameplay screenshot 1"
+                         loading="lazy"
+                         onclick="openLightbox(this.src)">
+                </div>
+                <div class="gallery-item">
+                    <img src="/assets/images/curving-bullet-2.jpg"
+                         alt="Gameplay screenshot 2"
+                         loading="lazy"
+                         onclick="openLightbox(this.src)">
+                </div>
+                <div class="gallery-item">
+                    <img src="/assets/images/curving-bullet-3.jpg"
+                         alt="Gameplay screenshot 3"
+                         loading="lazy"
+                         onclick="openLightbox(this.src)">
+                </div>
+            </div>
+        </section>
+
+        <!-- ───── Video (optional — remove if not needed) ───── -->
+        <!--
+        <section class="section">
+            <h2>Gameplay Video</h2>
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                    title="Gameplay Video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write;
+                           encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+        -->
+
+        <!-- ───── Tech Stack ───── -->
+        <section class="section">
+            <h2>Technology</h2>
+            <div class="tech-list">
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">Physics</span>
+                <span class="tech-tag">Bezier Curves</span>
+                <span class="tech-tag">Cinemachine</span>
+                <span class="tech-tag">Trail Renderer</span>
+                <span class="tech-tag">Particle System</span>
+            </div>
+        </section>
+
+        <!-- ───── Back ───── -->
+        <div class="back-link">
+            <a href="/">← Back to Portfolio</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Anil Tahmaz</p>
+    </footer>
+
+    <!-- ───── Lightbox ───── -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+    function goFullscreen() {
+        const wrapper = document.querySelector('.itch-embed-wrapper');
+        if (wrapper.requestFullscreen) {
+            wrapper.requestFullscreen();
+        } else if (wrapper.webkitRequestFullscreen) {
+            wrapper.webkitRequestFullscreen();
+        }
+    }
+
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+    }
+    </script>
+
+</body>
+</html>

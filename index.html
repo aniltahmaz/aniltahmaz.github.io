@@ -13,22 +13,17 @@
 
         <!-- ═══════════ LEFT SIDEBAR ═══════════ -->
         <aside class="sidebar">
-
             <div class="sidebar-inner">
 
-                <!-- Profile Photo -->
                 <div class="profile-photo">
                     <img src="assets/images/profile.jpg" alt="Anil Tahmaz">
                 </div>
 
-                <!-- Name & Title -->
                 <h1 class="name">ANIL TAHMAZ</h1>
                 <p class="title">Game Designer & Unity Developer</p>
 
-                <!-- Divider -->
                 <div class="divider"></div>
 
-                <!-- Info -->
                 <div class="info-block">
                     <div class="info-item">
                         <span class="info-icon">📍</span>
@@ -44,10 +39,8 @@
                     </div>
                 </div>
 
-                <!-- Divider -->
                 <div class="divider"></div>
 
-                <!-- Skills -->
                 <div class="sidebar-section">
                     <h3>Core Skills</h3>
                     <div class="skill-tags">
@@ -64,10 +57,8 @@
                     </div>
                 </div>
 
-                <!-- Divider -->
                 <div class="divider"></div>
 
-                <!-- Social Links -->
                 <div class="sidebar-section">
                     <h3>Connect</h3>
                     <div class="social-links">
@@ -85,10 +76,14 @@
                             <span class="social-icon">⌨</span>
                             <span>GitHub</span>
                         </a>
+                        <a href="https://yourname.itch.io"
+                           target="_blank" class="social-link">
+                            <span class="social-icon">🎮</span>
+                            <span>Itch.io</span>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Resume Button -->
                 <a href="assets/docs/Anil_Tahmaz_Resume.pdf"
                    target="_blank"
                    class="resume-btn">
@@ -96,13 +91,11 @@
                 </a>
 
             </div>
-
         </aside>
 
         <!-- ═══════════ RIGHT CONTENT ═══════════ -->
         <main class="content">
 
-            <!-- About Section -->
             <section class="section about-section">
                 <h2 class="section-title">About Me</h2>
                 <p>
@@ -110,148 +103,102 @@
                     building engaging gameplay systems across PC, console, and mobile
                     platforms. Specialized in <strong>DOTS/ECS architecture</strong>,
                     <strong>F2P economy design</strong>, and player-centric UX.
-                    Passionate about creating performant, data-driven game systems
-                    that scale.
                 </p>
             </section>
 
-            <!-- Projects Section -->
             <section class="section">
                 <h2 class="section-title">Projects</h2>
 
                 <div class="projects-grid">
 
-                    <!-- Project Card 1 -->
-                    <a href="/projects/roguelike-card-strategy/"
+                    <!-- ── Project Card 1 ── -->
+                    <a href="projects/curving-bullet/"
                        target="_blank"
-                       rel="noopener noreferrer"
                        class="project-card">
+                        <div class="card-thumbnail">
+                            <img src="assets/images/curving-bullet-thumb.jpg"
+                                 alt="Curving Bullet">
+                            <div class="card-overlay">
+                                <span class="play-badge">▶ PLAY ON PAGE</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-meta">
+                                <span class="card-platform">PC</span>
+                                <span class="card-itch">itch.io</span>
+                            </div>
+                            <h3>Curving Bullet</h3>
+                            <p>Physics-based shooter where you bend bullets
+                               around obstacles to hit targets.</p>
+                            <div class="card-tags">
+                                <span class="tag">C#</span>
+                                <span class="tag">Physics</span>
+                                <span class="tag">Unity</span>
+                            </div>
+                            <div class="card-arrow">View & Play →</div>
+                        </div>
+                    </a>
 
+                    <!-- ── Project Card 2 ── -->
+                    <a href="projects/roguelike/"
+                       target="_blank"
+                       class="project-card">
                         <div class="card-thumbnail">
                             <img src="assets/images/roguelike-thumb.jpg"
                                  alt="Roguelike Card Strategy">
                             <div class="card-overlay">
-                                <span class="play-badge">▶ PLAYABLE</span>
+                                <span class="play-badge">▶ PLAY ON PAGE</span>
                             </div>
                         </div>
-
                         <div class="card-body">
-                            <div class="card-platform">PC & Console</div>
+                            <div class="card-meta">
+                                <span class="card-platform">PC</span>
+                                <span class="card-itch">itch.io</span>
+                            </div>
                             <h3>Roguelike Card-Strategy</h3>
-                            <p>
-                                High-performance card-strategy game built on
-                                Unity DOTS/ECS. Features 60+ simultaneous units,
-                                procedural maps, and LOTR-inspired parody mechanics.
-                            </p>
+                            <p>High-performance card-strategy game built on
+                               Unity DOTS/ECS with 60+ simultaneous units.</p>
                             <div class="card-tags">
-                                <span class="tag">C#</span>
                                 <span class="tag">DOTS</span>
                                 <span class="tag">ECS</span>
                                 <span class="tag">Unity</span>
                             </div>
-                            <div class="card-arrow">View Project →</div>
+                            <div class="card-arrow">View & Play →</div>
                         </div>
                     </a>
 
-                    <!-- Project Card 2 -->
-                    <a href="/projects/parkour-movement/"
+                    <!-- ── Project Card 3 ── -->
+                    <a href="projects/parkour/"
                        target="_blank"
-                       rel="noopener noreferrer"
                        class="project-card">
-
                         <div class="card-thumbnail">
                             <img src="assets/images/parkour-thumb.jpg"
-                                 alt="Parkour Movement System">
+                                 alt="Parkour Movement">
                             <div class="card-overlay">
-                                <span class="play-badge">▶ PLAYABLE</span>
+                                <span class="play-badge">▶ PLAY ON PAGE</span>
                             </div>
                         </div>
-
                         <div class="card-body">
-                            <div class="card-platform">PC & Console</div>
+                            <div class="card-meta">
+                                <span class="card-platform">PC</span>
+                                <span class="card-itch">itch.io</span>
+                            </div>
                             <h3>Parkour Movement System</h3>
-                            <p>
-                                Fluid first-person movement mechanics with
-                                animation state machines, custom physics,
-                                wall-running, and momentum-based traversal.
-                            </p>
+                            <p>Fluid first-person movement with wall-running,
+                               momentum-based traversal, and custom physics.</p>
                             <div class="card-tags">
                                 <span class="tag">Level Design</span>
                                 <span class="tag">Mechanics</span>
-                                <span class="tag">Physics</span>
                             </div>
-                            <div class="card-arrow">View Project →</div>
-                        </div>
-                    </a>
-
-                    <!-- Project Card 3 (example — add more as needed) -->
-                    <a href="/projects/mobile-idle-tycoon/"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="project-card">
-
-                        <div class="card-thumbnail">
-                            <img src="assets/images/roguelike-thumb.jpg"
-                                 alt="Mobile Idle Tycoon">
-                            <div class="card-overlay">
-                                <span class="play-badge store-badge">
-                                    📱 ON STORE
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="card-body">
-                            <div class="card-platform mobile">Mobile</div>
-                            <h3>Idle Tycoon Game</h3>
-                            <p>
-                                F2P idle tycoon with optimized economy loops,
-                                A/B tested monetization, and 500K+ downloads
-                                on Google Play.
-                            </p>
-                            <div class="card-tags">
-                                <span class="tag">F2P</span>
-                                <span class="tag">Economy</span>
-                                <span class="tag">UX</span>
-                            </div>
-                            <div class="card-arrow">View Project →</div>
-                        </div>
-                    </a>
-
-                    <!-- Project Card 4 -->
-                    <a href="/projects/tower-defense/"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="project-card">
-
-                        <div class="card-thumbnail">
-                            <img src="assets/images/parkour-thumb.jpg"
-                                 alt="Tower Defense Prototype">
-                        </div>
-
-                        <div class="card-body">
-                            <div class="card-platform">PC & Console</div>
-                            <h3>Tower Defense Prototype</h3>
-                            <p>
-                                Strategic tower defense with dynamic enemy
-                                pathing, upgrade trees, and wave-based
-                                difficulty scaling.
-                            </p>
-                            <div class="card-tags">
-                                <span class="tag">AI</span>
-                                <span class="tag">NavMesh</span>
-                                <span class="tag">Balancing</span>
-                            </div>
-                            <div class="card-arrow">View Project →</div>
+                            <div class="card-arrow">View & Play →</div>
                         </div>
                     </a>
 
                 </div>
             </section>
 
-            <!-- Experience Timeline (optional) -->
             <section class="section">
                 <h2 class="section-title">Experience</h2>
-
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
@@ -259,10 +206,7 @@
                             <span class="timeline-date">2022 — Present</span>
                             <h3>Senior Game Designer</h3>
                             <p class="timeline-company">Studio Name, Warsaw</p>
-                            <p>
-                                Led design of core gameplay systems. Shipped
-                                2 titles on Steam. Managed a team of 4 designers.
-                            </p>
+                            <p>Led design of core gameplay systems. Shipped 2 titles.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -271,21 +215,17 @@
                             <span class="timeline-date">2019 — 2022</span>
                             <h3>Game Designer</h3>
                             <p class="timeline-company">Mobile Studio, Istanbul</p>
-                            <p>
-                                Designed F2P economy systems and live-ops
-                                features for games with 1M+ DAU.
-                            </p>
+                            <p>Designed F2P economy systems for games with 1M+ DAU.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <footer>
-                <p>&copy; 2026 Anil Tahmaz — Built with purpose.</p>
+                <p>&copy; 2026 Anil Tahmaz</p>
             </footer>
 
         </main>
-
     </div>
 
 </body>
