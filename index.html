@@ -210,24 +210,203 @@
 
     </div>
 
-</section>
-    <section class="project-feed">
-        <h2 class="section-label">03_SYSTEMS_DATABASE</h2>
-        </section>
-
             <!-- Projects -->
             <section class="section">
                 <h2 class="section-title">Projects</h2>
 
+            <!--═══════════════════════════════════
+                PROJECT 1 — WANTED CURVE BULLET
+                ═══════════════════════════════════ -->
+            <div class="project-row">
+
+                <!-- LEFT — Video Preview -->
+                <div class="project-preview">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/curving-bullet.mp4"
+                                type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- RIGHT — Details -->
+                <div class="project-details">
+
+                    <!-- Title Bar -->
+                    <div class="project-header">
+                        <div class="project-header-left">
+                            <h3>Wanted Curve Bullet</h3>
+                            <div class="project-tags">
+                                <span class="tag">C#</span>
+                                <span class="tag">Physics</span>
+                                <span class="tag">Unity</span>
+                            </div>
+                        </div>
+                        <a href="https://itch.io/embed-upload/16521010?color=0a0a0a"
+                            target="_blank"
+                            class="btn-play">
+                            ▶ Play Game
+                        </a>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="tabs">
+                        <button class="tab active"
+                                onclick="switchTab('project1', 'design', this)">
+                            Design & UX
+                        </button>
+                        <button class="tab"
+                                onclick="switchTab('project1', 'technical', this)">
+                            Technical Spec
+                        </button>
+                        <button class="tab"
+                                onclick="switchTab('project1', 'contribution', this)">
+                            Contribution
+                        </button>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content-wrapper" id="project1">
+
+                        <!-- Tab 1: Design & UX -->
+                        <div class="tab-panel active" data-tab="design">
+                            <div class="tab-goal">
+                                <span class="tab-goal-label">Goal</span>
+                                Replicate the iconic "Wanted" cinematic experience,
+                                giving players high agency over projectile ballistics.
+                            </div>
+                            <ul>
+                                <li>
+                                    <strong>Juice & Feel:</strong>
+                                    Developed a tactile input system where the player
+                                    "pulls" the trajectory. The curve responds instantly
+                                    to delta-input, creating a high-skill ceiling for
+                                    shooting around corners.
+                                </li>
+                                <li>
+                                    <strong>Visual Communication:</strong>
+                                    Implemented a real-time predictive UI. The trajectory
+                                    line dynamically switches to a <strong>"Warning Red"
+                                    </strong> state upon obstacle intersection, providing
+                                    immediate feedback before the player commits to the shot.
+                                </li>
+                                <li>
+                                    <strong>Combat Flow:</strong>
+                                    Integrated slow-motion <strong>"Bullet-Cam"</strong>
+                                    logic that follows the curve, emphasizing the mechanical
+                                    "weight" and satisfaction of a successful hit.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Tab 2: Technical Spec -->
+                        <div class="tab-panel" data-tab="technical">
+                            <div class="tech-block solution">
+                                <span class="tech-block-label">Polynomial Solver</span>
+                                <p>
+                                    Engineered a custom trajectory system using a quadratic
+                                    function logic:
+                                </p>
+                                <div class="code-block">
+                                    f(i) = (midpoint)² - (i - midpoint)²
+                                </div>
+                                <p>
+                                    This ensures the curve is anchored at the gun and target
+                                    while allowing for smooth, symmetrical offsets.
+                                </p>
+                            </div>
+                            <div class="tech-block problem">
+                                <span class="tech-block-label">The Problem</span>
+                                <p>
+                                    Standard physics updates or simple
+                                    <strong>OverlapSphere</strong> checks at line segments
+                                    can miss thin colliders <strong>(Tunneling)</strong>.
+                                </p>
+                            </div>
+                            <div class="tech-block solution">
+                                <span class="tech-block-label">The Solve</span>
+                                <p>
+                                    Implemented <strong>Segmented Raycasting</strong>.
+                                    In the same frame the trajectory is calculated, the
+                                    system performs discrete Raycasts between each
+                                    <code>shootingLinePositions[i]</code> and
+                                    <code>shootingLinePositions[i+1]</code>.
+                                </p>
+                            </div>
+                            <div class="tech-metrics">
+                                <div class="tech-metric">
+                                    <span class="metric-value">60+</span>
+                                    <span class="metric-label">Line Segments</span>
+                                    <span class="metric-desc">
+                                        Real-time trajectory calc
+                                    </span>
+                                </div>
+                                <div class="tech-metric">
+                                    <span class="metric-value">0</span>
+                                    <span class="metric-label">Rigidbodies</span>
+                                    <span class="metric-desc">
+                                        No physics engine overhead
+                                    </span>
+                                </div>
+                                <div class="tech-metric">
+                                    <span class="metric-value">1 Frame</span>
+                                    <span class="metric-label">Collision Check</span>
+                                    <span class="metric-desc">
+                                        Instant, frame-accurate
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Contribution & Achievements -->
+                        <div class="tab-panel" data-tab="contribution">
+                            <div class="role-badge">
+                                Technical Gameplay Designer
+                            </div>
+                            <ul>
+                                <li>
+                                    <strong>Performance:</strong>
+                                    Optimized trajectory visualization to handle
+                                    <strong>60+ line segments</strong> with zero
+                                    frame-drops on mobile hardware.
+                                </li>
+                                <li>
+                                    <strong>Game Feel:</strong>
+                                    Successfully balanced <strong>"Aim Assist"</strong>
+                                    logic to ensure the curve feels rewarding rather
+                                    than automated — preserving player skill expression.
+                                </li>
+                                <li>
+                                    <strong>Modular Architecture:</strong>
+                                    Created a modular <strong>"Ballistics Controller"
+                                    </strong> where designers can swap polynomial formulas
+                                    to create different bullet behaviors without rewriting
+                                    core physics code.
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Bottom Bar -->
+                    <div class="project-footer">
+                        <a href="https://aniltahmaz.itch.io/wanted-curve-bullet"
+                            target="_blank" class="itch-link">
+                            🎮 View on itch.io
+                        </a>
+                        <span class="duration-badge">⏱ 1 Week</span>
+                    </div>
+
+                </div>
+            </div>
+
                 <!-- ═══════════════════════════════════
-                     PROJECT 1 — WANTED CURVE BULLET
+                     PROJECT 2 — CLEAN ENERGY
                      ═══════════════════════════════════ -->
                 <div class="project-row">
 
                     <!-- LEFT — Video Preview -->
                     <div class="project-preview">
                         <video autoplay loop muted playsinline>
-                            <source src="assets/videos/curving-bullet.mp4"
+                            <source src="assets/videos/clean-energy.mp4"
                                     type="video/mp4">
                         </video>
                     </div>
@@ -238,126 +417,11 @@
                         <!-- Title Bar -->
                         <div class="project-header">
                             <div class="project-header-left">
-                                <h3>Wanted Curve Bullet</h3>
+                                <h3>Clean Energy</h3>
                                 <div class="project-tags">
-                                    <span class="tag">C#</span>
-                                    <span class="tag">Physics</span>
-                                    <span class="tag">Unity</span>
-                                </div>
-                            </div>
-                            <a href="https://itch.io/embed-upload/16521010?color=0a0a0a"
-                               target="_blank"
-                               class="btn-play">
-                                ▶ Play Game
-                            </a>
-                        </div>
-
-                        <!-- Tabs -->
-                        <div class="tabs">
-                            <button class="tab active"
-                                    onclick="switchTab('project1', 'contribution', this)">
-                                Contribution
-                            </button>
-                            <button class="tab"
-                                    onclick="switchTab('project1', 'achievements', this)">
-                                Achievements
-                            </button>
-                            <button class="tab"
-                                    onclick="switchTab('project1', 'difficulties', this)">
-                                Difficulties
-                            </button>
-                        </div>
-
-                        <!-- Tab Content -->
-                        <div class="tab-content-wrapper" id="project1">
-
-                            <div class="tab-panel active" data-tab="contribution">
-                                <ul>
-                                    <li>Designed and implemented the core
-                                        <strong>bullet curving mechanic</strong>
-                                        using bezier curves with real-time
-                                        player input control.</li>
-                                    <li>Built custom <strong>physics system</strong>
-                                        for bullet flight, collision detection,
-                                        and ricochet mechanics.</li>
-                                    <li>Created <strong>12 levels</strong> with
-                                        increasing complexity that teach the
-                                        curving mechanic through play.</li>
-                                    <li>Implemented <strong>slow-motion kill
-                                        cam</strong>, trail renderers, screen
-                                        shake, and particle effects.</li>
-                                </ul>
-                            </div>
-
-                            <div class="tab-panel" data-tab="achievements">
-                                <ul>
-                                    <li>Achieved <strong>stable 60 FPS</strong>
-                                        with complex physics calculations on
-                                        mid-range hardware.</li>
-                                    <li>Received <strong>positive player
-                                        feedback</strong> on itch.io for
-                                        unique mechanic and game feel.</li>
-                                    <li>Completed full development cycle from
-                                        <strong>prototype to release</strong>
-                                        as a solo developer in 3 months.</li>
-                                    <li>Implemented <strong>WebGL build</strong>
-                                        optimization for browser-based play.</li>
-                                </ul>
-                            </div>
-
-                            <div class="tab-panel" data-tab="difficulties">
-                                <ul>
-                                    <li><strong>Bezier curve precision:</strong>
-                                        Initial implementation had jittery
-                                        curves. Solved by implementing
-                                        catmull-rom splines with adaptive
-                                        sampling.</li>
-                                    <li><strong>Collision at high speed:</strong>
-                                        Bullets passed through thin walls.
-                                        Fixed with continuous collision
-                                        detection and raycasting between
-                                        frames.</li>
-                                    <li><strong>Game feel balance:</strong>
-                                        Curving felt either too easy or
-                                        impossible. Iterated through 15+
-                                        tuning passes with playtester
-                                        feedback.</li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                        <!-- Bottom Bar -->
-                        <div class="project-footer">
-                            <a href="https://aniltahmaz.itch.io/wanted-curve-bullet"
-                               target="_blank" class="itch-link">
-                                🎮 View on itch.io
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- ═══════════════════════════════════
-                     PROJECT 2 — ROGUELIKE CARD STRATEGY
-                     ═══════════════════════════════════ -->
-                <div class="project-row">
-
-                    <div class="project-preview">
-                        <video autoplay loop muted playsinline>
-                            <source src="assets/videos/roguelike.mp4"
-                                    type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div class="project-details">
-
-                        <div class="project-header">
-                            <div class="project-header-left">
-                                <h3>Roguelike Card-Strategy</h3>
-                                <div class="project-tags">
-                                    <span class="tag">DOTS</span>
-                                    <span class="tag">ECS</span>
+                                    <span class="tag">Lighting</span>
+                                    <span class="tag">Decals</span>
+                                    <span class="tag">Optimization</span>
                                     <span class="tag">Unity</span>
                                 </div>
                             </div>
@@ -368,75 +432,137 @@
                             </a>
                         </div>
 
+                        <!-- Tabs — CHANGED to project2 -->
                         <div class="tabs">
                             <button class="tab active"
+                                    onclick="switchTab('project2', 'design', this)">
+                                Design & UX
+                            </button>
+                            <button class="tab"
+                                    onclick="switchTab('project2', 'technical', this)">
+                                Technical Spec
+                            </button>
+                            <button class="tab"
                                     onclick="switchTab('project2', 'contribution', this)">
                                 Contribution
                             </button>
-                            <button class="tab"
-                                    onclick="switchTab('project2', 'achievements', this)">
-                                Achievements
-                            </button>
-                            <button class="tab"
-                                    onclick="switchTab('project2', 'difficulties', this)">
-                                Difficulties
-                            </button>
                         </div>
 
+                        <!-- Tab Content — CHANGED to id="project2" -->
                         <div class="tab-content-wrapper" id="project2">
 
-                            <div class="tab-panel active" data-tab="contribution">
+                            <!-- Tab 1: Design & UX -->
+                            <div class="tab-panel active" data-tab="design">
+                                <div class="tab-goal">
+                                    <span class="tab-goal-label">Goal</span>
+                                    Create a satisfying "Electrician" fantasy centered
+                                    on recycling and restoration.
+                                </div>
                                 <ul>
-                                    <li>Designed the <strong>card-based summoning
-                                        system</strong>, resource economy, and
-                                        wave-progression mechanics.</li>
-                                    <li>Migrated entire simulation layer from
-                                        MonoBehaviour to <strong>Unity DOTS</strong>
-                                        using IComponentData and ISystem.</li>
-                                    <li>Built <strong>procedural map system</strong>
-                                        with branching paths, random encounters,
-                                        and shop events.</li>
-                                    <li>Balanced <strong>20+ unit archetypes</strong>
-                                        through data-driven ScriptableObjects.</li>
+                                    <li>
+                                        <strong>Visual Feedback:</strong>
+                                        Engineered a high-contrast lighting loop where
+                                        the player's progression is immediately visible
+                                        through the illumination of darkened city districts.
+                                    </li>
+                                    <li>
+                                        <strong>Engagement Loop:</strong>
+                                        Balanced the cable-creation economy to reward
+                                        efficient pathfinding, ensuring the "rehabilitation"
+                                        of the city felt earned rather than automatic.
+                                    </li>
+                                    <li>
+                                        <strong>Impact:</strong>
+                                        Used hit-stops and subtle camera shakes during
+                                        cable connection to provide a tactile sense of
+                                        "powering up" the environment.
+                                    </li>
                                 </ul>
                             </div>
 
-                            <div class="tab-panel" data-tab="achievements">
-                                <ul>
-                                    <li>Achieved <strong>60+ simultaneous units</strong>
-                                        with stable frame rates using ECS.</li>
-                                    <li>Reduced <strong>GC allocations by 90%</strong>
-                                        with Burst Compiler and Jobs System.</li>
-                                    <li>Created <strong>replayable content</strong>
-                                        with procedural generation.</li>
-                                    <li>Integrated <strong>FMOD adaptive music</strong>
-                                        that reacts to combat intensity.</li>
-                                </ul>
+                            <!-- Tab 2: Technical Spec -->
+                            <div class="tab-panel" data-tab="technical">
+                                <div class="tech-block problem">
+                                    <span class="tech-block-label">The Constraint</span>
+                                    <p>
+                                        Real-time lighting for multiple city blocks exceeded
+                                        mobile GPU budgets. Traditional runtime lightmap
+                                        switching was rejected to avoid a ~300% increase
+                                        in build size from redundant texture maps.
+                                    </p>
+                                </div>
+                                <div class="tech-block solution">
+                                    <span class="tech-block-label">The Solve</span>
+                                    <p>
+                                        Developed a <strong>Decal-Based Shadow Casting</strong>
+                                        system. Instead of lighting the buildings, I projected
+                                        large black textures via decals to simulate "unpowered"
+                                        states.
+                                    </p>
+                                </div>
+                                <div class="tech-metrics">
+                                    <div class="tech-metric">
+                                        <span class="metric-value">80%</span>
+                                        <span class="metric-label">Build Size Reduced</span>
+                                        <span class="metric-desc">
+                                            vs. multiple lightmap sets
+                                        </span>
+                                    </div>
+                                    <div class="tech-metric">
+                                        <span class="metric-value">0ms</span>
+                                        <span class="metric-label">Lighting Overhead</span>
+                                        <span class="metric-desc">
+                                            SetActive(false) on decal layer
+                                        </span>
+                                    </div>
+                                    <div class="tech-metric">
+                                        <span class="metric-value">60 FPS</span>
+                                        <span class="metric-label">Stable on Mid-Range</span>
+                                        <span class="metric-desc">
+                                            Modular cable-node state system
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="tab-panel" data-tab="difficulties">
+                            <!-- Tab 3: Contribution & Achievements -->
+                            <div class="tab-panel" data-tab="contribution">
+                                <div class="role-badge">
+                                    Lead Technical & Gameplay Designer
+                                </div>
                                 <ul>
-                                    <li><strong>ECS learning curve:</strong>
-                                        DOTS paradigm shift was challenging.
-                                        Built incremental prototypes to learn
-                                        patterns before full migration.</li>
-                                    <li><strong>Pathfinding at scale:</strong>
-                                        60+ units overwhelmed NavMesh.
-                                        Implemented flow-field pathfinding
-                                        with spatial hashing.</li>
-                                    <li><strong>Balancing card economy:</strong>
-                                        Used Monte Carlo simulations to test
-                                        10,000+ game runs for tuning.</li>
+                                    <li>
+                                        <strong>Technical Achievement:</strong>
+                                        Engineered a mobile-first environmental lighting
+                                        solution that maintained a steady 60 FPS on
+                                        mid-range devices while visualizing a large-scale
+                                        city transformation.
+                                    </li>
+                                    <li>
+                                        <strong>Project Outcome:</strong>
+                                        Successfully shipped a performant hybrid-casual
+                                        loop that balanced technical constraints with
+                                        high-fidelity visual progression.
+                                    </li>
+                                    <li>
+                                        <strong>Growth:</strong>
+                                        This project solidified my philosophy of using
+                                        creative "hacks" to achieve AAA-style visual
+                                        feedback on limited mobile hardware.
+                                    </li>
                                 </ul>
                             </div>
 
                         </div>
 
+                        <!-- Bottom Bar -->
                         <div class="project-footer">
-                            <a href="https://aniltahmaz.itch.io/roguelike"
+                            <a href="https://aniltahmaz.itch.io/clean-energy"
                                target="_blank" class="itch-link">
                                 🎮 View on itch.io
                             </a>
+                            <span class="duration-badge">⏱ 3 Weeks</span>
+
                         </div>
 
                     </div>
@@ -464,6 +590,7 @@
                                     <span class="tag">Mechanics</span>
                                     <span class="tag">Physics</span>
                                 </div>
+
                             </div>
                             <a href="https://itch.io/embed-upload/YOUR_GAME_ID?color=0a0a0a"
                                target="_blank"
@@ -541,6 +668,8 @@
                                target="_blank" class="itch-link">
                                 🎮 View on itch.io
                             </a>
+                            <span class="duration-badge">⏱ 3 Weeks</span>
+
                         </div>
 
                     </div>
@@ -580,23 +709,6 @@
         </main>
     </div>
 
-    <script>
-    function switchTab(projectId, tabName, btn) {
-        const wrapper = document.getElementById(projectId);
-
-        wrapper.querySelectorAll('.tab-panel').forEach(panel => {
-            panel.classList.remove('active');
-        });
-
-        wrapper.querySelector(`[data-tab="${tabName}"]`)
-               .classList.add('active');
-
-        btn.closest('.tabs').querySelectorAll('.tab').forEach(t => {
-            t.classList.remove('active');
-        });
-        btn.classList.add('active');
-    }
-    </script>
         <script src="script.js"></script>
 
 </body>
