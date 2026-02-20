@@ -97,48 +97,120 @@
 
             <!-- Replace your entire about-section with this -->
 
-<section class="hero-intro">
-        <h2 class="section-label">01_SYSTEM_OVERVIEW</h2>
-        <div class="header-compact">
-            <div class="bio-text">
-                <p>Technical & Gameplay Designer with 5+ years experience. I specialize in bridging high-fidelity design with extreme mobile optimization. Currently focused on <strong>Unity DOTS/ECS</strong> and <strong>Unreal C++</strong> architectures.</p>
-                
-                <div class="status-strip">
-                    <div class="status-node"><span>FEEL:</span> KINEMATIC_FLIGHT</div>
-                    <div class="status-node"><span>MATH:</span> POLYNOMIAL_BALLISTICS</div>
-                    <div class="status-node"><span>LOC:</span> WARSAW_PL</div>
+<!-- Replace your entire about-section with this -->
+
+<section class="section about-section">
+
+    <div class="top-grid">
+
+        <!-- Left — About Text -->
+        <div class="about-card">
+            <h2 class="section-title">About Me</h2>
+            <p>
+                Game designer and Unity developer with 5+ years of experience
+                across multiple genres and platforms. Years of rapid prototyping
+                gave me deep hands-on experience <strong>designing and
+                implementing complex systems from scratch</strong> — from
+                custom physics to GPU-side optimizations. Now focused on
+                <strong>PC & console development</strong> with Unity DOTS/ECS.
+            </p>
+            <div class="quote-inline">
+                "I don't just design mechanics — I <strong>engineer
+                them from the ground up</strong>."
+            </div>
+        </div>
+
+        <!-- Right — Compact Highlights -->
+        <div class="highlights">
+
+            <!-- Current Focus -->
+            <div class="focus-card">
+                <div class="focus-header">
+                    <span class="current-dot"></span>
+                    <span class="focus-label">Current Focus</span>
                 </div>
+                <h3>PC & Console Development</h3>
+                <p>Unity DOTS/ECS • Systems Design • Technical Gameplay</p>
             </div>
+
+            <!-- Technical Highlights — Compact Grid -->
+            <div class="tech-highlights">
+                <span class="tech-hl-label">Technical Highlights — click to expand</span>
+
+                <div class="tech-hl-grid">
+
+                    <button class="tech-hl-item"
+                            onclick="selectHighlight(this)"
+                            data-icon="💥"
+                            data-title="Voxel Destruction System"
+                            data-detail="Divided humanoid meshes into body parts, voxelized each segment and assigned them to corresponding bones. Baked multiple voxel meshes together before destruction for performant real-time dismemberment.">
+                        <span class="tech-hl-icon">💥</span>
+                        <span class="tech-hl-title">Voxel Destruction</span>
+                    </button>
+
+                    <button class="tech-hl-item"
+                            onclick="selectHighlight(this)"
+                            data-icon="🎯"
+                            data-title="Curved Bullet Physics"
+                            data-detail="Implemented bullet curving entirely through mathematical functions — bezier paths with real-time input sampling and adaptive curve resolution for smooth trajectories at any speed.">
+                        <span class="tech-hl-icon">🎯</span>
+                        <span class="tech-hl-title">Curved Bullet</span>
+                    </button>
+
+                    <button class="tech-hl-item"
+                            onclick="selectHighlight(this)"
+                            data-icon="💡"
+                            data-title="Performant Lighting Tricks"
+                            data-detail="Achieved high-quality lighting on low-end hardware using decal-based fake lights, strategic light baking, and custom shaders to simulate dynamic illumination without runtime cost.">
+                        <span class="tech-hl-icon">💡</span>
+                        <span class="tech-hl-title">Lighting Tricks</span>
+                    </button>
+
+                    <button class="tech-hl-item"
+                            onclick="selectHighlight(this)"
+                            data-icon="🎨"
+                            data-title="Texture-Based Map Scoring"
+                            data-detail="Splatoon-style paint coverage system. Captured map state via render texture from orthographic camera, grouped color pixels into buckets to reduce iteration count by 90%+.">
+                        <span class="tech-hl-icon">🎨</span>
+                        <span class="tech-hl-title">Map Scoring</span>
+                    </button>
+
+                    <button class="tech-hl-item"
+                            onclick="selectHighlight(this)"
+                            data-icon="🦅"
+                            data-title="Flight & Gliding Physics"
+                            data-detail="Fully code-driven flight system — lift, drag, thermals, and wind resistance calculated per frame. No physics engine reliance, pure mathematical simulation for precise control.">
+                        <span class="tech-hl-icon">🦅</span>
+                        <span class="tech-hl-title">Flight Physics</span>
+                    </button>
+
+                    <button class="tech-hl-item"
+                            onclick="selectHighlight(this)"
+                            data-icon="⚡"
+                            data-title="Voxel Animation Baking"
+                            data-detail="Baked skeletal animations into voxel meshes — merged multiple voxel body parts into single meshes per frame for GPU instancing, drastically reducing draw calls while keeping animation fidelity.">
+                        <span class="tech-hl-icon">⚡</span>
+                        <span class="tech-hl-title">Anim Baking</span>
+                    </button>
+
+                </div>
+
+                <!-- Shared detail area — appears below grid -->
+                <div class="tech-hl-detail" id="tech-detail">
+                    <span class="tech-detail-icon" id="tech-detail-icon"></span>
+                    <div class="tech-detail-body">
+                        <strong id="tech-detail-title"></strong>
+                        <p id="tech-detail-text"></p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-    </section>
 
-    <section class="optimization-manifest">
-        <h2 class="section-label">02_PERFORMANCE_OPTIMIZATION_LOG</h2>
-        <div class="manifest-grid">
-            
-            <div class="m-box">
-                <div class="m-tag">VOXEL_DESTRUCTION</div>
-                <p>Optimized destruction by partitioning humanoid meshes into bone-synced voxel body parts, baking multiple meshes pre-destruction to maintain 60FPS.</p>
-            </div>
+    </div>
 
-            <div class="m-box">
-                <div class="m-tag">TEXTURE_SAMPLING</div>
-                <p>Splatoon-style area logic: Sampling map visuals via secondary cameras and grouping color textures to reduce <strong>for-loop</strong> iterations for real-time percentage counting.</p>
-            </div>
-
-            <div class="m-box">
-                <div class="m-tag">LIGHT_ARCHITECTURE</div>
-                <p>Performant mobile lighting using custom decal systems and hybrid light-baking pipelines for high-fidelity visuals on low-end hardware.</p>
-            </div>
-
-            <div class="m-box">
-                <div class="m-tag">KINEMATIC_AERO</div>
-                <p>Fully code-driven flying and gliding physics, removing engine overhead to achieve tighter control over player "flow state".</p>
-            </div>
-
-        </div>
-    </section>
-
+</section>
     <section class="project-feed">
         <h2 class="section-label">03_SYSTEMS_DATABASE</h2>
         </section>
@@ -525,6 +597,7 @@
         btn.classList.add('active');
     }
     </script>
+        <script src="script.js"></script>
 
 </body>
 </html>
