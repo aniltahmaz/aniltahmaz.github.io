@@ -5,6 +5,7 @@ function selectHighlight(item) {
     var detailText = document.getElementById('tech-detail-text');
     var detailTitle = document.getElementById('tech-detail-title');
     var detailIcon = document.getElementById('tech-detail-icon');
+    var projectLink = document.getElementById('tech-detail-project');
 
     if (item.classList.contains('active')) {
         item.classList.remove('active');
@@ -18,6 +19,15 @@ function selectHighlight(item) {
     detailIcon.textContent = item.dataset.icon;
     detailTitle.textContent = item.dataset.title;
     detailText.textContent = item.dataset.detail;
+
+    if (item.dataset.project) {
+        projectLink.dataset.openProject = item.dataset.project;
+        projectLink.hidden = false;
+    } else {
+        projectLink.dataset.openProject = '';
+        projectLink.hidden = true;
+    }
+
     detail.classList.add('open');
 }
 
@@ -75,6 +85,17 @@ function selectHighlight(item) {
             var card = btn.closest('.project-card');
             if (card) openModal(card);
         });
+    });
+
+    // Open: anything with [data-open-project="<id>"] anywhere in the page
+    document.addEventListener('click', function(e) {
+        var trigger = e.target.closest('[data-open-project]');
+        if (!trigger) return;
+        var id = trigger.dataset.openProject;
+        if (!id) return;
+        e.preventDefault();
+        var card = document.querySelector('.project-card[data-project-id="' + id + '"]');
+        if (card) openModal(card);
     });
 
     // Close: backdrop + close button (anything with data-close)

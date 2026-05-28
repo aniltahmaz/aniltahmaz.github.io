@@ -143,6 +143,7 @@
                             onclick="selectHighlight(this)"
                             data-icon="💥"
                             data-title="Voxel Destruction System"
+                            data-project="voxel-destruction"
                             data-detail="Divided humanoid meshes into body parts, voxelized each segment and assigned them to corresponding bones. Baked multiple voxel meshes together before destruction for performant real-time dismemberment.">
                         <span class="tech-hl-icon">💥</span>
                         <span class="tech-hl-title">Voxel Destruction</span>
@@ -152,6 +153,7 @@
                             onclick="selectHighlight(this)"
                             data-icon="🎯"
                             data-title="Curved Bullet Physics"
+                            data-project="curve-bullet"
                             data-detail="Implemented bullet curving entirely through mathematical functions — bezier paths with real-time input sampling and adaptive curve resolution for smooth trajectories at any speed.">
                         <span class="tech-hl-icon">🎯</span>
                         <span class="tech-hl-title">Curved Bullet</span>
@@ -161,6 +163,7 @@
                             onclick="selectHighlight(this)"
                             data-icon="💡"
                             data-title="Performant Lighting Tricks"
+                            data-project="clean-energy"
                             data-detail="Achieved high-quality lighting on low-end hardware using decal-based fake lights, strategic light baking, and custom shaders to simulate dynamic illumination without runtime cost.">
                         <span class="tech-hl-icon">💡</span>
                         <span class="tech-hl-title">Lighting Tricks</span>
@@ -168,29 +171,12 @@
 
                     <button class="tech-hl-item"
                             onclick="selectHighlight(this)"
-                            data-icon="🎨"
-                            data-title="Texture-Based Map Scoring"
-                            data-detail="Splatoon-style paint coverage system. Captured map state via render texture from orthographic camera, grouped color pixels into buckets to reduce iteration count by 90%+.">
-                        <span class="tech-hl-icon">🎨</span>
-                        <span class="tech-hl-title">Map Scoring</span>
-                    </button>
-
-                    <button class="tech-hl-item"
-                            onclick="selectHighlight(this)"
                             data-icon="🦅"
                             data-title="Flight & Gliding Physics"
-                            data-detail="Fully code-driven flight system — lift, drag, thermals, and wind resistance calculated per frame. No physics engine reliance, pure mathematical simulation for precise control.">
+                            data-project="flight-physics"
+                            data-detail="Fully code-driven flight system — quadratic velocity-to-lift conversion, pitch-state machine, and a modular merge-parts loadout (glider, booster, drill, plank) that reshapes flight feel mid-run.">
                         <span class="tech-hl-icon">🦅</span>
                         <span class="tech-hl-title">Flight Physics</span>
-                    </button>
-
-                    <button class="tech-hl-item"
-                            onclick="selectHighlight(this)"
-                            data-icon="⚡"
-                            data-title="Voxel Animation Baking"
-                            data-detail="Baked skeletal animations into voxel meshes — merged multiple voxel body parts into single meshes per frame for GPU instancing, drastically reducing draw calls while keeping animation fidelity.">
-                        <span class="tech-hl-icon">⚡</span>
-                        <span class="tech-hl-title">Anim Baking</span>
                     </button>
 
                 </div>
@@ -201,6 +187,13 @@
                     <div class="tech-detail-body">
                         <strong id="tech-detail-title"></strong>
                         <p id="tech-detail-text"></p>
+                        <button type="button"
+                                id="tech-detail-project"
+                                class="tech-detail-project-link"
+                                data-open-project=""
+                                hidden>
+                            View related project →
+                        </button>
                     </div>
                 </div>
 
@@ -214,6 +207,140 @@
     <h2 class="section-title">Projects</h2>
 
     <div class="projects-grid">
+
+        <!-- CARD 0 — Fancy Restaurant (shipped) -->
+        <article class="project-card is-featured" data-project-id="fancy-restaurant">
+            <button class="card-trigger" type="button" aria-label="View details for Fancy Restaurant">
+                <div class="card-video">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/fancy-restaurant.mp4" type="video/mp4">
+                    </video>
+                    <div class="card-video-overlay">
+                        <span class="card-expand-hint">View details →</span>
+                    </div>
+                    <span class="card-shipped-badge">📥 300K+ Downloads</span>
+                </div>
+                <div class="card-summary">
+                    <h3>Fancy Restaurant</h3>
+                    <p class="card-pitch">A soft-launched hybrid-casual restaurant manager (My Perfect Hotel lane) with 300K+ downloads. Built the full management loop, two-tree upgrade system, themed production lines, and an RV-driven economy tuned through live funnel data.</p>
+                    <div class="card-summary-meta">
+                        <div class="project-tags">
+                            <span class="tag">Hybrid-Casual</span>
+                            <span class="tag">Management</span>
+                            <span class="tag">Economy</span>
+                        </div>
+                        <span class="duration-badge">⏱ 7-Month Soft Launch</span>
+                    </div>
+                </div>
+            </button>
+
+            <template class="project-detail-template">
+                <div class="modal-hero">
+                    <div class="modal-video">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/videos/fancy-restaurant.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="modal-hero-body">
+                        <h2 class="modal-title">Fancy Restaurant</h2>
+                        <p class="modal-pitch">A soft-launched hybrid-casual restaurant management game in the "My Perfect Hotel" lane — shipped to <strong>300K+ downloads</strong>. I built the management loop, the economy, the upgrade and production systems, and iterated the whole thing against live KPI data over a 7-month soft launch at Tolian Games.</p>
+                        <div class="modal-meta-row">
+                            <div class="project-tags">
+                                <span class="tag">Unity</span>
+                                <span class="tag">Hybrid-Casual</span>
+                                <span class="tag">Management</span>
+                                <span class="tag">Economy</span>
+                                <span class="tag">Live-Ops</span>
+                            </div>
+                            <span class="duration-badge">📥 300K+ Downloads</span>
+                        </div>
+                        <div class="modal-keys">
+                            <div class="key-point">
+                                <span class="key-icon">📈</span>
+                                <div class="key-text">
+                                    <strong>Data-Driven Iteration</strong>
+                                    <span>5 scope revisions off level-funnel KPIs</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <span class="key-icon">🔧</span>
+                                <div class="key-text">
+                                    <strong>Two-Tree Upgrades</strong>
+                                    <span>Restaurant + staff progression</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <span class="key-icon">💰</span>
+                                <div class="key-text">
+                                    <strong>RV-Driven Economy</strong>
+                                    <span>Monetization tuned to playtime targets</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" type="button" data-tab-target="design">Design &amp; Gameplay</button>
+                    <button class="tab" type="button" data-tab-target="technical">Systems &amp; Economy</button>
+                    <button class="tab" type="button" data-tab-target="contribution">Live-Ops &amp; Results</button>
+                </div>
+                <div class="tab-content-wrapper">
+                    <div class="tab-panel active" data-tab="design">
+                        <div class="tab-goal">
+                            <span class="tab-goal-label">Goal</span>
+                            Deliver a polished hybrid-casual restaurant manager — instantly pick-up-able, but deep enough to retain players across multiple themed restaurants.
+                        </div>
+                        <ul>
+                            <li><strong>Core Loop:</strong> Seat customers, serve food, collect tips, then reinvest to unlock and upgrade tables — a tight earn-and-spend cycle driven by a joystick + stack-carry mechanic.</li>
+                            <li><strong>Automation Fantasy:</strong> Hire waiters, food runners, hosts and cooks so the restaurant increasingly runs itself — the satisfaction of watching a machine you built hum along.</li>
+                            <li><strong>Aspiration:</strong> Progress unlocks new themed restaurants — American Diner, Sushi, Italian, Chinese, Fine Dining — each with its own props, dishes and special tables.</li>
+                            <li><strong>WOW Moment:</strong> Serving candles &amp; wine dims the room into warm candle-lit ambiance, rewarding the player for upselling.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-panel" data-tab="technical">
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Two-Tree Upgrade System</span>
+                            <p><strong>Restaurant</strong> upgrades (purchase discounts, tip %, reservation income, special-request bonuses) and <strong>Staff</strong> upgrades (player/waiter stack counts, plus player/waiter/host/cook speeds) — two parallel progression trees feeding one currency.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Production-Line Crafting</span>
+                            <p>Raw materials trucked into a counter → cooking stations → intermediate &amp; final dishes, with real recipe chains (<code>Flour + Egg → Pancake</code>, <code>Dough + Cheese → Pizza</code>). Carriers can be hired to automate each hop.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Special Earners &amp; Time-Mgmt Loop</span>
+                            <p>Bars, music stages, drive-thrus, soda machines, sushi bars and coin fountains each act as a distinct mini-economy. A later redesign split the loop into timed <strong>"days"/phases</strong> with predesigned client schedules, per-client wait timers and serve goals.</p>
+                        </div>
+                        <div class="tech-metrics">
+                            <div class="tech-metric">
+                                <span class="metric-value">5</span>
+                                <span class="metric-label">Restaurant Themes</span>
+                                <span class="metric-desc">Diner → Fine Dining</span>
+                            </div>
+                            <div class="tech-metric">
+                                <span class="metric-value">2</span>
+                                <span class="metric-label">Upgrade Trees</span>
+                                <span class="metric-desc">Restaurant + staff</span>
+                            </div>
+                            <div class="tech-metric">
+                                <span class="metric-value">15-20</span>
+                                <span class="metric-label">Timed Phases</span>
+                                <span class="metric-desc">Day-based core loop</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" data-tab="contribution">
+                        <div class="role-badge">Developer &amp; Systems Designer — Tolian Games</div>
+                        <ul>
+                            <li><strong>Shipped &amp; Scaled:</strong> Soft-launched and grew to <strong>300K+ downloads</strong>, validating the core loop in the live market.</li>
+                            <li><strong>KPI-Driven Iteration:</strong> Ran 5 scope iterations over 7 months, each steered by level-funnel reports — e.g. shortening Section 2 and reordering unlocks after the funnel exposed drop-off at the Level 12 event.</li>
+                            <li><strong>Monetization Design:</strong> Built a rewarded-video economy tuned so non-RV players get +15-20 min of grind while RV watchers keep pace — RVs for x3 phase rewards, continue-on-fail, and temporary carry-capacity boosts.</li>
+                            <li><strong>Retention Mechanic:</strong> Added a win-streak multiplier (x1.2 → x3, resets on a loss) to reward consistent play.</li>
+                        </ul>
+                    </div>
+                </div>
+            </template>
+        </article>
 
         <!-- CARD 1 -->
         <article class="project-card" data-project-id="curve-bullet">
@@ -473,27 +600,27 @@
             </template>
         </article>
 
-        <!-- CARD 3 -->
-        <article class="project-card" data-project-id="parkour">
-            <button class="card-trigger" type="button" aria-label="View details for Parkour Movement">
+        <!-- CARD 4 — Voxel Destruction -->
+        <article class="project-card" data-project-id="voxel-destruction">
+            <button class="card-trigger" type="button" aria-label="View details for Voxel Destruction System">
                 <div class="card-video">
                     <video autoplay loop muted playsinline>
-                        <source src="assets/videos/parkour.mp4" type="video/mp4">
+                        <source src="assets/videos/voxel-destruction.mp4" type="video/mp4">
                     </video>
                     <div class="card-video-overlay">
                         <span class="card-expand-hint">View details →</span>
                     </div>
                 </div>
                 <div class="card-summary">
-                    <h3>Parkour Movement</h3>
-                    <p class="card-pitch">Fluid first-person parkour kit with wall-running, sliding, and vaulting — driven by a 30-state velocity blend tree for buttery-smooth motion.</p>
+                    <h3>Voxel Destruction System</h3>
+                    <p class="card-pitch">Real-time voxel-based character dismemberment — splits humanoid meshes per body part, swaps baked meshes for live voxels on hit, and reveals chunks bottom-up for satisfying destruction without tanking framerate.</p>
                     <div class="card-summary-meta">
                         <div class="project-tags">
-                            <span class="tag">Level Design</span>
-                            <span class="tag">Mechanics</span>
-                            <span class="tag">Physics</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Voxels</span>
+                            <span class="tag">Optimization</span>
                         </div>
-                        <span class="duration-badge">⏱ 3 Weeks</span>
+                        <span class="duration-badge">⏱ 4 Weeks</span>
                     </div>
                 </div>
             </button>
@@ -502,73 +629,344 @@
                 <div class="modal-hero">
                     <div class="modal-video">
                         <video autoplay loop muted playsinline>
-                            <source src="assets/videos/parkour.mp4" type="video/mp4">
+                            <source src="assets/videos/voxel-destruction.mp4" type="video/mp4">
                         </video>
                     </div>
                     <div class="modal-hero-body">
-                        <h2 class="modal-title">Parkour Movement</h2>
-                        <p class="modal-pitch">Fluid first-person parkour kit with wall-running, sliding, and vaulting — driven by a 30-state velocity blend tree for buttery-smooth motion.</p>
+                        <h2 class="modal-title">Voxel Destruction System</h2>
+                        <p class="modal-pitch">Real-time voxel-based character dismemberment — splits humanoid meshes per body part, swaps baked meshes for live voxels on hit, and reveals chunks bottom-up for satisfying destruction without tanking framerate.</p>
                         <div class="modal-meta-row">
                             <div class="project-tags">
-                                <span class="tag">Level Design</span>
-                                <span class="tag">Mechanics</span>
-                                <span class="tag">Physics</span>
+                                <span class="tag">C#</span>
+                                <span class="tag">Voxels</span>
+                                <span class="tag">Optimization</span>
+                                <span class="tag">Unity</span>
                             </div>
-                            <span class="duration-badge">⏱ 3 Weeks</span>
+                            <span class="duration-badge">⏱ 4 Weeks</span>
                         </div>
                         <div class="modal-keys">
                             <div class="key-point">
-                                <span class="key-icon">🏃</span>
+                                <span class="key-icon">🧊</span>
                                 <div class="key-text">
-                                    <strong>Fluid Movement</strong>
-                                    <span>Wall-run, slide, vault, momentum</span>
+                                    <strong>Body-Part Voxelization</strong>
+                                    <span>Mesh split per bone, then voxelized</span>
                                 </div>
                             </div>
                             <div class="key-point">
-                                <span class="key-icon">🎬</span>
+                                <span class="key-icon">⚡</span>
                                 <div class="key-text">
-                                    <strong>30+ Anim States</strong>
-                                    <span>Velocity-driven blend trees</span>
+                                    <strong>Baked-Mesh Swap</strong>
+                                    <span>One draw call until destruction</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <span class="key-icon">📚</span>
+                                <div class="key-text">
+                                    <strong>Phased Reveal</strong>
+                                    <span>Voxels height-sorted, bottom-up</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" type="button" data-tab-target="design">Design & UX</button>
+                    <button class="tab" type="button" data-tab-target="technical">Technical</button>
+                    <button class="tab" type="button" data-tab-target="contribution">Contribution</button>
+                </div>
+                <div class="tab-content-wrapper">
+                    <div class="tab-panel active" data-tab="design">
+                        <div class="tab-goal">
+                            <span class="tab-goal-label">Goal</span>
+                            Deliver an arcadey, satisfying dismemberment feel for hit reactions without the cost of full physics-driven destruction.
+                        </div>
+                        <ul>
+                            <li><strong>Feedback Loop:</strong> Each hit visibly chunks the enemy — players read damage state at a glance, no health bars required.</li>
+                            <li><strong>Phased Drama:</strong> Multiple <code>OpenNo</code> stages let designers script "first hit chips them, second hit dismembers" without scripting per enemy.</li>
+                            <li><strong>Reward Tie-In:</strong> Detached voxels become collectables, closing the loop between visual impact and progression.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-panel" data-tab="technical">
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Architecture</span>
+                            <p>Each character holds a list of <code>VoxelAndBakedData</code> — a paired baked mesh (for the un-hit state) and a voxel group (for live destruction). All groups carry an <code>OpenNo</code> for destruction phase ordering.</p>
+                        </div>
+                        <div class="tech-block problem">
+                            <span class="tech-block-label">The Problem</span>
+                            <p>Rendering each humanoid as thousands of individual voxel cubes tanked framerate on mobile — far too many draw calls and overdraw.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">The Solve</span>
+                            <p>While intact, each body part renders as a single <strong>baked combined mesh</strong>. On the first hit at a phase, the baked mesh is swapped out and the live voxels (ordered <code>OrderBy(y)</code> for bottom-up reveal) are activated chunk-by-chunk.</p>
+                        </div>
+                        <div class="tech-metrics">
+                            <div class="tech-metric">
+                                <span class="metric-value">1</span>
+                                <span class="metric-label">Draw Call</span>
+                                <span class="metric-desc">Per intact body part</span>
+                            </div>
+                            <div class="tech-metric">
+                                <span class="metric-value">0 GC</span>
+                                <span class="metric-label">On Destruction</span>
+                                <span class="metric-desc">SetActive toggle only</span>
+                            </div>
+                            <div class="tech-metric">
+                                <span class="metric-value">N Phases</span>
+                                <span class="metric-label">Per Body</span>
+                                <span class="metric-desc">Data-driven stages</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" data-tab="contribution">
+                        <div class="role-badge">Solo Systems & Tools Designer</div>
+                        <ul>
+                            <li><strong>System Design:</strong> Designed the baked-mesh-to-voxel swap pipeline from scratch; integrated <strong>MVoxelizer</strong> and <strong>MeshBaker</strong> into a single inspector-friendly workflow.</li>
+                            <li><strong>Editor Workflow:</strong> Authored the <code>VoxelAndBakedData</code> data class so designers could pair body parts and tag destruction phases without code changes.</li>
+                            <li><strong>Performance:</strong> Held a steady framerate on mid-tier mobile while keeping the "every hit chunks the enemy" promise.</li>
+                        </ul>
+                    </div>
+                </div>
+            </template>
+        </article>
+
+        <!-- CARD 5 — Flight Physics (Learn To Fly) -->
+        <article class="project-card" data-project-id="flight-physics">
+            <button class="card-trigger" type="button" aria-label="View details for Learn To Fly — Flight Physics">
+                <div class="card-video">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/flight-physics.mp4" type="video/mp4">
+                    </video>
+                    <div class="card-video-overlay">
+                        <span class="card-expand-hint">View details →</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    <h3>Learn To Fly — Flight Physics</h3>
+                    <p class="card-pitch">Code-driven glide system with quadratic velocity-to-lift conversion, a pitch-state machine, and a merge-style loadout (glider, booster, drill, plank) that reshapes flight feel mid-run.</p>
+                    <div class="card-summary-meta">
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Physics</span>
+                            <span class="tag">Rigidbody</span>
+                        </div>
+                        <span class="duration-badge">⏱ 4 Weeks</span>
+                    </div>
+                </div>
+            </button>
+
+            <template class="project-detail-template">
+                <div class="modal-hero">
+                    <div class="modal-video">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/videos/flight-physics.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="modal-hero-body">
+                        <h2 class="modal-title">Learn To Fly — Flight Physics</h2>
+                        <p class="modal-pitch">Code-driven glide system with quadratic velocity-to-lift conversion, a pitch-state machine, and a merge-style loadout (glider, booster, drill, plank) that reshapes flight feel mid-run.</p>
+                        <div class="modal-meta-row">
+                            <div class="project-tags">
+                                <span class="tag">C#</span>
+                                <span class="tag">Physics</span>
+                                <span class="tag">Rigidbody</span>
+                                <span class="tag">Unity</span>
+                            </div>
+                            <span class="duration-badge">⏱ 4 Weeks</span>
+                        </div>
+                        <div class="modal-keys">
+                            <div class="key-point">
+                                <span class="key-icon">🦅</span>
+                                <div class="key-text">
+                                    <strong>Pitch-State Machine</strong>
+                                    <span>35°/45° thresholds drive flight mode</span>
                                 </div>
                             </div>
                             <div class="key-point">
                                 <span class="key-icon">📐</span>
                                 <div class="key-text">
-                                    <strong>Modular Toolkit</strong>
-                                    <span>Snap-together level pieces</span>
+                                    <strong>Lift From Velocity²</strong>
+                                    <span>Real aerodynamic-style math</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <span class="key-icon">🧩</span>
+                                <div class="key-text">
+                                    <strong>Modular Loadout</strong>
+                                    <span>Glider / booster / drill / plank</span>
                                 </div>
                             </div>
                         </div>
-                        <a href="https://aniltahmaz.itch.io/parkour" target="_blank" rel="noopener" class="modal-play-btn">🎮 Play on itch.io</a>
                     </div>
                 </div>
 
                 <div class="tabs">
-                    <button class="tab active" type="button" data-tab-target="contribution">Contribution</button>
-                    <button class="tab" type="button" data-tab-target="achievements">Achievements</button>
-                    <button class="tab" type="button" data-tab-target="difficulties">Difficulties</button>
+                    <button class="tab active" type="button" data-tab-target="design">Design & UX</button>
+                    <button class="tab" type="button" data-tab-target="technical">Technical</button>
+                    <button class="tab" type="button" data-tab-target="contribution">Contribution</button>
                 </div>
                 <div class="tab-content-wrapper">
-                    <div class="tab-panel active" data-tab="contribution">
+                    <div class="tab-panel active" data-tab="design">
+                        <div class="tab-goal">
+                            <span class="tab-goal-label">Goal</span>
+                            Capture the joy of a "How To Train Your Dragon" glide with one-finger hyper-casual controls and a distance-driven high-score loop.
+                        </div>
                         <ul>
-                            <li>Designed <strong>fluid movement system</strong> with wall-running, sliding, vaulting, and momentum-based mechanics.</li>
-                            <li>Built <strong>animation state machine</strong> with 30+ transitions and blending.</li>
-                            <li>Created <strong>level design toolkit</strong> with modular pieces for rapid prototyping.</li>
-                            <li>Implemented <strong>Cinemachine camera</strong> system that enhances movement feel.</li>
+                            <li><strong>Intuitive Control:</strong> Pitch is the only verb — dive to build speed, pull up to convert that speed into lift. Players learn the loop without any tutorial text.</li>
+                            <li><strong>Modular Build:</strong> Merge-style upgrades let players reshape flight feel between runs (more glide, more burst, more crash-through).</li>
+                            <li><strong>Score Tension:</strong> Distance flown = score. A live high-score marker in the world, plus wind FX at high velocity, sells the sense of "I'm going further than ever".</li>
                         </ul>
                     </div>
-                    <div class="tab-panel" data-tab="achievements">
+                    <div class="tab-panel" data-tab="technical">
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Pitch State Machine</span>
+                            <p>FixedUpdate reads <code>transform.localRotation.eulerAngles.x</code> against a <strong>35°/45°</strong> threshold pair, switching between <strong>UpwardBehaviour</strong> and <strong>DownwardBehaviour</strong> branches.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Quadratic Lift</span>
+                            <p>On pull-up, the system applies <code>velocity.z² * gliderValue * upwardMultiplier</code> to upward velocity — squaring horizontal speed before converting it into lift, mirroring real aerodynamic lift behavior.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Modular Parts</span>
+                            <p>A <code>MergableObject</code> registry holds slots for <strong>slider, glider, booster, drill</strong>. Each part feeds tuning values (<code>_partField</code>, <code>_forwardForce</code>) into the flight math, so a single physics core supports any loadout.</p>
+                        </div>
+                        <div class="tech-metrics">
+                            <div class="tech-metric">
+                                <span class="metric-value">35°/45°</span>
+                                <span class="metric-label">Pitch Thresholds</span>
+                                <span class="metric-desc">Up vs down state</span>
+                            </div>
+                            <div class="tech-metric">
+                                <span class="metric-value">v²</span>
+                                <span class="metric-label">Lift Curve</span>
+                                <span class="metric-desc">Quadratic, glider-scaled</span>
+                            </div>
+                            <div class="tech-metric">
+                                <span class="metric-value">4</span>
+                                <span class="metric-label">Modular Slots</span>
+                                <span class="metric-desc">Slider / glider / boost / drill</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" data-tab="contribution">
+                        <div class="role-badge">Solo Gameplay Programmer & Designer</div>
                         <ul>
-                            <li>Movement described as <strong>"buttery smooth"</strong> by playtesters.</li>
-                            <li>Created <strong>8 parkour courses</strong> with speedrun timers and leaderboards.</li>
-                            <li>Achieved <strong>sub-frame input latency</strong> for responsive controls.</li>
+                            <li><strong>Flight Model:</strong> Designed and tuned the entire physics model — pitch-driven branches, lift formula, drag interpolation — with no asset-store flight controller.</li>
+                            <li><strong>Architecture:</strong> Built the <strong>Mergable</strong> system so upgrades plug into a single physics core via data, keeping the flight code authoritative.</li>
+                            <li><strong>Live Feedback:</strong> Wind particles auto-trigger at <code>velocity.magnitude &gt; 150</code> and a world-space high-score marker scales the sense of progression.</li>
                         </ul>
                     </div>
-                    <div class="tab-panel" data-tab="difficulties">
+                </div>
+            </template>
+        </article>
+
+        <!-- CARD 6 — Parkour System & Level -->
+        <article class="project-card" data-project-id="parkour">
+            <button class="card-trigger" type="button" aria-label="View details for Parkour System &amp; Level">
+                <div class="card-video">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/level-design.mp4" type="video/mp4">
+                    </video>
+                    <div class="card-video-overlay">
+                        <span class="card-expand-hint">View details →</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    <h3>Parkour System &amp; Level</h3>
+                    <p class="card-pitch">Parkour movement built on a state-machine pattern, plus a custom level that uses a cinematic camera transition to hand off from 3D traversal into a side-scroller gameplay segment.</p>
+                    <div class="card-summary-meta">
+                        <div class="project-tags">
+                            <span class="tag">State Machine</span>
+                            <span class="tag">Cinematic</span>
+                            <span class="tag">Level Design</span>
+                        </div>
+                        <span class="duration-badge">⏱ 4 Weeks</span>
+                    </div>
+                </div>
+            </button>
+
+            <template class="project-detail-template">
+                <div class="modal-hero">
+                    <div class="modal-video">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/videos/level-design.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="modal-hero-body">
+                        <h2 class="modal-title">Parkour System &amp; Level</h2>
+                        <p class="modal-pitch">Parkour movement built on a state-machine pattern, plus a custom level that uses a cinematic camera transition to hand off from 3D traversal into a side-scroller gameplay segment.</p>
+                        <div class="modal-meta-row">
+                            <div class="project-tags">
+                                <span class="tag">C#</span>
+                                <span class="tag">State Machine</span>
+                                <span class="tag">Cinematic</span>
+                                <span class="tag">Level Design</span>
+                            </div>
+                            <span class="duration-badge">⏱ 4 Weeks</span>
+                        </div>
+                        <div class="modal-keys">
+                            <div class="key-point">
+                                <span class="key-icon">🧠</span>
+                                <div class="key-text">
+                                    <strong>State Machine Movement</strong>
+                                    <span>Run / wall-run / vault / slide as discrete states</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <span class="key-icon">🎬</span>
+                                <div class="key-text">
+                                    <strong>Cinematic Hand-Off</strong>
+                                    <span>Scripted camera transition between modes</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <span class="key-icon">↔️</span>
+                                <div class="key-text">
+                                    <strong>3D → Side-Scroller</strong>
+                                    <span>Perspective shift mid-level</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" type="button" data-tab-target="design">Design &amp; UX</button>
+                    <button class="tab" type="button" data-tab-target="technical">Technical</button>
+                    <button class="tab" type="button" data-tab-target="contribution">Contribution</button>
+                </div>
+                <div class="tab-content-wrapper">
+                    <div class="tab-panel active" data-tab="design">
+                        <div class="tab-goal">
+                            <span class="tab-goal-label">Goal</span>
+                            Build a parkour traversal segment that climaxes in a perspective shift — letting one level cover two play styles without ever pulling the player out of the moment.
+                        </div>
                         <ul>
-                            <li><strong>Wall detection:</strong> Raycasts missed curved surfaces. Implemented multi-ray fan detection with surface normal averaging.</li>
-                            <li><strong>Animation blending:</strong> Transitions looked jerky. Used custom blend trees with velocity-driven weights.</li>
-                            <li><strong>Camera motion sickness:</strong> Fast movement caused nausea. Added FOV easing and motion blur controls.</li>
+                            <li><strong>Movement Read:</strong> Each parkour action (wall-run, vault, slide) is a clearly readable state — the player always knows what move just resolved and what's available next.</li>
+                            <li><strong>Cinematic Bridge:</strong> Instead of a load screen or hard cut, a scripted camera move carries the player from the 3D run into the side-scroller framing — preserving momentum and emotional beat.</li>
+                            <li><strong>Genre Shift as Punchline:</strong> The side-scroller segment recontextualises the same character with new constraints, rewarding the player who paid attention during the 3D run.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-panel" data-tab="technical">
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">State Machine Pattern</span>
+                            <p>Movement is implemented as a classic <strong>finite state machine</strong> — each traversal verb (idle, run, wall-run, vault, slide, fall) is its own state class with explicit <code>Enter</code> / <code>Update</code> / <code>Exit</code> hooks and a guarded transition table.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Why It Matters</span>
+                            <p>Decoupling each move into its own state kept the controller debuggable and extensible — adding a new traversal action only meant writing a new state + listing it in the transition map, not threading flags through a monolithic <code>Update()</code>.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Cinematic Hand-Off</span>
+                            <p>The 3D → side-scroller transition is driven by a trigger volume that pauses player input, runs a scripted camera + timeline sequence, then re-enables input under the side-scroller state — so the player feels a single continuous level, not two stitched scenes.</p>
+                        </div>
+                    </div>
+                    <div class="tab-panel" data-tab="contribution">
+                        <div class="role-badge">Solo Gameplay Programmer &amp; Level Designer</div>
+                        <ul>
+                            <li><strong>Architecture:</strong> Designed the state-machine framework end-to-end — base <code>State</code> class, transition guards, and the per-move state implementations.</li>
+                            <li><strong>Level Build:</strong> Designed and built the showcase level, including the geometry that telegraphs each parkour move and the trigger that fires the cinematic.</li>
+                            <li><strong>Camera &amp; Pacing:</strong> Authored the cinematic hand-off sequence and tuned timing so the perspective shift lands on a beat rather than feeling like a cutscene.</li>
                         </ul>
                     </div>
                 </div>
@@ -588,9 +986,9 @@
     <div class="project-modal" id="project-modal" aria-hidden="true" hidden>
         <div class="modal-backdrop" data-close="true"></div>
         <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title-anchor">
-            <button class="modal-close" type="button" data-close="true" aria-label="Close project details">×</button>
             <div class="modal-content" id="modal-content"></div>
         </div>
+        <button class="modal-close" type="button" data-close="true" aria-label="Close project details">×</button>
     </div>
 
     <script src="script.js"></script>
