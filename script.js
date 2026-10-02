@@ -52,11 +52,37 @@ function selectHighlight(item) {
         document.body.classList.add('modal-open');
 
         // Restart videos inside the modal
-        modalContent.querySelectorAll('video').forEach(function(v) {
+        modalContent.querySelectorAll('video:not([data-lazy-video])').forEach(function(v) {
             try { v.currentTime = 0; v.play(); } catch (e) {}
         });
 
+        watchLazyVideos();
+
         modal.querySelector('.modal-close').focus();
+    }
+
+    // Clips further down the modal only download and play once scrolled into view
+    var lazyVideoObserver = null;
+
+    function watchLazyVideos() {
+        if (lazyVideoObserver) lazyVideoObserver.disconnect();
+
+        var clips = modalContent.querySelectorAll('video[data-lazy-video]');
+        if (!clips.length) return;
+
+        if (!('IntersectionObserver' in window)) {
+            clips.forEach(function(v) { v.play().catch(function() {}); });
+            return;
+        }
+
+        lazyVideoObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) entry.target.play().catch(function() {});
+                else entry.target.pause();
+            });
+        }, { root: modal.querySelector('.modal-container'), threshold: 0.25 });
+
+        clips.forEach(function(v) { lazyVideoObserver.observe(v); });
     }
 
     function closeModal() {
@@ -66,6 +92,7 @@ function selectHighlight(item) {
         document.body.classList.remove('modal-open');
 
         // Pause videos so they don't keep streaming in background
+        if (lazyVideoObserver) lazyVideoObserver.disconnect();
         modalContent.querySelectorAll('video').forEach(function(v) {
             try { v.pause(); } catch (e) {}
         });
@@ -103,29 +130,56 @@ function selectHighlight(item) {
         if (e.target.closest('[data-close]')) closeModal();
     });
 
-    // Close: ESC key
+    // ── Image lightbox: design figures zoom in place, over the modal ──
+    var lightbox = document.getElementById('image-lightbox');
+    var lightboxImg = document.getElementById('lightbox-img');
+    var lightboxCaption = document.getElementById('lightbox-caption');
+    var lightboxOrigin = null;
+
+    function isLightboxOpen() {
+        return lightbox && !lightbox.hidden;
+    }
+
+    function openLightbox(link) {
+        var thumb = link.querySelector('img');
+        var caption = link.parentElement.querySelector('figcaption');
+
+        lightboxImg.src = link.href;
+        lightboxImg.alt = thumb ? thumb.alt : '';
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+
+        lightboxOrigin = link;
+        lightbox.hidden = false;
+        lightbox.querySelector('.lightbox-close').focus();
+    }
+
+    function closeLightbox() {
+        if (!isLightboxOpen()) return;
+        lightbox.hidden = true;
+        lightboxImg.removeAttribute('src');
+        if (lightboxOrigin) lightboxOrigin.focus();
+        lightboxOrigin = null;
+    }
+
+    if (lightbox) {
+        // Open: clicking a design figure inside the modal
+        modalContent.addEventListener('click', function(e) {
+            var link = e.target.closest('.design-figure a');
+            if (!link) return;
+            e.preventDefault();
+            openLightbox(link);
+        });
+
+        // Close: anywhere outside the image itself
+        lightbox.addEventListener('click', function(e) {
+            if (e.target !== lightboxImg) closeLightbox();
+        });
+    }
+
+    // Close: ESC key — the lightbox first, then the modal
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
-    });
-
-    // Tab switching inside modal (delegated)
-    modalContent.addEventListener('click', function(e) {
-        var tabBtn = e.target.closest('[data-tab-target]');
-        if (!tabBtn) return;
-
-        var target = tabBtn.dataset.tabTarget;
-        var wrapper = tabBtn.closest('.tabs').nextElementSibling;
-        if (!wrapper) return;
-
-        tabBtn.closest('.tabs').querySelectorAll('.tab').forEach(function(t) {
-            t.classList.remove('active');
-        });
-        tabBtn.classList.add('active');
-
-        wrapper.querySelectorAll('.tab-panel').forEach(function(p) {
-            p.classList.remove('active');
-        });
-        var panel = wrapper.querySelector('[data-tab="' + target + '"]');
-        if (panel) panel.classList.add('active');
+        if (e.key !== 'Escape') return;
+        if (isLightboxOpen()) closeLightbox();
+        else closeModal();
     });
 })();
