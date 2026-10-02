@@ -46,13 +46,11 @@
                     <div class="skill-tags">
                         <span class="skill-tag">C#</span>
                         <span class="skill-tag">C++</span>
-                        <span class="skill-tag">Unity DOTS</span>
-                        <span class="skill-tag">ECS</span>
+                        <span class="skill-tag">DOTS/ECS</span>
+                        <span class="skill-tag">Systems Design</span>
+                        <span class="skill-tag">Physics</span>
                         <span class="skill-tag">Level Design</span>
-                        <span class="skill-tag">F2P</span>
-                        <span class="skill-tag">UX</span>
-                        <span class="skill-tag">FMOD</span>
-                        <span class="skill-tag">NavMesh</span>
+                        <span class="skill-tag">Optimization</span>
                     </div>
                 </div>
 
@@ -130,7 +128,7 @@
                     <span class="focus-label">Current Focus</span>
                 </div>
                 <h3>PC & Console Development</h3>
-                <p>Unity DOTS/ECS • Systems Design • Technical Gameplay</p>
+                <p>Unity DOTS/ECS • Unreal Engine • Systems Design • Technical Gameplay</p>
             </div>
 
             <!-- Technical Highlights — Compact Grid -->
@@ -222,7 +220,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Fancy Restaurant</h3>
-                    <p class="card-pitch">A soft-launched hybrid-casual restaurant manager (My Perfect Hotel lane) with 300K+ downloads. Built the full management loop, two-tree upgrade system, themed production lines, and an RV-driven economy tuned through live funnel data.</p>
+                    <p class="card-pitch">Soft-launched restaurant manager. I built the core loop, upgrade system and economy.</p>
                     <div class="card-summary-meta">
                         <div class="project-tags">
                             <span class="tag">Hybrid-Casual</span>
@@ -330,7 +328,7 @@
                         </div>
                     </div>
                     <div class="tab-panel" data-tab="contribution">
-                        <div class="role-badge">Developer &amp; Systems Designer — Tolian Games</div>
+                        <div class="role-badge">Game Designer &amp; Developer — Tolian Games</div>
                         <ul>
                             <li><strong>Shipped &amp; Scaled:</strong> Soft-launched and grew to <strong>300K+ downloads</strong>, validating the core loop in the live market.</li>
                             <li><strong>KPI-Driven Iteration:</strong> Ran 5 scope iterations over 7 months, each steered by level-funnel reports — e.g. shortening Section 2 and reordering unlocks after the funnel exposed drop-off at the Level 12 event.</li>
@@ -355,7 +353,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Wanted Curve Bullet</h3>
-                    <p class="card-pitch">Curved bullet ballistics built on a custom polynomial solver with frame-accurate segmented raycasts — recreating the iconic "Wanted" cinematic feel without any physics overhead.</p>
+                    <p class="card-pitch">Player-steered curving bullets, done with pure math and no rigidbodies.</p>
                     <div class="card-summary-meta">
                         <div class="project-tags">
                             <span class="tag">C#</span>
@@ -463,7 +461,7 @@
                         </div>
                     </div>
                     <div class="tab-panel" data-tab="contribution">
-                        <div class="role-badge">Technical Gameplay Designer</div>
+                        <div class="role-badge">Gameplay Programmer &amp; Designer · Models by a 3D artist</div>
                         <ul>
                             <li><strong>Performance:</strong> 60+ line segments with zero frame-drops on mobile.</li>
                             <li><strong>Game Feel:</strong> Balanced <strong>"Aim Assist"</strong> — rewarding, not automated.</li>
@@ -487,7 +485,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Clean Energy</h3>
-                    <p class="card-pitch">Decal-based fake lighting that delivers AAA-style illumination on mobile — 80% smaller build, steady 60 FPS, zero runtime lighting cost.</p>
+                    <p class="card-pitch">Fake lighting with decals: 80% smaller build at a steady 60 FPS on mobile.</p>
                     <div class="card-summary-meta">
                         <div class="project-tags">
                             <span class="tag">Lighting</span>
@@ -589,7 +587,7 @@
                         </div>
                     </div>
                     <div class="tab-panel" data-tab="contribution">
-                        <div class="role-badge">Lead Technical & Gameplay Designer</div>
+                        <div class="role-badge">Gameplay Programmer &amp; Designer · Models by a 3D artist</div>
                         <ul>
                             <li><strong>Technical Achievement:</strong> Mobile-first environmental lighting at steady 60 FPS on mid-range devices.</li>
                             <li><strong>Project Outcome:</strong> Shipped performant hybrid-casual loop balancing constraints with visual fidelity.</li>
@@ -613,7 +611,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Voxel Destruction System</h3>
-                    <p class="card-pitch">Real-time voxel-based character dismemberment — splits humanoid meshes per body part, swaps baked meshes for live voxels on hit, and reveals chunks bottom-up for satisfying destruction without tanking framerate.</p>
+                    <p class="card-pitch">Enemies break apart voxel by voxel on every hit, one draw call per intact body part.</p>
                     <div class="card-summary-meta">
                         <div class="project-tags">
                             <span class="tag">C#</span>
@@ -719,7 +717,7 @@
                         </div>
                     </div>
                     <div class="tab-panel" data-tab="contribution">
-                        <div class="role-badge">Solo Systems & Tools Designer</div>
+                        <div class="role-badge">Gameplay Programmer &amp; Designer · Models by a 3D artist</div>
                         <ul>
                             <li><strong>System Design:</strong> Designed the baked-mesh-to-voxel swap pipeline from scratch; integrated <strong>MVoxelizer</strong> and <strong>MeshBaker</strong> into a single inspector-friendly workflow.</li>
                             <li><strong>Editor Workflow:</strong> Authored the <code>VoxelAndBakedData</code> data class so designers could pair body parts and tag destruction phases without code changes.</li>
@@ -743,7 +741,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Learn To Fly — Flight Physics</h3>
-                    <p class="card-pitch">Code-driven glide system with quadratic velocity-to-lift conversion, a pitch-state machine, and a merge-style loadout (glider, booster, drill, plank) that reshapes flight feel mid-run.</p>
+                    <p class="card-pitch">One-finger glider where diving builds speed and pulling up turns it into lift.</p>
                     <div class="card-summary-meta">
                         <div class="project-tags">
                             <span class="tag">C#</span>
@@ -849,7 +847,7 @@
                         </div>
                     </div>
                     <div class="tab-panel" data-tab="contribution">
-                        <div class="role-badge">Solo Gameplay Programmer & Designer</div>
+                        <div class="role-badge">Gameplay Programmer &amp; Designer · Models by a 3D artist</div>
                         <ul>
                             <li><strong>Flight Model:</strong> Designed and tuned the entire physics model — pitch-driven branches, lift formula, drag interpolation — with no asset-store flight controller.</li>
                             <li><strong>Architecture:</strong> Built the <strong>Mergable</strong> system so upgrades plug into a single physics core via data, keeping the flight code authoritative.</li>
@@ -873,7 +871,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Parkour System &amp; Level</h3>
-                    <p class="card-pitch">Parkour movement built on a state-machine pattern, plus a custom level that uses a cinematic camera transition to hand off from 3D traversal into a side-scroller gameplay segment.</p>
+                    <p class="card-pitch">State-machine parkour controller and a level that shifts from 3D into a side-scroller.</p>
                     <div class="card-summary-meta">
                         <div class="project-tags">
                             <span class="tag">State Machine</span>
@@ -962,11 +960,144 @@
                         </div>
                     </div>
                     <div class="tab-panel" data-tab="contribution">
-                        <div class="role-badge">Solo Gameplay Programmer &amp; Level Designer</div>
+                        <div class="role-badge">Gameplay Programmer &amp; Level Designer · Solo project</div>
                         <ul>
                             <li><strong>Architecture:</strong> Designed the state-machine framework end-to-end — base <code>State</code> class, transition guards, and the per-move state implementations.</li>
                             <li><strong>Level Build:</strong> Designed and built the showcase level, including the geometry that telegraphs each parkour move and the trigger that fires the cinematic.</li>
                             <li><strong>Camera &amp; Pacing:</strong> Authored the cinematic hand-off sequence and tuned timing so the perspective shift lands on a beat rather than feeling like a cutscene.</li>
+                        </ul>
+                    </div>
+                </div>
+            </template>
+        </article>
+
+        <!-- CARD 7 — Voice-Controlled Runner (Unreal) -->
+        <article class="project-card" data-project-id="voice-runner">
+            <button class="card-trigger" type="button" aria-label="View details for Voice-Controlled Runner">
+                <div class="card-video">
+                    <div class="video-placeholder">🎬 Gameplay video coming soon</div>
+                    <div class="card-video-overlay">
+                        <span class="card-expand-hint">View details →</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    <h3>Voice-Controlled Runner</h3>
+                    <p class="card-pitch">Runner steered by voice: say the word shown on a side to move that way.</p>
+                    <div class="card-summary-meta">
+                        <div class="project-tags">
+                            <span class="tag">Unreal Engine 5</span>
+                            <span class="tag">Blueprints</span>
+                            <span class="tag">Voice Input</span>
+                        </div>
+                        <span class="duration-badge">👥 Team Project</span>
+                    </div>
+                </div>
+            </button>
+
+            <template class="project-detail-template">
+                <div class="modal-hero">
+                    <div class="modal-video">
+                        <div class="video-placeholder">🎬 Gameplay video coming soon</div>
+                    </div>
+                    <div class="modal-hero-body">
+                        <h2 class="modal-title">Voice-Controlled Runner</h2>
+                        <p class="modal-pitch">An Unreal Engine 5 runner where speech is the controller. Four Polish words sit around the character — top, bottom, left, right — and saying one out loud triggers the move on that side. I built the voice-to-action pipeline and the on-screen word display.</p>
+                        <div class="modal-meta-row">
+                            <div class="project-tags">
+                                <span class="tag">Unreal Engine 5</span>
+                                <span class="tag">Blueprints</span>
+                                <span class="tag">Voice Input</span>
+                                <span class="tag">OSC</span>
+                                <span class="tag">UI</span>
+                            </div>
+                            <span class="duration-badge">👥 Team Project</span>
+                        </div>
+                        <div class="modal-keys">
+                            <div class="key-point">
+                                <span class="key-icon">🎙️</span>
+                                <div class="key-text">
+                                    <strong>Voice as Input</strong>
+                                    <span>Offline recognition of a 16-word vocabulary</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <span class="key-icon">📡</span>
+                                <div class="key-text">
+                                    <strong>Python → OSC → Blueprint</strong>
+                                    <span>Each recognised word arrives as one message</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <span class="key-icon">🔤</span>
+                                <div class="key-text">
+                                    <strong>Four Live Word Slots</strong>
+                                    <span>One word per direction, no repeats on screen</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" type="button" data-tab-target="design">Design &amp; UX</button>
+                    <button class="tab" type="button" data-tab-target="technical">Technical</button>
+                    <button class="tab" type="button" data-tab-target="contribution">Contribution</button>
+                </div>
+                <div class="tab-content-wrapper">
+                    <div class="tab-panel active" data-tab="design">
+                        <div class="tab-goal">
+                            <span class="tab-goal-label">Goal</span>
+                            Make speech the controller: the player reads a word, says it, and the character reacts fast enough to dodge what's coming.
+                        </div>
+                        <ul>
+                            <li><strong>Read, Say, Move:</strong> Each direction shows one word. Saying it triggers that side's move — jump, crouch, or a lane switch left or right.</li>
+                            <li><strong>Position Is the Mapping:</strong> A word's place on screen matches the move it triggers, so the left word always means "go left" and nothing has to be memorised.</li>
+                            <li><strong>Heard-You Feedback:</strong> A recognised word fades out and a fresh one fades in on the same side, so the player always knows the game caught it.</li>
+                            <li><strong>Word Difficulty:</strong> Words are tagged by difficulty in a data table, and each direction tracks the difficulty of the word it currently shows.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-panel" data-tab="technical">
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Pipeline</span>
+                            <p>A Python listener runs <strong>Vosk</strong> offline with its grammar limited to the game's vocabulary, then sends the recognised word as an OSC message (<code>/voice/command</code>) to an <strong>OSC server</strong> created in the character Blueprint.</p>
+                        </div>
+                        <div class="tech-block problem">
+                            <span class="tech-block-label">The Problem</span>
+                            <p>Waiting for the recogniser to finalise a word adds a pause a runner can't afford — by then the obstacle has already hit.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">The Solve</span>
+                            <p>The listener fires as soon as a <strong>partial result</strong> contains a vocabulary word. It also ends an attempt itself after a short silence instead of waiting for the recogniser, and keeps <strong>150 ms of pre-roll</strong> audio so the first consonant isn't clipped.</p>
+                        </div>
+                        <div class="tech-block solution">
+                            <span class="tech-block-label">Matching in Blueprint</span>
+                            <p><code>HandleVoiceCommand</code> normalises the incoming word, compares it with the four active words and runs the matching move. Words travel as plain ASCII and are resolved back to their accented spelling from the data table for display.</p>
+                        </div>
+                        <div class="tech-metrics">
+                            <div class="tech-metric">
+                                <span class="metric-value">16</span>
+                                <span class="metric-label">Words</span>
+                                <span class="metric-desc">Recogniser vocabulary</span>
+                            </div>
+                            <div class="tech-metric">
+                                <span class="metric-value">20 ms</span>
+                                <span class="metric-label">Audio Blocks</span>
+                                <span class="metric-desc">Mic sampled at 16 kHz</span>
+                            </div>
+                            <div class="tech-metric">
+                                <span class="metric-value">4</span>
+                                <span class="metric-label">Word Slots</span>
+                                <span class="metric-desc">Top / bottom / left / right</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" data-tab="contribution">
+                        <div class="role-badge">Voice Input &amp; UI Programmer · Team project</div>
+                        <ul>
+                            <li><strong>Voice Pipeline:</strong> Integrated the Python/Vosk listener with Unreal over OSC.</li>
+                            <li><strong>Command Handling:</strong> Built the Blueprint logic that receives a word, matches it against the active words and executes the move for that direction.</li>
+                            <li><strong>Word Display:</strong> Built the on-screen word UI — four direction panels with fade-in/out animations and accented text pulled from the data table.</li>
+                            <li><strong>Team Scope:</strong> Spline movement, level design and obstacles were built by teammates.</li>
                         </ul>
                     </div>
                 </div>
