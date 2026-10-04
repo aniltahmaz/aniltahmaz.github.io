@@ -1190,6 +1190,15 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(250, 92, 92, 0.3);
 }
+
+.modal-play-btn.is-github {
+    background: #f0f0f0;
+    color: #111;
+}
+
+.modal-play-btn.is-github:hover {
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.18);
+}
 /* ═══════════════════════════════════════
    IMAGE LIGHTBOX — sits above the project modal
    ═══════════════════════════════════════ */
