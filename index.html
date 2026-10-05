@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anil Tahmaz | Game Designer Portfolio</title>
+    <title>Anil Tahmaz | Technical Game Designer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,7 +20,7 @@
                 </div>
 
                 <h1 class="name">ANIL TAHMAZ</h1>
-                <p class="title">Game Designer & Unity Developer</p>
+                <p class="title">Technical Game Designer</p>
 
                 <div class="divider"></div>
 
@@ -105,12 +105,13 @@
         <div class="about-card">
             <h2 class="section-title">About Me</h2>
             <p>
-                Game designer and Unity developer with 5+ years of experience
-                across multiple genres and platforms. Years of rapid prototyping
+                Technical game designer with 5+ years of experience in Unity and
+                Unreal Engine: I design systems and levels and build them myself.
+                Years of rapid prototyping across genres and platforms
                 gave me deep hands-on experience <strong>designing and
                 implementing complex systems from scratch</strong> — from
                 custom physics to GPU-side optimizations. Now focused on
-                <strong>PC & console development</strong> with Unity DOTS/ECS.
+                <strong>PC & console development</strong> in Unreal Engine and Unity DOTS/ECS.
             </p>
             <div class="quote-inline">
                 "I don't just design mechanics — I <strong>engineer
@@ -464,6 +465,410 @@
                                     </figure>
                                 </div>
                             </div>
+                        </section>
+                    </div>
+                </div>
+            </template>
+        </article>
+
+        <!-- CARD — Slavic Dome (Unreal, team project) -->
+        <article class="project-card" data-project-id="slavic-dome">
+            <button class="card-trigger" type="button" aria-label="View details for Data-Driven Combat System">
+                <div class="card-video">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/slavic-hero.mp4" type="video/mp4">
+                    </video>
+                    <div class="card-video-overlay">
+                        <span class="card-expand-hint">View details →</span>
+                    </div>
+                    <span class="card-stat-badge">1 Call per Enemy Attack</span>
+                </div>
+                <div class="card-summary">
+                    <h3>Data-Driven Combat System</h3>
+                    <p class="card-pitch">Combat systems for a third-person action game: weapons, combos and player rules defined as data.</p>
+                    <div class="card-summary-meta">
+                        <div class="project-tags">
+                            <span class="tag">Unreal Engine 5</span>
+                            <span class="tag">Systems Design</span>
+                            <span class="tag">Combat</span>
+                        </div>
+                        <span class="duration-badge">⏱ 1 Month</span>
+                    </div>
+                </div>
+            </button>
+
+            <template class="project-detail-template">
+                <div class="modal-hero">
+                    <div class="modal-video">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/videos/slavic-hero.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="modal-hero-body">
+                        <h2 class="modal-title">Data-Driven Combat System</h2>
+                        <div class="role-badge">Technical Designer — Combat Systems · Team project</div>
+                        <p class="modal-pitch">Combat systems for a one-month team project in UE5, designed so that content is data: weapons are table rows, combos are lists, and what the player can do at each moment is set on the animation timeline.</p>
+                        <div class="modal-meta-row">
+                            <div class="project-tags">
+                                <span class="tag">Unreal Engine 5</span>
+                                <span class="tag">Systems Design</span>
+                                <span class="tag">Combat</span>
+                                <span class="tag">Blueprints</span>
+                            </div>
+                            <span class="duration-badge">⏱ 1 Month</span>
+                        </div>
+                        <h3 class="modal-section-title">What I did</h3>
+                        <ul class="modal-did">
+                            <li><strong>Weapons as data:</strong> A weapon is added or retuned in one table row, with no graph changes.</li>
+                            <li><strong>Rules on the timeline:</strong> Notifies on each montage decide when the player can move, attack or dodge.</li>
+                            <li><strong>One combat base:</strong> Player, enemies and boss share equip, attack, hit detection and damage.</li>
+                        </ul>
+                        <p class="modal-note">Enemy and boss AI by Jakub Krzysiak. Audio and level design by Mateusz Figura.</p>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="tech-metrics">
+                        <div class="tech-metric">
+                            <span class="metric-value">6</span>
+                            <span class="metric-label">Weapon Rows</span>
+                            <span class="metric-desc">One data table, no graph edits</span>
+                        </div>
+                        <div class="tech-metric">
+                            <span class="metric-value">1</span>
+                            <span class="metric-label">Call per Enemy Attack</span>
+                            <span class="metric-desc">Shared base handles trace and damage</span>
+                        </div>
+                        <div class="tech-metric">
+                            <span class="metric-value">4</span>
+                            <span class="metric-label">Montage Notifies</span>
+                            <span class="metric-desc">Drive every player permission</span>
+                        </div>
+                    </div>
+                    <div class="modal-details">
+                        <h3 class="modal-section-title">How it works</h3>
+                        <p class="modal-lead">Each row pairs a design decision with the asset or graph that implements it. Screenshots open full size on click.</p>
+
+                        <section class="iteration">
+                            <span class="iteration-date">Overview</span>
+                            <h4>The whole system on one page</h4>
+                            <div class="iteration-cols explain-row is-wide-figure">
+                                <div>
+                                    <p class="iteration-note"><strong>One base, one table.</strong> The player and the enemies inherit from <code>BP_BaseCharacter</code>, which owns equip, attack playback, the trace switch and damage. Weapons read their behaviour from a table row and a weapon-type asset, and know only the base class. Every part below is one box or one arrow of this diagram.</p>
+                                    <p class="iteration-note"><strong>Ready for co-op.</strong> The project is single-player today, but equips and attacks already run through server calls and multicasts and the equipped weapon replicates, so it can grow into co-op without being restructured.</p>
+                                    <p class="iteration-note">Blue and green are mine. Orange is Jakub's enemy Blueprints.</p>
+                                </div>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/class-hierarchy.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/class-hierarchy.png" width="2744" height="1344" alt="Class diagram: BP_BaseCharacter with the player and enemy subclasses, BP_WeaponBase with the melee weapon, and the weapon data table and data asset" loading="lazy"></a>
+                                    <figcaption>Characters, weapons and data.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">1 · Weapons</span>
+                            <h4>A weapon is a row in a table</h4>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>One row per weapon.</strong> <code>DT_Weapons</code> holds what makes a weapon different in play: its name and rarity, a list of stat modifiers (flat or percent, each tagged with the stat it changes), its mesh and its scale. The four sword rarities and the enemy and boss fists are all rows in the same table, so adding or rebalancing a weapon is a data edit.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/weapons-table.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapons-table.png" width="1911" height="987" alt="Data table with six weapon rows and the row editor showing stat modifiers, mesh and weapon type" loading="lazy"></a>
+                                    <figcaption>DT_Weapons, with one row open in the editor.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Behaviour lives in the weapon type.</strong> Every row points to a <code>PDA_WeaponMontageData</code> asset. It answers the questions the graphs would otherwise hard-code: which montages this weapon plays (attacks, dash attack, air attack, hit reactions), how its combo is ordered, how big its hit volume is, which hand holds it and which socket the hit trace follows. A new weapon family is a new asset, not a new Blueprint.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/weapon-type-asset.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapon-type-asset.png" width="1921" height="1082" alt="Weapon type data asset with attack montages, hit box size, wielding socket and trace socket name" loading="lazy"></a>
+                                    <figcaption>DA_SwordMontages, the weapon type the sword rows point to.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">2 · Weapon combo</span>
+                            <h4>Combos are read from the weapon's data</h4>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>A combo is an ordered list.</strong> <code>ComboSteps</code> on the weapon type lists each step as a montage key and a sound cue. The key is looked up in the same asset's montage map, so the order, length and animation of a combo are all changed here. Adding a fourth hit is one more entry.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/combo-steps-data.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/combo-steps-data.png" width="1920" height="1080" alt="Weapon type data asset with three combo steps, each with a montage key and a sound trigger" loading="lazy"></a>
+                                    <figcaption>ComboSteps on DA_SwordMontages.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>One attack button, three outcomes.</strong> <code>TryAttack</code> picks by situation: in the air it plays the air attack, once per jump; at sprint speed it plays the dash attack; otherwise it advances the ground combo. The ground combo asks only two questions: is there a next step in the data, and is the combo window open?</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/try-attack.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/try-attack.png" width="1904" height="943" alt="TryAttack Blueprint graph with air attack, dash attack and ground combo branches" loading="lazy"></a>
+                                    <figcaption>BP_ThirdPersonCharacter → TryAttack.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Special attacks reuse the same pipeline.</strong> The dash and air attacks are montages in the same map with the same notifies, so they get hit detection, hit-stop and the player-state rules without any extra logic. Both clips have the hit sweep drawn.</p>
+                                <div class="figure-pair">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Dash attack with the weapon sweep drawn">
+                                            <source src="assets/videos/slavic-trace-dash-attack.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Dash attack.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Air attack with the weapon sweep drawn">
+                                            <source src="assets/videos/slavic-trace-jump-attack.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Air attack.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">3 · Player state &amp; notifies</span>
+                            <h4>The animation decides what the player can do</h4>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Rules sit on the timeline.</strong> Each attack montage carries three notify windows: <code>WeaponTrace</code> (the blade can hit), <code>ComboWindow</code> (the next attack can be queued) and <code>EndAnim</code> (control returns). The character turns movement, rotation, attacking, dodging and sprinting on and off as each window begins and ends. Tuning an attack means sliding a window, not editing a graph.</p>
+                                <figure class="design-figure is-narrow">
+                                    <a href="assets/images/slavic-dome/montage-notify-attack.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-notify-attack.png" width="1072" height="981" alt="Attack montage timeline with WeaponTrace, ComboWindow and EndAnim notifies" loading="lazy"></a>
+                                    <figcaption>An attack montage and its notify windows.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Dodge uses the same language.</strong> <code>ImmuneDamage</code> marks the frames in which hits are ignored, and <code>EndAnim</code> hands control back. How generous a dodge feels is the length of one window.</p>
+                                <figure class="design-figure is-narrow">
+                                    <a href="assets/images/slavic-dome/montage-notify-dodge.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-notify-dodge.png" width="1083" height="980" alt="Dodge montage timeline with ImmuneDamage and EndAnim notifies" loading="lazy"></a>
+                                    <figcaption>The dodge montage and its notify windows.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>In play.</strong> Dodging through an enemy attack inside the immunity window.</p>
+                                <figure class="design-figure clip is-narrow">
+                                    <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Dodging through an enemy attack">
+                                        <source src="assets/videos/slavic-dodge-enemy-attack.mp4" type="video/mp4">
+                                    </video>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <div>
+                                    <p class="iteration-note"><strong>Designed on paper first.</strong> Before building it I drew each animation as phases and wrote down what the player may do in each one. These tables are the clean version of that page.</p>
+                                    <div class="design-table-wrap">
+                                        <table class="design-table perm-table">
+                                            <thead>
+                                                <tr><th>Normal attack</th><th>Wind-up</th><th>Weapon trace</th><th>Combo window</th><th>End anim</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td>Move</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Dodge</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Also</td><td></td><td></td><td></td><td>Combo resets</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="design-table-wrap">
+                                        <table class="design-table perm-table">
+                                            <thead>
+                                                <tr><th>Dodge</th><th>Start</th><th>Immune damage</th><th>End anim</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td>Move</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Dodge</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td></tr>
+                                                <tr><td>Also</td><td>Combo resets</td><td></td><td>Sprint attack</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p class="iteration-note">After playtesting I adjusted a few cells for flow: a swing can be cancelled with a dodge, rotation is locked for the whole dodge, and the combo resets when the dodge animation ends rather than when it starts.</p>
+                                </div>
+                                <figure class="design-figure is-narrow is-top-crop">
+                                    <a href="assets/images/slavic-dome/state-paper-design.jpg" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/state-paper-design.jpg" width="1126" height="2000" alt="Hand-drawn timelines for a normal attack and a dodge, with the permissions allowed in each phase" loading="lazy"></a>
+                                    <figcaption>The paper design.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">4 · Game feel</span>
+                            <h4>Feedback is layered on the hit, not mixed into it</h4>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>What the player feels.</strong> Each hit of the combo holds the swing for a few frames and shakes the camera, while the target flashes, throws an impact effect and shows a damage number.</p>
+                                <figure class="design-figure clip is-narrow">
+                                    <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Three-hit combo with hit-stop">
+                                        <source src="assets/videos/slavic-combo-hitstop.mp4" type="video/mp4">
+                                    </video>
+                                    <figcaption>Three-hit combo.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>The weapon announces, the player reacts.</strong> When a weapon is equipped the player subscribes to its <code>OnHitLanded</code> event. The weapon doesn't know hit-stop exists, so the feel can change without touching hit detection.</p>
+                                <figure class="design-figure is-narrow">
+                                    <a href="assets/images/slavic-dome/weapon-equipped-bind.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapon-equipped-bind.png" width="847" height="365" alt="OnWeaponEquipped Blueprint graph binding ApplyHitStop to On Hit Landed" loading="lazy"></a>
+                                    <figcaption>BP_ThirdPersonCharacter → OnWeaponEquipped.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Hit-stop is two numbers.</strong> <code>ApplyHitStop</code> slows the attack montage by a slow rate for a slow duration, restores it, and plays a camera shake. Both values are variables, so how heavy a hit feels is tuned without opening the graph.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/hit-stop.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/hit-stop.png" width="1749" height="904" alt="ApplyHitStop Blueprint graph" loading="lazy"></a>
+                                    <figcaption>BP_ThirdPersonCharacter → ApplyHitStop.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Target feedback is chosen by damage type.</strong> The victim flashes, spawns an impact effect looked up from a damage-type map with a default fallback, and pops a damage number at the hit location.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/hit-feedback.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/hit-feedback.png" width="1836" height="532" alt="PlayHitFeedback Blueprint graph" loading="lazy"></a>
+                                    <figcaption>BP_BaseCharacter → PlayHitFeedback.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">5 · Trace system</span>
+                            <h4>Hits follow the blade, and only while the animation says so</h4>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>The notify is the switch.</strong> When a montage's <code>WeaponTrace</code> window begins, the base character starts the trace on whatever weapon is equipped, and stops it when the window ends. The window on the timeline is the hit window, so nothing else has to be kept in sync with the animation.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/handle-trace-notify.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/handle-trace-notify.png" width="1541" height="548" alt="HandleWeaponTraceNotify Blueprint graph" loading="lazy"></a>
+                                    <figcaption>BP_BaseCharacter → HandleWeaponTraceNotify.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Each swing starts clean.</strong> Starting a trace clears the list of actors already hit and turns the weapon's tick on. It is off the rest of the time, so a weapon that isn't swinging costs nothing.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/start-trace.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/start-trace.png" width="1515" height="440" alt="StartTrace Blueprint graph" loading="lazy"></a>
+                                    <figcaption>BP_MeleeWeaponBase → StartTrace.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>A sweep, not a point check.</strong> On every frame of the swing the weapon sweeps a sphere from the trace socket's previous position to its current one. The radius is the weapon type's hit box size, so a fast swing can't skip past a target and reach is tuned in data.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/sweep-trace-1.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/sweep-trace-1.png" width="1855" height="670" alt="PerformSweepTrace Blueprint graph, sweep part" loading="lazy"></a>
+                                    <figcaption>BP_MeleeWeaponBase → PerformSweepTrace, the sweep.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>One hit per target per swing.</strong> A target joins the swing's hit list the first time it is touched and is ignored after that. The weapon then announces the hit through <code>OnHitLanded</code> and sends damage through the shared damage interface. The sound block in this graph is Mateusz's.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/sweep-trace-2.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/sweep-trace-2.png" width="1559" height="928" alt="PerformSweepTrace Blueprint graph, hit part" loading="lazy"></a>
+                                    <figcaption>BP_MeleeWeaponBase → PerformSweepTrace, the hit.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">6 · Damage system</span>
+                            <h4>One way in, two questions for each character</h4>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>One entry point.</strong> Everything that can be hurt receives damage through a single event on the base character: check whether it may be damaged, apply it, then tell the subclass. A character type answers two questions instead of rebuilding the flow: can I be damaged, and what do I do afterwards?</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/receive-damage.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/receive-damage.png" width="1493" height="523" alt="Event ReceiveDamage Blueprint graph on the base character" loading="lazy"></a>
+                                    <figcaption>BP_BaseCharacter → Event ReceiveDamage.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Apply, then show.</strong> The hit goes to the stats component, which owns health and the damage maths, and feedback is triggered from what it returns. Combat rules and presentation stay in separate steps.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/damage-received.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/damage-received.png" width="1555" height="612" alt="DamageReceived Blueprint graph" loading="lazy"></a>
+                                    <figcaption>BP_BaseCharacter → DamageReceived.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>The player's rule.</strong> The player adds two conditions on top of the base check: other players can't hurt it, and nothing can during immunity frames.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/player-can-receive-damage.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/player-can-receive-damage.png" width="1214" height="439" alt="The player's CanReceiveDamage override" loading="lazy"></a>
+                                    <figcaption>BP_ThirdPersonCharacter → CanReceiveDamage.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>The player's reaction.</strong> On damage the player loses control and plays a hit-reaction montage. Enemies inherit the base flow unchanged. The sound triggers in this graph are Mateusz's.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/player-on-damage.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/player-on-damage.png" width="1890" height="610" alt="The player's OnDamageApplied and Die events" loading="lazy"></a>
+                                    <figcaption>BP_ThirdPersonCharacter → Event OnDamageApplied.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">7 · Shared base</span>
+                            <h4>Enemies and the boss need no combat code of their own</h4>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>An attack is a montage.</strong> Playing a montage through the base character routes its notifies through the trace handler on every client. Whoever plays the montage gets hit detection with it.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/montage-play-notify-routing.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-play-notify-routing.png" width="1253" height="773" alt="Server_PlayMontage and Multicast_PlayMontage Blueprint graph" loading="lazy"></a>
+                                    <figcaption>BP_BaseCharacter → Server_PlayMontage / Multicast_PlayMontage.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>An enemy attack is one call.</strong> Jakub's State Tree task casts to the base class and plays an attack montage. Hit detection and damage come from the base, so the enemies and the boss were built without writing either.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/enemy-attack-call.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/enemy-attack-call.png" width="1220" height="328" alt="State Tree task graph: cast to BP_BaseCharacter, Server Play Montage, finish task" loading="lazy"></a>
+                                    <figcaption>Jakub's State Tree task, STT_RootAttack.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Same trace, same damage.</strong> The boss equips its own row from the weapon table and hits the player through the same sweep and the same damage flow. The first clip has the hit sweep drawn.</p>
+                                <div class="figure-pair">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Boss attack with the weapon sweep drawn">
+                                            <source src="assets/videos/slavic-boss-attack-trace.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Boss attack.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="A boss hit landing on the player">
+                                            <source src="assets/videos/slavic-boss-hit-player-death.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A boss hit on the player.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">8 · Animation Blueprint</span>
+                            <h4>One blend space for all ground movement</h4>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>One blend space.</strong> Locomotion is a single blend space driven by speed and direction. It covers walking to sprinting in all eight directions, so there is one asset to tune rather than a state per direction.</p>
+                                <figure class="design-figure clip is-narrow">
+                                    <video loop muted playsinline preload="none" data-lazy-video width="1120" height="1080" aria-label="The locomotion blend space previewed in the editor">
+                                        <source src="assets/videos/slavic-blendspace-strafing.mp4" type="video/mp4">
+                                    </video>
+                                    <figcaption>The locomotion blend space previewed in the editor.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="iteration-cols explain-row">
+                                <p class="iteration-note"><strong>Two inputs.</strong> Each frame the animation Blueprint reads the character's velocity and facing and feeds speed and direction to the blend space, along with the in-air and sprinting flags the rest of the graph needs.</p>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/anim-direction.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/anim-direction.png" width="1908" height="406" alt="Animation Blueprint event graph computing speed and direction" loading="lazy"></a>
+                                    <figcaption>ABP_Player → EventGraph.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">9 · Unfinished</span>
+                            <h4>Bow aiming and shooting</h4>
+                            <div class="iteration-cols explain-row">
+                                <div>
+                                    <p class="iteration-note"><strong>What works.</strong> Aim mode pulls the camera in, shows a crosshair and locks the character to the camera direction, so the same locomotion blend space becomes strafing.</p>
+                                    <p class="iteration-note"><strong>What doesn't yet.</strong> Drawing and firing are not finished. The weapon type already has slots for a projectile class and a muzzle socket, so the bow is planned as another row in the weapon table rather than a separate system.</p>
+                                </div>
+                                <figure class="design-figure">
+                                    <a href="assets/images/slavic-dome/aim-mode.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/aim-mode.png" width="1905" height="696" alt="OnAimStarted and OnAimEnded Blueprint graph" loading="lazy"></a>
+                                    <figcaption>BP_ThirdPersonCharacter → OnAimStarted / OnAimEnded.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <span class="iteration-date">10 · Next</span>
+                            <h4>What I would change next</h4>
+                            <ul class="modal-did">
+                                <li>Replace the player's permission flags with a single action-state enum.</li>
+                                <li>Move respawn out of the character into the game mode.</li>
+                                <li>Split combo and aiming into components.</li>
+                                <li>Finish the bow: draw, release, and projectile hits through the same damage flow.</li>
+                            </ul>
                         </section>
                     </div>
                 </div>

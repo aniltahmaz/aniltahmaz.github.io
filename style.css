@@ -779,6 +779,40 @@ body {
     align-items: start;
 }
 
+/* One explanation on the left, the screenshot or clip it describes on the right */
+.iteration-cols.explain-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    margin-bottom: 22px;
+}
+
+.iteration-cols.explain-row:last-child { margin-bottom: 0; }
+
+/* A diagram that needs more room than its text */
+.iteration-cols.explain-row.is-wide-figure {
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
+}
+.explain-row .design-figure:last-child,
+.explain-row .figure-pair .design-figure { margin-bottom: 0; }
+
+/* A clip that sits in the flow like a design image */
+.clip video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #000;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+/* Tall photo: show the top part as the thumbnail, full image in the lightbox */
+.design-figure.is-top-crop a { aspect-ratio: 3 / 4; }
+
+.design-figure.is-top-crop img {
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
 /* Row of in-game screenshots */
 .shot-row-images {
     display: grid;
@@ -891,6 +925,12 @@ body {
 }
 
 .design-table td { color: #c4c4c4; }
+
+/* Permission tables: narrow, centred tick columns */
+.perm-table th + th,
+.perm-table td + td { text-align: center; }
+.perm-table .perm-yes { color: #00ff88; font-weight: 700; }
+.perm-table .perm-no { color: #555; }
 .design-table td:first-child { color: #fff; }
 .design-table tr:last-child td { border-bottom: none; }
 .design-table td + td,
@@ -1350,6 +1390,9 @@ footer {
     .modal-video { aspect-ratio: 16 / 9; max-height: 260px; }
 
     .iteration-cols { grid-template-columns: 1fr; gap: 0; }
+    .iteration-cols.explain-row,
+    .iteration-cols.explain-row.is-wide-figure { grid-template-columns: 1fr; margin-bottom: 26px; }
+    .explain-row .design-figure:last-child { margin-top: 4px; }
     .clip-fill { min-height: 0; }
     .clip-fill-frame video {
         position: static;
