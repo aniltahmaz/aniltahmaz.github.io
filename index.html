@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anil Tahmaz | Technical Game Designer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- Bump ?v= whenever style.css or script.js changes, so browsers never pair this page with a cached copy -->
+    <link rel="stylesheet" href="style.css?v=20261005c">
 </head>
 <body>
 
@@ -523,7 +524,7 @@
                             <li><strong>Rules on the timeline:</strong> Notifies on each montage decide when the player can move, attack or dodge.</li>
                             <li><strong>One combat base:</strong> Player, enemies and boss share equip, attack, hit detection and damage.</li>
                         </ul>
-                        <p class="modal-note">Enemy and boss AI by Jakub Krzysiak. Audio and level design by Mateusz Figura.</p>
+                        <p class="modal-note">Enemy and boss AI and the stats system by Jakub Krzysiak. Audio and level design by Mateusz Figura.</p>
                     </div>
                 </div>
 
@@ -569,17 +570,34 @@
                             <span class="iteration-date">1 · Weapons</span>
                             <h4>A weapon is a row in a table</h4>
                             <div class="iteration-cols explain-row">
-                                <p class="iteration-note"><strong>One row per weapon.</strong> <code>DT_Weapons</code> holds what makes a weapon different in play: its name and rarity, a list of stat modifiers (flat or percent, each tagged with the stat it changes), its mesh and its scale. The four sword rarities and the enemy and boss fists are all rows in the same table, so adding or rebalancing a weapon is a data edit.</p>
+                                <div>
+                                    <p class="iteration-note"><strong>One row per weapon.</strong> <code>DT_Weapons</code> holds what makes a weapon different in play. The four sword rarities and the enemy and boss fists are all rows in the same table, so adding or rebalancing a weapon is a data edit.</p>
+                                    <ul class="modal-did">
+                                        <li><strong>Name and rarity:</strong> what the player sees.</li>
+                                        <li><strong>Weapon type:</strong> which behaviour asset the row uses. The four swords share <code>DA_Sword</code>; the two fists have their own.</li>
+                                        <li><strong>Modifiers:</strong> stat changes applied while the weapon is equipped, each tagged with the stat it affects in Jakub's stats system.</li>
+                                        <li><strong>Mesh and scale:</strong> how it looks in the hand.</li>
+                                    </ul>
+                                </div>
                                 <figure class="design-figure">
-                                    <a href="assets/images/slavic-dome/weapons-table.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapons-table.png" width="1911" height="987" alt="Data table with six weapon rows and the row editor showing stat modifiers, mesh and weapon type" loading="lazy"></a>
+                                    <a href="assets/images/slavic-dome/weapons-table.png?v=2" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapons-table.png?v=2" width="1557" height="1576" alt="Data table with six weapon rows and the row editor showing weapon type, rarity, a stat modifier and mesh" loading="lazy"></a>
                                     <figcaption>DT_Weapons, with one row open in the editor.</figcaption>
                                 </figure>
                             </div>
                             <div class="iteration-cols explain-row">
-                                <p class="iteration-note"><strong>Behaviour lives in the weapon type.</strong> Every row points to a <code>PDA_WeaponMontageData</code> asset. It answers the questions the graphs would otherwise hard-code: which montages this weapon plays (attacks, dash attack, air attack, hit reactions), how its combo is ordered, how big its hit volume is, which hand holds it and which socket the hit trace follows. A new weapon family is a new asset, not a new Blueprint.</p>
+                                <div>
+                                    <p class="iteration-note"><strong>Behaviour lives in the weapon type.</strong> A <code>PDA_WeaponMontageData</code> asset answers the questions the graphs would otherwise hard-code. A new weapon family is a new asset, not a new Blueprint.</p>
+                                    <ul class="modal-did">
+                                        <li><strong>Montages:</strong> every animation the weapon can play, by key: attacks, dash attack, air attack and hit reactions.</li>
+                                        <li><strong>Combo steps:</strong> the order of the ground combo.</li>
+                                        <li><strong>Hit box size:</strong> the reach of the hit sweep.</li>
+                                        <li><strong>Wielding and trace sockets:</strong> which hand holds the weapon and which point the sweep follows.</li>
+                                        <li><strong>Ranged sockets:</strong> reserved for the bow.</li>
+                                    </ul>
+                                </div>
                                 <figure class="design-figure">
-                                    <a href="assets/images/slavic-dome/weapon-type-asset.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapon-type-asset.png" width="1921" height="1082" alt="Weapon type data asset with attack montages, hit box size, wielding socket and trace socket name" loading="lazy"></a>
-                                    <figcaption>DA_SwordMontages, the weapon type the sword rows point to.</figcaption>
+                                    <a href="assets/images/slavic-dome/weapon-type-asset.png?v=2" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapon-type-asset.png?v=2" width="1348" height="1906" alt="Weapon type data asset DA_Sword: damage type, hit box size, seven montages, three combo steps, grip offset, trace socket and ranged sockets" loading="lazy"></a>
+                                    <figcaption>DA_Sword, the weapon type the four sword rows point to.</figcaption>
                                 </figure>
                             </div>
                         </section>
@@ -588,10 +606,12 @@
                             <span class="iteration-date">2 · Weapon combo</span>
                             <h4>Combos are read from the weapon's data</h4>
                             <div class="iteration-cols explain-row">
-                                <p class="iteration-note"><strong>A combo is an ordered list.</strong> <code>ComboSteps</code> on the weapon type lists each step as a montage key and a sound cue. The key is looked up in the same asset's montage map, so the order, length and animation of a combo are all changed here. Adding a fourth hit is one more entry.</p>
-                                <figure class="design-figure">
-                                    <a href="assets/images/slavic-dome/combo-steps-data.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/combo-steps-data.png" width="1920" height="1080" alt="Weapon type data asset with three combo steps, each with a montage key and a sound trigger" loading="lazy"></a>
-                                    <figcaption>ComboSteps on DA_SwordMontages.</figcaption>
+                                <p class="iteration-note"><strong>A combo is an ordered list.</strong> <code>ComboSteps</code> on the weapon type, the list near the bottom of the asset above, names each step by montage key and sound cue. The key is looked up in the same asset's montage map, so the order, length and animation of a combo are all changed there. Adding a fourth hit is one more entry. The clip plays the three steps of <code>DA_Sword</code> in order.</p>
+                                <figure class="design-figure clip">
+                                    <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Three-hit sword combo">
+                                        <source src="assets/videos/slavic-combo-hitstop.mp4" type="video/mp4">
+                                    </video>
+                                    <figcaption>The three-hit combo.</figcaption>
                                 </figure>
                             </div>
                             <div class="iteration-cols explain-row">
@@ -639,7 +659,7 @@
                             </div>
                             <div class="iteration-cols explain-row">
                                 <p class="iteration-note"><strong>In play.</strong> Dodging through an enemy attack inside the immunity window.</p>
-                                <figure class="design-figure clip is-narrow">
+                                <figure class="design-figure clip">
                                     <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Dodging through an enemy attack">
                                         <source src="assets/videos/slavic-dodge-enemy-attack.mp4" type="video/mp4">
                                     </video>
@@ -701,7 +721,7 @@
                             </div>
                             <div class="iteration-cols explain-row">
                                 <p class="iteration-note"><strong>The weapon announces, the player reacts.</strong> When a weapon is equipped the player subscribes to its <code>OnHitLanded</code> event. The weapon doesn't know hit-stop exists, so the feel can change without touching hit detection.</p>
-                                <figure class="design-figure is-narrow">
+                                <figure class="design-figure">
                                     <a href="assets/images/slavic-dome/weapon-equipped-bind.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapon-equipped-bind.png" width="847" height="365" alt="OnWeaponEquipped Blueprint graph binding ApplyHitStop to On Hit Landed" loading="lazy"></a>
                                     <figcaption>BP_ThirdPersonCharacter → OnWeaponEquipped.</figcaption>
                                 </figure>
@@ -766,7 +786,7 @@
                                 </figure>
                             </div>
                             <div class="iteration-cols explain-row">
-                                <p class="iteration-note"><strong>Apply, then show.</strong> The hit goes to the stats component, which owns health and the damage maths, and feedback is triggered from what it returns. Combat rules and presentation stay in separate steps.</p>
+                                <p class="iteration-note"><strong>Apply, then show.</strong> The hit goes to Jakub's stats component, which owns health and the damage maths, and feedback is triggered from what it returns. Combat rules and presentation stay in separate steps.</p>
                                 <figure class="design-figure">
                                     <a href="assets/images/slavic-dome/damage-received.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/damage-received.png" width="1555" height="612" alt="DamageReceived Blueprint graph" loading="lazy"></a>
                                     <figcaption>BP_BaseCharacter → DamageReceived.</figcaption>
@@ -1437,7 +1457,7 @@
         <button class="lightbox-close" type="button" aria-label="Close image">×</button>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20261005c"></script>
 
 </body>
 </html>

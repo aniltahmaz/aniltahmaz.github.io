@@ -787,6 +787,11 @@ body {
 
 .iteration-cols.explain-row:last-child { margin-bottom: 0; }
 
+/* Square screenshots fill less of the column than wide ones */
+.explain-row .design-figure.is-narrow { max-width: 600px; }
+.explain-row .design-figure.is-narrow.is-top-crop { max-width: 480px; }
+.explain-row .modal-did { margin-bottom: 0; }
+
 /* A diagram that needs more room than its text */
 .iteration-cols.explain-row.is-wide-figure {
     grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
