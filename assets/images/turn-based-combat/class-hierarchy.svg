@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 520" width="1700" height="520" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1700" height="520" fill="#14171d"/>
+
+  <!-- connectors -->
+  <g stroke="#5b6b85" stroke-width="2" fill="none">
+    <path d="M850 114 V152 M295 152 H1130 M295 152 V190 M1130 152 V190"/>
+    <path d="M295 274 V312 M115 312 H475 M115 312 V350 M295 312 V350 M475 312 V350"/>
+    <path d="M1130 274 V312 M668 312 H1592 M668 312 V350 M800 312 V350 M932 312 V350 M1064 312 V350 M1196 312 V350 M1328 312 V350 M1460 312 V350 M1592 312 V350"/>
+  </g>
+
+  <!-- root -->
+  <rect x="610" y="30" width="480" height="84" rx="10" fill="#23314d" stroke="#5b8def" stroke-width="2"/>
+  <text x="850" y="66" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="700">BP_CharacterParent</text>
+  <text x="850" y="94" text-anchor="middle" fill="#a9b8d4" font-size="14">Skill pipeline · damage flow · parry / counter · QTE state</text>
+
+  <!-- level 1 -->
+  <rect x="115" y="190" width="360" height="84" rx="10" fill="#1f3b2e" stroke="#4cc38a" stroke-width="2"/>
+  <text x="295" y="226" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="700">BP_HeroParent</text>
+  <text x="295" y="254" text-anchor="middle" fill="#a8d9bf" font-size="14">Hero events · RefreshHealthUI override</text>
+
+  <rect x="950" y="190" width="360" height="84" rx="10" fill="#4a2a2a" stroke="#ef6b6b" stroke-width="2"/>
+  <text x="1130" y="226" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="700">BP_EnemyParent</text>
+  <text x="1130" y="254" text-anchor="middle" fill="#e6b3b3" font-size="14">PlayRandomAttack · PickTarget (taunt-aware)</text>
+
+  <!-- heroes -->
+  <g fill="#1a2a24" stroke="#4cc38a" stroke-width="1.5">
+    <rect x="40" y="350" width="150" height="52" rx="8"/>
+    <rect x="220" y="350" width="150" height="52" rx="8"/>
+    <rect x="400" y="350" width="150" height="52" rx="8"/>
+  </g>
+  <g fill="#e8f5ee" font-size="15" text-anchor="middle">
+    <text x="115" y="382">BP_Hero01</text>
+    <text x="295" y="382">BP_Hero02</text>
+    <text x="475" y="382">BP_Hero03</text>
+  </g>
+
+  <!-- enemies -->
+  <g fill="#2a1d1d" stroke="#ef6b6b" stroke-width="1.5">
+    <rect x="606" y="350" width="124" height="52" rx="8"/>
+    <rect x="738" y="350" width="124" height="52" rx="8"/>
+    <rect x="870" y="350" width="124" height="52" rx="8"/>
+    <rect x="1002" y="350" width="124" height="52" rx="8"/>
+    <rect x="1134" y="350" width="124" height="52" rx="8"/>
+    <rect x="1266" y="350" width="124" height="52" rx="8"/>
+    <rect x="1398" y="350" width="124" height="52" rx="8"/>
+    <rect x="1530" y="350" width="124" height="52" rx="8"/>
+  </g>
+  <g fill="#fbeaea" font-size="11.5" text-anchor="middle">
+    <text x="668" y="381">BP_EnemyDogPhysical</text>
+    <text x="800" y="381">BP_EnemyDogBlack</text>
+    <text x="932" y="381">BP_Boss</text>
+    <text x="1064" y="381">BP_Enemy01</text>
+    <text x="1196" y="381">BP_Enemy02</text>
+    <text x="1328" y="381">BP_Enemy03</text>
+    <text x="1460" y="381">BP_TentacleKnight</text>
+    <text x="1592" y="381">BP_Larvae</text>
+  </g>
+
+  <!-- annotations -->
+  <text x="668" y="428" text-anchor="middle" fill="#f0b66b" font-size="12.5" font-weight="600">overrides PlayRandomAttack</text>
+
+  <!-- legend -->
+  <text x="850" y="478" text-anchor="middle" fill="#8fa0bd" font-size="14">Shared skill pipeline in the base class · side-specific behaviour in Hero / Enemy · characters are data-configured children (PDA_Character, PDA_Action)</text>
+</svg>
