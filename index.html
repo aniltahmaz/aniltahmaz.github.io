@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" href="assets/images/profile.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <!-- Bump ?v= whenever style.css or script.js changes, so browsers never pair this page with a cached copy -->
-    <link rel="stylesheet" href="style.css?v=20261010t">
+    <link rel="stylesheet" href="style.css?v=20261017a">
 </head>
 <body>
 
@@ -64,6 +64,7 @@
                         <span class="skill-tag">Systems Design</span>
                         <span class="skill-tag">Combat Design</span>
                         <span class="skill-tag">Level Design</span>
+                        <span class="skill-tag">Game Feel</span>
                         <span class="skill-tag">Prototyping</span>
                         <span class="skill-tag">Blueprints</span>
                         <span class="skill-tag">C#</span>
@@ -121,7 +122,9 @@
                 I am a technical game designer with 5+ years of experience in
                 Unity and Unreal Engine. I <strong>design gameplay systems, combat
                 and levels</strong>, and I <strong>build them myself</strong> in
-                Blueprints and C#. I started with mobile games: many prototypes and
+                Blueprints and C#. When I design a mechanic or a system, I work out its
+                details and depth, prototype it and make my decisions from how it feels in
+                play. I started with mobile games: many prototypes and
                 one soft-launched management game, Fancy Restaurant. I now focus on
                 <strong>PC and console games</strong> in Unreal Engine.
             </p>
@@ -159,6 +162,11 @@
                     <p class="card-pitch">Soft-launched restaurant manager. I built the core loop, upgrade system and economy.</p>
                     <div class="card-facts">
                         <span class="card-role"><span class="card-role-label">Role</span> Game Designer &amp; Developer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Systems Design</span>
+                            <span class="tag design">Economy Design</span>
+                            <span class="tag design">Level Design</span>
+                        </div>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
                             <span class="tag">Tolian Games</span>
@@ -411,6 +419,10 @@
                     <p class="card-pitch">Combat design for a third-person action game against a horde. Weapons, combos and attack timing are set up in data and on the animations.</p>
                     <div class="card-facts">
                         <span class="card-role"><span class="card-role-label">Role</span> Combat &amp; Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Combat Design</span>
+                            <span class="tag design">Game Feel</span>
+                        </div>
                         <div class="project-tags">
                             <span class="tag">Unreal Engine 5</span>
                             <span class="tag">Team of 3</span>
@@ -693,9 +705,13 @@
                 </div>
                 <div class="card-summary">
                     <h3>Wanted Curve Bullet</h3>
-                    <p class="card-pitch">Player-steered curving bullets, done with pure math and no rigidbodies.</p>
+                    <p class="card-pitch">A shot the player bends around cover. The aim line is the exact path the bullet takes.</p>
                     <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Gameplay Programmer &amp; Designer</span>
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Game Feel</span>
+                            <span class="tag design">Prototyping</span>
+                        </div>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
                             <span class="tag">Solo + 3D artist</span>
@@ -710,7 +726,7 @@
                     <h2 class="modal-title">Wanted Curve Bullet</h2>
                     <p class="modal-pitch">The player bends a bullet around cover, as in the film &quot;Wanted&quot;. The path is calculated with a formula and does not use rigidbody physics.</p>
                     <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Gameplay Programmer &amp; Designer</dd></div>
+                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
                         <div><dt>Team</dt><dd>Solo, models by a 3D artist</dd></div>
                         <div><dt>Duration</dt><dd>3 weeks</dd></div>
                         <div><dt>Engine / tools</dt><dd>Unity · C#</dd></div>
@@ -795,9 +811,13 @@
                 </div>
                 <div class="card-summary">
                     <h3>Clean Energy</h3>
-                    <p class="card-pitch">Fake lighting with decals: 80% smaller build at a steady 60 FPS on mobile.</p>
+                    <p class="card-pitch">Connecting a district to power lights it up. Decals instead of lights keep it at 60 FPS on mobile.</p>
                     <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Gameplay Programmer &amp; Designer</span>
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Game Feel</span>
+                            <span class="tag design">Prototyping</span>
+                        </div>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
                             <span class="tag">Solo + 3D artist</span>
@@ -812,7 +832,7 @@
                     <h2 class="modal-title">Clean Energy</h2>
                     <p class="modal-pitch">City districts light up as the player connects them to power. The lighting is faked with decals, so it runs on mobile.</p>
                     <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Gameplay Programmer &amp; Designer</dd></div>
+                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
                         <div><dt>Team</dt><dd>Solo, models by a 3D artist</dd></div>
                         <div><dt>Duration</dt><dd>3 weeks</dd></div>
                         <div><dt>Engine / tools</dt><dd>Unity</dd></div>
@@ -879,9 +899,13 @@
                 </div>
                 <div class="card-summary">
                     <h3>Voxel Destruction System</h3>
-                    <p class="card-pitch">Enemies break apart voxel by voxel on every hit, one draw call per intact body part.</p>
+                    <p class="card-pitch">Every hit breaks pieces off the enemy, so the player reads damage without a health bar.</p>
                     <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Gameplay Programmer &amp; Designer</span>
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Game Feel</span>
+                            <span class="tag design">Prototyping</span>
+                        </div>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
                             <span class="tag">Solo + 3D artist</span>
@@ -896,7 +920,7 @@
                     <h2 class="modal-title">Voxel Destruction System</h2>
                     <p class="modal-pitch">Enemies break apart voxel by voxel on every hit. It runs on mobile.</p>
                     <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Gameplay Programmer &amp; Designer</dd></div>
+                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
                         <div><dt>Team</dt><dd>Solo, models by a 3D artist</dd></div>
                         <div><dt>Duration</dt><dd>4 weeks</dd></div>
                         <div><dt>Engine / tools</dt><dd>Unity · C#</dd></div>
@@ -969,7 +993,11 @@
                     <h3>Learn To Fly — Flight Physics</h3>
                     <p class="card-pitch">One-finger glider where diving builds speed and pulling up turns it into lift.</p>
                     <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Gameplay Programmer &amp; Designer</span>
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Game Feel</span>
+                            <span class="tag design">Prototyping</span>
+                        </div>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
                             <span class="tag">Solo + 3D artist</span>
@@ -984,7 +1012,7 @@
                     <h2 class="modal-title">Learn To Fly — Flight Physics</h2>
                     <p class="modal-pitch">A one-finger glider game. Diving builds speed, and pulling up turns the speed into lift.</p>
                     <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Gameplay Programmer &amp; Designer</dd></div>
+                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
                         <div><dt>Team</dt><dd>Solo, models by a 3D artist</dd></div>
                         <div><dt>Duration</dt><dd>4 weeks</dd></div>
                         <div><dt>Engine / tools</dt><dd>Unity · C#</dd></div>
@@ -1068,9 +1096,13 @@
                 </div>
                 <div class="card-summary">
                     <h3>Parkour System &amp; Level</h3>
-                    <p class="card-pitch">State-machine parkour controller and a level that shifts from 3D into a side-scroller.</p>
+                    <p class="card-pitch">A parkour level that turns from a 3D run into a side-scroller without a cut. Each move is its own state.</p>
                     <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Gameplay Programmer &amp; Level Designer</span>
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Level Design</span>
+                            <span class="tag design">Movement Design</span>
+                        </div>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
                             <span class="tag">Solo</span>
@@ -1085,7 +1117,7 @@
                     <h2 class="modal-title">Parkour System &amp; Level</h2>
                     <p class="modal-pitch">A parkour controller and a level that changes from 3D into a side-scroller.</p>
                     <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Gameplay Programmer &amp; Level Designer</dd></div>
+                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
                         <div><dt>Team</dt><dd>Solo</dd></div>
                         <div><dt>Duration</dt><dd>4 weeks</dd></div>
                         <div><dt>Engine / tools</dt><dd>Unity · C#</dd></div>
@@ -1169,7 +1201,12 @@
                     <h3>Sequence-Driven Turn-Based Combat</h3>
                     <p class="card-pitch">Turn-based combat that runs on Level Sequences. Event keys on the sequences trigger the gameplay, and a new skill is a new data asset.</p>
                     <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Technical &amp; Systems Designer</span>
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Systems Design</span>
+                            <span class="tag design">Combat Design</span>
+                            <span class="tag design">Game Feel</span>
+                        </div>
                         <div class="project-tags">
                             <span class="tag">Unreal Engine 5</span>
                             <span class="tag">Team</span>
@@ -1183,7 +1220,7 @@
                     <h2 class="modal-title">Sequence-Driven Turn-Based Combat</h2>
                     <p class="modal-pitch">Turn-based RPG combat prototype. Every phase of a fight plays a Level Sequence: turn changes, menu choices and attacks. Event keys on the sequences trigger the gameplay, and a new skill is a new data asset.</p>
                     <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Technical &amp; Systems Designer</dd></div>
+                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
                         <div><dt>Team</dt><dd>Team project</dd></div>
                         <div><dt>Engine / tools</dt><dd>Unreal Engine 5 · Blueprints · Level Sequencer</dd></div>
                     </dl>
@@ -1603,7 +1640,7 @@
         <button class="lightbox-close" type="button" aria-label="Close image">×</button>
     </div>
 
-    <script src="script.js?v=20261010t"></script>
+    <script src="script.js?v=20261017a"></script>
 
 </body>
 </html>

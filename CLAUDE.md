@@ -11,10 +11,12 @@ There is no build step, package manager, linter or test suite. Pushing to `main`
 ## Previewing
 
 ```bash
-python -m http.server 8000
+py -m http.server 5500 --bind 127.0.0.1
 ```
 
-Then open `http://localhost:8000/`. To open a project's case study directly, go to `http://localhost:8000/#project/<id>`. The `<id>` comes from the card's `data-project-id`.
+Then open `http://localhost:5500/`. To open a project's case study directly, go to `http://localhost:5500/#project/<id>`. The `<id>` comes from the card's `data-project-id`. The same server is the `site` entry in `.claude/launch.json` for the desktop app's preview pane.
+
+On the Windows machine, `python` in Git Bash opens the Microsoft Store alias, so use `py`. Port 8000 is reserved there and fails with WinError 10013.
 
 ## Cache busting (easy to forget)
 
@@ -56,6 +58,26 @@ All cards share one structure. Copy an existing card rather than inventing new m
    - `.video-slot` frames, and `.video-placeholder` on card fronts, mark videos that are not recorded yet.
 
 The title, role and facts appear twice: on the card front (`.card-summary`) and in the case head. Keep both copies in sync.
+
+## Positioning decisions (October 2026)
+
+The site presents Anil as one thing: a **Technical Designer** who designs mechanics and systems, prototypes them, decides by feel and builds them. Cards follow these rules:
+
+- **Role label.** Use "Technical Designer" for projects Anil designed and built. Keep the real team role where it was different: "Combat & Technical Designer" on the combat card, and "Game Designer & Developer" at Tolian Games. Do not lead a role with "Programmer".
+- **Design areas.** Each card front has a row of `.tag.design` chips (`.project-tags.design-tags`) under the role. A project can have several areas, because one project often covered more than one discipline. Engine, team and duration stay in the plain tag row below. Category filters were left out on purpose until there are more projects.
+- **Card pitch.** Lead with the design (what the player does or feels) and follow with the technique. Technical numbers such as draw calls or build size belong in the case study, not in the opening line.
+- **Only real work.** Never add mechanics, numbers or techniques that Anil has not confirmed, such as ledge detection, coyote time, input buffering, StateTree, cooldowns or invented hit-stop values. Ask instead.
+
+## Open items
+
+These were deferred for later and will be done when we go through each card in detail:
+
+- **Combat:** add the real hit-stop values (slow-down amount and duration) and the reasoning behind them. Add the input buffer if one exists, or list it under "Next".
+- **Turn-based:** add duration and team size to the card tags and case facts, and an "Intended player feeling" note about the cinematic cameras. Anil also made the boss skills and the Level Sequences, which the case study does not mention yet. Six `.video-slot`s and the card-front video still need recordings.
+- **Parkour:** add a level design section showing how the geometry teaches each move. This needs a layout image and any metrics.
+- **Voice Runner:** decide whether the role becomes "Technical Designer" with an input-design focus, if Anil made those decisions, or whether the card moves to the bottom or is removed. It has no design-area tags until then.
+- **Clean Energy:** the design story is weak. Keep it as is, add the cable-cost balancing, or remove the card.
+- **Card order:** leave it as is for now. Revisit it together with category filters when more projects are added.
 
 ## Content and assets
 
