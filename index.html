@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" href="assets/images/profile.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <!-- Bump ?v= whenever style.css or script.js changes, so browsers never pair this page with a cached copy -->
-    <link rel="stylesheet" href="style.css?v=20261017a">
+    <link rel="stylesheet" href="style.css?v=20261017c">
 </head>
 <body>
 
@@ -466,65 +466,98 @@
                         <p class="modal-lead">Click a screenshot to open it full size.</p>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Overview</span> Structure of the system</h4>
-                            <p class="iteration-note">The player, the enemies and the boss inherit from one base character. Weapon values (stats, animations, behaviour, etc.) come from the weapon data table and the weapon type data asset.</p>
-                            <div class="media-row single">
-                                <figure class="design-figure">
-                                    <a href="assets/images/slavic-dome/class-hierarchy.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/class-hierarchy.png" width="2744" height="1344" alt="Class diagram: BP_BaseCharacter with the player and enemy subclasses, BP_WeaponBase with the melee weapon, and the weapon data table and data asset" loading="lazy"></a>
-                                    <figcaption>Characters, weapons and data. Blue and green boxes are my work. Orange boxes are Jakub's enemies.</figcaption>
-                                </figure>
+                            <h4 class="section-heading"><span class="section-name">Overview</span> Fast combat against a horde</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>The player fights a horde. Combat should be fast, and hard enough that clearing the horde feels like a reward.</p>
+                                <p class="iteration-note">Each section below starts with the design, then shows how I built it.</p>
+                            </div>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">The player, the enemies and the boss inherit from one base character. Weapon values (stats, animations, behaviour, etc.) come from the weapon data table and the weapon type data asset.</p>
+                                <div class="media-row single">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/slavic-dome/class-hierarchy.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/class-hierarchy.png" width="2744" height="1344" alt="Class diagram: BP_BaseCharacter with the player and enemy subclasses, BP_WeaponBase with the melee weapon, and the weapon data table and data asset" loading="lazy"></a>
+                                        <figcaption>Characters, weapons and data. Blue and green boxes are my work. Orange boxes are Jakub's enemies.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Weapons</span> Each weapon is a row in a data table</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>Each weapon has its own stats, mesh, animations, etc. Setting them inside each weapon Blueprint makes adding and balancing weapons slow.</p>
+                            <h4 class="section-heading"><span class="section-name">Combat flow</span> Fast, but not easy</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>Against a horde, combat has to be fast. But if the player can do anything at any moment, it is also easy. Every attack and dodge needs moments where the player is committed to it.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I split each attack and the dodge into phases and decided what the player can do in each one: move, rotate, attack, dodge or sprint.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>The player is fully locked only while the weapon swings and during the immune part of the dodge. Around those phases they can still dodge or start the next attack, so combat stays fast.</p>
+                                <p class="iteration-note"><strong>Paper design.</strong> I drew each animation as phases on paper before building it. The tables below are that design, with the times from combo step 2 and the dodge. The last column shows how long each action is allowed.</p>
+                                <p class="iteration-note"><strong>After playtesting</strong> I changed two rules:</p>
+                                <ul class="modal-did">
+                                    <li><strong>A dodge cancels an attack.</strong> Against the horde, not being able to dodge during an attack was too hard and felt bad in playtests.</li>
+                                    <li><strong>No rotation during a dodge.</strong> Turning while dodging did not match the dodge animation.</li>
+                                </ul>
+                                <div class="text-cols">
+                                    <div class="design-table-wrap">
+                                        <table class="design-table perm-table">
+                                            <thead>
+                                                <tr><th>Normal attack</th><th>Wind-up<span class="th-time">0.10 s</span></th><th>Weapon trace<span class="th-time">0.20 s</span></th><th>Combo window<span class="th-time">0.31 s</span></th><th>End anim<span class="th-time">0.75 s</span></th><th>Allowed</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td>Move</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.75 s</td></tr>
+                                                <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.16 s</td></tr>
+                                                <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.06 s</td></tr>
+                                                <tr><td>Dodge</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.16 s</td></tr>
+                                                <tr><td>Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.75 s</td></tr>
+                                                <tr><td>Also</td><td></td><td></td><td></td><td>Combo resets</td><td></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="design-table-wrap">
+                                        <table class="design-table perm-table">
+                                            <thead>
+                                                <tr><th>Dodge</th><th>Start<span class="th-time">0.21 s</span></th><th>Immune damage<span class="th-time">0.54 s</span></th><th>End anim<span class="th-time">0.29 s</span></th><th>Allowed</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td>Move</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.29 s</td></tr>
+                                                <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Total 0.50 s</td></tr>
+                                                <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.29 s</td></tr>
+                                                <tr><td>Dodge</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.29 s</td></tr>
+                                                <tr><td>Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.29 s</td></tr>
+                                                <tr><td>Also</td><td>Combo resets</td><td></td><td>Sprint attack</td><td></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>To make it extendible, I put all weapons in one data table, <code>DT_Weapons</code>. Values shared by one kind of weapon are in a weapon type data asset, such as <code>DA_Sword</code>.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>Adding a new weapon type is creating a new data asset. Adding variations for this weapon is adding a new row in the data table.</p>
+                                <div class="media-row cols-3">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/slavic-dome/state-paper-design.jpg" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/state-paper-design.jpg" width="1126" height="2000" alt="Hand-drawn timelines for a normal attack and a dodge, with the permissions allowed in each phase" loading="lazy"></a>
+                                        <figcaption>The paper design.</figcaption>
+                                    </figure>
                                 </div>
                             </div>
-                            <p class="iteration-note"><strong>To create a new weapon type (example: Bow):</strong></p>
-                            <ul class="modal-did">
-                                <li>Create a new data asset, <code>DA_Bow</code>.</li>
-                                <li>Set Weapon Actor Class to <code>BP_RangedWeaponBase</code> for its behaviour.</li>
-                                <li>Set Wielding Socket to the left hand.</li>
-                                <li>Add its animations.</li>
-                                <li>Set its Projectile Class for spawning arrows.</li>
-                                <li>Add a new row in the data table, add its stats and set its mesh.</li>
-                            </ul>
-                            <div class="media-row shots-tall">
-                                <figure class="design-figure">
-                                    <a href="assets/images/slavic-dome/weapons-table.png?v=3" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapons-table.png?v=3" width="1507" height="1235" alt="Data table with six weapon rows and the row editor showing weapon type, rarity, a stat modifier and mesh" loading="lazy"></a>
-                                    <figcaption>DT_Weapons with one row open: name, rarity, weapon type, modifiers, mesh and scale. The modifiers use Jakub's stats system.</figcaption>
-                                </figure>
-                                <figure class="design-figure focus-combo">
-                                    <a href="assets/images/slavic-dome/weapon-type-asset.png?v=3" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapon-type-asset.png?v=3" width="1347" height="1746" alt="Weapon type data asset DA_Sword: damage type, hit box size, seven montages, three combo steps, trace socket and ranged sockets" loading="lazy"></a>
-                                    <figcaption>DA_Sword, the weapon type used by the four swords: montages, combo steps, hit box size and sockets.</figcaption>
-                                </figure>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">Notifies on each montage switch the actions on and off. When a notify starts or ends, the character enables or disables moving, rotating, attacking, dodging and sprinting. The timing lives on the montage, so tuning the feel means moving a notify.</p>
+                                <div class="media-row cols-3">
+                                    <figure class="design-figure focus-bottom">
+                                        <a href="assets/images/slavic-dome/montage-notify-attack.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-notify-attack.png" width="1072" height="981" alt="Attack montage timeline with WeaponTrace, ComboWindow and EndAnim notifies" loading="lazy"></a>
+                                        <figcaption>An attack montage with its notifies: WeaponTrace (the weapon can hit), ComboWindow (the player can start the next attack) and EndAnim (the player gets control back).</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Weapon combo</span> Combo steps, moves and hit feedback</h4>
-                            <p class="iteration-note"><strong>Combo.</strong> <code>ComboSteps</code> is a list in the weapon type data asset. Each entry is one attack with its montage, played in list order. <a class="graph-link" href="assets/images/slavic-dome/try-attack.png" target="_blank" rel="noopener" data-lightbox data-alt="TryAttack Blueprint graph with air attack, dash attack and ground combo branches" data-caption="BP_ThirdPersonCharacter → TryAttack.">See the graph →</a></p>
-                            <p class="iteration-note"><strong>Why each move is there:</strong></p>
-                            <ul class="modal-did">
-                                <li><strong>Three-hit combo.</strong> Three attacks in a row feel fluid. A combo also lets each weapon feel different. With a single attack, every weapon would feel almost the same.</li>
-                                <li><strong>Dash attack.</strong> The game is fast. Sprinting into a fight and opening with a quick, different attack feels like entering combat fast.</li>
-                                <li><strong>Air attack.</strong> Mateusz's level has height. After a jump from a high place, attacking on the way down made more sense than hanging in the air.</li>
-                            </ul>
-                            <p class="iteration-note"><strong>Hit feedback.</strong> Hit-stop has two values: how much the animation slows down and for how long. <a class="graph-link" href="assets/images/slavic-dome/hit-stop.png" target="_blank" rel="noopener" data-lightbox data-alt="ApplyHitStop Blueprint graph" data-caption="BP_ThirdPersonCharacter → ApplyHitStop.">See the graph →</a></p>
-                            <p class="iteration-note"><strong>Hit detection.</strong> The weapon traces the whole path of each swing during the <code>WeaponTrace</code> notify. A fast swing cannot skip an enemy, and a single enemy cannot take damage twice in a single swing. <a class="graph-link" href="assets/images/slavic-dome/sweep-trace-1.png" target="_blank" rel="noopener" data-lightbox data-alt="PerformSweepTrace Blueprint graph" data-caption="BP_MeleeWeaponBase → PerformSweepTrace.">See the graph →</a></p>
-                            <div class="text-cols">
+                            <h4 class="section-heading"><span class="section-name">Moves</span> Every move has a reason</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>The fight is fast and Mateusz's level has height, so the player attacks while standing, sprinting and falling. One attack would not fit all three, and every weapon would feel almost the same.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>The attack button picks the move from the situation: an air attack once per jump, a dash attack at sprint speed and the combo on the ground. Each weapon type has its own combo.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>The player only presses one button, and each weapon still feels different.</p>
+                                <p class="iteration-note"><strong>Why each move is there:</strong></p>
+                                <ul class="modal-did">
+                                    <li><strong>Three-hit combo.</strong> Three attacks in a row feel fluid. A combo also lets each weapon feel different. With a single attack, every weapon would feel almost the same.</li>
+                                    <li><strong>Dash attack.</strong> The game is fast. Sprinting into a fight and opening with a quick, different attack feels like entering combat fast.</li>
+                                    <li><strong>Air attack.</strong> Mateusz's level has height. After a jump from a high place, attacking on the way down made more sense than hanging in the air.</li>
+                                </ul>
                                 <div class="design-table-wrap">
                                     <table class="design-table">
                                         <thead>
@@ -537,6 +570,34 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="media-row cols-3">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Dash attack with the weapon sweep drawn">
+                                            <source src="assets/videos/slavic-trace-dash-attack.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Dash attack at sprint speed, with the trace drawn.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Air attack with the weapon sweep drawn">
+                                            <source src="assets/videos/slavic-trace-jump-attack.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Air attack after a jump, with the trace drawn.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note"><code>TryAttack</code> checks the situation and starts the right move. <a class="graph-link" href="assets/images/slavic-dome/try-attack.png" target="_blank" rel="noopener" data-lightbox data-alt="TryAttack Blueprint graph with air attack, dash attack and ground combo branches" data-caption="BP_ThirdPersonCharacter → TryAttack.">See the graph →</a> The combo is <code>ComboSteps</code>, a list in the weapon type data asset. Each entry is one attack with its montage, played in list order.</p>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Impact</span> Hits feel solid and always count</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>Against a horde, the player lands many hits in a few seconds. Each one has to feel like it connected. A fast swing that visibly passes through an enemy also has to hit it.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>Every hit plays hit-stop, a camera shake, a flash on the target, an impact effect and a damage number. A swing hits every enemy along its whole path, and each enemy only once.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>The player feels every hit. A fast swing cannot skip an enemy, and one enemy cannot take damage twice from the same swing.</p>
+                                <p class="iteration-note"><strong>Hit-stop</strong> has two values: how much the attack animation slows down and for how long.</p>
                                 <div class="design-table-wrap">
                                     <table class="design-table">
                                         <thead>
@@ -549,140 +610,91 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="media-row cols-3">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Three-hit sword combo">
+                                            <source src="assets/videos/slavic-combo-hitstop.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The three-step sword combo. Hit feedback is exaggerated in this clip so it is easy to see.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
-                            <div class="media-row single">
-                                <figure class="design-figure clip">
-                                    <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Three-hit sword combo">
-                                        <source src="assets/videos/slavic-combo-hitstop.mp4" type="video/mp4">
-                                    </video>
-                                    <figcaption>The three-step sword combo. Hit feedback is exaggerated in this clip so it is easy to see.</figcaption>
-                                </figure>
-                            </div>
-                            <div class="media-row">
-                                <figure class="design-figure clip">
-                                    <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Dash attack with the weapon sweep drawn">
-                                        <source src="assets/videos/slavic-trace-dash-attack.mp4" type="video/mp4">
-                                    </video>
-                                    <figcaption>Dash attack with the trace drawn.</figcaption>
-                                </figure>
-                                <figure class="design-figure clip">
-                                    <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Air attack with the weapon sweep drawn">
-                                        <source src="assets/videos/slavic-trace-jump-attack.mp4" type="video/mp4">
-                                    </video>
-                                    <figcaption>Air attack with the trace drawn.</figcaption>
-                                </figure>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note"><code>ApplyHitStop</code> slows the attack animation by the set amount for the set time. <a class="graph-link" href="assets/images/slavic-dome/hit-stop.png" target="_blank" rel="noopener" data-lightbox data-alt="ApplyHitStop Blueprint graph" data-caption="BP_ThirdPersonCharacter → ApplyHitStop.">See the graph →</a> During the <code>WeaponTrace</code> notify, <code>PerformSweepTrace</code> traces the whole path of the swing and skips enemies it has already hit in that swing. <a class="graph-link" href="assets/images/slavic-dome/sweep-trace-1.png" target="_blank" rel="noopener" data-lightbox data-alt="PerformSweepTrace Blueprint graph" data-caption="BP_MeleeWeaponBase → PerformSweepTrace.">See the graph →</a> The dash and air attack clips above show the trace drawn.</p>
                             </div>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Player state &amp; combat flow</span> Anim notifies set what the player can do</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>The player fights a horde, so combat has to be fast but not easy. During an attack or a dodge the player should not be able to do everything.</p>
-                                </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>I put notifies on each montage. When a notify starts or ends, the character enables or disables moving, rotating, attacking, dodging and sprinting.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>The timing is set on the montage. Tuning the feel means moving a notify.</p>
-                                </div>
-                            </div>
-                            <p class="iteration-note"><strong>Intended player feeling.</strong> Fast combat against a horde. It is hard enough that clearing the horde feels like a reward.</p>
-                            <p class="iteration-note"><strong>Paper design.</strong> Before building it, I drew each animation as phases on paper and wrote what the player can do in each phase. The two tables show that design.</p>
-                            <p class="iteration-note"><strong>After playtesting</strong> I changed two rules:</p>
-                            <ul class="modal-did">
-                                <li><strong>A dodge cancels an attack.</strong> Against the horde, not being able to dodge during an attack was too hard and felt bad in playtests.</li>
-                                <li><strong>No rotation during a dodge.</strong> Turning while dodging did not match the dodge animation.</li>
-                            </ul>
-                            <p class="iteration-note"><strong>Timing.</strong> The times in the tables are from combo step 2 and the dodge. The last column shows how long each action is allowed.</p>
-                            <div class="text-cols">
-                                <div class="design-table-wrap">
-                                    <table class="design-table perm-table">
-                                        <thead>
-                                            <tr><th>Normal attack</th><th>Wind-up<span class="th-time">0.10 s</span></th><th>Weapon trace<span class="th-time">0.20 s</span></th><th>Combo window<span class="th-time">0.31 s</span></th><th>End anim<span class="th-time">0.75 s</span></th><th>Allowed</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Move</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.75 s</td></tr>
-                                            <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.16 s</td></tr>
-                                            <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.06 s</td></tr>
-                                            <tr><td>Dodge</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.16 s</td></tr>
-                                            <tr><td>Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.75 s</td></tr>
-                                            <tr><td>Also</td><td></td><td></td><td></td><td>Combo resets</td><td></td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="design-table-wrap">
-                                    <table class="design-table perm-table">
-                                        <thead>
-                                            <tr><th>Dodge</th><th>Start<span class="th-time">0.21 s</span></th><th>Immune damage<span class="th-time">0.54 s</span></th><th>End anim<span class="th-time">0.29 s</span></th><th>Allowed</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Move</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.29 s</td></tr>
-                                            <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Total 0.50 s</td></tr>
-                                            <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.29 s</td></tr>
-                                            <tr><td>Dodge</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.29 s</td></tr>
-                                            <tr><td>Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.29 s</td></tr>
-                                            <tr><td>Also</td><td>Combo resets</td><td></td><td>Sprint attack</td><td></td></tr>
-                                        </tbody>
-                                    </table>
+                            <h4 class="section-heading"><span class="section-name">Enemies</span> Each enemy asks something different of the player</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>The horde, the elites and the boss should each ask the player for something different.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>Three enemy types that put different pressure on the player: a large horde, small groups of tougher elites, and a boss.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>The horde rewards speed and movement. The boss rewards reading an attack and reacting in time.</p>
+                                <p class="iteration-note"><strong>What each enemy asks of the player:</strong></p>
+                                <ul class="modal-did">
+                                    <li><strong>Horde enemies</strong> die in one hit. The fight in the video starts with 24 of them. They push the player to dodge out of the middle of the horde, or to keep attacking and clear it quickly.</li>
+                                    <li><strong>Elite enemies</strong> take five hits and come in groups of four.</li>
+                                    <li><strong>The boss</strong> has a normal attack with a long, clear wind-up of 0.65 s. Its root attack marks an area on the ground and bursts after about 1.5 s, so the player has time to leave the area.</li>
+                                </ul>
+                                <div class="media-row cols-3">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Boss attack with the weapon sweep drawn">
+                                            <source src="assets/videos/slavic-boss-attack-trace.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The boss attack, with the trace drawn.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="A boss hit landing on the player">
+                                            <source src="assets/videos/slavic-boss-hit-player-death.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The boss hits the player.</figcaption>
+                                    </figure>
                                 </div>
                             </div>
-                            <div class="media-row">
-                                <figure class="design-figure focus-bottom">
-                                    <a href="assets/images/slavic-dome/montage-notify-attack.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-notify-attack.png" width="1072" height="981" alt="Attack montage timeline with WeaponTrace, ComboWindow and EndAnim notifies" loading="lazy"></a>
-                                    <figcaption>An attack montage with its notifies: WeaponTrace (the weapon can hit), ComboWindow (the player can start the next attack) and EndAnim (the player gets control back).</figcaption>
-                                </figure>
-                                <figure class="design-figure">
-                                    <a href="assets/images/slavic-dome/state-paper-design.jpg" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/state-paper-design.jpg" width="1126" height="2000" alt="Hand-drawn timelines for a normal attack and a dodge, with the permissions allowed in each phase" loading="lazy"></a>
-                                    <figcaption>The paper design.</figcaption>
-                                </figure>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">Jakub was building the enemy AI while I built the combat, so we could have built attacks and damage twice. I made one base character for the player, the enemies and the boss. It handles notify states, equipping, attacks, the weapon trace and damage.</p>
+                                <p class="iteration-note">Jakub's AI attacks by playing an attack montage, so enemy timing is tuned with the same notifies as the player's. <a class="graph-link" href="assets/images/slavic-dome/enemy-attack-call.png" target="_blank" rel="noopener" data-lightbox data-alt="State Tree task graph: cast to BP_BaseCharacter, Server Play Montage, finish task" data-caption="Jakub's State Tree task, STT_RootAttack.">See the graph →</a> The boss has its own row in <code>DT_Weapons</code>. Every hit, on the player or an enemy, goes through the base character's damage event. <a class="graph-link" href="assets/images/slavic-dome/receive-damage.png" target="_blank" rel="noopener" data-lightbox data-alt="Event ReceiveDamage Blueprint graph on the base character" data-caption="BP_BaseCharacter → Event ReceiveDamage.">See the graph →</a></p>
                             </div>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Enemies and boss</span> They use the same base character and notifies as the player</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>The enemies and the boss also attack and take damage. Jakub was making their AI while I was making the combat, so we could have built the same things twice.</p>
-                                </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>I made one base character for the player, the enemies and the boss. It handles notify states, equipping, attacks, the weapon trace and damage.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>An enemy attacks by playing an attack montage. The enemies and the boss have no combat logic of their own. Their behaviour is tuned with the notifies on their montages.</p>
-                                </div>
+                            <h4 class="section-heading"><span class="section-name">Weapons</span> New weapons without new Blueprints</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>Each weapon has its own stats, mesh and animations. If every weapon Blueprint holds its own values, adding and balancing weapons is slow.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>Every weapon is a row in one table. What all weapons of one kind share, such as animations and combo steps, lives in one weapon type.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>Adding a new weapon type is creating a new data asset. Adding variations for this weapon is adding a new row in the data table.</p>
                             </div>
-                            <p class="iteration-note"><strong>What each enemy asks of the player:</strong></p>
-                            <ul class="modal-did">
-                                <li><strong>Horde enemies</strong> die in one hit. The fight in the video starts with 24 of them. They push the player to dodge out of the middle of the horde, or to keep attacking and clear it quickly.</li>
-                                <li><strong>Elite enemies</strong> take five hits and come in groups of four.</li>
-                                <li><strong>The boss</strong> has a normal attack with a long, clear wind-up of 0.65 s. Its root attack marks an area on the ground and bursts after about 1.5 s, so the player has time to leave the area.</li>
-                            </ul>
-                            <div class="media-row">
-                                <figure class="design-figure clip">
-                                    <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Boss attack with the weapon sweep drawn">
-                                        <source src="assets/videos/slavic-boss-attack-trace.mp4" type="video/mp4">
-                                    </video>
-                                    <figcaption>The boss has its own row in DT_Weapons. The trace is drawn. <a class="graph-link" href="assets/images/slavic-dome/enemy-attack-call.png" target="_blank" rel="noopener" data-lightbox data-alt="State Tree task graph: cast to BP_BaseCharacter, Server Play Montage, finish task" data-caption="Jakub's State Tree task, STT_RootAttack.">See the graph →</a></figcaption>
-                                </figure>
-                                <figure class="design-figure clip">
-                                    <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="A boss hit landing on the player">
-                                        <source src="assets/videos/slavic-boss-hit-player-death.mp4" type="video/mp4">
-                                    </video>
-                                    <figcaption>The boss hits the player. <a class="graph-link" href="assets/images/slavic-dome/receive-damage.png" target="_blank" rel="noopener" data-lightbox data-alt="Event ReceiveDamage Blueprint graph on the base character" data-caption="BP_BaseCharacter → Event ReceiveDamage.">See the graph →</a></figcaption>
-                                </figure>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note"><code>DT_Weapons</code> holds every weapon. A weapon type data asset, such as <code>DA_Sword</code>, holds the montages, combo steps, hit box size and sockets its weapons share.</p>
+                                <p class="iteration-note"><strong>To create a new weapon type (example: Bow):</strong></p>
+                                <ul class="modal-did">
+                                    <li>Create a new data asset, <code>DA_Bow</code>.</li>
+                                    <li>Set Weapon Actor Class to <code>BP_RangedWeaponBase</code> for its behaviour.</li>
+                                    <li>Set Wielding Socket to the left hand.</li>
+                                    <li>Add its animations.</li>
+                                    <li>Set its Projectile Class for spawning arrows.</li>
+                                    <li>Add a new row in the data table, add its stats and set its mesh.</li>
+                                </ul>
+                                <div class="media-row cols-3 shots-tall">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/slavic-dome/weapons-table.png?v=3" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapons-table.png?v=3" width="1507" height="1235" alt="Data table with six weapon rows and the row editor showing weapon type, rarity, a stat modifier and mesh" loading="lazy"></a>
+                                        <figcaption>DT_Weapons with one row open: name, rarity, weapon type, modifiers, mesh and scale. The modifiers use Jakub's stats system.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure focus-combo">
+                                        <a href="assets/images/slavic-dome/weapon-type-asset.png?v=3" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapon-type-asset.png?v=3" width="1347" height="1746" alt="Weapon type data asset DA_Sword: damage type, hit box size, seven montages, three combo steps, trace socket and ranged sockets" loading="lazy"></a>
+                                        <figcaption>DA_Sword, the weapon type used by the four swords: montages, combo steps, hit box size and sockets.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                         </section>
 
                         <section class="iteration">
                             <h4 class="section-heading"><span class="section-name">Next</span> What I would do with more time</h4>
                             <ul class="modal-did">
+                                <li>Add an input buffer, so an attack pressed just before the combo window opens is kept and plays when the window opens.</li>
                                 <li>Finish the bow. Aim mode works. Drawing, firing and projectile hits are not done yet.</li>
                                 <li>Add new enemy types with different attacks, to create different combat interactions with the player.</li>
                             </ul>
@@ -1640,7 +1652,7 @@
         <button class="lightbox-close" type="button" aria-label="Close image">×</button>
     </div>
 
-    <script src="script.js?v=20261017a"></script>
+    <script src="script.js?v=20261017c"></script>
 
 </body>
 </html>
