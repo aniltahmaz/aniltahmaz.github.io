@@ -1337,6 +1337,22 @@ body {
 .perm-table td + td { text-align: center; }
 .perm-table .perm-yes { color: #00ff88; font-weight: 700; }
 .perm-table .perm-no { color: #555; }
+
+/* A short reason beside each row, pointing out from it */
+.perm-table th.perm-why,
+.perm-table td.perm-why {
+    min-width: 200px;
+    text-align: left;
+    white-space: normal;
+}
+
+.perm-table td.perm-why { color: #c4c4c4; line-height: 1.45; }
+
+.perm-table td.perm-why:not(:empty)::before {
+    content: "→ ";
+    color: var(--accent);
+    font-weight: 700;
+}
 .design-table td:first-child { color: #fff; }
 .design-table tr:last-child td { border-bottom: none; }
 .design-table td + td,

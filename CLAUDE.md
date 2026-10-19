@@ -16,7 +16,7 @@ py -m http.server 5500 --bind 127.0.0.1
 
 Then open `http://localhost:5500/`. To open a project's case study directly, go to `http://localhost:5500/#project/<id>`. The `<id>` comes from the card's `data-project-id`. The same server is the `site` entry in `.claude/launch.json` for the desktop app's preview pane.
 
-On the Windows machine, `python` in Git Bash opens the Microsoft Store alias, so use `py`. Port 8000 is reserved there and fails with WinError 10013.
+On the Windows machine, `python` in Git Bash opens the Microsoft Store alias, so use `py`. Port 8000 is taken there by a Windows service (`Manager.exe`), so binding to it fails with WinError 10013.
 
 ## Cache busting (easy to forget)
 
@@ -67,21 +67,34 @@ The site presents Anil as one thing: a **Technical Designer** who designs mechan
 - **Design areas.** Each card front has a row of `.tag.design` chips (`.project-tags.design-tags`) under the role. A project can have several areas, because one project often covered more than one discipline. Engine, team and duration stay in the plain tag row below. Category filters were left out on purpose until there are more projects.
 - **Card pitch.** Lead with the design (what the player does or feels) and follow with the technique. Technical numbers such as draw calls or build size belong in the case study, not in the opening line.
 - **Sections are design goals.** Name each case-study section after what the player should feel, not after a system part. The short `.section-name` label is for the contents nav and the headline after it states the goal, e.g. "Combat flow — Fast, but not easy". Labels should be common terms a reader knows at a glance, not design jargon. Put player-facing sections first and data or architecture sections last. The combat card was rebuilt this way first. Apply it to the other cards when we go through each one.
-- **Design, then how it was built.** Each section has two `.phase` blocks:
+- **Design, then how it was built.** Each section has two or three `.phase` blocks:
   - **Design part (no title).** The section headline already states the goal. It holds `p.design-point.problem` ("Design problem", or "Design goal" when it is a goal), `.decision` ("Design decision") and `.reason` ("Why this decision"). Then further details: notes, lists and tables. Then a `.media-row.cols-3` of design-side visuals, meaning gameplay clips and paper designs.
-  - **Build part.** It is headed `h5.phase-title` "How I built it", in sentence case, below a thin line. "Execution" read oddly. It holds a short explanation of how the decision was built, then a `.media-row.cols-3` of engine visuals: montages, Blueprint graphs and data assets.
+  - **Build part.** It is headed `h5.phase-title` "How I built it", in sentence case, below a thin line. "Execution" read oddly. It holds a short explanation of how the decision was built, then a `.media-row.cols-3` of engine visuals: montages, Blueprint graphs and data assets. Blueprint graphs are shown as `design-figure fit fit-dark` thumbnails, which display the whole graph uncropped and open full size, rather than as "See the graph →" links.
+  - **Change part (only where it applies).** It is headed `h5.phase-title` "What I would change". It holds the design lessons and the unfinished work that belong to that section, such as the dodge chaining limit or per-attack hit-stop. These replace a separate "Next" section at the end.
   - **Formatting.** The text is plain, never boxed. Anil asked for no boxes around text. Design-point labels are inline, at the same size as the text, colored, and followed by a colon.
   - **Coverage.** So far only the combat card uses this layout. The other cards still use the boxed `.design-brief` / `.tech-block` trio until they are converted.
 - **Only real work.** Never add mechanics, numbers or techniques that Anil has not confirmed, such as ledge detection, coyote time, input buffering, StateTree, cooldowns or invented hit-stop values. Ask instead. Other AI tools (e.g. a Gemini conversation) suggested many of these, and they are not in the projects. In the combat project, StateTree is used only in Jakub's enemy AI.
-- **Wording.** Write in the site's own plain voice. Do not copy phrasing from other AI tools. Anil will do a final wording pass on each card.
+- **Wording.** Write in the site's own plain voice. Do not copy phrasing from other AI tools. Anil does a final wording pass on each card. Once his wording is in, keep it. Fix only clear grammar slips and tell him which ones.
+- **Edit copies.** Anil may review a card in an edit copy (Word or PDF) of the case study:
+  - English text is the site copy.
+  - Brown italic text holds notes for him and does not go on the site.
+  - Text in `[brackets]` is an instruction to carry out.
+  - A file name under an image says which asset it is.
 
 ## Open items
 
 These were deferred for later and will be done when we go through each card in detail:
 
-- **Combat:** sections were rebuilt around design goals and split into Design and Execution (October 2026). Still to add:
-  - The real hit-stop values (slow-down amount and duration) in the Impact section, which Anil will supply. There is no input buffer, and it is listed under "Next".
-  - Several Execution rows have one visual or none. Unused screenshots in `assets/images/slavic-dome/` are candidates, matched by filename only so far: `montage-notify-dodge`, `montage-play-notify-routing` (Combat flow); `hit-feedback`, `start-trace`, `handle-trace-notify`, `sweep-trace-2` (Impact); `damage-received`, `player-on-damage`, `player-can-receive-damage` (Enemies); `weapon-setup-1/2`, `equip-weapon`, `weapon-equipped-bind` (Weapons); `aim-mode` (bow, Next). `assets/videos/slavic-dodge-enemy-attack.mp4` could be a Combat flow design clip.
+- **Combat:** sections were rebuilt around design goals and split into Design, How I built it and, where it applies, What I would change (October 2026). Anil's wording pass from an edit copy (PDF) is applied (19 October 2026):
+  - The Overview section was removed. Its intro line moved to the "How it works" lead, and the class diagram moved to a "Teamwork & architecture" section at the end. That section also holds the multiplayer note and the result of the shared base character.
+  - The permission tables are stacked, times are rounded to one decimal, and Move and Sprint share a row. Each row has a `td.perm-why` reason.
+  - Hit-stop is a slow rate of 0.2 for 0.1 s. A `Can Hit Stop` flag keeps hits that land together from stacking it. The combat is replicated for multiplayer.
+  - Weapon diversity was the goal, but only the sword family was finished in the one-month scope. Update the Weapons section when new weapon types are added.
+
+  Still open:
+  - The timing of all three combo steps, to show how commitment builds to the finisher. Anil will come back to this.
+  - The card title still leads with "Data-Driven". The Unreal project is named `SalivicDome`. Ask whether the game's name should go in the title.
+  - Unused: `start-trace.png`, `anim-direction.png` and the two blend-space clips. Locomotion has no section.
 - **Turn-based:** add duration and team size to the card tags and case facts, and an "Intended player feeling" note about the cinematic cameras. Anil also made the boss skills and the Level Sequences, which the case study does not mention yet. Six `.video-slot`s and the card-front video still need recordings.
 - **Parkour:** add a level design section showing how the geometry teaches each move. This needs a layout image and any metrics.
 - **Voice Runner:** decide whether the role becomes "Technical Designer" with an input-design focus, if Anil made those decisions, or whether the card moves to the bottom or is removed. It has no design-area tags until then.
