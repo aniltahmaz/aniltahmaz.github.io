@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" href="assets/images/profile.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <!-- Bump ?v= whenever style.css or script.js changes, so browsers never pair this page with a cached copy -->
-    <link rel="stylesheet" href="style.css?v=20261019b">
+    <link rel="stylesheet" href="style.css?v=20261019c">
 </head>
 <body>
 
@@ -416,7 +416,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Horde Combat Design</h3>
-                    <p class="card-pitch">Horde combat where the player is locked for only 0.2 s per swing. Every action window is tuned on the animation, every weapon is a row of data.</p>
+                    <p class="card-pitch">Horde combat with only a 0.2 s lock per swing. I tuned every action window on the animations and made each weapon a row of data.</p>
                     <div class="card-facts">
                         <span class="card-role"><span class="card-role-label">Role</span> Combat &amp; Technical Designer</span>
                         <div class="project-tags design-tags" aria-label="Design areas">
@@ -436,7 +436,7 @@
             <template class="project-detail-template">
                 <div class="case-head">
                     <h2 class="modal-title">Horde Combat Design</h2>
-                    <p class="modal-pitch">Combat for a third-person multiplayer horde game with enemy waves and a three-phase Boss. I tuned the combat flow on the animations and made every weapon a row of data.</p>
+                    <p class="modal-pitch">Combat for a third-person multiplayer horde game, with enemy waves and a three-phase Boss.</p>
                     <dl class="case-facts">
                         <div><dt>My role</dt><dd>Combat &amp; Technical Designer</dd></div>
                         <div><dt>Team</dt><dd>3 people</dd></div>
@@ -452,10 +452,10 @@
                         <div class="case-did">
                             <h3 class="modal-section-title">What I did</h3>
                             <ul class="modal-did">
-                                <li><strong>Combat flow:</strong> Tuned move, attack and dodge windows with Anim Notifies on the montages, without touching code.</li>
+                                <li><strong>Combat flow:</strong> Tuned move, attack and dodge windows with Anim Notifies. No code changes.</li>
                                 <li><strong>Shared base:</strong> Built one <code>BP_BaseCharacter</code> for the player, enemies and Boss: equipping, hit detection and damage.</li>
                                 <li><strong>Data-driven weapons:</strong> Put weapon stats, meshes and combos into a Data Table and Data Assets.</li>
-                                <li><strong>Multiplayer:</strong> Replicated the combat, so montages and weapons stay in sync on every client.</li>
+                                <li><strong>Multiplayer:</strong> Replicated the combat. Montages and weapons stay in sync on every client.</li>
                             </ul>
                             <p class="modal-note">Boss phases designed as a team. Enemy and Boss AI, the phase sequences and the stats system by <a href="https://zululzulul.github.io/" target="_blank" rel="noopener">Jakub Krzysiak</a>. Audio and level design by <a href="https://mateuszfigura.com/" target="_blank" rel="noopener">Mateusz Figura</a>.</p>
                         </div>
@@ -470,17 +470,17 @@
                         <section class="iteration">
                             <h4 class="section-heading"><span class="section-name">Combat flow</span> Fast, but not easy</h4>
                             <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design problem</span>Horde combat needs to be fast, but if every action is always open, it gets too easy.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I split each attack and the dodge into phases and chose which actions are open in each one.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>Every action commits the player, but only briefly: the full lock is 0.2 s per swing and 0.5 s per dodge.</p>
-                                <p class="iteration-note">I drew the phases on paper first. The tables show that paper design for combo step 2 and the dodge, before the playtest changes below.</p>
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>Horde combat must be fast. If every action is always open, it is too easy.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I split each attack and the dodge into phases. I chose which actions are open in each phase.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted every action to lock the player for a moment. The lock is short: 0.2 s per swing and 0.5 s per dodge.</p>
+                                <p class="iteration-note">I drew the phases on paper first. The tables show that design for combo step 2 and the dodge, before playtesting.</p>
                                 <div class="design-table-wrap">
                                     <table class="design-table perm-table">
                                         <thead>
                                             <tr><th>Normal attack</th><th>Wind-up<span class="th-time">0.1 s</span></th><th>Weapon trace<span class="th-time">0.2 s</span></th><th>Combo window<span class="th-time">0.3 s</span></th><th>Recovery<span class="th-time">0.8 s</span></th><th>Allowed</th><th class="perm-why">Why</th></tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>Move / Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.8 s</td><td class="perm-why">Walking or sprinting cancels the recovery, so the player never waits for the attack to finish.</td></tr>
+                                            <tr><td>Move / Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.8 s</td><td class="perm-why">Walking or sprinting cancels the recovery. No waiting for the attack to end.</td></tr>
                                             <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.2 s</td><td class="perm-why">Re-aim between hits against a moving crowd.</td></tr>
                                             <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.1 s</td><td class="perm-why">Chain the next hit without waiting for the recovery.</td></tr>
                                             <tr><td>Dodge</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.2 s</td><td class="perm-why">Locked only during the 0.2 s swing.</td></tr>
@@ -503,15 +503,21 @@
                                 <p class="iteration-note"><strong>After playtesting</strong> I changed two rules:</p>
                                 <ul class="modal-did">
                                     <li><strong>A dodge cancels an attack.</strong> Being locked in an attack inside the horde felt unfair.</li>
-                                    <li><strong>No turning mid-roll.</strong> It broke the animation, so the player aims at startup (0.2 s) and in the recovery (0.3 s).</li>
+                                    <li><strong>No turning mid-roll.</strong> It broke the animation. The player aims at startup (0.2 s) and in the recovery (0.3 s).</li>
                                 </ul>
-                                <p class="iteration-note"><strong>In the game,</strong> combo step 2 lasts 1.4 s, as on paper. The dodge plays at 1.3× speed, and at 1.5× out of a sprint.</p>
+                                <p class="iteration-note"><strong>In the game,</strong> combo step 2 lasts 1.4 s, as on paper. The dodge plays at 1.3× speed, 1.5× out of a sprint.</p>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure">
                                         <a href="assets/images/slavic-dome/state-paper-design.jpg" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/state-paper-design.jpg" width="1126" height="2000" alt="Hand-drawn timelines for a normal attack and a dodge, with the permissions allowed in each phase" loading="lazy"></a>
                                         <figcaption>The paper design.</figcaption>
                                     </figure>
-                                    <figure class="design-figure clip">
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Three-hit sword combo">
+                                            <source src="assets/videos/slavic-combo-hitstop.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The 3-hit combo.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
                                         <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="The player dodging a boss attack">
                                             <source src="assets/videos/slavic-dodge-enemy-attack.mp4" type="video/mp4">
                                         </video>
@@ -521,7 +527,7 @@
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">I put Anim Notify States on each montage. They switch actions on and off, so tuning the feel means moving a notify. Montages play on the server and every client, so the same timing holds in multiplayer.</p>
+                                <p class="iteration-note">I put Anim Notify States on each montage. They switch actions on and off. To tune the feel, I move a notify. Montages play on the server and every client, so the timing holds in multiplayer.</p>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure focus-bottom">
                                         <a href="assets/images/slavic-dome/montage-notify-attack.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-notify-attack.png" width="1072" height="981" alt="Attack montage timeline with WeaponTrace, ComboWindow and EndAnim notifies" loading="lazy"></a>
@@ -540,8 +546,8 @@
                             <div class="phase">
                                 <h5 class="phase-title">What I would change</h5>
                                 <ul class="modal-did">
-                                    <li><strong>Limit dodge chaining.</strong> A new dodge can start as soon as the recovery begins, at 0.7 s, so chained dodges keep the player immune 0.5 s of every 0.7 s. I would add a cooldown or a stamina cost.</li>
-                                    <li><strong>Add an input buffer.</strong> Keep an attack pressed just before <code>ComboWindow</code> opens, so the combo does not drop.</li>
+                                    <li><strong>Limit dodge chaining.</strong> A new dodge can start when the recovery begins, at 0.7 s. Chained dodges keep the player immune 0.5 s of every 0.7 s. I would add a cooldown or a stamina cost.</li>
+                                    <li><strong>Add an input buffer.</strong> An attack pressed just before <code>ComboWindow</code> opens should not be lost.</li>
                                 </ul>
                             </div>
                         </section>
@@ -550,15 +556,15 @@
                             <h4 class="section-heading"><span class="section-name">Moves</span> Every move has a reason</h4>
                             <div class="phase">
                                 <p class="design-point problem"><span class="design-point-label">Design goal</span>Keep the player attacking in every movement state, with one button.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>The button picks the move: a 3-hit combo on the ground, a Dash Attack while sprinting, an Air Attack while falling.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>Jumping or sprinting never pauses the fight, and each weapon gets its own combo.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I made one button pick the move: a 3-hit combo on the ground, a Dash Attack while sprinting, an Air Attack while falling.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted jumping and sprinting to keep the fight going. Each weapon also gets its own combo.</p>
                                 <div class="design-table-wrap">
                                     <table class="design-table">
                                         <thead>
                                             <tr><th>Situation</th><th>Move</th><th>Length</th><th>Why it is there</th></tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>On the ground</td><td>3-Hit Combo</td><td><span class="nowrap">1.6 / 1.4 / 2.1 s</span></td><td>Fluid, and gives each weapon its own identity. The finisher commits the longest.</td></tr>
+                                            <tr><td>On the ground</td><td>3-Hit Combo</td><td><span class="nowrap">1.6 / 1.4 / 2.1 s</span></td><td>Fluid. Each weapon gets its own identity. The finisher takes the longest.</td></tr>
                                             <tr><td>At sprint speed</td><td>Dash Attack</td><td>1.0 s</td><td>Enters the fight without losing speed.</td></tr>
                                             <tr><td>In the air</td><td>Air Attack (1 per jump)</td><td>0.9 s</td><td>Turns a fall from high ground into an attack.</td></tr>
                                         </tbody>
@@ -581,7 +587,7 @@
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">I wrote <code>TryAttack</code>: it reads the movement state and plays the matching move. Combo montages come from the weapon's Data Asset.</p>
+                                <p class="iteration-note">I wrote <code>TryAttack</code>. It reads the movement state and plays the matching move. Combo montages come from the weapon's Data Asset.</p>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure fit fit-dark">
                                         <a href="assets/images/slavic-dome/try-attack.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/try-attack.png" width="1904" height="943" alt="TryAttack Blueprint graph with air attack, dash attack and ground combo branches" loading="lazy"></a>
@@ -594,10 +600,10 @@
                         <section class="iteration">
                             <h4 class="section-heading"><span class="section-name">Impact</span> Hits feel solid and always count</h4>
                             <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design problem</span>In a fast horde fight, hits can feel weightless, and fast swings can pass through enemies.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I layered three kinds of hit feedback and made every swing check its whole path.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>The player feels each hit, and a fast swing never misses or double-hits an enemy.</p>
-                                <p class="iteration-note"><strong>Hit-stop</strong> drops the attack to 20% speed for 0.1 s, once per swing. A swing through ten enemies still stops only once, so the combo keeps its rhythm.</p>
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>In a fast horde fight, hits can feel weightless. Fast swings can pass through enemies.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I layered three kinds of hit feedback. I made every swing check its whole path.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted the player to feel each hit. A fast swing never misses or double-hits an enemy.</p>
+                                <p class="iteration-note"><strong>Hit-stop</strong> drops the attack to 20% speed for 0.1 s, once per swing. A swing through ten enemies stops only once. The combo keeps its rhythm.</p>
                                 <div class="design-table-wrap">
                                     <table class="design-table">
                                         <thead>
@@ -615,7 +621,13 @@
                                         <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Three-hit sword combo">
                                             <source src="assets/videos/slavic-combo-hitstop.mp4" type="video/mp4">
                                         </video>
-                                        <figcaption>3-hit combo. Feedback exaggerated so it is easy to see.</figcaption>
+                                        <figcaption>Exaggerated feedback, easy to see.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="719" aria-label="A horde fight with the real hit feedback values">
+                                            <source src="assets/videos/slavic-hero.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Real feedback, in a full fight.</figcaption>
                                     </figure>
                                 </div>
                             </div>
@@ -623,7 +635,7 @@
                                 <h5 class="phase-title">How I built it</h5>
                                 <ul class="modal-did">
                                     <li>I bound each weapon's <code>OnHitLanded</code> to <code>ApplyHitStop</code>. It slows the montage, shakes the camera and resets on a timer. A flag lets it run once per swing.</li>
-                                    <li>I wrote <code>PerformSweepTrace</code>: during <code>WeaponTrace</code> it sweeps the blade from its last position to the current one and skips enemies it already hit. It runs only on the server, so clients play the montage but never deal damage themselves.</li>
+                                    <li>I wrote <code>PerformSweepTrace</code>. During <code>WeaponTrace</code> it sweeps the blade from its last position to the current one. It skips enemies it already hit. It runs only on the server: clients play the montage but never deal damage.</li>
                                 </ul>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure fit fit-dark">
@@ -652,18 +664,18 @@
                             <h4 class="section-heading"><span class="section-name">Enemies</span> Three tiers that test different skills</h4>
                             <div class="phase">
                                 <p class="design-point problem"><span class="design-point-label">Design goal</span>Make the player switch tactics instead of repeating one move.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>Three tiers: a large horde, small groups of tougher Elites, and a Boss.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>The horde tests speed and positioning, Elites test target focus, and the Boss tests reaction time.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I used three tiers: a large horde, small groups of tougher Elites, and a Boss.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I gave each tier one skill to test: speed and positioning (horde), target focus (Elites), reaction time (Boss).</p>
                                 <ul class="modal-did">
-                                    <li><strong>Horde</strong> (24+, 1 hit): 5 damage against the player's 100 HP. Weak alone, dangerous in numbers: dodge out of encirclements and clear the crowd fast.</li>
-                                    <li><strong>Elite</strong> (groups of 4, 5 hits): 11× the horde's health, far more armor, and faster than the player walks. It survives a full 3-hit combo, so the player has to break off and reposition before finishing it.</li>
-                                    <li><strong>Boss:</strong> a 0.6 s wind-up, longer than the 0.2 s attack lock, so a dodge is always possible in time. Its ground AoE bursts after 1.5 s.</li>
+                                    <li><strong>Horde</strong> (24+, 1 hit): 5 damage against the player's 100 HP. Weak alone, dangerous in numbers. The player has to escape encirclements and clear the crowd fast.</li>
+                                    <li><strong>Elite</strong> (groups of 4, 5 hits): 11× the horde's health, far more armor, faster than the player walks. It survives a full 3-hit combo. The player has to break off and reposition.</li>
+                                    <li><strong>Boss:</strong> a 0.6 s wind-up, longer than the 0.2 s attack lock. A dodge is always possible in time. Its ground AoE bursts after 1.5 s.</li>
                                 </ul>
-                                <p class="iteration-note"><strong>No stun-lock.</strong> After a stagger the player is immune for 1 s, so the horde cannot chain hits.</p>
+                                <p class="iteration-note"><strong>No stun-lock.</strong> After a stagger the player is immune for 1 s. The horde cannot chain hits.</p>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">I built one <code>BP_BaseCharacter</code> for the player, enemies and Boss: equipping, traces, notifies and damage. Jakub's AI only plays attack montages, so enemy timing runs on my notifies, and he built the AI in parallel without touching the combat code. The player overrides only its hit reaction, respawn and friendly fire.</p>
+                                <p class="iteration-note">I built one <code>BP_BaseCharacter</code> for the player, enemies and Boss: equipping, traces, notifies and damage. Jakub's AI only plays attack montages. Enemy timing runs on my notifies. He built the AI in parallel without touching the combat code. The player overrides only its hit reaction, respawn and friendly fire.</p>
                                 <div class="media-row single">
                                     <figure class="design-figure">
                                         <a href="assets/images/slavic-dome/class-hierarchy.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/class-hierarchy.png" width="2744" height="1344" alt="Class diagram: BP_BaseCharacter with the player and enemy subclasses, BP_WeaponBase with the melee weapon, and the weapon data table and data asset" loading="lazy"></a>
@@ -697,12 +709,12 @@
                             <h4 class="section-heading"><span class="section-name">Boss fight</span> Three phases, one arena</h4>
                             <div class="phase">
                                 <p class="design-point problem"><span class="design-point-label">Design goal</span>Make the Boss a fight in stages, not one long health bar.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>We designed three phases as a team: clear a wave, break the totems that shield the Boss, then fight the Boss itself.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>Each phase tests one skill from the tiers: clearing a crowd, choosing targets, then reading telegraphs.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>We designed three phases as a team: clear a wave, break the totems shielding the Boss, then fight the Boss.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>We wanted each phase to test one skill from the tiers: clearing a crowd, choosing targets, reading telegraphs.</p>
                                 <ul class="modal-did">
                                     <li><strong>Phase 1:</strong> the Boss waits underground while a Stickling wave attacks. Clearing the wave brings it up.</li>
-                                    <li><strong>Phase 2:</strong> the Boss rises behind a shield, and totems appear, each with 11 defenders. The Boss attacks with roots and thrown projectiles until every totem falls.</li>
-                                    <li><strong>Phase 3:</strong> the shield is gone. The Boss stomps, sweeps and roots, and calls new enemies as its health drops.</li>
+                                    <li><strong>Phase 2:</strong> the Boss rises behind a shield. Totems appear, each with 11 defenders. The Boss attacks with roots and projectiles until every totem falls.</li>
+                                    <li><strong>Phase 3:</strong> the shield is gone. The Boss stomps, sweeps and roots. It calls new enemies as its health drops.</li>
                                 </ul>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure clip">
@@ -721,7 +733,7 @@
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">The Boss runs on my <code>BP_BaseCharacter</code>: its attacks are montages with my notifies, and its weapon is a row in <code>DT_Weapons</code>. Jakub built the Boss AI and the phase sequences.</p>
+                                <p class="iteration-note">The Boss runs on my <code>BP_BaseCharacter</code>. Its attacks are montages with my notifies. Its weapon is a row in <code>DT_Weapons</code>. Jakub built the Boss AI and the phase sequences.</p>
                             </div>
                         </section>
 
@@ -730,13 +742,13 @@
                             <div class="phase">
                                 <p class="design-point problem"><span class="design-point-label">Design goal</span>Weapon variety as a core hook: different playstyles and stat builds.</p>
                                 <p class="design-point problem"><span class="design-point-label">Design problem</span>Values inside each weapon Blueprint make adding and balancing weapons slow.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I put shared movesets in Weapon Type Data Assets and each weapon's stats and mesh in one Data Table, <code>DT_Weapons</code>.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>A new stat variant is one row and a new playstyle is one Data Asset, with no Blueprint changes.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I put shared movesets in Weapon Type Data Assets. Each weapon's stats and mesh go in one Data Table, <code>DT_Weapons</code>.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted new weapons without Blueprint work. A new stat variant is one row. A new playstyle is one Data Asset.</p>
                                 <p class="iteration-note"><strong>Scope:</strong> in one month we finished the sword family. The system is ready for more.</p>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">I wrote <code>EquipWeapon</code>, which spawns a weapon from its row. The weapon then sets its mesh, type and socket from the same row, on every client.</p>
+                                <p class="iteration-note">I wrote <code>EquipWeapon</code>. It spawns a weapon from its row. The weapon sets its mesh, type and socket from the same row, on every client.</p>
                                 <ul class="modal-did">
                                     <li><strong>New archetype (e.g., Bow):</strong> create <code>DA_Bow</code> with its animations, socket and projectile class, then add a row.</li>
                                     <li><strong>New variant (e.g., a new sword):</strong> add a row with its stats and mesh. It shares <code>DA_Sword</code>'s moveset.</li>
@@ -1723,7 +1735,7 @@
         <button class="lightbox-close" type="button" aria-label="Close image">×</button>
     </div>
 
-    <script src="script.js?v=20261019b"></script>
+    <script src="script.js?v=20261019c"></script>
 
 </body>
 </html>

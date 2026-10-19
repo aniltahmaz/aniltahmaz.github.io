@@ -1486,6 +1486,22 @@ body {
 .modal-details.is-phased .iteration + .iteration::before { top: 48px; }
 .modal-details.is-phased .iteration h4 { margin-bottom: 20px; font-size: 1.3rem; }
 
+/* Section headings sit flush left and the content hangs under them.
+   The timeline line and dots belong to chronological cards, not to these sections. */
+.modal-details.is-phased .iteration {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+}
+
+.modal-details.is-phased .iteration::before { display: none; }
+
+.modal-details.is-phased .iteration > .phase { padding-left: 28px; }
+
+@media (max-width: 768px) {
+    .modal-details.is-phased .iteration > .phase { padding-left: 14px; }
+}
+
 .design-point.problem .design-point-label { color: #ff6b6b; }
 .design-point.decision .design-point-label { color: var(--accent); }
 .design-point.reason .design-point-label { color: #00ff88; }
