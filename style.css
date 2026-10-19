@@ -1437,17 +1437,54 @@ body {
 .design-point {
     margin: 0 0 12px;
     font-size: 0.95rem;
-    line-height: 1.55;
+    line-height: 1.6;
     color: #c4c4c4;
 }
 
-/* Same size as the text it introduces, set apart by color */
-.design-point-label {
-    margin-right: 6px;
-    font-weight: 700;
+/* Label in its own column, at the same size as the text beside it */
+.design-point {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    column-gap: 18px;
 }
 
-.design-point-label::after { content: ":"; }
+.design-point-label { font-weight: 700; }
+
+@media (max-width: 768px) {
+    .design-point { grid-template-columns: minmax(0, 1fr); row-gap: 2px; }
+}
+
+/* Converted cards: shorter lines, more air between parts and sections */
+.modal-details.is-phased .modal-lead,
+.modal-details.is-phased .phase > .iteration-note,
+.modal-details.is-phased .phase > .modal-did { max-width: 760px; }
+
+.modal-details.is-phased .phase > .design-point { max-width: 940px; }
+
+.modal-details.is-phased .design-point,
+.modal-details.is-phased .iteration-note,
+.modal-details.is-phased .modal-did li { line-height: 1.7; }
+
+.modal-details.is-phased .design-point { margin-bottom: 10px; }
+.modal-details.is-phased .phase > .design-point + .iteration-note,
+.modal-details.is-phased .phase > .design-point + .modal-did,
+.modal-details.is-phased .phase > .design-point + .design-table-wrap { margin-top: 22px; }
+
+.modal-details.is-phased .design-table-wrap { margin-bottom: 18px; }
+.modal-details.is-phased .media-row { margin-top: 22px; }
+
+.modal-details.is-phased .phase + .phase {
+    margin-top: 36px;
+    padding-top: 28px;
+}
+
+.modal-details.is-phased .phase-title { margin-bottom: 14px; }
+
+.modal-details.is-phased .iteration { padding-bottom: 44px; }
+.modal-details.is-phased .iteration:last-of-type { padding-bottom: 4px; }
+.modal-details.is-phased .iteration + .iteration { padding-top: 44px; }
+.modal-details.is-phased .iteration + .iteration::before { top: 48px; }
+.modal-details.is-phased .iteration h4 { margin-bottom: 20px; font-size: 1.3rem; }
 
 .design-point.problem .design-point-label { color: #ff6b6b; }
 .design-point.decision .design-point-label { color: var(--accent); }
