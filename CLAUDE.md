@@ -100,10 +100,10 @@ These were deferred for later and will be done when we go through each card in d
     - Impact states that hit detection is server-only.
     - A "Boss fight" section covers the three phases. They were designed as a team, and Jakub built the Boss AI and the phase sequences, as the credits note says.
     These numbers come from the project via the Unreal MCP.
+    - The title is now "Horde Combat Design" (it was "Data-Driven Combat Design"). Anil wants a generic title without the game's name, and only the Weapons section is about data.
   - The screenshots on the site show an earlier state of the project than the current one (ComboSteps, FAttackSlowRate, the OnHitLanded binding). Anil chose to leave this as it is.
 
   Still open:
-  - The card title still leads with "Data-Driven". Ask whether the game's name should go in it.
   - Some assets were trimmed to keep the card clean and are unused on purpose: `weapon-equipped-bind`, `handle-trace-notify`, `sweep-trace-1`, `start-trace`, `damage-received`, `player-on-damage`, `weapon-setup-1/2`, `anim-direction` and the two blend-space clips.
 - **Turn-based:** add duration and team size to the card tags and case facts, and an "Intended player feeling" note about the cinematic cameras. Anil also made the boss skills and the Level Sequences, which the case study does not mention yet. Six `.video-slot`s and the card-front video still need recordings.
 - **Parkour:** add a level design section showing how the geometry teaches each move. This needs a layout image and any metrics.
