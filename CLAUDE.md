@@ -93,10 +93,17 @@ These were deferred for later and will be done when we go through each card in d
   - Hit-stop is a slow rate of 0.2 for 0.1 s. A `Can Hit Stop` flag keeps hits that land together from stacking it. The combat is replicated for multiplayer.
   - Weapon diversity was the goal, but only the sword family was finished in the one-month scope. Update the Weapons section when new weapon types are added.
 
+  - Lead-designer review applied (19 October 2026):
+    - Tables use Startup / Recovery wording, and Move/Sprint explains the recovery cancel.
+    - Moves shows each move's length (1.6 / 1.4 / 2.1 s, dash 1.0 s, air 0.9 s).
+    - Enemies uses real stats: horde 20 HP and 5 damage, Elite 11× health and faster than the player walks, player 100 HP, 1 s anti-stun-lock immunity.
+    - Impact states that hit detection is server-only.
+    - A "Boss fight" section covers the three phases. They were designed as a team, and Jakub built the Boss AI and the phase sequences, as the credits note says.
+    These numbers come from the project via the Unreal MCP.
+  - The screenshots on the site show an earlier state of the project than the current one (ComboSteps, FAttackSlowRate, the OnHitLanded binding). Anil chose to leave this as it is.
+
   Still open:
-  - The Blueprint export in the SalivicDome session's scratchpad (`dsl/*.txt`) confirms that hit-stop runs once per swing (`ResetHitStop` at each `PlayAttack`), with a 0.2 rate for 0.09 s, and that the dodge has no cooldown or stamina cost. Where it differs from the paper tables, for example dodge during the swing, the tables stay as they are.
-  - The timing of all three combo steps, to show how commitment builds to the finisher. Anil will come back to this.
-  - The card title still leads with "Data-Driven". The Unreal project is named `SalivicDome`. Ask whether the game's name should go in the title.
+  - The card title still leads with "Data-Driven". Ask whether the game's name should go in it.
   - Some assets were trimmed to keep the card clean and are unused on purpose: `weapon-equipped-bind`, `handle-trace-notify`, `sweep-trace-1`, `start-trace`, `damage-received`, `player-on-damage`, `weapon-setup-1/2`, `anim-direction` and the two blend-space clips.
 - **Turn-based:** add duration and team size to the card tags and case facts, and an "Intended player feeling" note about the cinematic cameras. Anil also made the boss skills and the Level Sequences, which the case study does not mention yet. Six `.video-slot`s and the card-front video still need recordings.
 - **Parkour:** add a level design section showing how the geometry teaches each move. This needs a layout image and any metrics.

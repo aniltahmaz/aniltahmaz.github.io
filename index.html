@@ -436,7 +436,7 @@
             <template class="project-detail-template">
                 <div class="case-head">
                     <h2 class="modal-title">Data-Driven Combat Design</h2>
-                    <p class="modal-pitch">Combat for a third-person multiplayer horde game. I tuned the combat flow on the animations and made every weapon a row of data.</p>
+                    <p class="modal-pitch">Combat for a third-person multiplayer horde game with enemy waves and a three-phase Boss. I tuned the combat flow on the animations and made every weapon a row of data.</p>
                     <dl class="case-facts">
                         <div><dt>My role</dt><dd>Combat &amp; Technical Designer</dd></div>
                         <div><dt>Team</dt><dd>3 people</dd></div>
@@ -457,7 +457,7 @@
                                 <li><strong>Data-driven weapons:</strong> Put weapon stats, meshes and combos into a Data Table and Data Assets.</li>
                                 <li><strong>Multiplayer:</strong> Replicated the combat, so montages and weapons stay in sync on every client.</li>
                             </ul>
-                            <p class="modal-note">Enemy and boss AI and the stats system by <a href="https://zululzulul.github.io/" target="_blank" rel="noopener">Jakub Krzysiak</a>. Audio and level design by <a href="https://mateuszfigura.com/" target="_blank" rel="noopener">Mateusz Figura</a>.</p>
+                            <p class="modal-note">Boss phases designed as a team. Enemy and Boss AI, the phase sequences and the stats system by <a href="https://zululzulul.github.io/" target="_blank" rel="noopener">Jakub Krzysiak</a>. Audio and level design by <a href="https://mateuszfigura.com/" target="_blank" rel="noopener">Mateusz Figura</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -477,10 +477,10 @@
                                 <div class="design-table-wrap">
                                     <table class="design-table perm-table">
                                         <thead>
-                                            <tr><th>Normal attack</th><th>Wind-up<span class="th-time">0.1 s</span></th><th>Weapon trace<span class="th-time">0.2 s</span></th><th>Combo window<span class="th-time">0.3 s</span></th><th>End anim<span class="th-time">0.8 s</span></th><th>Allowed</th><th class="perm-why">Why</th></tr>
+                                            <tr><th>Normal attack</th><th>Wind-up<span class="th-time">0.1 s</span></th><th>Weapon trace<span class="th-time">0.2 s</span></th><th>Combo window<span class="th-time">0.3 s</span></th><th>Recovery<span class="th-time">0.8 s</span></th><th>Allowed</th><th class="perm-why">Why</th></tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>Move / Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.8 s</td><td class="perm-why">Root motion carries the attack until the combo window closes.</td></tr>
+                                            <tr><td>Move / Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.8 s</td><td class="perm-why">Walking or sprinting cancels the recovery, so the player never waits for the attack to finish.</td></tr>
                                             <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.2 s</td><td class="perm-why">Re-aim between hits against a moving crowd.</td></tr>
                                             <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.1 s</td><td class="perm-why">Chain the next hit without waiting for the recovery.</td></tr>
                                             <tr><td>Dodge</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td class="perm-yes">✓</td><td>Total 1.2 s</td><td class="perm-why">Locked only during the 0.2 s swing.</td></tr>
@@ -490,11 +490,11 @@
                                 <div class="design-table-wrap">
                                     <table class="design-table perm-table">
                                         <thead>
-                                            <tr><th>Dodge</th><th>Start<span class="th-time">0.2 s</span></th><th>Immune damage<span class="th-time">0.5 s</span></th><th>End anim<span class="th-time">0.3 s</span></th><th>Allowed</th><th class="perm-why">Why</th></tr>
+                                            <tr><th>Dodge</th><th>Startup<span class="th-time">0.2 s</span></th><th>Immune<span class="th-time">0.5 s</span></th><th>Recovery<span class="th-time">0.3 s</span></th><th>Allowed</th><th class="perm-why">Why</th></tr>
                                         </thead>
                                         <tbody>
                                             <tr><td>Move / Sprint</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.3 s</td><td class="perm-why">Root motion sets the roll distance.</td></tr>
-                                            <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Total 0.5 s</td><td class="perm-why">Aim the roll at the start, re-aim in the recovery.</td></tr>
+                                            <tr><td>Rotate</td><td class="perm-yes">✓</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Total 0.5 s</td><td class="perm-why">Aim the roll at startup, re-aim in the recovery.</td></tr>
                                             <tr><td>Attack</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.3 s</td><td class="perm-why">Counter-attack before the roll ends.</td></tr>
                                             <tr><td>Dodge</td><td class="perm-no">✗</td><td class="perm-no">✗</td><td class="perm-yes">✓</td><td>Last 0.3 s</td><td class="perm-why">Chain dodges to stay mobile.</td></tr>
                                         </tbody>
@@ -503,8 +503,9 @@
                                 <p class="iteration-note"><strong>After playtesting</strong> I changed two rules:</p>
                                 <ul class="modal-did">
                                     <li><strong>A dodge cancels an attack.</strong> Being locked in an attack inside the horde felt unfair.</li>
-                                    <li><strong>No turning during a dodge.</strong> It broke the roll, so the player aims at the start (0.2 s) and in the recovery (0.3 s).</li>
+                                    <li><strong>No turning mid-roll.</strong> It broke the animation, so the player aims at startup (0.2 s) and in the recovery (0.3 s).</li>
                                 </ul>
+                                <p class="iteration-note"><strong>In the game,</strong> combo step 2 lasts 1.4 s, as on paper. The dodge plays at 1.3× speed, and at 1.5× out of a sprint.</p>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure">
                                         <a href="assets/images/slavic-dome/state-paper-design.jpg" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/state-paper-design.jpg" width="1126" height="2000" alt="Hand-drawn timelines for a normal attack and a dodge, with the permissions allowed in each phase" loading="lazy"></a>
@@ -539,7 +540,7 @@
                             <div class="phase">
                                 <h5 class="phase-title">What I would change</h5>
                                 <ul class="modal-did">
-                                    <li><strong>Limit dodge chaining.</strong> Chained dodges keep the player immune 0.5 s of every 0.7 s. I would add a cooldown or a stamina cost.</li>
+                                    <li><strong>Limit dodge chaining.</strong> A new dodge can start as soon as the recovery begins, at 0.7 s, so chained dodges keep the player immune 0.5 s of every 0.7 s. I would add a cooldown or a stamina cost.</li>
                                     <li><strong>Add an input buffer.</strong> Keep an attack pressed just before <code>ComboWindow</code> opens, so the combo does not drop.</li>
                                 </ul>
                             </div>
@@ -554,12 +555,12 @@
                                 <div class="design-table-wrap">
                                     <table class="design-table">
                                         <thead>
-                                            <tr><th>Situation</th><th>Move</th><th>Why it is there</th></tr>
+                                            <tr><th>Situation</th><th>Move</th><th>Length</th><th>Why it is there</th></tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>On the ground</td><td>3-Hit Combo</td><td>Fluid, and gives each weapon its own identity.</td></tr>
-                                            <tr><td>At sprint speed</td><td>Dash Attack</td><td>Enters the fight without losing speed.</td></tr>
-                                            <tr><td>In the air</td><td>Air Attack (1 per jump)</td><td>Turns a fall from high ground into an attack.</td></tr>
+                                            <tr><td>On the ground</td><td>3-Hit Combo</td><td><span class="nowrap">1.6 / 1.4 / 2.1 s</span></td><td>Fluid, and gives each weapon its own identity. The finisher commits the longest.</td></tr>
+                                            <tr><td>At sprint speed</td><td>Dash Attack</td><td>1.0 s</td><td>Enters the fight without losing speed.</td></tr>
+                                            <tr><td>In the air</td><td>Air Attack (1 per jump)</td><td>0.9 s</td><td>Turns a fall from high ground into an attack.</td></tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -622,7 +623,7 @@
                                 <h5 class="phase-title">How I built it</h5>
                                 <ul class="modal-did">
                                     <li>I bound each weapon's <code>OnHitLanded</code> to <code>ApplyHitStop</code>. It slows the montage, shakes the camera and resets on a timer. A flag lets it run once per swing.</li>
-                                    <li>I wrote <code>PerformSweepTrace</code>: during <code>WeaponTrace</code> it sweeps the blade from its last position to the current one and skips enemies it already hit.</li>
+                                    <li>I wrote <code>PerformSweepTrace</code>: during <code>WeaponTrace</code> it sweeps the blade from its last position to the current one and skips enemies it already hit. It runs only on the server, so clients play the montage but never deal damage themselves.</li>
                                 </ul>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure fit fit-dark">
@@ -654,24 +655,11 @@
                                 <p class="design-point decision"><span class="design-point-label">Design decision</span>Three tiers: a large horde, small groups of tougher Elites, and a Boss.</p>
                                 <p class="design-point reason"><span class="design-point-label">Why this decision</span>The horde tests speed and positioning, Elites test target focus, and the Boss tests reaction time.</p>
                                 <ul class="modal-did">
-                                    <li><strong>Horde</strong> (24+, 1 hit): dodge out of encirclements and clear the crowd fast.</li>
-                                    <li><strong>Elite</strong> (groups of 4, 5 hits): cannot be cleared in one swing.</li>
-                                    <li><strong>Boss:</strong> a clear 0.6 s wind-up and a ground AoE that bursts after 1.5 s, enough time to read it and dodge.</li>
+                                    <li><strong>Horde</strong> (24+, 1 hit): 5 damage against the player's 100 HP. Weak alone, dangerous in numbers: dodge out of encirclements and clear the crowd fast.</li>
+                                    <li><strong>Elite</strong> (groups of 4, 5 hits): 11× the horde's health, far more armor, and faster than the player walks. It survives a full 3-hit combo, so the player has to break off and reposition before finishing it.</li>
+                                    <li><strong>Boss:</strong> a 0.6 s wind-up, longer than the 0.2 s attack lock, so a dodge is always possible in time. Its ground AoE bursts after 1.5 s.</li>
                                 </ul>
-                                <div class="media-row cols-3">
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Boss attack with the weapon sweep drawn">
-                                            <source src="assets/videos/slavic-boss-attack-trace.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>Boss attack, trace drawn.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="A boss hit landing on the player">
-                                            <source src="assets/videos/slavic-boss-hit-player-death.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>The Boss hits the player.</figcaption>
-                                    </figure>
-                                </div>
+                                <p class="iteration-note"><strong>No stun-lock.</strong> After a stagger the player is immune for 1 s, so the horde cannot chain hits.</p>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
@@ -702,6 +690,38 @@
                                 <ul class="modal-did">
                                     <li><strong>More enemy types.</strong> Add new attack patterns for more variety.</li>
                                 </ul>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Boss fight</span> Three phases, one arena</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Make the Boss a fight in stages, not one long health bar.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>We designed three phases as a team: clear a wave, break the totems that shield the Boss, then fight the Boss itself.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>Each phase tests one skill from the tiers: clearing a crowd, choosing targets, then reading telegraphs.</p>
+                                <ul class="modal-did">
+                                    <li><strong>Phase 1:</strong> the Boss waits underground while a Stickling wave attacks. Clearing the wave brings it up.</li>
+                                    <li><strong>Phase 2:</strong> the Boss rises behind a shield, and totems appear, each with 11 defenders. The Boss attacks with roots and thrown projectiles until every totem falls.</li>
+                                    <li><strong>Phase 3:</strong> the shield is gone. The Boss stomps, sweeps and roots, and calls new enemies as its health drops.</li>
+                                </ul>
+                                <div class="media-row cols-3">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Boss attack with the weapon sweep drawn">
+                                            <source src="assets/videos/slavic-boss-attack-trace.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Boss attack, trace drawn.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="A boss hit landing on the player">
+                                            <source src="assets/videos/slavic-boss-hit-player-death.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The Boss hits the player.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">The Boss runs on my <code>BP_BaseCharacter</code>: its attacks are montages with my notifies, and its weapon is a row in <code>DT_Weapons</code>. Jakub built the Boss AI and the phase sequences.</p>
                             </div>
                         </section>
 
