@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" href="assets/images/profile.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <!-- Bump ?v= whenever style.css or script.js changes, so browsers never pair this page with a cached copy -->
-    <link rel="stylesheet" href="style.css?v=20261019c">
+    <link rel="stylesheet" href="style.css?v=20261020a">
 </head>
 <body>
 
@@ -1419,18 +1419,22 @@
                                         <figcaption>The paper design: the same framing in two places.</figcaption>
                                     </figure>
                                     <figure class="design-figure clip crop">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Preparing a sequence</span></div>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="Preparing an attack sequence in Sequencer, with the attacker at the origin">
+                                            <source src="assets/videos/turn-based-preparing-sequence.mp4" type="video/mp4">
+                                        </video>
                                         <figcaption>Preparing a sequence at 0,0,0.</figcaption>
                                     </figure>
                                     <figure class="design-figure clip crop">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Dynamic binding in action</span></div>
-                                        <figcaption>One skill from two places and angles.</figcaption>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Heroes attacking enemies from different places and angles, with the same framing each time">
+                                            <source src="assets/videos/turn-based-dynamic-binding.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Attacks from different places and angles.</figcaption>
                                     </figure>
                                 </div>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note"><code>NewBindActiveCharacter</code> checks for an enemy binding first. On an enemy attack, the enemy goes into <code>BP_Enemy01</code> and the defending hero into <code>BP_Hero01</code>. On a hero turn, the active hero goes into <code>BP_Hero01</code>. <code>StartAttackSequence</code> turns the defender to face the attacker, then plays the attack.</p>
+                                <p class="iteration-note"><code>NewBindActiveCharacter</code> checks for an enemy binding first. On an enemy attack, the enemy goes into <code>Enemy</code> and the defending hero into <code>Player</code>. On a hero turn, the active hero goes into <code>Player</code>. <code>StartAttackSequence</code> turns the defender to face the attacker, then plays the attack.</p>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure fit fit-dark">
                                         <a href="assets/images/turn-based-combat/graph-bind-active-character.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-bind-active-character.png" width="1864" height="777" alt="Blueprint graph that binds the active characters to a sequence" loading="lazy"></a>
@@ -1594,7 +1598,9 @@
                                         <figcaption>BP_MasterDirector: one event per key type.</figcaption>
                                     </figure>
                                     <figure class="design-figure clip crop">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Adding a skill</span></div>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="A skill's event keys in Sequencer and its steps in the skill data asset">
+                                            <source src="assets/videos/turn-based-adding-skill.mp4" type="video/mp4">
+                                        </video>
                                         <figcaption>A skill's keys and its steps.</figcaption>
                                     </figure>
                                 </div>
@@ -1633,7 +1639,7 @@
                                             <tr><th>Step</th><th>What to do</th><th>Where</th></tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>1</td><td>Create a Level Sequence for the attack. Use the binding names <code>BP_Hero01</code> and <code>BP_Enemy01</code>.</td><td>Sequencer</td></tr>
+                                            <tr><td>1</td><td>Create a Level Sequence for the attack. Use the binding names <code>Player</code> and <code>Enemy</code>.</td><td>Sequencer</td></tr>
                                             <tr><td>2</td><td>Add the animation, the attack camera, effects and sound.</td><td>Sequencer</td></tr>
                                             <tr><td>3</td><td>Add an <code>ExecuteSkillStep</code> key on each hit. Mark the last one as the last attack.</td><td>Sequencer</td></tr>
                                             <tr><td>4</td><td>Add the other keys: <code>MoveToAttackPosition</code>, <code>QTEStart</code> and <code>QTEEnd</code>, or the parry window keys for an enemy.</td><td>Sequencer</td></tr>
@@ -1649,8 +1655,16 @@
                                         <figcaption>Step 7: a hero's attack list.</figcaption>
                                     </figure>
                                     <figure class="design-figure clip crop">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Creating a new skill</span></div>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="Creating a new skill in the editor, from the sequence to the data assets">
+                                            <source src="assets/videos/turn-based-new-skill.mp4" type="video/mp4">
+                                        </video>
                                         <figcaption>A new skill, start to finish.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="The new attack used in a fight against each hero">
+                                            <source src="assets/videos/turn-based-new-skill-result.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The new attack in game.</figcaption>
                                     </figure>
                                 </div>
                             </div>
@@ -1789,7 +1803,7 @@
         <button class="lightbox-close" type="button" aria-label="Close image">×</button>
     </div>
 
-    <script src="script.js?v=20261019c"></script>
+    <script src="script.js?v=20261020a"></script>
 
 </body>
 </html>

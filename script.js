@@ -77,6 +77,7 @@ var cardVideos = (function() {
         });
 
         modalContainer.scrollTop = 0;
+        addFullscreenButtons();
         watchLazyVideos();
         buildSectionNav();
         buildCaseEnd(card);
@@ -238,7 +239,7 @@ var cardVideos = (function() {
         lazyVideoObserver = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) entry.target.play().catch(function() {});
-                else entry.target.pause();
+                else if (entry.target !== fullscreenElement()) entry.target.pause();
             });
         }, { root: modal.querySelector('.modal-container'), threshold: 0.25 });
 
@@ -382,6 +383,60 @@ var cardVideos = (function() {
             if (e.target !== lightboxImg) closeLightbox();
         });
     }
+
+    // ── Clips: a click plays the clip full screen, with the player controls ──
+    var expandIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+
+    function fullscreenElement() {
+        return document.fullscreenElement || document.webkitFullscreenElement || null;
+    }
+
+    function addFullscreenButtons() {
+        modalContent.querySelectorAll('.clip video, .case-video video').forEach(function(v) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'clip-fullscreen';
+            btn.setAttribute('aria-label', 'Play full screen');
+            btn.innerHTML = expandIcon;
+            v.insertAdjacentElement('afterend', btn);
+        });
+    }
+
+    function playFullscreen(v) {
+        v.controls = true;
+        v.play().catch(function() {});
+        if (v.requestFullscreen) {
+            v.requestFullscreen().catch(function() { v.controls = false; });
+        } else if (v.webkitRequestFullscreen) {
+            v.webkitRequestFullscreen();
+        } else if (v.webkitEnterFullscreen) {
+            // iPhone: only the video itself can go full screen
+            v.webkitEnterFullscreen();
+        } else {
+            v.controls = false;
+        }
+    }
+
+    modalContent.addEventListener('click', function(e) {
+        if (fullscreenElement()) return;
+        var target = e.target.closest('.clip-fullscreen, .clip video, .case-video video');
+        if (!target) return;
+        var v = target.tagName === 'VIDEO' ? target : target.previousElementSibling;
+        if (v && v.tagName === 'VIDEO') playFullscreen(v);
+    });
+
+    // Back from full screen: hide the controls and keep the clip looping in place
+    function leaveFullscreen() {
+        modalContent.querySelectorAll('video[controls]').forEach(function(v) {
+            if (v === fullscreenElement()) return;
+            v.controls = false;
+            v.play().catch(function() {});
+        });
+    }
+
+    document.addEventListener('fullscreenchange', leaveFullscreen);
+    document.addEventListener('webkitfullscreenchange', leaveFullscreen);
+    modalContent.addEventListener('webkitendfullscreen', leaveFullscreen, true);
 
     // Close: ESC key — the lightbox first, then the modal
     document.addEventListener('keydown', function(e) {
