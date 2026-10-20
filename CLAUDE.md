@@ -74,7 +74,7 @@ The site presents Anil as one thing: a **Technical Designer** who designs mechan
   - **Formatting.** The text is plain, never boxed. Anil asked for no boxes around text. Design-point labels sit in their own 160px column, at the same size as the text and colored. On phones they stack above the text.
   - **Readability.** Converted cards put `is-phased` on `.modal-details`. That class caps text lines at 760px, sets line-height to 1.7 and adds room between parts and sections. Friends who read the card got lost in long, full-width lines. Section headings sit flush left and the content is indented 28px under them (14px on phones). The timeline line and dots are hidden there, because those sections are not chronological.
   - **Voice.** Keep text short and first person: "I wrote `TryAttack`…", "I built one `BP_BaseCharacter`…". Design decisions and reasons also start from "I" ("I split…", "I wanted…"). Team decisions use "We" (Boss fight). Write one idea per sentence and avoid chains of "so" and "and", which makes proofreading easier. Captions are a few words, e.g. "ApplyHitStop: slow-down, timer, camera shake."
-  - **Coverage.** So far only the combat card uses this layout. The other cards still use the boxed `.design-brief` / `.tech-block` trio until they are converted.
+  - **Coverage.** The combat and turn-based cards use this layout. The other cards still use the boxed `.design-brief` / `.tech-block` trio until they are converted.
 - **Only real work.** Never add mechanics, numbers or techniques that Anil has not confirmed, such as ledge detection, coyote time, input buffering, StateTree, cooldowns or invented hit-stop values. Ask instead. Other AI tools (e.g. a Gemini conversation) suggested many of these, and they are not in the projects. In the combat project, StateTree is used only in Jakub's enemy AI.
 - **Wording.** Write in the site's own plain voice. Do not copy phrasing from other AI tools. Anil does a final wording pass on each card. Once his wording is in, keep it. Fix only clear grammar slips and tell him which ones. Avoid jargon he would not use himself, even standard design terms. For example, write "lock the player for a moment" instead of "commit".
 - **Edit copies.** Anil may review a card in an edit copy (Word or PDF) of the case study:
@@ -105,7 +105,20 @@ These were deferred for later and will be done when we go through each card in d
 
   Still open:
   - Some assets were trimmed to keep the card clean and are unused on purpose: `weapon-equipped-bind`, `handle-trace-notify`, `sweep-trace-1`, `start-trace`, `damage-received`, `player-on-damage`, `weapon-setup-1/2`, `anim-direction` and the two blend-space clips.
-- **Turn-based:** add duration and team size to the card tags and case facts, and an "Intended player feeling" note about the cinematic cameras. Anil also made the boss skills and the Level Sequences, which the case study does not mention yet. Six `.video-slot`s and the card-front video still need recordings.
+- **Turn-based:** rebuilt from scratch in the phased layout (19 October 2026). It follows a section outline Anil liked from Gemini, corrected against the current project through the editor MCP.
+  - The title is "Cinematic Turn-Based Combat" (it was "Sequence-Driven…"). The role is "Technical & Combat Designer". Design tags: Systems Design, Combat Design, Game Feel.
+  - Facts: team of 7, 5 weeks.
+  - Six sections: Turn flow, Camera system, Timing (parry and QTE), Skills, Tactics and Team workflow.
+  - The Fixes section was dropped. None of its four claims from `Docs/PortfolioCopy_EN.md` match the current project: the caster is still the arena's active character, enemy logic was not moved to `BP_EnemyParent`, there is no HP>0 guard, and the multi-ally camera helpers were not found.
+  - Tactics (AP, types and resistances, statuses) were designed by a team of two designers, so it is written with "We". Enemy targeting is Anil's own work. It lives in `BP_CharacterParent`: `EnemyPlayRandomAttack` is an overridable event (the dog overrides it to switch to lasers after its Shield) and `PickEnemyTarget` takes a taunting hero first, otherwise a random one.
+  - Parry rules: a 0.5 s window; a press stays active 0.3 s, so an early press counts; only taking a hit fails, and then that hero cannot parry the rest of the attack; a parried hit also blocks its status; a last-hit parry counters at once at 0.5 time dilation and cancels the enemy attack. QTE: the multiplier starts at 1.0 per skill; Perfect +0.25 up to 2.0; Good no change; Fail, timeout or a prompt still open at `QTEEnd` −0.25 down to 0.5. It scales damage, heals and buff stacks. Self-damage uses `max(2 − m, 0.5)`.
+  - Only two flow charts are kept: one-turn flow and event keys. `flow-parry`, `flow-qte`, `flow-system-overview`, `graph-move-to-attack-position` and `class-hierarchy.svg` are unused on purpose. The SVG is also wrong: it puts the enemy logic in `BP_EnemyParent`.
+  - The defender stands 3 m in front of the attacker (`GetTargetAttackLocation`, 300 units). Anil confirmed it; the paper design's 4 m is outdated.
+  - Loadout: the player picks 3 of each hero's 5 skills in the main menu (`BP_GameInstance.GetActiveSkillSlots`). Anil designed this planning part; a teammate implemented the menu, so the card says "my design" and credits the menu in the note.
+  - Sources: the Unreal project is `PrismoOfDarkness.uproject` in `Documents/Unreal Projects/GP4New`. **Its `Docs/` drafts and the GP4 project memory are outdated.** Verify every claim through the editor MCP, which runs on `http://127.0.0.1:18000/mcp` (read-only use).
+  - Still open:
+    - Recorded on 20 October: the card-front video (also the case video, poster from its QTE frame), Menu transitions, Full turn flow and three parry clips (all three parries with the counter, a missed parry, a counter from each hero). Six slots still wait for videos: Preparing a sequence, Dynamic binding in action, QTE, Result, Adding a skill and Creating a new skill.
+    - The three "What I would change" items still hold as of 19 October: Back mid-transition uses `PlayReverse` from the end, `ReturnToStartPosition` snaps location and rotation, and there is no counter queue. Anil asked Claude to handle them. Fixing them in the project needs the editor MCP, so ask first.
 - **Parkour:** add a level design section showing how the geometry teaches each move. This needs a layout image and any metrics.
 - **Voice Runner:** decide whether the role becomes "Technical Designer" with an input-design focus, if Anil made those decisions, or whether the card moves to the bottom or is removed. It has no design-area tags until then.
 - **Clean Energy:** the design story is weak. Keep it as is, add the cable-cost balancing, or remove the card.
@@ -113,7 +126,8 @@ These were deferred for later and will be done when we go through each card in d
 
 ## Content and assets
 
-- Images go in `assets/images/<project>/`. Card video posters go in `assets/images/posters/`, videos in `assets/videos/` (H.264 MP4), and the resume in `assets/docs/`.
+- Images go in `assets/images/<project>/`. Card video posters go in `assets/images/posters/` (800×450 JPG), videos in `assets/videos/` (H.264 MP4, flat, named `<project>-<clip>.mp4`), and the resume in `assets/docs/`.
+- Compress new recordings with FFmpeg (installed with `winget install Gyan.FFmpeg`) before committing: `-an -vf scale=1280:-2 -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart`, with CRF 28 for a long card-front video. This took the turn-based recordings from 102 MB to 26 MB. Keep the originals outside the repo.
 - Some assets are committed before they are used on the page. To list the ones `index.html` does not reference yet:
   ```bash
   for f in $(git ls-files assets); do grep -q "$f" index.html || echo "$f"; done
