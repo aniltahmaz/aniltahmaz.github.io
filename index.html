@@ -1296,7 +1296,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Cinematic Turn-Based Combat</h3>
-                    <p class="card-pitch">Turn-based combat where every phase plays as a cinematic sequence. The player parries enemy hits, times QTEs and triggers multi-step data-driven skills.</p>
+                    <p class="card-pitch">Every phase of a turn plays as a cinematic sequence. The player parries enemy hits, times QTEs and triggers multi-step skills.</p>
                     <div class="card-facts">
                         <span class="card-role"><span class="card-role-label">Role</span> Technical &amp; Combat Designer</span>
                         <div class="project-tags design-tags" aria-label="Design areas">
@@ -1332,12 +1332,10 @@
                         <div class="case-did">
                             <h3 class="modal-section-title">What I did</h3>
                             <ul class="modal-did">
-                                <li><strong>Cinematic turns:</strong> Made every phase of a turn a Level Sequence: menus, targeting, hero skills and the Boss's attacks.</li>
-                                <li><strong>Dynamic camera binding:</strong> Prepared one camera setup that binds and frames any attacker and target at runtime.</li>
-                                <li><strong>Parry and QTE:</strong> Designed the timing rules. A parry on the last hit counters in slow motion. Perfect QTE hits add damage.</li>
-                                <li><strong>Skills as data:</strong> Built skills as data assets whose steps fire on event keys in the sequence. All 15 skills run on it.</li>
-                                <li><strong>Enemy behaviour:</strong> Built how enemies choose targets. They go for a taunting hero first, and some change attacks mid-fight.</li>
-                                <li><strong>Team workflow:</strong> Wrote the 7-step workflow my teammates used to add skills and sequences on their own.</li>
+                                <li><strong>Cinematic turns:</strong> Made every phase of a turn a Level Sequence. One camera setup frames any attacker and target.</li>
+                                <li><strong>Parry and QTE:</strong> Designed the 0.5 s parry window, the slow-motion counter on the last hit and the QTE multiplier.</li>
+                                <li><strong>Skills as data:</strong> Built skills as data assets whose steps fire on sequence event keys. All 15 skills run on it.</li>
+                                <li><strong>Team workflow:</strong> I created a 7-step workflow for teammates to add skills and sequences on their own.</li>
                             </ul>
                             <p class="modal-note">Tactics designed in a team of two designers. Stats system by <a href="https://zululzulul.github.io/" target="_blank" rel="noopener">Jakub Krzysiak</a>. Turn order by Mateusz Szwarc. The UI, including the loadout menu, and status effects were built by teammates.</p>
                         </div>
@@ -1353,21 +1351,8 @@
                             <h4 class="section-heading"><span class="section-name">Turn flow</span> Every phase of a turn plays like an action scene</h4>
                             <div class="phase">
                                 <p class="design-point problem"><span class="design-point-label">Design goal</span>Make turn-based combat feel cinematic, like Expedition 33, with no static menu screen.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I made every phase of a turn its own Level Sequence: idle, opening the skill menu, aiming at targets and attacking.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted each phase to have its own camera and timing. A designer changes them in Sequencer, with no Blueprint work.</p>
-                                <div class="design-table-wrap">
-                                    <table class="design-table">
-                                        <thead>
-                                            <tr><th>Moment</th><th>Sequence</th><th>What the player sees</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Turn start</td><td>Idle battle</td><td>The camera frames the active hero.</td></tr>
-                                            <tr><td>Skills button</td><td>Skill transition, then idle skill</td><td>The camera moves in as the skill list opens.</td></tr>
-                                            <tr><td>Skill selected</td><td>Targeting camera</td><td>The camera frames the targets.</td></tr>
-                                            <tr><td>Target confirmed</td><td>Attack sequence</td><td>The attack plays, with its QTE prompts and hits.</td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I made each phase of a turn its own Level Sequence: idle, skill menu, targeting and attack.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted each phase to have its own camera and timing, tuned in Sequencer without Blueprint work.</p>
                                 <div class="media-row single is-wide">
                                     <figure class="design-figure">
                                         <a href="assets/images/turn-based-combat/flow-one-turn.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-one-turn.png" width="2664" height="1222" alt="Flow chart of one hero turn: combat start sequence, next character's turn, idle battle sequence, Skills button, skill transition sequence, idle skill sequence, skill selected, targeting camera, target confirmed, attack sequence, then the next character's turn" loading="lazy"></a>
@@ -1391,7 +1376,7 @@
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">A turn change or a menu button only tells <code>BP_CameraManager</code> which sequence to play. <code>NewStartSequence</code> stops the active one, binds the characters and plays the new one. It keeps one player per sequence and reuses it.</p>
+                                <p class="iteration-note">Turn changes and menu buttons only tell <code>BP_CameraManager</code> which sequence to play. <code>NewStartSequence</code> stops the active one, binds the characters and plays the new one. Each sequence keeps one reused player.</p>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure fit fit-dark">
                                         <a href="assets/images/turn-based-combat/graph-start-sequence.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-start-sequence.png" width="1907" height="876" alt="Blueprint graph that starts a sequence: stop the active sequence, bind the actors, play the new one" loading="lazy"></a>
@@ -1402,7 +1387,7 @@
                             <div class="phase">
                                 <h5 class="phase-title">What I would change</h5>
                                 <ul class="modal-did">
-                                    <li><strong>Smooth Back mid-transition.</strong> Pressing Back during a menu transition restarts the reverse from the end. The camera jumps. I would reverse from the current frame.</li>
+                                    <li><strong>Smooth Back mid-transition.</strong> Back during a menu transition reverses from the end, and the camera jumps. I would reverse from the current frame.</li>
                                 </ul>
                             </div>
                         </section>
@@ -1410,9 +1395,9 @@
                         <section class="iteration">
                             <h4 class="section-heading"><span class="section-name">Camera system</span> One sequence setup frames any attacker and target</h4>
                             <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design problem</span>Three heroes and several enemies stand at different places and angles. Sequences built in world space would need a setup for every pair and break on diagonal attacks.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I prepare each sequence once, with the attacker at 0,0,0 and the defender 3 m in front. I attach the camera to the attacker. In a fight I bind the active pair and turn the defender to face the attacker.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>The camera moves with the attacker, and the two characters face each other. The framing stays the same from any place or angle on the battlefield.</p>
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>Heroes and enemies stand at different places and angles. World-space sequences would need a setup per pair and break on diagonal attacks.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I build each sequence once at 0,0,0, with the defender 3 m ahead and the camera on the attacker. In a fight I bind the pair and turn the defender to face the attacker.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted the same framing anywhere in the arena. The camera moves with the attacker, and the pair face each other.</p>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure fit">
                                         <a href="assets/images/turn-based-combat/paper-design-camera-binding.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/paper-design-camera-binding.png" width="2907" height="1569" alt="Paper design with two cases: the same camera angle on an attacker and a defender at two different places and rotations" loading="lazy"></a>
@@ -1449,7 +1434,7 @@
                             <div class="phase">
                                 <h5 class="phase-title">What I would change</h5>
                                 <ul class="modal-did">
-                                    <li><strong>Smooth the return.</strong> When an attack ends, the attacker and its targets snap back to their start position and rotation. I would blend them back during the return.</li>
+                                    <li><strong>Smooth the return.</strong> After an attack, the characters snap back to their start position and rotation. I would blend them back.</li>
                                 </ul>
                             </div>
                         </section>
@@ -1457,11 +1442,11 @@
                         <section class="iteration">
                             <h4 class="section-heading"><span class="section-name">Timing</span> No turn is spent waiting</h4>
                             <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Keep the player active in every turn, not only their own.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I put timing windows on the sequences. Enemy attacks open a 0.5 s parry window. Hero attacks open QTE prompts.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I did not want turn-based combat to become waiting. Good timing protects the player on enemy turns and adds power on their own. The counter comes only on the last hit, so an enemy's combo plays out before the player is rewarded.</p>
-                                <p class="iteration-note"><strong>Parry rules.</strong> The window is 0.5 s. A press stays active for 0.3 s, so a slightly early press still counts. Only taking a hit fails a parry, and the hero cannot parry the rest of that attack. A parried hit also blocks its status effect. A parry on the last hit counter-attacks at once, in slow motion, and cuts the enemy's attack short.</p>
-                                <p class="iteration-note"><strong>QTE rules.</strong> Each skill starts with a 1.0 multiplier. A Perfect adds 0.25, up to 2.0. Good changes nothing. A Fail or a prompt that runs out takes 0.25 away, down to 0.5. The multiplier scales the skill's damage, heals and buff stacks. Self-damage goes the other way: better timing hurts the caster less.</p>
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Keep the player active on every turn, not only their own.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I added a 0.5 s parry window to enemy attacks and QTE prompts to hero skills.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I did not want turn-based combat to become waiting. Good timing protects the player on enemy turns and adds power on their own. The counter waits for the last hit, so an enemy's combo plays out first.</p>
+                                <p class="iteration-note"><strong>Parry rules.</strong> A press stays active for 0.3 s, so an early press counts. Only taking a hit fails a parry. The counter also cuts the enemy's attack short.</p>
+                                <p class="iteration-note"><strong>QTE rules.</strong> The multiplier starts at 1.0 for each skill. It scales damage, heals and buff stacks. Better timing also lowers self-damage.</p>
                                 <div class="text-cols">
                                     <div class="design-table-wrap">
                                         <table class="design-table">
@@ -1469,8 +1454,8 @@
                                                 <tr><th>Parry: a hit on a hero</th><th>What happens</th></tr>
                                             </thead>
                                             <tbody>
-                                                <tr><td>No parry, or outside the window</td><td>Damage applies</td></tr>
-                                                <tr><td>Inside the window</td><td>The hit is blocked</td></tr>
+                                                <tr><td>No parry, or outside the window</td><td>Damage applies. No more parries in this attack.</td></tr>
+                                                <tr><td>Inside the window</td><td>The hit and its status effect are blocked</td></tr>
                                                 <tr><td>Inside the window, last hit</td><td>Slow-motion counter, no damage</td></tr>
                                             </tbody>
                                         </table>
@@ -1512,14 +1497,16 @@
                                 </div>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure clip">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">QTE</span></div>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="QTE prompts during a hero skill that hits three enemies">
+                                            <source src="assets/videos/turn-based-full-turn.mp4" type="video/mp4">
+                                        </video>
                                         <figcaption>QTE prompts during a hero skill.</figcaption>
                                     </figure>
                                 </div>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Enemy attack sequences carry <code>ParryWindowOpen</code> and <code>ParryWindowClosed</code> keys. <code>DamageLogic</code> decides what each hit does: damage, a block, or a counter on the last hit. The counter drops the world to half speed. The QTE widget reports each result to the character through event dispatchers.</p>
+                                <p class="iteration-note">Enemy sequences carry <code>ParryWindowOpen</code> and <code>ParryWindowClosed</code> keys. <code>DamageLogic</code> decides each hit: damage, a block, or a half-speed counter on the last hit. The QTE widget sends its results through event dispatchers.</p>
                                 <div class="media-row cols-3">
                                     <figure class="design-figure fit fit-dark">
                                         <a href="assets/images/turn-based-combat/graph-damage-logic.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-damage-logic.png" width="1937" height="913" alt="DamageLogic Blueprint graph with the parry and counter-attack branches" loading="lazy"></a>
@@ -1538,9 +1525,9 @@
                         <section class="iteration">
                             <h4 class="section-heading"><span class="section-name">Skills</span> Skills that do more than damage</h4>
                             <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design problem</span>We wanted skills that do several things in one attack: damage, a status, healing allies. A Blueprint per skill means graph work for every new skill.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I made a skill a list of steps in a data asset. Each step has its own target, effect, hit, condition and strength.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted skill ideas to cost data, not code. A step can also depend on a condition, such as a status on the target or a perfect QTE hit. All 15 skills for three heroes run on this one system.</p>
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>We wanted skills with several effects in one attack, like self-damage plus a Shield for allies. A Blueprint per skill means new graph work every time.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I made each skill a list of steps in a data asset. Each step has its own target, effect, hit, condition and strength.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted new skills to cost data, not code. All 15 skills for three heroes run on this one system.</p>
                                 <div class="design-table-wrap">
                                     <table class="design-table">
                                         <thead>
@@ -1555,37 +1542,22 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="design-table-wrap">
-                                    <table class="design-table">
-                                        <thead>
-                                            <tr><th>Skill</th><th>Step</th><th>Target</th><th>Effect</th><th>Step index</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Life Leech</td><td>1</td><td>Single enemy</td><td>Damage 15</td><td>0</td></tr>
-                                            <tr><td>Life Leech</td><td>2</td><td>Self</td><td>Heal 10</td><td>0</td></tr>
-                                            <tr><td>Guardian's Blood</td><td>1</td><td>Self</td><td>Damage 10</td><td>0</td></tr>
-                                            <tr><td>Guardian's Blood</td><td>2</td><td>All allies</td><td>Shield, 1 stack</td><td>1</td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                                 <div class="media-row cols-3 shots-data">
-                                    <figure class="design-figure">
-                                        <a href="assets/images/turn-based-combat/skill-life-leech.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/skill-life-leech.png" width="1916" height="1604" alt="Skill data asset for Life Leech with two steps: damage on a single enemy and a heal on the caster, both on step index 0" loading="lazy"></a>
-                                        <figcaption>Life Leech: damage and heal on step index 0.</figcaption>
-                                    </figure>
                                     <figure class="design-figure">
                                         <a href="assets/images/turn-based-combat/skill-guardians-blood.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/skill-guardians-blood.png" width="1914" height="1632" alt="Skill data asset for Guardian's Blood with two steps: damage on the caster on step index 0 and the Shield status on all allies on step index 1" loading="lazy"></a>
                                         <figcaption>Guardian's Blood: self-damage on 0, Shield on 1.</figcaption>
                                     </figure>
                                     <figure class="design-figure clip crop">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Result</span></div>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Guardian's Blood in game: the caster takes damage, then every ally gets a Shield">
+                                            <source src="assets/videos/turn-based-skill-result.mp4" type="video/mp4">
+                                        </video>
                                         <figcaption>A multi-step skill in game.</figcaption>
                                     </figure>
                                 </div>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Each hit is an <code>ExecuteSkillStep</code> event key on the attack's sequence. The key calls <code>BP_MasterDirector</code>, and the character runs the steps with that index. Moving a key moves the hit with the animation. Every character inherits this pipeline from <code>BP_CharacterParent</code>.</p>
+                                <p class="iteration-note">Each hit is an <code>ExecuteSkillStep</code> key on the sequence. Through <code>BP_MasterDirector</code>, the character runs the steps with that index. Moving a key moves the hit. Every character inherits this from <code>BP_CharacterParent</code>.</p>
                                 <div class="media-row single">
                                     <figure class="design-figure">
                                         <a href="assets/images/turn-based-combat/flow-event-keys.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-event-keys.png" width="2108" height="1268" alt="Diagram: two ExecuteSkillStep event keys on the Level Sequence go through BP_MasterDirector to the two steps of the Guardian's Blood skill, matched by step index" loading="lazy"></a>
@@ -1610,28 +1582,28 @@
                         <section class="iteration">
                             <h4 class="section-heading"><span class="section-name">Tactics</span> Every turn is a choice</h4>
                             <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Make the player think before each action, instead of always using the strongest skill.</p>
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Make the player think each turn, instead of always using the strongest skill.</p>
                                 <p class="design-point decision"><span class="design-point-label">Design decision</span>We gave every skill an AP cost and a type. Targets resist some types. Statuses change who the enemies attack.</p>
                                 <p class="design-point reason"><span class="design-point-label">Why this decision</span>We wanted the player to weigh cost, resistances and statuses on every turn.</p>
                                 <ul class="modal-did">
-                                    <li><strong>AP:</strong> every skill costs AP.</li>
+                                    <li><strong>AP:</strong> every skill costs AP, and the heroes share one AP pool.</li>
                                     <li><strong>Loadout (my design):</strong> before a fight, the player picks 3 of each hero's 5 skills in the main menu.</li>
                                     <li><strong>Types:</strong> Physical, White, Black and Blood. An enemy's health bar shows its type.</li>
                                     <li><strong>Statuses:</strong> Shield protects allies. Taunt pulls enemy attacks onto one hero.</li>
-                                    <li><strong>Enemies:</strong> they attack a taunting hero first, otherwise a random one. Multi-target attacks hit every hero. The dog switches to laser attacks after its Shield.</li>
+                                    <li><strong>Enemies:</strong> they attack a taunting hero first, otherwise a random one. Multi-target attacks hit every hero. Right after the dog shields itself, it uses a laser attack.</li>
                                 </ul>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Enemy decisions live in <code>BP_CharacterParent</code>. <code>EnemyPlayRandomAttack</code> is an event each enemy can override, and the dog overrides it. <code>PickEnemyTarget</code> takes a taunting hero first, otherwise a random one.</p>
+                                <p class="iteration-note">Enemy decisions live in <code>BP_CharacterParent</code>. Each enemy can override <code>EnemyPlayRandomAttack</code>, as the dog does. <code>PickEnemyTarget</code> takes a taunting hero first, otherwise a random one.</p>
                             </div>
                         </section>
 
                         <section class="iteration">
                             <h4 class="section-heading"><span class="section-name">Team workflow</span> Teammates add skills on their own</h4>
                             <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Let my teammates create skills and their sequences without me.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I wrote the workflow as seven steps and went through it with them.</p>
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Let my teammates create skills and sequences without waiting on me.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I wrote the workflow as a 7-step checklist and went through it with them.</p>
                                 <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted a list anyone can follow and check. After one walkthrough they created skills and sequences on their own.</p>
                                 <div class="design-table-wrap">
                                     <table class="design-table">
