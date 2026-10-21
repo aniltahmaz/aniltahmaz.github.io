@@ -123,7 +123,7 @@ These were deferred for later and will be done when we go through each card in d
     - On 22 October, Anil's PDF draft replaced the title area and the first three sections: Every phase of a turn is a cutscene, Camera system, and Parry and QTE.
     - Skills, Tactics and Team workflow are the 20 October versions.
   - **Card facts.** The role is "Technical & Combat Designer", with a team of 7 and 5 weeks. Design tags: Systems Design, Combat Design, Game Feel.
-  - **Function names.** The current names are `NewStartSequence`, `NewBindActiveCharacter` and `StartAttackSequence`; the PDF and the project agree. The graph screenshots show the older `StartSequence`, `BindActiveCharacter` and `StartSkillSequence`, but their captions do not name functions.
+  - **Function names.** The project now names them `NewStartSequence`, `NewBindActiveCharacter` and `StartAttackSequence`. The graph screenshots show `StartSequence`, `BindActiveCharacter` and `StartSkillSequence`, and Anil asked the text to match the screenshots: the card says `StartSequence` and `BindActiveCharacter`. `StartAttackSequence` is still as in the PDF.
   - **Binding names.** The sequence binding names are `Player` and `Enemy`. Anil renamed them from `BP_Hero01` and `BP_Enemy01` on 20 October so they read more easily. Older Blueprint screenshots and editor videos still show the old names.
   - **Parry.**
     - The window is 0.5 s, and a press stays active 0.3 s, so an early press counts.
@@ -166,7 +166,7 @@ These were deferred for later and will be done when we go through each card in d
 - **Parkour:** add a level design section showing how the geometry teaches each move. This needs a layout image and any metrics.
 - **Voice Runner:** decide whether the role becomes "Technical Designer" with an input-design focus, if Anil made those decisions, or whether the card moves to the bottom or is removed. It has no design-area tags until then.
 - **Clean Energy:** the design story is weak. Keep it as is, add the cable-cost balancing, or remove the card.
-- **Card order:** leave it as is for now. Revisit it together with category filters when more projects are added.
+- **Card order:** on 22 October 2026 Anil set it to turn-based, combat, parkour, curve bullet, Fancy Restaurant and voxel destruction. The rest follow in no particular order; they are now flight physics, voice runner and clean energy. The same order drives the "Next project" links. Revisit it together with category filters when more projects are added.
 
 ## Content and assets
 

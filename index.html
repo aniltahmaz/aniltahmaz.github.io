@@ -88,32 +88,31 @@
 
             <div class="projects-grid">
 
-        <!-- CARD 0 — Fancy Restaurant (shipped) -->
-        <article class="project-card is-featured" data-project-id="fancy-restaurant">
-            <a class="card-trigger" href="#project/fancy-restaurant" aria-label="View details for Fancy Restaurant">
+        <!-- CARD — Cinematic Turn-Based Combat (Unreal, team project) -->
+        <article class="project-card" data-project-id="turn-based-combat">
+            <a class="card-trigger" href="#project/turn-based-combat" aria-label="View details for Cinematic Turn-Based Combat">
                 <div class="card-video">
-                    <video loop muted playsinline preload="none" poster="assets/images/posters/fancy-restaurant.jpg">
-                        <source src="assets/videos/fancy-restaurant.mp4" type="video/mp4">
+                    <video loop muted playsinline preload="none" poster="assets/images/posters/turn-based-hero.jpg">
+                        <source src="assets/videos/turn-based-hero.mp4" type="video/mp4">
                     </video>
                     <div class="card-video-overlay">
                         <span class="card-expand-hint">View details →</span>
                     </div>
-                    <span class="card-shipped-badge">300K+ downloads</span>
                 </div>
                 <div class="card-summary">
-                    <h3>Fancy Restaurant</h3>
-                    <p class="card-pitch">Soft-launched restaurant manager. I built the core loop, upgrade system and economy.</p>
+                    <h3>Cinematic Turn-Based Combat</h3>
+                    <p class="card-pitch">Every phase of a turn plays as a cinematic sequence. The player parries enemy hits, times QTEs and triggers multi-step skills.</p>
                     <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Game Designer &amp; Developer</span>
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical &amp; Combat Designer</span>
                         <div class="project-tags design-tags" aria-label="Design areas">
                             <span class="tag design">Systems Design</span>
-                            <span class="tag design">Economy Design</span>
-                            <span class="tag design">Level Design</span>
+                            <span class="tag design">Combat Design</span>
+                            <span class="tag design">Game Feel</span>
                         </div>
                         <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">Tolian Games</span>
-                            <span class="tag">7-month soft launch</span>
+                            <span class="tag">Unreal Engine 5</span>
+                            <span class="tag">Team of 7</span>
+                            <span class="tag">5 weeks</span>
                         </div>
                     </div>
                 </div>
@@ -121,28 +120,29 @@
 
             <template class="project-detail-template">
                 <div class="case-head">
-                    <h2 class="modal-title">Fancy Restaurant</h2>
-                    <p class="modal-pitch">Hybrid-casual restaurant management game. It was in soft launch for 7 months and reached 300K+ downloads. I reworked the design four times from player data and publisher feedback.</p>
+                    <h2 class="modal-title">Cinematic Turn-Based Combat</h2>
+                    <p class="modal-pitch">Turn-based RPG combat inspired by Expedition 33, with three heroes and 15 skills. Each phase of a turn is played through a Level Sequence.</p>
                     <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Game Designer &amp; Developer</dd></div>
-                        <div><dt>Team</dt><dd>Tolian Games</dd></div>
-                        <div><dt>Duration</dt><dd>7-month soft launch</dd></div>
-                        <div><dt>Engine / tools</dt><dd>Unity</dd></div>
+                        <div><dt>My role</dt><dd>Technical &amp; Combat Designer</dd></div>
+                        <div><dt>Team</dt><dd>7 people</dd></div>
+                        <div><dt>Duration</dt><dd>5 weeks</dd></div>
+                        <div><dt>Engine / tools</dt><dd>Unreal Engine 5 · Blueprints · Level Sequencer</dd></div>
                     </dl>
                     <div class="case-intro">
                         <div class="case-video">
-                            <video autoplay loop muted playsinline poster="assets/images/posters/fancy-restaurant.jpg">
-                                <source src="assets/videos/fancy-restaurant.mp4" type="video/mp4">
+                            <video autoplay loop muted playsinline poster="assets/images/posters/turn-based-hero.jpg">
+                                <source src="assets/videos/turn-based-hero.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="case-did">
                             <h3 class="modal-section-title">What I did</h3>
                             <ul class="modal-did">
-                                <li><strong>Core loop:</strong> Seat guests, serve them, collect money and reinvest it. Hired staff later run the restaurant for the player.</li>
-                                <li><strong>Economy:</strong> Two upgrade trees and rewarded-video boosts, tuned to playtime targets.</li>
-                                <li><strong>Live iteration:</strong> I changed the scope from funnel data. For example, I shortened section 2, where most players quit.</li>
+                                <li><strong>Cinematic turns:</strong> Made every phase of a turn a Level Sequence. One camera setup frames any attacker and target.</li>
+                                <li><strong>Parry and QTE:</strong> Designed parry window on enemy attacks, the slow-motion counter on the last hit and the QTE multiplier.</li>
+                                <li><strong>Skills as data:</strong> Built skills as data assets whose steps fire on sequence event keys. All 15 skills run on it.</li>
+                                <li><strong>Team workflow:</strong> I created a 7-step workflow for teammates to add skills and sequences on their own.</li>
                             </ul>
-                            <p class="modal-note">No playable link or repository: the soft launch has ended, and the publisher NDA covers the build and source code.</p>
+                            <p class="modal-note">Tactics designed in a team of 4 designers. Stats system by <a href="https://zululzulul.github.io/" target="_blank" rel="noopener">Jakub Krzysiak</a>. Turn order by Mateusz Szwarc. The UI, including the loadout menu, and status effects were built by teammates.</p>
                         </div>
                     </div>
                 </div>
@@ -150,195 +150,282 @@
                 <div class="modal-body is-stacked">
                     <div class="modal-details" data-section-nav>
                         <h3 class="modal-section-title">How it works</h3>
-                        <p class="modal-lead">Click a screenshot to open it full size.</p>
+                        <p class="modal-lead">Each section shows the design, how I built it and what I would change. Click any image to enlarge it.</p>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Overview</span> Seven months of reworks</h4>
-                            <p class="iteration-note">I planned the whole progression on paper before building it, with a cost, revenue and star reward for every unlock. Each rework after that started from funnel data or publisher feedback. The sections below show what the signal was and what I changed.</p>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">V1 · Nov 2023</span> Core loop and first economy</h4>
-                            <ul class="modal-did">
-                                <li><strong>Loop:</strong> The player seats guests, serves them, and unlocks and upgrades tables. Later they hire waiters and food runners, and the restaurant runs itself. Joystick and stack-carry controls, no lose condition.</li>
-                                <li><strong>Progression:</strong> Every purchase pays stars. The restaurant rating climbs to 5 stars, which finishes the level.</li>
-                                <li><strong>Planned on paper first:</strong> Each unlockable has a cost, what it opens next, its reservation and meal revenue and its star reward, from $50 for the first room to $1,500 for the last kitchen upgrade.</li>
-                            </ul>
-                            <p class="iteration-note"><strong>After the first build</strong> I simplified the economy, reordered the upgrade areas so they do not all open at once, lowered tips, and added a short delay before money is spent, so walking over a pad does not buy by accident. I also replaced the waiter upgrade with a second waiter, so faster service is visible.</p>
-                            <div class="media-row">
-                                <figure class="design-figure">
-                                    <a href="assets/images/fancy-restaurant/staff-sheet.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/staff-sheet.jpg" width="832" height="557" alt="Spreadsheet of staff levels, speeds and costs, and revenue for hot towel, candles and wine services" loading="lazy"></a>
-                                    <figcaption>Staff levels and costs, and what each special service pays.</figcaption>
-                                </figure>
-                                <figure class="design-figure">
-                                    <a href="assets/images/fancy-restaurant/economy-flow.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/economy-flow.jpg" width="2048" height="1208" alt="Flow chart of onboarding steps followed by every purchase in order with its price" loading="lazy"></a>
-                                    <figcaption>Progression flow: four onboarding steps, then every purchase in order with its price.</figcaption>
-                                </figure>
-                                <figure class="design-figure">
-                                    <a href="assets/images/fancy-restaurant/economy-sheet.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/economy-sheet.jpg" width="1805" height="934" alt="Spreadsheet listing each unlockable room with cost, revenue, star reward and restaurant rating" loading="lazy"></a>
-                                    <figcaption>Economy sheet: cost, revenue and star reward for every unlockable.</figcaption>
-                                </figure>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Iteration 2 · Dec 2023 – Jan 2024</span> Shorten the early game</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>A management game has no levels, so every table and section unlock sent a &quot;level passed&quot; analytics event. The funnel showed that most players had quit by event 12, the second table of section 2.</p>
+                            <h4 class="section-heading title-only"><span class="section-name">Every phase of a turn is a cutscene</span></h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>As a team, we wanted to recreate Expedition 33's cinematic, turn-based combat style.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>To achieve this, I made each phase of a turn a Level Sequence.</p>
+                                <div class="media-row single is-wide">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/turn-based-combat/flow-one-turn.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-one-turn.png" width="2664" height="1222" alt="Flow chart of one hero turn: combat start sequence, next character's turn, idle battle sequence, Skills button, skill transition sequence, idle skill sequence, skill selected, targeting camera, target confirmed, attack sequence, then the next character's turn" loading="lazy"></a>
+                                        <figcaption>One hero turn, from the start of the fight to the next turn.</figcaption>
+                                    </figure>
                                 </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>I shortened section 2 and cut the slow steps: cleaning tables, choosing a table type and carrying crates to special tables.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>Players quit before the game showed them anything new. A shorter section 2 gets them to the next unlock sooner.</p>
-                                </div>
-                            </div>
-                            <ul class="modal-did">
-                                <li><strong>Wayfinding:</strong> A compass button points to everything that can be bought, and the camera pans to each newly opened area.</li>
-                                <li><strong>Curiosity:</strong> One special place per section (music stage, cooking show, grill table, dance show), so players wonder what unlocks next.</li>
-                                <li><strong>Supply runs:</strong> Raw fish to the sushi bars, raw meat to the grill and crates to the bar, all carried from a depot.</li>
-                            </ul>
-                            <div class="design-table-wrap">
-                                <table class="design-table">
-                                    <thead>
-                                        <tr><th>Before</th><th>After</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>Tables had to be cleaned before seating new guests.</td><td>Cleaning removed.</td></tr>
-                                        <tr><td>The player chose a Romantic or Party table at the second upgrade.</td><td>Table types are fixed per section. The upgrade only picks a skin.</td></tr>
-                                        <tr><td>Crates had to be carried to special tables to prepare them.</td><td>Special tables are always ready.</td></tr>
-                                        <tr><td>No special requests.</td><td>Each table type has its own request, for example hot towels before the meal.</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="media-row single is-small">
-                                <figure class="design-figure">
-                                    <a href="assets/images/fancy-restaurant/section-plan.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/section-plan.jpg" width="2048" height="1772" alt="Floor plan with seven sections: regular sections in the middle, Chinese-themed sections on both sides, one coloured special place in each" loading="lazy"></a>
-                                    <figcaption>Section plan: regular sections up the middle, Chinese-themed sections on both sides, one special place in each.</figcaption>
-                                </figure>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Iteration 3 · Jan – Feb 2024</span> One restaurant theme per area</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>Publisher feedback: the food should match the restaurant type, the economy needed some grind, and the game should start smaller.</p>
-                                </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>Each new area is a different restaurant with its own special places and guest requests. The first restaurant opens with two seats. Carry capacity starts low and is earned back through upgrades.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>A new theme makes each area feel new. A smaller start leaves more for the player to earn.</p>
-                                </div>
-                            </div>
-                            <p class="iteration-note"><strong>Each special place earns differently.</strong> The drive-thru pays fast because nobody waits for a seat. The jukebox and the coin fountain give small passive income. The soda machine and the gelato stand only earn while they are kept stocked.</p>
-                            <div class="design-table-wrap">
-                                <table class="design-table">
-                                    <thead>
-                                        <tr><th>Theme</th><th>Special places</th><th>Guest requests</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>Diner</td><td>Self-serve counter, jukebox, drive-thru, soda machine</td><td>Ketchup &amp; mayo, coffee refill</td></tr>
-                                        <tr><td>Italian</td><td>Gelato stand, coffee machine, coin fountain</td><td>Salt &amp; pepper, wine</td></tr>
-                                        <tr><td>Chinese</td><td>Sushi bar, self grill, cooking show, rotating table</td><td>Fortune cookies, green tea</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="media-row single">
-                                <figure class="design-figure shot-row">
-                                    <div class="shot-row-images">
-                                        <video loop muted playsinline preload="none" data-lazy-video aria-label="Gameplay clip of the Diner restaurant">
-                                            <source src="assets/videos/Dinerfeedback2.mp4" type="video/mp4">
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted each phase to feel distinct and cinematic rather than static.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="The camera moving between the idle, menu and targeting views">
+                                            <source src="assets/videos/turn-based-menu-transitions.mp4" type="video/mp4">
                                         </video>
-                                        <video loop muted playsinline preload="none" data-lazy-video aria-label="Gameplay clip of the Italian restaurant">
-                                            <source src="assets/videos/Italianfeedback.mp4" type="video/mp4">
+                                        <figcaption>Idle, menu and targeting cameras.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="One hero turn: choosing a skill, choosing targets, QTE prompts and the hits">
+                                            <source src="assets/videos/turn-based-full-turn.mp4" type="video/mp4">
                                         </video>
-                                        <video loop muted playsinline preload="none" data-lazy-video aria-label="Gameplay clip of the Chinese restaurant">
-                                            <source src="assets/videos/Chinesefeedback2.mp4" type="video/mp4">
-                                        </video>
-                                    </div>
-                                    <figcaption>In the build, left to right: Diner, Italian and Chinese restaurants.</figcaption>
-                                </figure>
+                                        <figcaption>One turn: skill, targets, QTE and hits.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
-                            <div class="media-row shots-tall">
-                                <figure class="design-figure">
-                                    <a href="assets/images/fancy-restaurant/diner-layout.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/diner-layout.jpg" width="1467" height="1329" alt="Diner floor plan with tables, counter, soda machines and drive-thru, numbered 1 to 4 in unlock order" loading="lazy"></a>
-                                    <figcaption>Diner layout, numbered in unlock order. Dashed lines are the walls that open as the player expands.</figcaption>
-                                </figure>
-                                <figure class="design-figure">
-                                    <a href="assets/images/fancy-restaurant/italian-layout.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/italian-layout.jpg" width="1196" height="994" alt="Italian restaurant floor plan with indoor tables, a patio row, gelato stands, a coffee machine and a coin fountain, numbered 1 to 6 in unlock order" loading="lazy"></a>
-                                    <figcaption>Italian layout: indoor tables below, a patio row above with the gelato stand, coffee machine and coin fountain.</figcaption>
-                                </figure>
-                                <figure class="design-figure">
-                                    <a href="assets/images/fancy-restaurant/chinese-layout.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/chinese-layout.jpg" width="1183" height="932" alt="Chinese restaurant floor plan with sushi bars, self grills, a cooking show and a huge rotating table around a central kitchen" loading="lazy"></a>
-                                    <figcaption>Chinese layout: sushi bars, self grills, a cooking show and a rotating table around a central kitchen.</figcaption>
-                                </figure>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">Turn changes and menu buttons tell <code>BP_CameraManager</code> which sequence to play. <code>StartSequence</code> stops the active sequence, binds the characters, and plays the new one.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-start-sequence.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-start-sequence.png" width="1907" height="876" alt="Blueprint graph that starts a sequence: stop the active sequence, bind the actors, play the new one" loading="lazy"></a>
+                                        <figcaption>Starting a sequence: stop, bind, play.</figcaption>
+                                    </figure>
+                                </div>
+                                <p class="design-point"><span class="design-point-label">What I would change</span><strong>Smooth Back mid-transition:</strong> Pressing Back during a menu transition reverses the sequence from the end, causing the camera to jump. I would reverse it from the current frame instead.</p>
                             </div>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Iteration 4 · Mar 2024</span> Monetization through the economy alone</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>The brief was to test rewarded video for soft currency. Players who skip videos should take 15–20 minutes longer. Players who watch keep the current 30 minutes or so. No map or mechanic changes.</p>
-                                </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>I listed where players got stuck and attached a fix or a rewarded video to each bottleneck.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>Each video is offered where the player is already stuck, so no map or mechanic had to change.</p>
+                            <h4 class="section-heading title-only"><span class="section-name">Camera system</span></h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Technical problem</span>Because heroes and enemies stand at different positions, each attack has a different attacker-target orientation. The camera also needs to follow whichever character is attacking on each turn.</p>
+                                <p class="design-point decision"><span class="design-point-label">Solution</span>I built each sequence once at the origin (0, 0, 0), with the defender 3 m ahead of the attacker and the camera attached to the attacker. During combat, I bind the current attacker to the sequence and turn the defender to face the attacker.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this solution</span>I wanted consistent framing anywhere in the arena. The camera follows the attacker, and the attacker and defender face each other.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure fit">
+                                        <a href="assets/images/turn-based-combat/paper-design-camera-binding.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/paper-design-camera-binding.png" width="2907" height="1569" alt="Paper design with two cases: the same camera angle on an attacker and a defender at two different places and rotations" loading="lazy"></a>
+                                        <figcaption>The paper design: the same framing in two places.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="Preparing an attack sequence in Sequencer, with the attacker at the origin">
+                                            <source src="assets/videos/turn-based-preparing-sequence.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Preparing a sequence at 0,0,0.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Heroes attacking enemies from different places and angles, with the same framing each time">
+                                            <source src="assets/videos/turn-based-dynamic-binding.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Attacks from different places and angles.</figcaption>
+                                    </figure>
                                 </div>
                             </div>
-                            <p class="iteration-note"><strong>Added in the same scope:</strong></p>
-                            <ul class="modal-did">
-                                <li><strong>Restaurant upgrades:</strong> Purchase discount, tip income, reservation income, bonus tip for special requests.</li>
-                                <li><strong>Staff upgrades:</strong> Player and waiter stack count; player, waiter, host and cook speed.</li>
-                                <li><strong>Decoration store:</strong> Cosmetic items. Some of them add small boosts such as +5% tip income.</li>
-                            </ul>
-                            <div class="design-table-wrap">
-                                <table class="design-table">
-                                    <thead>
-                                        <tr><th>Bottleneck</th><th>Fix</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>Cook speed is fixed and cannot keep up as tables are added.</td><td>A clock pickup in the restaurant triggers a cook-speed boost.</td></tr>
-                                        <tr><td>Stars come too fast, so new areas open before upgrades are finished.</td><td>An area's star requirement equals the stars its upgrades give. A video-only third upgrade option pays extra stars.</td></tr>
-                                        <tr><td>The player is short of cash for the next upgrade.</td><td>A money case appears when the balance is below the next upgrade cost.</td></tr>
-                                        <tr><td>Carry capacity is too small to keep up with the tables.</td><td>A video gives unlimited carry for a limited time. The extra stack is lost when it ends.</td></tr>
-                                    </tbody>
-                                </table>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note"><code>BindActiveCharacter</code> checks for an enemy binding first. On an enemy attack, the enemy goes into <code>Enemy</code> and the defending hero into <code>Player</code>. On a hero turn, the active hero goes into <code>Player</code>. <code>StartAttackSequence</code> turns the defender to face the attacker, then plays the attack.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-bind-active-character.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-bind-active-character.png" width="1864" height="777" alt="Blueprint graph that binds the active characters to a sequence" loading="lazy"></a>
+                                        <figcaption>Binding: enemy first, then hero.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-start-skill-sequence.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-start-skill-sequence.png" width="1896" height="619" alt="Blueprint graph that turns the defender to the attacker and starts the attack sequence" loading="lazy"></a>
+                                        <figcaption>Face, then attack.</figcaption>
+                                    </figure>
+                                </div>
+                                <p class="design-point"><span class="design-point-label">What I would change</span>Smooth the return. After an attack, the characters snap back to their start position and rotation. I would blend them back.</p>
                             </div>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Iteration 5 · May 2024</span> Production lines</h4>
-                            <ul class="modal-did">
-                                <li><strong>Raw materials:</strong> Trucks deliver to a counter with a limited stack. Two upgrades: delivery speed, and a carrier who moves raw food to the right station.</li>
-                                <li><strong>Stations:</strong> Three interaction points: drop raw food, stand to cook (until a cook is hired), pick up the result.</li>
-                                <li><strong>Recipe chains:</strong> Raw Meat → Meatball, Cheese + Meatball → Hamburger, Flour → Dough, Dough + Cheese → Pizza. Intermediate products feed the next station.</li>
-                            </ul>
-                            <div class="media-row shots-tall">
-                                <figure class="design-figure">
-                                    <a href="assets/images/fancy-restaurant/production-line.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/production-line.jpg" width="2048" height="1819" alt="Diner floor plan with raw material drop-offs on the left, cooking stations and their outputs, then the order counter and tables" loading="lazy"></a>
-                                    <figcaption>Diner production line: raw-material drop-offs on the left, stations and their outputs, then the order counter and tables.</figcaption>
-                                </figure>
-                                <figure class="design-figure clip crop">
-                                    <video loop muted playsinline preload="none" data-lazy-video aria-label="Gameplay clip of the final build">
-                                        <source src="assets/videos/fancy-restaurant.mp4" type="video/mp4">
-                                    </video>
-                                    <figcaption>Gameplay from the final build.</figcaption>
-                                </figure>
+                            <h4 class="section-heading title-only"><span class="section-name">Parry and QTE</span></h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>We wanted to keep players active during both attack and defense phases while taking inspiration from Expedition 33.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I added a parry window to enemy attack sequences and QTE prompts to hero skills.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I didn't want turn-based combat to feel like waiting. Good timing lets players defend themselves during enemy turns and strengthen their skills during their own turns.</p>
+                                <div class="design-point">
+                                    <span class="design-point-label">Parry rules</span>
+                                    <ul class="modal-did">
+                                        <li><strong>Parry Input:</strong> The parry input remains active for 0.3 s, allowing an early press to register as a parry. Since our game does not have a dodge option like Expedition 33, I made parrying more forgiving.</li>
+                                        <li><strong>Counterattack Condition:</strong> The player counterattacks on the enemy's final hit only if they successfully parry every attack in that enemy's sequence. Parrying all 3–4 attacks consecutively makes the final counterattack feel more rewarding.</li>
+                                    </ul>
+                                </div>
+                                <div class="design-table-wrap">
+                                    <table class="design-table">
+                                        <thead>
+                                            <tr><th>Parry: a hit on a hero</th><th>What happens</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>No parry, or outside the window</td><td>Damage applies. No more parries in this attack.</td></tr>
+                                            <tr><td>Inside the window</td><td>The hit and its status effect are blocked</td></tr>
+                                            <tr><td>Inside the window on the last hit, after every earlier hit was parried</td><td>Counter-attack at half speed. The hero takes no damage.</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="design-point">
+                                    <span class="design-point-label">QTE rules</span>
+                                    <p>I wanted a QTE system that differed from Expedition 33. I divided QTE results into three tiers: Perfect, Good, and Fail. I wanted to avoid punishing average players while giving more experienced players a risk-reward choice: aim for the Perfect window for a bonus, but risk a penalty if they miss.</p>
+                                    <p>The multiplier starts at 1.0 for each skill. It scales damage, healing, and buff stacks. Better timing also reduces self-damage.</p>
+                                    <ul class="modal-did">
+                                        <li><strong>Perfect:</strong> Multiplier +0.25, up to 2.0</li>
+                                        <li><strong>Good:</strong> No change</li>
+                                        <li><strong>Fail or Timeout:</strong> Multiplier −0.25, down to 0.5</li>
+                                    </ul>
+                                </div>
+                                <div class="media-row">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="A hero parrying all three hits of a Boss attack and countering on the last one">
+                                            <source src="assets/videos/turn-based-3hit-parry-success.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Three hits parried, then the counter.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="A hero missing a parry against a three-hit Boss attack, with no counter">
+                                            <source src="assets/videos/turn-based-3hit-parry-counter-fail.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A missed parry: no counter.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Each of the three heroes parrying an enemy attack and countering">
+                                            <source src="assets/videos/turn-based-parry-counter-with-all-characters.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A counter from each hero.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="QTE prompts during a hero skill that hits three enemies">
+                                            <source src="assets/videos/turn-based-full-turn.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>QTE prompts during a hero skill.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">Enemy sequences carry <code>ParryWindowOpen</code> and <code>ParryWindowClosed</code> keys. <code>DamageLogic</code> decides each hit: damage, a block, or a half-speed counter on the last hit. The QTE widget sends its results through event dispatchers.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-damage-logic.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-damage-logic.png" width="1937" height="913" alt="DamageLogic Blueprint graph with the parry and counter-attack branches" loading="lazy"></a>
+                                        <figcaption>DamageLogic: damage, block or counter.</figcaption>
+                                    </figure>
+                                </div>
+                                <p class="design-point"><span class="design-point-label">What I would change</span><strong>Multiple Counter Attack:</strong> When enemy is making a multitarget attack, on parry only the first player hero does the counter attack. I would add a new global counter attack sequence and make all heroes attack at the same time.</p>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Skills</span> Skills that do more than damage</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>We wanted skills with several effects in one attack, like self-damage plus a Shield for allies. A Blueprint per skill means new graph work every time.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I made each skill a list of steps in a data asset. Each step has its own target, effect, hit, condition and strength.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted new skills to cost data, not code. All 15 skills for three heroes run on this one system.</p>
+                                <div class="design-table-wrap">
+                                    <table class="design-table">
+                                        <thead>
+                                            <tr><th>Step field</th><th>What it sets</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Target rule</td><td>Self, allies, enemies or the chosen target</td></tr>
+                                            <tr><td>Effect</td><td>Damage, heal, apply status, remove statuses, change stress, set type</td></tr>
+                                            <tr><td>Step index</td><td>Which hit in the sequence applies this step</td></tr>
+                                            <tr><td>Condition</td><td>None, caster type, target has a status, perfect QTE hit</td></tr>
+                                            <tr><td>Amount, scaling, stacks</td><td>How strong the effect is and how many status stacks it adds</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="media-row shots-data">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/turn-based-combat/skill-guardians-blood.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/skill-guardians-blood.png" width="1914" height="1632" alt="Skill data asset for Guardian's Blood with two steps: damage on the caster on step index 0 and the Shield status on all allies on step index 1" loading="lazy"></a>
+                                        <figcaption>Guardian's Blood: self-damage on 0, Shield on 1.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Guardian's Blood in game: the caster takes damage, then every ally gets a Shield">
+                                            <source src="assets/videos/turn-based-skill-result.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A multi-step skill in game.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">Each hit is an <code>ExecuteSkillStep</code> key on the sequence. Through <code>BP_MasterDirector</code>, the character runs the steps with that index. Moving a key moves the hit. Every character inherits this from <code>BP_CharacterParent</code>.</p>
+                                <div class="media-row single">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/turn-based-combat/flow-event-keys.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-event-keys.png" width="2108" height="1268" alt="Diagram: two ExecuteSkillStep event keys on the Level Sequence go through BP_MasterDirector to the two steps of the Guardian's Blood skill, matched by step index" loading="lazy"></a>
+                                        <figcaption>Guardian's Blood: each key applies the steps with its index.</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-master-director.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-master-director.png" width="1913" height="909" alt="BP_MasterDirector event graph with QTEStart, QTEEnd, ParryWindowOpen, ParryWindowClosed, ExecuteSkillStep and MoveToAttackPosition" loading="lazy"></a>
+                                        <figcaption>BP_MasterDirector: one event per key type.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="A skill's event keys in Sequencer and its steps in the skill data asset">
+                                            <source src="assets/videos/turn-based-adding-skill.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A skill's keys and its steps.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Tactics</span> Every turn is a choice</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Make the player think each turn, instead of always using the strongest skill.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>We gave every skill an AP cost and a type. Targets resist some types. Statuses change who the enemies attack.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>We wanted the player to weigh cost, resistances and statuses on every turn.</p>
+                                <ul class="modal-did">
+                                    <li><strong>AP:</strong> every skill costs AP, and the heroes share one AP pool.</li>
+                                    <li><strong>Loadout (my design):</strong> before a fight, the player picks 3 of each hero's 5 skills in the main menu.</li>
+                                    <li><strong>Types:</strong> Physical, White, Black and Blood. An enemy's health bar shows its type.</li>
+                                    <li><strong>Statuses:</strong> Shield protects allies. Taunt pulls enemy attacks onto one hero.</li>
+                                    <li><strong>Enemies:</strong> they attack a taunting hero first, otherwise a random one. Multi-target attacks hit every hero. Right after the dog shields itself, it uses a laser attack.</li>
+                                </ul>
+                            </div>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">Enemy decisions live in <code>BP_CharacterParent</code>. Each enemy can override <code>EnemyPlayRandomAttack</code>, as the dog does. <code>PickEnemyTarget</code> takes a taunting hero first, otherwise a random one.</p>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Team workflow</span> Teammates add skills on their own</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Let my teammates create skills and sequences without waiting on me.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I wrote the workflow as a 7-step checklist and went through it with them.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted a list anyone can follow and check. After one walkthrough they created skills and sequences on their own.</p>
+                                <div class="design-table-wrap">
+                                    <table class="design-table">
+                                        <thead>
+                                            <tr><th>Step</th><th>What to do</th><th>Where</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>1</td><td>Create a Level Sequence for the attack. Use the binding names <code>Player</code> and <code>Enemy</code>.</td><td>Sequencer</td></tr>
+                                            <tr><td>2</td><td>Add the animation, the attack camera, effects and sound.</td><td>Sequencer</td></tr>
+                                            <tr><td>3</td><td>Add an <code>ExecuteSkillStep</code> key on each hit. Mark the last one as the last attack.</td><td>Sequencer</td></tr>
+                                            <tr><td>4</td><td>Add the other keys: <code>MoveToAttackPosition</code>, <code>QTEStart</code> and <code>QTEEnd</code>, or the parry window keys for an enemy.</td><td>Sequencer</td></tr>
+                                            <tr><td>5</td><td>Create a skill data asset. Set its name, AP cost, targeting and type, and choose the sequence.</td><td>Skill data asset</td></tr>
+                                            <tr><td>6</td><td>Add the steps: target rule, effect, step index and amount.</td><td>Skill data asset</td></tr>
+                                            <tr><td>7</td><td>Add the skill to the character's attack list.</td><td>Character data asset</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/hero-attack-list.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/hero-attack-list.png" width="898" height="870" alt="Character data asset DA_Hero1 with an Attacks list of six skill data assets and a counter-attack" loading="lazy"></a>
+                                        <figcaption>Step 7: a hero's attack list.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="Creating a new skill in the editor, from the sequence to the data assets">
+                                            <source src="assets/videos/turn-based-new-skill.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A new skill, start to finish.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="The new attack used in a fight against each hero">
+                                            <source src="assets/videos/turn-based-new-skill-result.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The new attack in game.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                         </section>
                     </div>
@@ -693,6 +780,111 @@
             </template>
         </article>
 
+        <!-- CARD 6 — Parkour System & Level -->
+        <article class="project-card" data-project-id="parkour">
+            <a class="card-trigger" href="#project/parkour" aria-label="View details for Parkour System &amp; Level">
+                <div class="card-video">
+                    <video loop muted playsinline preload="none" poster="assets/images/posters/level-design.jpg">
+                        <source src="assets/videos/level-design.mp4" type="video/mp4">
+                    </video>
+                    <div class="card-video-overlay">
+                        <span class="card-expand-hint">View details →</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    <h3>Parkour System &amp; Level</h3>
+                    <p class="card-pitch">A parkour level that turns from a 3D run into a side-scroller without a cut. Each move is its own state.</p>
+                    <div class="card-facts">
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Level Design</span>
+                            <span class="tag design">Movement Design</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">Solo</span>
+                            <span class="tag">4 weeks</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <template class="project-detail-template">
+                <div class="case-head">
+                    <h2 class="modal-title">Parkour System &amp; Level</h2>
+                    <p class="modal-pitch">A parkour controller and a level that changes from 3D into a side-scroller.</p>
+                    <dl class="case-facts">
+                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
+                        <div><dt>Team</dt><dd>Solo</dd></div>
+                        <div><dt>Duration</dt><dd>4 weeks</dd></div>
+                        <div><dt>Engine / tools</dt><dd>Unity · C#</dd></div>
+                    </dl>
+                    <div class="case-intro">
+                        <div class="case-video">
+                            <video autoplay loop muted playsinline poster="assets/images/posters/level-design.jpg">
+                                <source src="assets/videos/level-design.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="case-did">
+                            <h3 class="modal-section-title">What I did</h3>
+                            <ul class="modal-did">
+                                <li><strong>Movement:</strong> Each move is its own state, so adding a new move does not change the others.</li>
+                                <li><strong>Level:</strong> I designed and built the level. The geometry shows each move before the player reaches it.</li>
+                                <li><strong>Camera:</strong> A scripted camera move connects the 3D section and the side-scroller section, without a cut.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body is-stacked">
+                    <div class="modal-details" data-section-nav>
+                        <h3 class="modal-section-title">How it works</h3>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Overview</span> One level, two play styles</h4>
+                            <p class="iteration-note">A four-week solo project. The level starts as a 3D parkour run and continues as a side-scroller.</p>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Movement</span> One state per move</h4>
+                            <div class="design-brief">
+                                <div class="tech-block problem">
+                                    <span class="tech-block-label">Design problem</span>
+                                    <p>The move set had to grow: idle, run, wall-run, vault, slide and fall. With all moves in one update loop, each new move could break the others.</p>
+                                </div>
+                                <div class="tech-block decision">
+                                    <span class="tech-block-label">Design decision</span>
+                                    <p>I built movement as a state machine. Each move is its own state with its own enter, update and exit.</p>
+                                </div>
+                                <div class="tech-block solution">
+                                    <span class="tech-block-label">Why this decision</span>
+                                    <p>A move can be added or tuned without touching the others.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Level</span> From 3D to side-scroller without a cut</h4>
+                            <div class="design-brief">
+                                <div class="tech-block problem">
+                                    <span class="tech-block-label">Design problem</span>
+                                    <p>One level needed two play styles: a 3D parkour run and a side-scroller. A cut or a load screen would break the momentum.</p>
+                                </div>
+                                <div class="tech-block decision">
+                                    <span class="tech-block-label">Design decision</span>
+                                    <p>A trigger in the level pauses input and plays a scripted camera move. Input comes back in the side-scroller state.</p>
+                                </div>
+                                <div class="tech-block solution">
+                                    <span class="tech-block-label">Why this decision</span>
+                                    <p>The player feels one continuous level.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </template>
+        </article>
+
         <!-- CARD 1 -->
         <article class="project-card" data-project-id="curve-bullet">
             <a class="card-trigger" href="#project/curve-bullet" aria-label="View details for Wanted Curve Bullet">
@@ -799,30 +991,32 @@
             </template>
         </article>
 
-        <!-- CARD 2 -->
-        <article class="project-card" data-project-id="clean-energy">
-            <a class="card-trigger" href="#project/clean-energy" aria-label="View details for Clean Energy">
+        <!-- CARD 0 — Fancy Restaurant (shipped) -->
+        <article class="project-card is-featured" data-project-id="fancy-restaurant">
+            <a class="card-trigger" href="#project/fancy-restaurant" aria-label="View details for Fancy Restaurant">
                 <div class="card-video">
-                    <video loop muted playsinline preload="none" poster="assets/images/posters/clean-energy.jpg">
-                        <source src="assets/videos/clean-energy.mp4" type="video/mp4">
+                    <video loop muted playsinline preload="none" poster="assets/images/posters/fancy-restaurant.jpg">
+                        <source src="assets/videos/fancy-restaurant.mp4" type="video/mp4">
                     </video>
                     <div class="card-video-overlay">
                         <span class="card-expand-hint">View details →</span>
                     </div>
+                    <span class="card-shipped-badge">300K+ downloads</span>
                 </div>
                 <div class="card-summary">
-                    <h3>Clean Energy</h3>
-                    <p class="card-pitch">Connecting a district to power lights it up. Decals instead of lights keep it at 60 FPS on mobile.</p>
+                    <h3>Fancy Restaurant</h3>
+                    <p class="card-pitch">Soft-launched restaurant manager. I built the core loop, upgrade system and economy.</p>
                     <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <span class="card-role"><span class="card-role-label">Role</span> Game Designer &amp; Developer</span>
                         <div class="project-tags design-tags" aria-label="Design areas">
-                            <span class="tag design">Game Feel</span>
-                            <span class="tag design">Prototyping</span>
+                            <span class="tag design">Systems Design</span>
+                            <span class="tag design">Economy Design</span>
+                            <span class="tag design">Level Design</span>
                         </div>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
-                            <span class="tag">Solo + 3D artist</span>
-                            <span class="tag">3 weeks</span>
+                            <span class="tag">Tolian Games</span>
+                            <span class="tag">7-month soft launch</span>
                         </div>
                     </div>
                 </div>
@@ -830,28 +1024,28 @@
 
             <template class="project-detail-template">
                 <div class="case-head">
-                    <h2 class="modal-title">Clean Energy</h2>
-                    <p class="modal-pitch">City districts light up as the player connects them to power. The lighting is faked with decals, so it runs on mobile.</p>
+                    <h2 class="modal-title">Fancy Restaurant</h2>
+                    <p class="modal-pitch">Hybrid-casual restaurant management game. It was in soft launch for 7 months and reached 300K+ downloads. I reworked the design four times from player data and publisher feedback.</p>
                     <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
-                        <div><dt>Team</dt><dd>Solo, models by a 3D artist</dd></div>
-                        <div><dt>Duration</dt><dd>3 weeks</dd></div>
+                        <div><dt>My role</dt><dd>Game Designer &amp; Developer</dd></div>
+                        <div><dt>Team</dt><dd>Tolian Games</dd></div>
+                        <div><dt>Duration</dt><dd>7-month soft launch</dd></div>
                         <div><dt>Engine / tools</dt><dd>Unity</dd></div>
                     </dl>
                     <div class="case-intro">
                         <div class="case-video">
-                            <video autoplay loop muted playsinline poster="assets/images/posters/clean-energy.jpg">
-                                <source src="assets/videos/clean-energy.mp4" type="video/mp4">
+                            <video autoplay loop muted playsinline poster="assets/images/posters/fancy-restaurant.jpg">
+                                <source src="assets/videos/fancy-restaurant.mp4" type="video/mp4">
                             </video>
                         </div>
                         <div class="case-did">
                             <h3 class="modal-section-title">What I did</h3>
                             <ul class="modal-did">
-                                <li><strong>Lighting:</strong> Dark decals cover each district and turn off when it gets power. This replaced lightmap switching, which made the build about 300% bigger.</li>
-                                <li><strong>Economy:</strong> I balanced cable costs so lighting up a district feels earned.</li>
-                                <li><strong>Feel:</strong> Every cable connection has hit-stop and camera shake.</li>
+                                <li><strong>Core loop:</strong> Seat guests, serve them, collect money and reinvest it. Hired staff later run the restaurant for the player.</li>
+                                <li><strong>Economy:</strong> Two upgrade trees and rewarded-video boosts, tuned to playtime targets.</li>
+                                <li><strong>Live iteration:</strong> I changed the scope from funnel data. For example, I shortened section 2, where most players quit.</li>
                             </ul>
-                            <a href="https://aniltahmaz.itch.io/clean-energy" target="_blank" rel="noopener" class="modal-play-btn">Play on itch.io</a>
+                            <p class="modal-note">No playable link or repository: the soft launch has ended, and the publisher NDA covers the build and source code.</p>
                         </div>
                     </div>
                 </div>
@@ -859,27 +1053,195 @@
                 <div class="modal-body is-stacked">
                     <div class="modal-details" data-section-nav>
                         <h3 class="modal-section-title">How it works</h3>
+                        <p class="modal-lead">Click a screenshot to open it full size.</p>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Overview</span> A dark city that lights up</h4>
-                            <p class="iteration-note">A three-week mobile prototype. The player connects city districts to power with cables, and each connected district lights up.</p>
+                            <h4 class="section-heading"><span class="section-name">Overview</span> Seven months of reworks</h4>
+                            <p class="iteration-note">I planned the whole progression on paper before building it, with a cost, revenue and star reward for every unlock. Each rework after that started from funnel data or publisher feedback. The sections below show what the signal was and what I changed.</p>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Lighting</span> Dark districts without real-time lights</h4>
+                            <h4 class="section-heading"><span class="section-name">V1 · Nov 2023</span> Core loop and first economy</h4>
+                            <ul class="modal-did">
+                                <li><strong>Loop:</strong> The player seats guests, serves them, and unlocks and upgrades tables. Later they hire waiters and food runners, and the restaurant runs itself. Joystick and stack-carry controls, no lose condition.</li>
+                                <li><strong>Progression:</strong> Every purchase pays stars. The restaurant rating climbs to 5 stars, which finishes the level.</li>
+                                <li><strong>Planned on paper first:</strong> Each unlockable has a cost, what it opens next, its reservation and meal revenue and its star reward, from $50 for the first room to $1,500 for the last kitchen upgrade.</li>
+                            </ul>
+                            <p class="iteration-note"><strong>After the first build</strong> I simplified the economy, reordered the upgrade areas so they do not all open at once, lowered tips, and added a short delay before money is spent, so walking over a pad does not buy by accident. I also replaced the waiter upgrade with a second waiter, so faster service is visible.</p>
+                            <div class="media-row">
+                                <figure class="design-figure">
+                                    <a href="assets/images/fancy-restaurant/staff-sheet.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/staff-sheet.jpg" width="832" height="557" alt="Spreadsheet of staff levels, speeds and costs, and revenue for hot towel, candles and wine services" loading="lazy"></a>
+                                    <figcaption>Staff levels and costs, and what each special service pays.</figcaption>
+                                </figure>
+                                <figure class="design-figure">
+                                    <a href="assets/images/fancy-restaurant/economy-flow.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/economy-flow.jpg" width="2048" height="1208" alt="Flow chart of onboarding steps followed by every purchase in order with its price" loading="lazy"></a>
+                                    <figcaption>Progression flow: four onboarding steps, then every purchase in order with its price.</figcaption>
+                                </figure>
+                                <figure class="design-figure">
+                                    <a href="assets/images/fancy-restaurant/economy-sheet.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/economy-sheet.jpg" width="1805" height="934" alt="Spreadsheet listing each unlockable room with cost, revenue, star reward and restaurant rating" loading="lazy"></a>
+                                    <figcaption>Economy sheet: cost, revenue and star reward for every unlockable.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Iteration 2 · Dec 2023 – Jan 2024</span> Shorten the early game</h4>
                             <div class="design-brief">
                                 <div class="tech-block problem">
                                     <span class="tech-block-label">Design problem</span>
-                                    <p>Districts had to go from dark to lit as the player powers them. Real-time lights for whole districts were too heavy for mobile. Switching lightmap sets made the build about 300% bigger.</p>
+                                    <p>A management game has no levels, so every table and section unlock sent a &quot;level passed&quot; analytics event. The funnel showed that most players had quit by event 12, the second table of section 2.</p>
                                 </div>
                                 <div class="tech-block decision">
                                     <span class="tech-block-label">Design decision</span>
-                                    <p>The city is lit once. Large dark decals cover each unpowered district and are switched off when it gets power.</p>
+                                    <p>I shortened section 2 and cut the slow steps: cleaning tables, choosing a table type and carrying crates to special tables.</p>
                                 </div>
                                 <div class="tech-block solution">
                                     <span class="tech-block-label">Why this decision</span>
-                                    <p>Powering a district is one toggle. The build is 80% smaller than with lightmap sets and holds 60 FPS on mid-range phones.</p>
+                                    <p>Players quit before the game showed them anything new. A shorter section 2 gets them to the next unlock sooner.</p>
                                 </div>
+                            </div>
+                            <ul class="modal-did">
+                                <li><strong>Wayfinding:</strong> A compass button points to everything that can be bought, and the camera pans to each newly opened area.</li>
+                                <li><strong>Curiosity:</strong> One special place per section (music stage, cooking show, grill table, dance show), so players wonder what unlocks next.</li>
+                                <li><strong>Supply runs:</strong> Raw fish to the sushi bars, raw meat to the grill and crates to the bar, all carried from a depot.</li>
+                            </ul>
+                            <div class="design-table-wrap">
+                                <table class="design-table">
+                                    <thead>
+                                        <tr><th>Before</th><th>After</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Tables had to be cleaned before seating new guests.</td><td>Cleaning removed.</td></tr>
+                                        <tr><td>The player chose a Romantic or Party table at the second upgrade.</td><td>Table types are fixed per section. The upgrade only picks a skin.</td></tr>
+                                        <tr><td>Crates had to be carried to special tables to prepare them.</td><td>Special tables are always ready.</td></tr>
+                                        <tr><td>No special requests.</td><td>Each table type has its own request, for example hot towels before the meal.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="media-row single is-small">
+                                <figure class="design-figure">
+                                    <a href="assets/images/fancy-restaurant/section-plan.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/section-plan.jpg" width="2048" height="1772" alt="Floor plan with seven sections: regular sections in the middle, Chinese-themed sections on both sides, one coloured special place in each" loading="lazy"></a>
+                                    <figcaption>Section plan: regular sections up the middle, Chinese-themed sections on both sides, one special place in each.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Iteration 3 · Jan – Feb 2024</span> One restaurant theme per area</h4>
+                            <div class="design-brief">
+                                <div class="tech-block problem">
+                                    <span class="tech-block-label">Design problem</span>
+                                    <p>Publisher feedback: the food should match the restaurant type, the economy needed some grind, and the game should start smaller.</p>
+                                </div>
+                                <div class="tech-block decision">
+                                    <span class="tech-block-label">Design decision</span>
+                                    <p>Each new area is a different restaurant with its own special places and guest requests. The first restaurant opens with two seats. Carry capacity starts low and is earned back through upgrades.</p>
+                                </div>
+                                <div class="tech-block solution">
+                                    <span class="tech-block-label">Why this decision</span>
+                                    <p>A new theme makes each area feel new. A smaller start leaves more for the player to earn.</p>
+                                </div>
+                            </div>
+                            <p class="iteration-note"><strong>Each special place earns differently.</strong> The drive-thru pays fast because nobody waits for a seat. The jukebox and the coin fountain give small passive income. The soda machine and the gelato stand only earn while they are kept stocked.</p>
+                            <div class="design-table-wrap">
+                                <table class="design-table">
+                                    <thead>
+                                        <tr><th>Theme</th><th>Special places</th><th>Guest requests</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Diner</td><td>Self-serve counter, jukebox, drive-thru, soda machine</td><td>Ketchup &amp; mayo, coffee refill</td></tr>
+                                        <tr><td>Italian</td><td>Gelato stand, coffee machine, coin fountain</td><td>Salt &amp; pepper, wine</td></tr>
+                                        <tr><td>Chinese</td><td>Sushi bar, self grill, cooking show, rotating table</td><td>Fortune cookies, green tea</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="media-row single">
+                                <figure class="design-figure shot-row">
+                                    <div class="shot-row-images">
+                                        <video loop muted playsinline preload="none" data-lazy-video aria-label="Gameplay clip of the Diner restaurant">
+                                            <source src="assets/videos/Dinerfeedback2.mp4" type="video/mp4">
+                                        </video>
+                                        <video loop muted playsinline preload="none" data-lazy-video aria-label="Gameplay clip of the Italian restaurant">
+                                            <source src="assets/videos/Italianfeedback.mp4" type="video/mp4">
+                                        </video>
+                                        <video loop muted playsinline preload="none" data-lazy-video aria-label="Gameplay clip of the Chinese restaurant">
+                                            <source src="assets/videos/Chinesefeedback2.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                    <figcaption>In the build, left to right: Diner, Italian and Chinese restaurants.</figcaption>
+                                </figure>
+                            </div>
+                            <div class="media-row shots-tall">
+                                <figure class="design-figure">
+                                    <a href="assets/images/fancy-restaurant/diner-layout.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/diner-layout.jpg" width="1467" height="1329" alt="Diner floor plan with tables, counter, soda machines and drive-thru, numbered 1 to 4 in unlock order" loading="lazy"></a>
+                                    <figcaption>Diner layout, numbered in unlock order. Dashed lines are the walls that open as the player expands.</figcaption>
+                                </figure>
+                                <figure class="design-figure">
+                                    <a href="assets/images/fancy-restaurant/italian-layout.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/italian-layout.jpg" width="1196" height="994" alt="Italian restaurant floor plan with indoor tables, a patio row, gelato stands, a coffee machine and a coin fountain, numbered 1 to 6 in unlock order" loading="lazy"></a>
+                                    <figcaption>Italian layout: indoor tables below, a patio row above with the gelato stand, coffee machine and coin fountain.</figcaption>
+                                </figure>
+                                <figure class="design-figure">
+                                    <a href="assets/images/fancy-restaurant/chinese-layout.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/chinese-layout.jpg" width="1183" height="932" alt="Chinese restaurant floor plan with sushi bars, self grills, a cooking show and a huge rotating table around a central kitchen" loading="lazy"></a>
+                                    <figcaption>Chinese layout: sushi bars, self grills, a cooking show and a rotating table around a central kitchen.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Iteration 4 · Mar 2024</span> Monetization through the economy alone</h4>
+                            <div class="design-brief">
+                                <div class="tech-block problem">
+                                    <span class="tech-block-label">Design problem</span>
+                                    <p>The brief was to test rewarded video for soft currency. Players who skip videos should take 15–20 minutes longer. Players who watch keep the current 30 minutes or so. No map or mechanic changes.</p>
+                                </div>
+                                <div class="tech-block decision">
+                                    <span class="tech-block-label">Design decision</span>
+                                    <p>I listed where players got stuck and attached a fix or a rewarded video to each bottleneck.</p>
+                                </div>
+                                <div class="tech-block solution">
+                                    <span class="tech-block-label">Why this decision</span>
+                                    <p>Each video is offered where the player is already stuck, so no map or mechanic had to change.</p>
+                                </div>
+                            </div>
+                            <p class="iteration-note"><strong>Added in the same scope:</strong></p>
+                            <ul class="modal-did">
+                                <li><strong>Restaurant upgrades:</strong> Purchase discount, tip income, reservation income, bonus tip for special requests.</li>
+                                <li><strong>Staff upgrades:</strong> Player and waiter stack count; player, waiter, host and cook speed.</li>
+                                <li><strong>Decoration store:</strong> Cosmetic items. Some of them add small boosts such as +5% tip income.</li>
+                            </ul>
+                            <div class="design-table-wrap">
+                                <table class="design-table">
+                                    <thead>
+                                        <tr><th>Bottleneck</th><th>Fix</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Cook speed is fixed and cannot keep up as tables are added.</td><td>A clock pickup in the restaurant triggers a cook-speed boost.</td></tr>
+                                        <tr><td>Stars come too fast, so new areas open before upgrades are finished.</td><td>An area's star requirement equals the stars its upgrades give. A video-only third upgrade option pays extra stars.</td></tr>
+                                        <tr><td>The player is short of cash for the next upgrade.</td><td>A money case appears when the balance is below the next upgrade cost.</td></tr>
+                                        <tr><td>Carry capacity is too small to keep up with the tables.</td><td>A video gives unlimited carry for a limited time. The extra stack is lost when it ends.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Iteration 5 · May 2024</span> Production lines</h4>
+                            <ul class="modal-did">
+                                <li><strong>Raw materials:</strong> Trucks deliver to a counter with a limited stack. Two upgrades: delivery speed, and a carrier who moves raw food to the right station.</li>
+                                <li><strong>Stations:</strong> Three interaction points: drop raw food, stand to cook (until a cook is hired), pick up the result.</li>
+                                <li><strong>Recipe chains:</strong> Raw Meat → Meatball, Cheese + Meatball → Hamburger, Flour → Dough, Dough + Cheese → Pizza. Intermediate products feed the next station.</li>
+                            </ul>
+                            <div class="media-row shots-tall">
+                                <figure class="design-figure">
+                                    <a href="assets/images/fancy-restaurant/production-line.jpg" target="_blank" rel="noopener"><img src="assets/images/fancy-restaurant/production-line.jpg" width="2048" height="1819" alt="Diner floor plan with raw material drop-offs on the left, cooking stations and their outputs, then the order counter and tables" loading="lazy"></a>
+                                    <figcaption>Diner production line: raw-material drop-offs on the left, stations and their outputs, then the order counter and tables.</figcaption>
+                                </figure>
+                                <figure class="design-figure clip crop">
+                                    <video loop muted playsinline preload="none" data-lazy-video aria-label="Gameplay clip of the final build">
+                                        <source src="assets/videos/fancy-restaurant.mp4" type="video/mp4">
+                                    </video>
+                                    <figcaption>Gameplay from the final build.</figcaption>
+                                </figure>
                             </div>
                         </section>
                     </div>
@@ -1084,456 +1446,6 @@
             </template>
         </article>
 
-        <!-- CARD 6 — Parkour System & Level -->
-        <article class="project-card" data-project-id="parkour">
-            <a class="card-trigger" href="#project/parkour" aria-label="View details for Parkour System &amp; Level">
-                <div class="card-video">
-                    <video loop muted playsinline preload="none" poster="assets/images/posters/level-design.jpg">
-                        <source src="assets/videos/level-design.mp4" type="video/mp4">
-                    </video>
-                    <div class="card-video-overlay">
-                        <span class="card-expand-hint">View details →</span>
-                    </div>
-                </div>
-                <div class="card-summary">
-                    <h3>Parkour System &amp; Level</h3>
-                    <p class="card-pitch">A parkour level that turns from a 3D run into a side-scroller without a cut. Each move is its own state.</p>
-                    <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
-                        <div class="project-tags design-tags" aria-label="Design areas">
-                            <span class="tag design">Level Design</span>
-                            <span class="tag design">Movement Design</span>
-                        </div>
-                        <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">Solo</span>
-                            <span class="tag">4 weeks</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <template class="project-detail-template">
-                <div class="case-head">
-                    <h2 class="modal-title">Parkour System &amp; Level</h2>
-                    <p class="modal-pitch">A parkour controller and a level that changes from 3D into a side-scroller.</p>
-                    <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
-                        <div><dt>Team</dt><dd>Solo</dd></div>
-                        <div><dt>Duration</dt><dd>4 weeks</dd></div>
-                        <div><dt>Engine / tools</dt><dd>Unity · C#</dd></div>
-                    </dl>
-                    <div class="case-intro">
-                        <div class="case-video">
-                            <video autoplay loop muted playsinline poster="assets/images/posters/level-design.jpg">
-                                <source src="assets/videos/level-design.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="case-did">
-                            <h3 class="modal-section-title">What I did</h3>
-                            <ul class="modal-did">
-                                <li><strong>Movement:</strong> Each move is its own state, so adding a new move does not change the others.</li>
-                                <li><strong>Level:</strong> I designed and built the level. The geometry shows each move before the player reaches it.</li>
-                                <li><strong>Camera:</strong> A scripted camera move connects the 3D section and the side-scroller section, without a cut.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-body is-stacked">
-                    <div class="modal-details" data-section-nav>
-                        <h3 class="modal-section-title">How it works</h3>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Overview</span> One level, two play styles</h4>
-                            <p class="iteration-note">A four-week solo project. The level starts as a 3D parkour run and continues as a side-scroller.</p>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Movement</span> One state per move</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>The move set had to grow: idle, run, wall-run, vault, slide and fall. With all moves in one update loop, each new move could break the others.</p>
-                                </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>I built movement as a state machine. Each move is its own state with its own enter, update and exit.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>A move can be added or tuned without touching the others.</p>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Level</span> From 3D to side-scroller without a cut</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>One level needed two play styles: a 3D parkour run and a side-scroller. A cut or a load screen would break the momentum.</p>
-                                </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>A trigger in the level pauses input and plays a scripted camera move. Input comes back in the side-scroller state.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>The player feels one continuous level.</p>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </template>
-        </article>
-
-        <!-- CARD — Cinematic Turn-Based Combat (Unreal, team project) -->
-        <article class="project-card" data-project-id="turn-based-combat">
-            <a class="card-trigger" href="#project/turn-based-combat" aria-label="View details for Cinematic Turn-Based Combat">
-                <div class="card-video">
-                    <video loop muted playsinline preload="none" poster="assets/images/posters/turn-based-hero.jpg">
-                        <source src="assets/videos/turn-based-hero.mp4" type="video/mp4">
-                    </video>
-                    <div class="card-video-overlay">
-                        <span class="card-expand-hint">View details →</span>
-                    </div>
-                </div>
-                <div class="card-summary">
-                    <h3>Cinematic Turn-Based Combat</h3>
-                    <p class="card-pitch">Every phase of a turn plays as a cinematic sequence. The player parries enemy hits, times QTEs and triggers multi-step skills.</p>
-                    <div class="card-facts">
-                        <span class="card-role"><span class="card-role-label">Role</span> Technical &amp; Combat Designer</span>
-                        <div class="project-tags design-tags" aria-label="Design areas">
-                            <span class="tag design">Systems Design</span>
-                            <span class="tag design">Combat Design</span>
-                            <span class="tag design">Game Feel</span>
-                        </div>
-                        <div class="project-tags">
-                            <span class="tag">Unreal Engine 5</span>
-                            <span class="tag">Team of 7</span>
-                            <span class="tag">5 weeks</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <template class="project-detail-template">
-                <div class="case-head">
-                    <h2 class="modal-title">Cinematic Turn-Based Combat</h2>
-                    <p class="modal-pitch">Turn-based RPG combat inspired by Expedition 33, with three heroes and 15 skills. Each phase of a turn is played through a Level Sequence.</p>
-                    <dl class="case-facts">
-                        <div><dt>My role</dt><dd>Technical &amp; Combat Designer</dd></div>
-                        <div><dt>Team</dt><dd>7 people</dd></div>
-                        <div><dt>Duration</dt><dd>5 weeks</dd></div>
-                        <div><dt>Engine / tools</dt><dd>Unreal Engine 5 · Blueprints · Level Sequencer</dd></div>
-                    </dl>
-                    <div class="case-intro">
-                        <div class="case-video">
-                            <video autoplay loop muted playsinline poster="assets/images/posters/turn-based-hero.jpg">
-                                <source src="assets/videos/turn-based-hero.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="case-did">
-                            <h3 class="modal-section-title">What I did</h3>
-                            <ul class="modal-did">
-                                <li><strong>Cinematic turns:</strong> Made every phase of a turn a Level Sequence. One camera setup frames any attacker and target.</li>
-                                <li><strong>Parry and QTE:</strong> Designed parry window on enemy attacks, the slow-motion counter on the last hit and the QTE multiplier.</li>
-                                <li><strong>Skills as data:</strong> Built skills as data assets whose steps fire on sequence event keys. All 15 skills run on it.</li>
-                                <li><strong>Team workflow:</strong> I created a 7-step workflow for teammates to add skills and sequences on their own.</li>
-                            </ul>
-                            <p class="modal-note">Tactics designed in a team of 4 designers. Stats system by <a href="https://zululzulul.github.io/" target="_blank" rel="noopener">Jakub Krzysiak</a>. Turn order by Mateusz Szwarc. The UI, including the loadout menu, and status effects were built by teammates.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-body is-stacked">
-                    <div class="modal-details" data-section-nav>
-                        <h3 class="modal-section-title">How it works</h3>
-                        <p class="modal-lead">Each section shows the design, how I built it and what I would change. Click any image to enlarge it.</p>
-
-                        <section class="iteration">
-                            <h4 class="section-heading title-only"><span class="section-name">Every phase of a turn is a cutscene</span></h4>
-                            <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design goal</span>As a team, we wanted to recreate Expedition 33's cinematic, turn-based combat style.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>To achieve this, I made each phase of a turn a Level Sequence.</p>
-                                <div class="media-row single is-wide">
-                                    <figure class="design-figure">
-                                        <a href="assets/images/turn-based-combat/flow-one-turn.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-one-turn.png" width="2664" height="1222" alt="Flow chart of one hero turn: combat start sequence, next character's turn, idle battle sequence, Skills button, skill transition sequence, idle skill sequence, skill selected, targeting camera, target confirmed, attack sequence, then the next character's turn" loading="lazy"></a>
-                                        <figcaption>One hero turn, from the start of the fight to the next turn.</figcaption>
-                                    </figure>
-                                </div>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted each phase to feel distinct and cinematic rather than static.</p>
-                                <div class="media-row">
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="The camera moving between the idle, menu and targeting views">
-                                            <source src="assets/videos/turn-based-menu-transitions.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>Idle, menu and targeting cameras.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="One hero turn: choosing a skill, choosing targets, QTE prompts and the hits">
-                                            <source src="assets/videos/turn-based-full-turn.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>One turn: skill, targets, QTE and hits.</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                            <div class="phase">
-                                <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Turn changes and menu buttons tell <code>BP_CameraManager</code> which sequence to play. <code>NewStartSequence</code> stops the active sequence, binds the characters, and plays the new one.</p>
-                                <div class="media-row">
-                                    <figure class="design-figure fit fit-dark">
-                                        <a href="assets/images/turn-based-combat/graph-start-sequence.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-start-sequence.png" width="1907" height="876" alt="Blueprint graph that starts a sequence: stop the active sequence, bind the actors, play the new one" loading="lazy"></a>
-                                        <figcaption>Starting a sequence: stop, bind, play.</figcaption>
-                                    </figure>
-                                </div>
-                                <p class="design-point"><span class="design-point-label">What I would change</span><strong>Smooth Back mid-transition:</strong> Pressing Back during a menu transition reverses the sequence from the end, causing the camera to jump. I would reverse it from the current frame instead.</p>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading title-only"><span class="section-name">Camera system</span></h4>
-                            <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Technical problem</span>Because heroes and enemies stand at different positions, each attack has a different attacker-target orientation. The camera also needs to follow whichever character is attacking on each turn.</p>
-                                <p class="design-point decision"><span class="design-point-label">Solution</span>I built each sequence once at the origin (0, 0, 0), with the defender 3 m ahead of the attacker and the camera attached to the attacker. During combat, I bind the current attacker to the sequence and turn the defender to face the attacker.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this solution</span>I wanted consistent framing anywhere in the arena. The camera follows the attacker, and the attacker and defender face each other.</p>
-                                <div class="media-row">
-                                    <figure class="design-figure fit">
-                                        <a href="assets/images/turn-based-combat/paper-design-camera-binding.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/paper-design-camera-binding.png" width="2907" height="1569" alt="Paper design with two cases: the same camera angle on an attacker and a defender at two different places and rotations" loading="lazy"></a>
-                                        <figcaption>The paper design: the same framing in two places.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip crop">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="Preparing an attack sequence in Sequencer, with the attacker at the origin">
-                                            <source src="assets/videos/turn-based-preparing-sequence.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>Preparing a sequence at 0,0,0.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip crop">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Heroes attacking enemies from different places and angles, with the same framing each time">
-                                            <source src="assets/videos/turn-based-dynamic-binding.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>Attacks from different places and angles.</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                            <div class="phase">
-                                <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note"><code>NewBindActiveCharacter</code> checks for an enemy binding first. On an enemy attack, the enemy goes into <code>Enemy</code> and the defending hero into <code>Player</code>. On a hero turn, the active hero goes into <code>Player</code>. <code>StartAttackSequence</code> turns the defender to face the attacker, then plays the attack.</p>
-                                <div class="media-row">
-                                    <figure class="design-figure fit fit-dark">
-                                        <a href="assets/images/turn-based-combat/graph-bind-active-character.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-bind-active-character.png" width="1864" height="777" alt="Blueprint graph that binds the active characters to a sequence" loading="lazy"></a>
-                                        <figcaption>Binding: enemy first, then hero.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure fit fit-dark">
-                                        <a href="assets/images/turn-based-combat/graph-start-skill-sequence.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-start-skill-sequence.png" width="1896" height="619" alt="Blueprint graph that turns the defender to the attacker and starts the attack sequence" loading="lazy"></a>
-                                        <figcaption>Face, then attack.</figcaption>
-                                    </figure>
-                                </div>
-                                <p class="design-point"><span class="design-point-label">What I would change</span>Smooth the return. After an attack, the characters snap back to their start position and rotation. I would blend them back.</p>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading title-only"><span class="section-name">Parry and QTE</span></h4>
-                            <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design goal</span>We wanted to keep players active during both attack and defense phases while taking inspiration from Expedition 33.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I added a parry window to enemy attack sequences and QTE prompts to hero skills.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I didn't want turn-based combat to feel like waiting. Good timing lets players defend themselves during enemy turns and strengthen their skills during their own turns.</p>
-                                <div class="design-point">
-                                    <span class="design-point-label">Parry rules</span>
-                                    <ul class="modal-did">
-                                        <li><strong>Parry Input:</strong> The parry input remains active for 0.3 s, allowing an early press to register as a parry. Since our game does not have a dodge option like Expedition 33, I made parrying more forgiving.</li>
-                                        <li><strong>Counterattack Condition:</strong> The player counterattacks on the enemy's final hit only if they successfully parry every attack in that enemy's sequence. Parrying all 3–4 attacks consecutively makes the final counterattack feel more rewarding.</li>
-                                    </ul>
-                                </div>
-                                <div class="design-table-wrap">
-                                    <table class="design-table">
-                                        <thead>
-                                            <tr><th>Parry: a hit on a hero</th><th>What happens</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>No parry, or outside the window</td><td>Damage applies. No more parries in this attack.</td></tr>
-                                            <tr><td>Inside the window</td><td>The hit and its status effect are blocked</td></tr>
-                                            <tr><td>Inside the window on the last hit, after every earlier hit was parried</td><td>Counter-attack at half speed. The hero takes no damage.</td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="design-point">
-                                    <span class="design-point-label">QTE rules</span>
-                                    <p>I wanted a QTE system that differed from Expedition 33. I divided QTE results into three tiers: Perfect, Good, and Fail. I wanted to avoid punishing average players while giving more experienced players a risk-reward choice: aim for the Perfect window for a bonus, but risk a penalty if they miss.</p>
-                                    <p>The multiplier starts at 1.0 for each skill. It scales damage, healing, and buff stacks. Better timing also reduces self-damage.</p>
-                                    <ul class="modal-did">
-                                        <li><strong>Perfect:</strong> Multiplier +0.25, up to 2.0</li>
-                                        <li><strong>Good:</strong> No change</li>
-                                        <li><strong>Fail or Timeout:</strong> Multiplier −0.25, down to 0.5</li>
-                                    </ul>
-                                </div>
-                                <div class="media-row">
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="A hero parrying all three hits of a Boss attack and countering on the last one">
-                                            <source src="assets/videos/turn-based-3hit-parry-success.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>Three hits parried, then the counter.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="A hero missing a parry against a three-hit Boss attack, with no counter">
-                                            <source src="assets/videos/turn-based-3hit-parry-counter-fail.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>A missed parry: no counter.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Each of the three heroes parrying an enemy attack and countering">
-                                            <source src="assets/videos/turn-based-parry-counter-with-all-characters.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>A counter from each hero.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="QTE prompts during a hero skill that hits three enemies">
-                                            <source src="assets/videos/turn-based-full-turn.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>QTE prompts during a hero skill.</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                            <div class="phase">
-                                <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Enemy sequences carry <code>ParryWindowOpen</code> and <code>ParryWindowClosed</code> keys. <code>DamageLogic</code> decides each hit: damage, a block, or a half-speed counter on the last hit. The QTE widget sends its results through event dispatchers.</p>
-                                <div class="media-row">
-                                    <figure class="design-figure fit fit-dark">
-                                        <a href="assets/images/turn-based-combat/graph-damage-logic.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-damage-logic.png" width="1937" height="913" alt="DamageLogic Blueprint graph with the parry and counter-attack branches" loading="lazy"></a>
-                                        <figcaption>DamageLogic: damage, block or counter.</figcaption>
-                                    </figure>
-                                </div>
-                                <p class="design-point"><span class="design-point-label">What I would change</span><strong>Multiple Counter Attack:</strong> When enemy is making a multitarget attack, on parry only the first player hero does the counter attack. I would add a new global counter attack sequence and make all heroes attack at the same time.</p>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Skills</span> Skills that do more than damage</h4>
-                            <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design problem</span>We wanted skills with several effects in one attack, like self-damage plus a Shield for allies. A Blueprint per skill means new graph work every time.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I made each skill a list of steps in a data asset. Each step has its own target, effect, hit, condition and strength.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted new skills to cost data, not code. All 15 skills for three heroes run on this one system.</p>
-                                <div class="design-table-wrap">
-                                    <table class="design-table">
-                                        <thead>
-                                            <tr><th>Step field</th><th>What it sets</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Target rule</td><td>Self, allies, enemies or the chosen target</td></tr>
-                                            <tr><td>Effect</td><td>Damage, heal, apply status, remove statuses, change stress, set type</td></tr>
-                                            <tr><td>Step index</td><td>Which hit in the sequence applies this step</td></tr>
-                                            <tr><td>Condition</td><td>None, caster type, target has a status, perfect QTE hit</td></tr>
-                                            <tr><td>Amount, scaling, stacks</td><td>How strong the effect is and how many status stacks it adds</td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="media-row shots-data">
-                                    <figure class="design-figure">
-                                        <a href="assets/images/turn-based-combat/skill-guardians-blood.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/skill-guardians-blood.png" width="1914" height="1632" alt="Skill data asset for Guardian's Blood with two steps: damage on the caster on step index 0 and the Shield status on all allies on step index 1" loading="lazy"></a>
-                                        <figcaption>Guardian's Blood: self-damage on 0, Shield on 1.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip crop">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Guardian's Blood in game: the caster takes damage, then every ally gets a Shield">
-                                            <source src="assets/videos/turn-based-skill-result.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>A multi-step skill in game.</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                            <div class="phase">
-                                <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Each hit is an <code>ExecuteSkillStep</code> key on the sequence. Through <code>BP_MasterDirector</code>, the character runs the steps with that index. Moving a key moves the hit. Every character inherits this from <code>BP_CharacterParent</code>.</p>
-                                <div class="media-row single">
-                                    <figure class="design-figure">
-                                        <a href="assets/images/turn-based-combat/flow-event-keys.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-event-keys.png" width="2108" height="1268" alt="Diagram: two ExecuteSkillStep event keys on the Level Sequence go through BP_MasterDirector to the two steps of the Guardian's Blood skill, matched by step index" loading="lazy"></a>
-                                        <figcaption>Guardian's Blood: each key applies the steps with its index.</figcaption>
-                                    </figure>
-                                </div>
-                                <div class="media-row">
-                                    <figure class="design-figure fit fit-dark">
-                                        <a href="assets/images/turn-based-combat/graph-master-director.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-master-director.png" width="1913" height="909" alt="BP_MasterDirector event graph with QTEStart, QTEEnd, ParryWindowOpen, ParryWindowClosed, ExecuteSkillStep and MoveToAttackPosition" loading="lazy"></a>
-                                        <figcaption>BP_MasterDirector: one event per key type.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip crop">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="A skill's event keys in Sequencer and its steps in the skill data asset">
-                                            <source src="assets/videos/turn-based-adding-skill.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>A skill's keys and its steps.</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Tactics</span> Every turn is a choice</h4>
-                            <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Make the player think each turn, instead of always using the strongest skill.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>We gave every skill an AP cost and a type. Targets resist some types. Statuses change who the enemies attack.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>We wanted the player to weigh cost, resistances and statuses on every turn.</p>
-                                <ul class="modal-did">
-                                    <li><strong>AP:</strong> every skill costs AP, and the heroes share one AP pool.</li>
-                                    <li><strong>Loadout (my design):</strong> before a fight, the player picks 3 of each hero's 5 skills in the main menu.</li>
-                                    <li><strong>Types:</strong> Physical, White, Black and Blood. An enemy's health bar shows its type.</li>
-                                    <li><strong>Statuses:</strong> Shield protects allies. Taunt pulls enemy attacks onto one hero.</li>
-                                    <li><strong>Enemies:</strong> they attack a taunting hero first, otherwise a random one. Multi-target attacks hit every hero. Right after the dog shields itself, it uses a laser attack.</li>
-                                </ul>
-                            </div>
-                            <div class="phase">
-                                <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Enemy decisions live in <code>BP_CharacterParent</code>. Each enemy can override <code>EnemyPlayRandomAttack</code>, as the dog does. <code>PickEnemyTarget</code> takes a taunting hero first, otherwise a random one.</p>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Team workflow</span> Teammates add skills on their own</h4>
-                            <div class="phase">
-                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Let my teammates create skills and sequences without waiting on me.</p>
-                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I wrote the workflow as a 7-step checklist and went through it with them.</p>
-                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted a list anyone can follow and check. After one walkthrough they created skills and sequences on their own.</p>
-                                <div class="design-table-wrap">
-                                    <table class="design-table">
-                                        <thead>
-                                            <tr><th>Step</th><th>What to do</th><th>Where</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>1</td><td>Create a Level Sequence for the attack. Use the binding names <code>Player</code> and <code>Enemy</code>.</td><td>Sequencer</td></tr>
-                                            <tr><td>2</td><td>Add the animation, the attack camera, effects and sound.</td><td>Sequencer</td></tr>
-                                            <tr><td>3</td><td>Add an <code>ExecuteSkillStep</code> key on each hit. Mark the last one as the last attack.</td><td>Sequencer</td></tr>
-                                            <tr><td>4</td><td>Add the other keys: <code>MoveToAttackPosition</code>, <code>QTEStart</code> and <code>QTEEnd</code>, or the parry window keys for an enemy.</td><td>Sequencer</td></tr>
-                                            <tr><td>5</td><td>Create a skill data asset. Set its name, AP cost, targeting and type, and choose the sequence.</td><td>Skill data asset</td></tr>
-                                            <tr><td>6</td><td>Add the steps: target rule, effect, step index and amount.</td><td>Skill data asset</td></tr>
-                                            <tr><td>7</td><td>Add the skill to the character's attack list.</td><td>Character data asset</td></tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="media-row">
-                                    <figure class="design-figure fit fit-dark">
-                                        <a href="assets/images/turn-based-combat/hero-attack-list.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/hero-attack-list.png" width="898" height="870" alt="Character data asset DA_Hero1 with an Attacks list of six skill data assets and a counter-attack" loading="lazy"></a>
-                                        <figcaption>Step 7: a hero's attack list.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip crop">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="Creating a new skill in the editor, from the sequence to the data assets">
-                                            <source src="assets/videos/turn-based-new-skill.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>A new skill, start to finish.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip crop">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="The new attack used in a fight against each hero">
-                                            <source src="assets/videos/turn-based-new-skill-result.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>The new attack in game.</figcaption>
-                                    </figure>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </template>
-        </article>
-
         <!-- CARD 7 — Voice-Controlled Runner (Unreal) -->
         <article class="project-card" data-project-id="voice-runner">
             <a class="card-trigger" href="#project/voice-runner" aria-label="View details for Voice-Controlled Runner">
@@ -1623,6 +1535,94 @@
                                 <div class="tech-block solution">
                                     <span class="tech-block-label">Why this decision</span>
                                     <p>The position of a word tells the player what it does.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </template>
+        </article>
+
+        <!-- CARD 2 -->
+        <article class="project-card" data-project-id="clean-energy">
+            <a class="card-trigger" href="#project/clean-energy" aria-label="View details for Clean Energy">
+                <div class="card-video">
+                    <video loop muted playsinline preload="none" poster="assets/images/posters/clean-energy.jpg">
+                        <source src="assets/videos/clean-energy.mp4" type="video/mp4">
+                    </video>
+                    <div class="card-video-overlay">
+                        <span class="card-expand-hint">View details →</span>
+                    </div>
+                </div>
+                <div class="card-summary">
+                    <h3>Clean Energy</h3>
+                    <p class="card-pitch">Connecting a district to power lights it up. Decals instead of lights keep it at 60 FPS on mobile.</p>
+                    <div class="card-facts">
+                        <span class="card-role"><span class="card-role-label">Role</span> Technical Designer</span>
+                        <div class="project-tags design-tags" aria-label="Design areas">
+                            <span class="tag design">Game Feel</span>
+                            <span class="tag design">Prototyping</span>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">Solo + 3D artist</span>
+                            <span class="tag">3 weeks</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <template class="project-detail-template">
+                <div class="case-head">
+                    <h2 class="modal-title">Clean Energy</h2>
+                    <p class="modal-pitch">City districts light up as the player connects them to power. The lighting is faked with decals, so it runs on mobile.</p>
+                    <dl class="case-facts">
+                        <div><dt>My role</dt><dd>Technical Designer</dd></div>
+                        <div><dt>Team</dt><dd>Solo, models by a 3D artist</dd></div>
+                        <div><dt>Duration</dt><dd>3 weeks</dd></div>
+                        <div><dt>Engine / tools</dt><dd>Unity</dd></div>
+                    </dl>
+                    <div class="case-intro">
+                        <div class="case-video">
+                            <video autoplay loop muted playsinline poster="assets/images/posters/clean-energy.jpg">
+                                <source src="assets/videos/clean-energy.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="case-did">
+                            <h3 class="modal-section-title">What I did</h3>
+                            <ul class="modal-did">
+                                <li><strong>Lighting:</strong> Dark decals cover each district and turn off when it gets power. This replaced lightmap switching, which made the build about 300% bigger.</li>
+                                <li><strong>Economy:</strong> I balanced cable costs so lighting up a district feels earned.</li>
+                                <li><strong>Feel:</strong> Every cable connection has hit-stop and camera shake.</li>
+                            </ul>
+                            <a href="https://aniltahmaz.itch.io/clean-energy" target="_blank" rel="noopener" class="modal-play-btn">Play on itch.io</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-body is-stacked">
+                    <div class="modal-details" data-section-nav>
+                        <h3 class="modal-section-title">How it works</h3>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Overview</span> A dark city that lights up</h4>
+                            <p class="iteration-note">A three-week mobile prototype. The player connects city districts to power with cables, and each connected district lights up.</p>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Lighting</span> Dark districts without real-time lights</h4>
+                            <div class="design-brief">
+                                <div class="tech-block problem">
+                                    <span class="tech-block-label">Design problem</span>
+                                    <p>Districts had to go from dark to lit as the player powers them. Real-time lights for whole districts were too heavy for mobile. Switching lightmap sets made the build about 300% bigger.</p>
+                                </div>
+                                <div class="tech-block decision">
+                                    <span class="tech-block-label">Design decision</span>
+                                    <p>The city is lit once. Large dark decals cover each unpowered district and are switched off when it gets power.</p>
+                                </div>
+                                <div class="tech-block solution">
+                                    <span class="tech-block-label">Why this decision</span>
+                                    <p>Powering a district is one toggle. The build is 80% smaller than with lightmap sets and holds 60 FPS on mid-range phones.</p>
                                 </div>
                             </div>
                         </section>
