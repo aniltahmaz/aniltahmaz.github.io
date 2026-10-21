@@ -16,7 +16,7 @@ py -m http.server 5500 --bind 127.0.0.1
 
 Then open `http://localhost:5500/`. To open a project's case study directly, go to `http://localhost:5500/#project/<id>`. The `<id>` comes from the card's `data-project-id`. The same server is the `site` entry in `.claude/launch.json` for the desktop app's preview pane.
 
-On the Windows machine, `python` in Git Bash opens the Microsoft Store alias, so use `py`. Port 8000 is reserved there and fails with WinError 10013.
+On the Windows machine, `python` in Git Bash opens the Microsoft Store alias, so use `py`. Port 8000 is taken there by a Windows service (`Manager.exe`), so binding to it fails with WinError 10013.
 
 Anil also works from a second Windows PC that has no Python, Node, Word or LibreOffice, so the `site` entry fails there. To preview on that PC, use a small PowerShell static server (a `TcpListener` loop) started from a temporary `launch.json` entry, then revert the entry. The browser pane does not open `file://` pages.
 
@@ -43,6 +43,7 @@ The modal (`#project-modal`) starts empty. `script.js` clones the card's `<templ
 - **Contents nav.** This is built from the `section.iteration` elements inside `.modal-details[data-section-nav]`. Each button's label is the section's `.section-name` text. It only appears when there are at least 4 sections. At every width it is a sticky text bar at the top of the case study. The script also fills `#section-rail` for a side rail, but the current style hides it.
 - **Lightbox.** Clicking `.design-figure a` or an `a[data-lightbox]` inside the modal opens the image. Text links can set `data-alt` and `data-caption`. Otherwise the caption comes from the `<figcaption>`.
 - **Video loading.** Card-front videos use `preload="none"` with a `poster`. They play only while on screen and pause while a modal is open. Modal videos autoplay. Add `data-lazy-video` (with `preload="none"`, no `autoplay`) to a clip further down a case study so it loads and plays only when scrolled into view.
+- **Full-screen clips.** When a modal opens, every video in a `.clip` figure or `.case-video` gets a `.clip-fullscreen` button in its top-right corner. Clicking the button or the video plays it full screen with the player controls, which matters for the long editor walkthroughs. Leaving full screen hides the controls and the clip keeps looping in place. iPhones use `webkitEnterFullscreen`. The desktop app's preview pane does not complete full-screen requests, so test this in Chrome.
 - **Scrolling.** The home page scrolls the window as normal. An open project is a full page over it that scrolls inside `.modal-container`, so scroll code for a case study must target that element. `body.modal-open` stops the list behind it from scrolling.
 
 ## Case study layout
@@ -81,32 +82,87 @@ The site presents Anil as one thing: a **Technical Designer** who designs mechan
 - **Card pitch.** Lead with the design (what the player does or feels) and follow with the technique. Technical numbers such as draw calls or build size belong in the case study, not in the opening line.
 - **Sections are design goals.** Name each case-study section after what the player should feel, not after a system part. The short `.section-name` label is for the contents nav and the headline after it states the goal, e.g. "Combat flow — Fast, but not easy". Labels should be common terms a reader knows at a glance, not design jargon. Put player-facing sections first and data or architecture sections last. The combat card was rebuilt this way first. Apply it to the other cards when we go through each one.
 - **Design, then how it was built.** Each section has two `.phase` blocks:
-  - **Design part (no title).** The section headline already states the goal. It holds `p.design-point.problem` ("Design problem", or "Design goal" when it is a goal), `.decision` ("Design decision") and `.reason` ("Why this decision"). Then further details: notes, lists and tables. Then a `.media-row` of design-side visuals, meaning gameplay clips and paper designs. Other labels follow the same pattern when Anil uses them: "Technical problem", "Solution", "What I would change", "What I would add", "Parry rules". Each is a `.design-point`, and a `div.design-point` can hold a list.
-  - **Build part.** It is headed `h5.phase-title` "How I built it", in sentence case. "Execution" read oddly. It holds a short explanation of how the decision was built, then a `.media-row` of engine visuals: montages, Blueprint graphs and data assets.
+  - **Design part (no title).** The section headline already states the goal. It holds `p.design-point.problem` ("Design problem", or "Design goal" when it is a goal), `.decision` ("Design decision") and `.reason` ("Why this decision"). Then further details: notes, lists and tables. Then a `.media-row` of design-side visuals, meaning gameplay clips and paper designs. Other labels follow the same pattern when Anil uses them: "Technical problem", "Solution", "What I would change", "What I would add", "Parry rules". Each is a `.design-point`, and a `div.design-point` can hold a list. "What I would change" sits where it applies, in place of a separate "Next" section at the end.
+  - **Build part.** It is headed `h5.phase-title` "How I built it", in sentence case. "Execution" read oddly. It holds a short explanation of how the decision was built, then a `.media-row` of engine visuals: montages, Blueprint graphs and data assets. In the combat and turn-based cards, Blueprint graphs are `design-figure fit fit-dark` thumbnails, which show the whole graph uncropped and open full size, rather than "See the graph →" links.
   - **Formatting.** The text is plain, never boxed. Anil asked for no boxes around text. Design-point labels are bold headings on their own line (see Visual style).
-  - **Coverage.** The combat card and the first three sections of the turn-based card use this layout. The other cards, and the last three turn-based sections, still use the `.design-brief` / `.tech-block` trio until they are converted. The style shows those the same way as design points, without boxes.
+  - **Voice.** Keep text short and first person: "I wrote `TryAttack`…", "I built one `BP_BaseCharacter`…". Design decisions and reasons also start from "I" ("I split…", "I wanted…"). Team decisions use "We" (Boss fight). Write one idea per sentence and avoid chains of "so" and "and", which makes proofreading easier. Captions are a few words, e.g. "ApplyHitStop: slow-down, timer, camera shake."
+  - **Coverage.** The combat and turn-based cards use this layout. The other cards still use the `.design-brief` / `.tech-block` trio until they are converted. The style shows those the same way as design points, without boxes.
 - **Only real work.** Never add mechanics, numbers or techniques that Anil has not confirmed, such as ledge detection, coyote time, input buffering, StateTree, cooldowns or invented hit-stop values. Ask instead. Other AI tools (e.g. a Gemini conversation) suggested many of these, and they are not in the projects. In the combat project, StateTree is used only in Jakub's enemy AI.
-- **Wording.** Write in the site's own plain voice. Do not copy phrasing from other AI tools. Anil will do a final wording pass on each card.
+- **Wording.** Write in the site's own plain voice. Do not copy phrasing from other AI tools. Anil does a final wording pass on each card. Once his wording is in, keep it. Fix only clear grammar slips and tell him which ones. Avoid jargon he would not use himself, even standard design terms. For example, write "lock the player for a moment" instead of "commit".
+- **Edit copies.** Anil may review a card in an edit copy (Word or PDF) of the case study:
+  - English text is the site copy.
+  - Brown italic text holds notes for him and does not go on the site.
+  - Text in `[brackets]` is an instruction to carry out.
+  - A file name under an image says which asset it is.
 
 ## Open items
 
 These were deferred for later and will be done when we go through each card in detail:
 
-- **Combat** ("Horde & Boss Combat Design"): on 22 October 2026 the card was rebuilt from Anil's PDF draft. Its sections are Combat flow: Player, Combat flow: Enemies, Player moveset, Hit feedback, 3-stage boss fight and Weapons for variety. Overview, Architecture and Next were dropped; the class diagram now sits in Weapons. The PDF confirms these facts:
-  - The game is multiplayer: montages play on the server and the clients, and `EquipWeapon` sets the weapon up on every client.
-  - The boss fight has three phases. Jakub built the boss AI and the phase sequences.
-  - Hit-stop slows the attack to 20% for 0.1 s.
-  - Elites have 5x a horde enemy's health. After a stagger, the player is immune to further stagger for 1 s.
-  - The combo steps last 1.6, 1.4 and 2.1 s, the dash attack 1.0 s and the air attack 0.9 s.
-  - The boss wind-up is 0.65 s. The PDF said 0.6 s, and Anil had it set back to 0.65 s.
-  - The PDF's dodge-table "Dodge" reason repeated the attack table's. On Anil's request it now matches the dodge table: dodging is locked in the startup and the immune phase and can be chained in the recovery.
-  - There is no input buffer and no stamina. Both appear as "What I would change".
-- Still to do on the combat card:
-  - Several "How I built it" parts have one visual or none. Unused screenshots in `assets/images/slavic-dome/` are candidates, matched by filename only so far: `montage-notify-dodge`, `montage-play-notify-routing` (Combat flow); `hit-feedback`, `start-trace`, `handle-trace-notify`, `sweep-trace-2` (Hit feedback); `damage-received`, `player-on-damage`, `player-can-receive-damage` (Enemies); `weapon-setup-1/2`, `equip-weapon`, `weapon-equipped-bind` (Weapons); `aim-mode` (the bow). `assets/videos/slavic-dodge-enemy-attack.mp4` could be a Combat flow design clip.
-- **Turn-based** ("Cinematic Turn-Based Combat"): on 22 October 2026 the title, pitch, facts (Technical & Combat Designer, 7 people, 5 weeks), "What I did" and the first three sections (Every phase of a turn is a cutscene, Camera system, Parry and QTE) were rebuilt from Anil's PDF. Sequence events, Skill steps and Preparing skills are unchanged. Overview was dropped, and its diagram moved to the first section's "How I built it". The PDF names the functions NewStartSequence, NewBindActiveCharacter and StartAttackSequence. The graph screenshots show StartSequence, BindActiveCharacter and StartSkillSequence, and Anil agreed the text should use the screenshot names. The counter-attack needs every hit of the enemy attack parried, not only the last one. The old `flow-parry.png` drawing showed only the last-hit check, so it was removed and its corrected table is shown at every width. Redraw it in draw.io to bring the drawing back. Still to do:
-  - Add an "Intended player feeling" note about the cinematic cameras.
-  - Mention the boss skills and the Level Sequences, which Anil also made.
-  - Record the six `.video-slot`s and the card-front video.
+- **Combat** ("Horde & Boss Combat Design"). Rebuilt around design goals in October 2026:
+  - **19 October, on the other PC.** A wording pass and a lead-designer review were applied, with numbers checked in the project through the Unreal MCP.
+  - **22 October.** Anil's PDF draft became the text. It was merged with the 19 October media.
+  - **Sections.** Combat flow: Player, Combat flow: Enemies, Player moveset, Hit feedback, 3-stage boss fight, and Weapons for variety.
+  - **Multiplayer.** Montages play on the server and every client, and `EquipWeapon` sets the weapon up on every client. Hit detection runs only on the server.
+  - **Boss fight.** It has three phases, designed as a team. Jakub built the Boss AI and the phase sequences, as the credits note says.
+  - **Confirmed numbers:**
+    - Hit-stop slows the attack to 20% for 0.1 s. A `Can Hit Stop` flag keeps hits that land together from stacking it.
+    - Combo steps last 1.6 / 1.4 / 2.1 s, the dash attack 1.0 s and the air attack 0.9 s.
+    - After a stagger, the player is immune for 1 s.
+    - The horde has 20 HP and deals 5 damage; the player has 100 HP.
+  - **Boss wind-up.** It is 0.65 s, Anil's call. The PDF and the 19 October card said 0.6 s.
+  - **Elite health (open).** The PDF says 5x a horde enemy's health, but the 19 October project check found 11×. The card follows the PDF until Anil confirms.
+  - **Timing tables.** They show the PDF's final timings: wind-up / weapon trace / combo window / recovery, and startup / immune / recovery. Each row's reason is in a list under its table. The dodge-table "Dodge" reason was fixed to match that table.
+  - **Screenshots.** They show an earlier state of the project than the current one (ComboSteps, FAttackSlowRate, the OnHitLanded binding). Anil chose to leave this as it is.
+  - **Media placement.** The class diagram and Jakub's AI task sit in the boss fight's "How I built it". `ApplyHitStop` and `PlayHitFeedback` sit with the Hit feedback clips.
+  - **Unused assets.** These are left out on purpose: `weapon-equipped-bind`, `handle-trace-notify`, `sweep-trace-1`, `sweep-trace-2`, `start-trace`, `damage-received`, `player-on-damage`, `receive-damage`, `player-can-receive-damage`, `weapon-setup-1/2`, `anim-direction` and the two blend-space clips.
+  - **Weapons.** Only the sword family was finished in the one-month scope. Update the Weapons section when new weapon types are added.
+- **Turn-based** ("Cinematic Turn-Based Combat"):
+  - **History.**
+    - On 19–20 October, on the other PC, it was rebuilt from scratch. It followed a section outline Anil liked from Gemini, corrected against the project through the editor MCP, and the videos were recorded.
+    - On 22 October, Anil's PDF draft replaced the title area and the first three sections: Every phase of a turn is a cutscene, Camera system, and Parry and QTE.
+    - Skills, Tactics and Team workflow are the 20 October versions.
+  - **Card facts.** The role is "Technical & Combat Designer", with a team of 7 and 5 weeks. Design tags: Systems Design, Combat Design, Game Feel.
+  - **Function names.** The current names are `NewStartSequence`, `NewBindActiveCharacter` and `StartAttackSequence`; the PDF and the project agree. The graph screenshots show the older `StartSequence`, `BindActiveCharacter` and `StartSkillSequence`, but their captions do not name functions.
+  - **Binding names.** The sequence binding names are `Player` and `Enemy`. Anil renamed them from `BP_Hero01` and `BP_Enemy01` on 20 October so they read more easily. Older Blueprint screenshots and editor videos still show the old names.
+  - **Parry.**
+    - The window is 0.5 s, and a press stays active 0.3 s, so an early press counts.
+    - Only taking a hit fails a parry. After that, the hero cannot parry the rest of the attack.
+    - A parried hit also blocks its status.
+    - The counter therefore needs every hit parried. It plays on the last hit at half speed (0.5 time dilation) and cancels the enemy attack.
+    - The parry table says this.
+  - **QTE.**
+    - The multiplier starts at 1.0 per skill. Perfect adds 0.25, up to 2.0. Good changes nothing.
+    - Fail, timeout or a prompt still open at `QTEEnd` subtracts 0.25, down to 0.5.
+    - It scales damage, heals and buff stacks. Self-damage uses `max(2 − m, 0.5)`.
+  - **Tactics.**
+    - Tactics (AP, types and resistances, statuses) were a team design, so the section uses "We".
+    - Enemy targeting is Anil's own work. It lives in `BP_CharacterParent`.
+    - `EnemyPlayRandomAttack` is an overridable event. The dog overrides it: right after `DA_DogShieldBuff` it plays one of its two laser attacks, then goes back to random attacks.
+    - `PickEnemyTarget` takes a taunting hero first, otherwise a random one.
+    - The heroes share one AP pool: `WBP_Skills.ApplySkillCost` checks `CanAffordAP` on the arena's `AC_TeamAP`.
+  - **Loadout.** The player picks 3 of each hero's 5 skills in the main menu (`BP_GameInstance.GetActiveSkillSlots`). Anil designed this planning part. A teammate implemented the menu, so the card says "my design" and credits the menu in the note.
+  - **Distances.** The defender stands 3 m in front of the attacker (`GetTargetAttackLocation`, 300 units). Anil confirmed it, and the paper design's 4 m is outdated.
+  - **Flow charts.** Only the one-turn flow and the event-key flow are kept. `flow-parry`, `flow-qte`, `flow-system-overview`, `graph-move-to-attack-position`, `class-hierarchy.svg` and `skill-life-leech` are unused on purpose. The SVG is also wrong: it puts the enemy logic in `BP_EnemyParent`. Skills follows one example, Guardian's Blood, through its data asset, the event-key diagram and the in-game clip.
+  - **Rejected claims.**
+    - The Fixes section was dropped. None of its four claims from `Docs/PortfolioCopy_EN.md` match the project: the caster is still the arena's active character, enemy logic was not moved to `BP_EnemyParent`, there is no HP>0 guard, and the multi-ally camera helpers were not found.
+    - A Gemini review (20 October) was applied only where it held up. These claims were rejected because the project says otherwise:
+      - the hero turn also binding the target to `Enemy`;
+      - both characters turning to face each other (only the defender turns);
+      - the dog's lasers starting "after its Shield breaks";
+      - the health bar showing resistances;
+      - "Scaling" meaning QTE scaling;
+      - "Built 15 multi-step skills" (teammates made skills through the workflow).
+  - **Videos.** All were recorded on 20 October, and every slot has one. The Parry and QTE section's QTE clip reuses Full turn flow. Skills' Result shows Guardian's Blood, trimmed before the editor shows at the end.
+  - **Sources.** The Unreal project is `PrismoOfDarkness.uproject` in `Documents/Unreal Projects/GP4New`. **Its `Docs/` drafts and the GP4 project memory are outdated.** Verify every claim through the editor MCP, which runs on `http://127.0.0.1:18000/mcp` (read-only use).
+  - **Open questions.** The card follows the PDF until Anil confirms these:
+    - The PDF credits tactics to "a team of 4 designers"; the 20 October notes said two.
+    - The PDF's "What I would change" says only the first hero counters a multi-target attack; the 20 October check found that only the last counter plays.
+  - **Still open.** The three "What I would change" items still hold as of 19 October:
+    - Back mid-transition uses `PlayReverse` from the end.
+    - `ReturnToStartPosition` snaps location and rotation.
+    - There is no counter queue.
+    Anil asked Claude to handle them. Fixing them in the project needs the editor MCP, so ask first.
 - **Parkour:** add a level design section showing how the geometry teaches each move. This needs a layout image and any metrics.
 - **Voice Runner:** decide whether the role becomes "Technical Designer" with an input-design focus, if Anil made those decisions, or whether the card moves to the bottom or is removed. It has no design-area tags until then.
 - **Clean Energy:** the design story is weak. Keep it as is, add the cable-cost balancing, or remove the card.
@@ -114,7 +170,8 @@ These were deferred for later and will be done when we go through each card in d
 
 ## Content and assets
 
-- Images go in `assets/images/<project>/`. Card video posters go in `assets/images/posters/`, videos in `assets/videos/` (H.264 MP4), and the resume in `assets/docs/`.
+- Images go in `assets/images/<project>/`. Card video posters go in `assets/images/posters/` (800×450 JPG), videos in `assets/videos/` (H.264 MP4, flat, named `<project>-<clip>.mp4`), and the resume in `assets/docs/`.
+- Compress new recordings with FFmpeg (installed with `winget install Gyan.FFmpeg`) before committing: `-an -vf scale=1280:-2 -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart`, with CRF 28 for a long card-front video. Add `fps=30` for 60 fps recordings. Editor walkthroughs stay 1920 wide at CRF 28 so their text reads in full screen. Recordings often carry a silent audio track, which `-an` drops. This took the turn-based recordings from 195 MB to 46 MB. Keep the originals outside the repo.
 - Some assets are committed before they are used on the page. To list the ones `index.html` does not reference yet:
   ```bash
   for f in $(git ls-files assets); do grep -q "$f" index.html || echo "$f"; done

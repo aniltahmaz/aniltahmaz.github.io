@@ -780,6 +780,47 @@ body { padding-left: var(--panel); }
     border-radius: var(--radius-sm);
 }
 
+/* A click on a clip plays it full screen; the corner button that the script adds shows that */
+.clip,
+.case-video { position: relative; }
+
+.clip video,
+.case-video video { cursor: zoom-in; }
+
+.clip-fullscreen {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: rgba(33, 34, 38, 0.82);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.clip-fullscreen svg { width: 16px; height: 16px; }
+
+.clip:hover .clip-fullscreen,
+.case-video:hover .clip-fullscreen,
+.clip-fullscreen:focus-visible { opacity: 1; }
+
+.clip-fullscreen:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Full screen shows the whole frame, not the crop used in the row */
+video:fullscreen { object-fit: contain; aspect-ratio: auto; border: 0; border-radius: 0; cursor: auto; }
+video:-webkit-full-screen { object-fit: contain; aspect-ratio: auto; border: 0; border-radius: 0; cursor: auto; }
+
 .media-row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

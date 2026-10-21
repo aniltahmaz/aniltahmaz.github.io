@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" href="assets/images/profile.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Bump ?v= whenever style.css or script.js changes, so browsers never pair this page with a cached copy -->
-    <link rel="stylesheet" href="style.css?v=20261022a">
+    <link rel="stylesheet" href="style.css?v=20261022b">
 </head>
 <body>
 
@@ -359,7 +359,7 @@
                 </div>
                 <div class="card-summary">
                     <h3>Horde &amp; Boss Combat Design</h3>
-                    <p class="card-pitch">Combat for a third-person multiplayer horde game, with enemy waves and a three-phase Boss.</p>
+                    <p class="card-pitch">Horde combat with only a 0.2 s lock per swing. I tuned every action window on the animations and made each weapon a row of data.</p>
                     <div class="card-facts">
                         <span class="card-role"><span class="card-role-label">Role</span> Combat &amp; Technical Designer</span>
                         <div class="project-tags design-tags" aria-label="Design areas">
@@ -370,6 +370,7 @@
                             <span class="tag">Unreal Engine 5</span>
                             <span class="tag">Team of 3</span>
                             <span class="tag">1 month</span>
+                            <span class="tag">Multiplayer</span>
                         </div>
                     </div>
                 </div>
@@ -398,7 +399,7 @@
                                 <li><strong>Data-Driven Weapons System:</strong> To make adding new weapons easy, I put weapon stats, meshes, and combos into a Data Table and Data Assets.</li>
                                 <li><strong>Boss Design:</strong> As a team, we designed a three-phase boss fight built around arena objectives and enemy waves, rather than relying solely on a large health bar.</li>
                             </ul>
-                            <p class="modal-note">Enemy and boss AI and the stats system by <a href="https://zululzulul.github.io/" target="_blank" rel="noopener">Jakub Krzysiak</a>. Audio and level design by <a href="https://mateuszfigura.com/" target="_blank" rel="noopener">Mateusz Figura</a>.</p>
+                            <p class="modal-note">Boss phases designed as a team. Enemy and Boss AI, the phase sequences and the stats system by <a href="https://zululzulul.github.io/" target="_blank" rel="noopener">Jakub Krzysiak</a>. Audio and level design by <a href="https://mateuszfigura.com/" target="_blank" rel="noopener">Mateusz Figura</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -406,7 +407,7 @@
                 <div class="modal-body is-stacked">
                     <div class="modal-details" data-section-nav>
                         <h3 class="modal-section-title">How it works</h3>
-                        <p class="modal-lead">Each section starts with <strong>the design</strong>, then shows <strong>how I built it</strong>. Click a screenshot to open it full size.</p>
+                        <p class="modal-lead">Each section shows the design, how I built it and what I would change. Click any image to enlarge it.</p>
 
                         <section class="iteration">
                             <h4 class="section-heading title-only"><span class="section-name">Combat flow: Player</span></h4>
@@ -465,6 +466,18 @@
                                         <a href="assets/images/slavic-dome/state-paper-design.jpg" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/state-paper-design.jpg" width="1126" height="2000" alt="Hand-drawn timelines for a normal attack and a dodge, with the permissions allowed in each phase" loading="lazy"></a>
                                         <figcaption>The paper design.</figcaption>
                                     </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Three-hit sword combo">
+                                            <source src="assets/videos/slavic-combo-hitstop.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The 3-hit combo.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="The player dodging a boss attack">
+                                            <source src="assets/videos/slavic-dodge-enemy-attack.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Dodging the Boss's attack.</figcaption>
+                                    </figure>
                                 </div>
                             </div>
                             <div class="phase">
@@ -473,7 +486,15 @@
                                 <div class="media-row">
                                     <figure class="design-figure focus-bottom">
                                         <a href="assets/images/slavic-dome/montage-notify-attack.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-notify-attack.png" width="1072" height="981" alt="Attack montage timeline with WeaponTrace, ComboWindow and EndAnim notifies" loading="lazy"></a>
-                                        <figcaption>An attack montage with its notifies: WeaponTrace (the weapon can hit), ComboWindow (the player can start the next attack) and EndAnim (the player gets control back).</figcaption>
+                                        <figcaption>Attack montage: WeaponTrace, ComboWindow, EndAnim.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure focus-bottom">
+                                        <a href="assets/images/slavic-dome/montage-notify-dodge.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-notify-dodge.png" width="1083" height="980" alt="Dodge montage timeline with ImmuneDamage and EndAnim notifies" loading="lazy"></a>
+                                        <figcaption>Dodge montage: ImmuneDamage, EndAnim.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/slavic-dome/montage-play-notify-routing.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/montage-play-notify-routing.png" width="1253" height="773" alt="BP_BaseCharacter graph: Server and Multicast Play Montage, then Play Montage passing each notify begin and end to the character" loading="lazy"></a>
+                                        <figcaption>Montage plays on every client; notifies go to the character.</figcaption>
                                     </figure>
                                 </div>
                             </div>
@@ -490,20 +511,6 @@
                                     <li><strong>Boss:</strong> a 0.65&nbsp;s wind-up, longer than the 0.2&nbsp;s attack lock. A dodge is always possible in time. Its ground AoE bursts after 1.5&nbsp;s.</li>
                                     <li><strong>No stun-lock:</strong> After being staggered, the player is immune to further stagger effects for 1&nbsp;s, preventing successive hits from repeatedly staggering them.</li>
                                 </ul>
-                                <div class="media-row">
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Boss attack with the weapon sweep drawn">
-                                            <source src="assets/videos/slavic-boss-attack-trace.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>The boss attack, with the trace drawn.</figcaption>
-                                    </figure>
-                                    <figure class="design-figure clip">
-                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="A boss hit landing on the player">
-                                            <source src="assets/videos/slavic-boss-hit-player-death.mp4" type="video/mp4">
-                                        </video>
-                                        <figcaption>The boss hits the player.</figcaption>
-                                    </figure>
-                                </div>
                             </div>
                         </section>
 
@@ -531,19 +538,25 @@
                                         <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Dash attack with the weapon sweep drawn">
                                             <source src="assets/videos/slavic-trace-dash-attack.mp4" type="video/mp4">
                                         </video>
-                                        <figcaption>Dash attack at sprint speed, with the trace drawn.</figcaption>
+                                        <figcaption>Dash Attack, trace drawn.</figcaption>
                                     </figure>
                                     <figure class="design-figure clip">
                                         <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Air attack with the weapon sweep drawn">
                                             <source src="assets/videos/slavic-trace-jump-attack.mp4" type="video/mp4">
                                         </video>
-                                        <figcaption>Air attack after a jump, with the trace drawn.</figcaption>
+                                        <figcaption>Air Attack, trace drawn.</figcaption>
                                     </figure>
                                 </div>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">I wrote <code>TryAttack</code>. It reads the player's movement state and plays the matching move. <a class="graph-link" href="assets/images/slavic-dome/try-attack.png" target="_blank" rel="noopener" data-lightbox data-alt="TryAttack Blueprint graph with air attack, dash attack and ground combo branches" data-caption="BP_ThirdPersonCharacter → TryAttack.">See the graph →</a> Combo montages are stored in the weapon's Data Asset.</p>
+                                <p class="iteration-note">I wrote <code>TryAttack</code>. It reads the player's movement state and plays the matching move. Combo montages are stored in the weapon's Data Asset.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/slavic-dome/try-attack.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/try-attack.png" width="1904" height="943" alt="TryAttack Blueprint graph with air attack, dash attack and ground combo branches" loading="lazy"></a>
+                                        <figcaption>TryAttack: air, dash or next combo step.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                         </section>
 
@@ -558,7 +571,7 @@
                                             <tr><th>Feedback</th><th>What it does</th><th>Why</th></tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td><span class="nowrap">Hit-Stop</span></td><td>The attack slows down to 20% for 0.1 s when a hit occurs. <a class="graph-link" href="assets/images/slavic-dome/hit-stop.png" target="_blank" rel="noopener" data-lightbox data-alt="ApplyHitStop Blueprint graph" data-caption="BP_ThirdPersonCharacter → ApplyHitStop.">See the graph →</a></td><td>I wanted players to feel resistance on impact.</td></tr>
+                                            <tr><td><span class="nowrap">Hit-Stop</span></td><td>The attack slows down to 20% for 0.1 s when a hit occurs.</td><td>I wanted players to feel resistance on impact.</td></tr>
                                             <tr><td><span class="nowrap">Camera Shake</span></td><td>The camera shakes with a small amplitude on each hit.</td><td>I added another layer of feedback to reinforce the impact.</td></tr>
                                             <tr><td>VFX</td><td>I added material flashing to the player upon hit. I also added hit VFX on impact point for enemies.</td><td>I used a material hit flash only on the player to make it clear when it was taking damage. For enemies, I used hit VFX to reinforce the impact.</td></tr>
                                             <tr><td>Ragdoll</td><td>I pass the attack direction to the damage receiver with every hit. On death, the character switches to ragdoll and is pushed in the attack direction.</td><td>I wanted a more convincing death response than a standard death animation. The ragdoll reaction also adds a sense of accomplishment when clearing a horde.</td></tr>
@@ -570,7 +583,21 @@
                                         <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Three-hit sword combo">
                                             <source src="assets/videos/slavic-combo-hitstop.mp4" type="video/mp4">
                                         </video>
-                                        <figcaption>The three-step sword combo. Hit feedback is exaggerated in this clip so it is easy to see.</figcaption>
+                                        <figcaption>Exaggerated feedback, easy to see.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="719" aria-label="A horde fight with the real hit feedback values">
+                                            <source src="assets/videos/slavic-hero.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Real feedback, in a full fight.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/slavic-dome/hit-stop.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/hit-stop.png" width="1749" height="904" alt="ApplyHitStop Blueprint graph: Can Hit Stop check, montage play rate times the slow rate, a timer for the slow duration and a camera shake" loading="lazy"></a>
+                                        <figcaption>ApplyHitStop: slow-down, timer, camera shake.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/slavic-dome/hit-feedback.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/hit-feedback.png" width="1836" height="532" alt="PlayHitFeedback graph: hit flash, impact effect picked by damage type and a damage number" loading="lazy"></a>
+                                        <figcaption>PlayHitFeedback: flash, impact VFX, damage number.</figcaption>
                                     </figure>
                                 </div>
                             </div>
@@ -589,10 +616,36 @@
                                     </ul>
                                 </div>
                                 <p class="design-point reason"><span class="design-point-label">Why this decision</span>We wanted each phase to test one skill: clearing a crowd, choosing targets, reading telegraphs.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="Boss attack with the weapon sweep drawn">
+                                            <source src="assets/videos/slavic-boss-attack-trace.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Boss attack, trace drawn.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1918" height="1076" aria-label="A boss hit landing on the player">
+                                            <source src="assets/videos/slavic-boss-hit-player-death.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The Boss hits the player.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">The Boss runs on my <code>BP_BaseCharacter</code>. Its attacks are montages with my notifies. <a class="graph-link" href="assets/images/slavic-dome/enemy-attack-call.png" target="_blank" rel="noopener" data-lightbox data-alt="State Tree task graph: cast to BP_BaseCharacter, Server Play Montage, finish task" data-caption="Jakub's State Tree task, STT_RootAttack.">See the graph →</a> Its weapon is a row in <code>DT_Weapons</code>. Jakub built the Boss AI and the phase sequences.</p>
+                                <p class="iteration-note">The Boss runs on my <code>BP_BaseCharacter</code>. Its attacks are montages with my notifies. Its weapon is a row in <code>DT_Weapons</code>. Jakub built the Boss AI and the phase sequences.</p>
+                                <div class="media-row single">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/slavic-dome/class-hierarchy.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/class-hierarchy.png" width="2744" height="1344" alt="Class diagram: BP_BaseCharacter with the player and enemy subclasses, BP_WeaponBase with the melee weapon, and the weapon data table and data asset" loading="lazy"></a>
+                                        <figcaption>Blue and green: my work. Orange: Jakub's enemies.</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/slavic-dome/enemy-attack-call.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/enemy-attack-call.png" width="1220" height="328" alt="State Tree task graph: cast to BP_BaseCharacter, Server Play Montage, finish task" loading="lazy"></a>
+                                        <figcaption>Jakub's AI task only plays a montage.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                         </section>
 
@@ -616,17 +669,21 @@
                                 <div class="media-row shots-tall">
                                     <figure class="design-figure">
                                         <a href="assets/images/slavic-dome/weapons-table.png?v=3" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapons-table.png?v=3" width="1507" height="1235" alt="Data table with six weapon rows and the row editor showing weapon type, rarity, a stat modifier and mesh" loading="lazy"></a>
-                                        <figcaption>DT_Weapons with one row open: name, rarity, weapon type, modifiers, mesh and scale. The modifiers use Jakub's stats system.</figcaption>
+                                        <figcaption>DT_Weapons: one row per weapon.</figcaption>
                                     </figure>
                                     <figure class="design-figure focus-combo">
                                         <a href="assets/images/slavic-dome/weapon-type-asset.png?v=3" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/weapon-type-asset.png?v=3" width="1347" height="1746" alt="Weapon type data asset DA_Sword: damage type, hit box size, seven montages, three combo steps, trace socket and ranged sockets" loading="lazy"></a>
-                                        <figcaption>DA_Sword, the weapon type used by the four swords: montages, combo steps, hit box size and sockets.</figcaption>
+                                        <figcaption>DA_Sword: the moveset all four swords share.</figcaption>
                                     </figure>
                                 </div>
-                                <div class="media-row single">
-                                    <figure class="design-figure">
-                                        <a href="assets/images/slavic-dome/class-hierarchy.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/class-hierarchy.png" width="2744" height="1344" alt="Class diagram: BP_BaseCharacter with the player and enemy subclasses, BP_WeaponBase with the melee weapon, and the weapon data table and data asset" loading="lazy"></a>
-                                        <figcaption>Characters, weapons and data. Blue and green boxes are my work. Orange boxes are Jakub's enemies.</figcaption>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/slavic-dome/equip-weapon.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/equip-weapon.png" width="1912" height="874" alt="EquipWeapon graph: reads the weapon's row in DT_Weapons, spawns its Weapon Actor Class and initializes it" loading="lazy"></a>
+                                        <figcaption>EquipWeapon: spawn from the row.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/slavic-dome/aim-mode.png" target="_blank" rel="noopener"><img src="assets/images/slavic-dome/aim-mode.png" width="1905" height="696" alt="Aim mode graph: aim HUD on, character turns with the camera and the camera boom moves in; reversed when aiming ends" loading="lazy"></a>
+                                        <figcaption>The bow's aim mode, already working.</figcaption>
                                     </figure>
                                 </div>
                             </div>
@@ -1136,14 +1193,16 @@
         <article class="project-card" data-project-id="turn-based-combat">
             <a class="card-trigger" href="#project/turn-based-combat" aria-label="View details for Cinematic Turn-Based Combat">
                 <div class="card-video">
-                    <div class="video-placeholder">Gameplay video coming soon</div>
+                    <video loop muted playsinline preload="none" poster="assets/images/posters/turn-based-hero.jpg">
+                        <source src="assets/videos/turn-based-hero.mp4" type="video/mp4">
+                    </video>
                     <div class="card-video-overlay">
                         <span class="card-expand-hint">View details →</span>
                     </div>
                 </div>
                 <div class="card-summary">
                     <h3>Cinematic Turn-Based Combat</h3>
-                    <p class="card-pitch">Turn-based RPG combat inspired by Expedition 33, with three heroes and 15 skills. Each phase of a turn is played through a Level Sequence.</p>
+                    <p class="card-pitch">Every phase of a turn plays as a cinematic sequence. The player parries enemy hits, times QTEs and triggers multi-step skills.</p>
                     <div class="card-facts">
                         <span class="card-role"><span class="card-role-label">Role</span> Technical &amp; Combat Designer</span>
                         <div class="project-tags design-tags" aria-label="Design areas">
@@ -1172,7 +1231,9 @@
                     </dl>
                     <div class="case-intro">
                         <div class="case-video">
-                            <div class="video-placeholder">Gameplay video coming soon</div>
+                            <video autoplay loop muted playsinline poster="assets/images/posters/turn-based-hero.jpg">
+                                <source src="assets/videos/turn-based-hero.mp4" type="video/mp4">
+                            </video>
                         </div>
                         <div class="case-did">
                             <h3 class="modal-section-title">What I did</h3>
@@ -1190,7 +1251,7 @@
                 <div class="modal-body is-stacked">
                     <div class="modal-details" data-section-nav>
                         <h3 class="modal-section-title">How it works</h3>
-                        <p class="modal-lead">Click an image to open it full size.</p>
+                        <p class="modal-lead">Each section shows the design, how I built it and what I would change. Click any image to enlarge it.</p>
 
                         <section class="iteration">
                             <h4 class="section-heading title-only"><span class="section-name">Every phase of a turn is a cutscene</span></h4>
@@ -1204,23 +1265,31 @@
                                     </figure>
                                 </div>
                                 <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted each phase to feel distinct and cinematic rather than static.</p>
-                                <div class="media-row single is-small">
+                                <div class="media-row">
                                     <figure class="design-figure clip">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Menu transitions</span></div>
-                                        <figcaption>Idle camera, Skills button, skill camera and targeting camera.</figcaption>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="The camera moving between the idle, menu and targeting views">
+                                            <source src="assets/videos/turn-based-menu-transitions.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Idle, menu and targeting cameras.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="One hero turn: choosing a skill, choosing targets, QTE prompts and the hits">
+                                            <source src="assets/videos/turn-based-full-turn.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>One turn: skill, targets, QTE and hits.</figcaption>
                                     </figure>
                                 </div>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Turn changes and menu buttons tell <code>BP_CameraManager</code> which sequence to play. <code>StartSequence</code> stops the active sequence, binds the characters, and plays the new one. <a class="graph-link" href="assets/images/turn-based-combat/graph-start-sequence.png" target="_blank" rel="noopener" data-lightbox data-alt="StartSequence Blueprint graph" data-caption="BP_CameraManager → StartSequence.">See the graph →</a></p>
-                                <p class="design-point"><span class="design-point-label">What I would change</span><strong>Smooth Back mid-transition:</strong> Pressing Back during a menu transition reverses the sequence from the end, causing the camera to jump. I would reverse it from the current frame instead.</p>
-                                <div class="media-row single is-wide">
-                                    <figure class="design-figure">
-                                        <a href="assets/images/turn-based-combat/flow-system-overview.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-system-overview.png" width="2728" height="886" alt="Flow diagram: a turn change or button goes to BP_CameraManager, which starts a Level Sequence. Its event keys call BP_MasterDirector, and BP_CharacterParent applies the skill steps. The skill data asset gives the attack sequence and the steps" loading="lazy"></a>
-                                        <figcaption>From a turn change or a button to the gameplay.</figcaption>
+                                <p class="iteration-note">Turn changes and menu buttons tell <code>BP_CameraManager</code> which sequence to play. <code>NewStartSequence</code> stops the active sequence, binds the characters, and plays the new one.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-start-sequence.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-start-sequence.png" width="1907" height="876" alt="Blueprint graph that starts a sequence: stop the active sequence, bind the actors, play the new one" loading="lazy"></a>
+                                        <figcaption>Starting a sequence: stop, bind, play.</figcaption>
                                     </figure>
                                 </div>
+                                <p class="design-point"><span class="design-point-label">What I would change</span><strong>Smooth Back mid-transition:</strong> Pressing Back during a menu transition reverses the sequence from the end, causing the camera to jump. I would reverse it from the current frame instead.</p>
                             </div>
                         </section>
 
@@ -1233,17 +1302,35 @@
                                 <div class="media-row">
                                     <figure class="design-figure fit">
                                         <a href="assets/images/turn-based-combat/paper-design-camera-binding.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/paper-design-camera-binding.png" width="2907" height="1569" alt="Paper design with two cases: the same camera angle on an attacker and a defender at two different places and rotations" loading="lazy"></a>
-                                        <figcaption>The paper design. The camera keeps the attacker and the defender in frame in both cases.</figcaption>
+                                        <figcaption>The paper design: the same framing in two places.</figcaption>
                                     </figure>
                                     <figure class="design-figure clip crop">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Preparing a sequence</span></div>
-                                        <figcaption>Preparing a level sequence: the camera arrangement only.</figcaption>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="Preparing an attack sequence in Sequencer, with the attacker at the origin">
+                                            <source src="assets/videos/turn-based-preparing-sequence.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Preparing a sequence at 0,0,0.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Heroes attacking enemies from different places and angles, with the same framing each time">
+                                            <source src="assets/videos/turn-based-dynamic-binding.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Attacks from different places and angles.</figcaption>
                                     </figure>
                                 </div>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note"><code>BindActiveCharacter</code> checks for an enemy binding first. On an enemy attack, the enemy goes into Enemy and the defending hero into Player. On a hero turn, the active hero goes into Player. <a class="graph-link" href="assets/images/turn-based-combat/graph-bind-active-character.png" target="_blank" rel="noopener" data-lightbox data-alt="BindActiveCharacter Blueprint graph" data-caption="BP_CameraManager → BindActiveCharacter.">See the graph →</a> <code>StartSkillSequence</code> turns the defender to face the attacker, then plays the attack. <a class="graph-link" href="assets/images/turn-based-combat/graph-start-skill-sequence.png" target="_blank" rel="noopener" data-lightbox data-alt="StartSkillSequence Blueprint graph" data-caption="BP_CharacterParent → StartSkillSequence.">See the graph →</a></p>
+                                <p class="iteration-note"><code>NewBindActiveCharacter</code> checks for an enemy binding first. On an enemy attack, the enemy goes into <code>Enemy</code> and the defending hero into <code>Player</code>. On a hero turn, the active hero goes into <code>Player</code>. <code>StartAttackSequence</code> turns the defender to face the attacker, then plays the attack.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-bind-active-character.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-bind-active-character.png" width="1864" height="777" alt="Blueprint graph that binds the active characters to a sequence" loading="lazy"></a>
+                                        <figcaption>Binding: enemy first, then hero.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-start-skill-sequence.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-start-skill-sequence.png" width="1896" height="619" alt="Blueprint graph that turns the defender to the attacker and starts the attack sequence" loading="lazy"></a>
+                                        <figcaption>Face, then attack.</figcaption>
+                                    </figure>
+                                </div>
                                 <p class="design-point"><span class="design-point-label">What I would change</span>Smooth the return. After an attack, the characters snap back to their start position and rotation. I would blend them back.</p>
                             </div>
                         </section>
@@ -1261,6 +1348,18 @@
                                         <li><strong>Counterattack Condition:</strong> The player counterattacks on the enemy's final hit only if they successfully parry every attack in that enemy's sequence. Parrying all 3–4 attacks consecutively makes the final counterattack feel more rewarding.</li>
                                     </ul>
                                 </div>
+                                <div class="design-table-wrap">
+                                    <table class="design-table">
+                                        <thead>
+                                            <tr><th>Parry: a hit on a hero</th><th>What happens</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>No parry, or outside the window</td><td>Damage applies. No more parries in this attack.</td></tr>
+                                            <tr><td>Inside the window</td><td>The hit and its status effect are blocked</td></tr>
+                                            <tr><td>Inside the window on the last hit, after every earlier hit was parried</td><td>Counter-attack at half speed. The hero takes no damage.</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="design-point">
                                     <span class="design-point-label">QTE rules</span>
                                     <p>I wanted a QTE system that differed from Expedition 33. I divided QTE results into three tiers: Perfect, Good, and Fail. I wanted to avoid punishing average players while giving more experienced players a risk-reward choice: aim for the Perfect window for a bonus, but risk a penalty if they miss.</p>
@@ -1271,109 +1370,52 @@
                                         <li><strong>Fail or Timeout:</strong> Multiplier −0.25, down to 0.5</li>
                                     </ul>
                                 </div>
-                                <div class="text-cols">
-                                    <div class="design-table-wrap">
-                                        <table class="design-table">
-                                            <thead>
-                                                <tr><th>Parry: a hit on a hero</th><th>What happens</th></tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr><td>No parry, or a parry outside the window</td><td>Damage applies</td></tr>
-                                                <tr><td>A parry inside the window</td><td>The hit is blocked</td></tr>
-                                                <tr><td>A parry on the last hit, after every earlier hit of the attack was parried</td><td>Counter-attack at half speed. The hero takes no damage.</td></tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="table-slot">
-                                        <figure class="design-figure drawn" style="max-width: 466px">
-                                            <a href="assets/images/turn-based-combat/flow-qte.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-qte.png" width="1318" height="1188" alt="" loading="lazy"></a>
-                                        </figure>
-                                        <div class="design-table-wrap">
-                                            <table class="design-table">
-                                                <thead>
-                                                    <tr><th>QTE: moment</th><th>What happens</th></tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr><td><code>QTEStart</code> key</td><td>The prompts open</td></tr>
-                                                    <tr><td>The player presses the QTE key</td><td>The oldest prompt resolves as Perfect, Good or Fail</td></tr>
-                                                    <tr><td>A prompt runs out of time</td><td>Fail</td></tr>
-                                                    <tr><td><code>QTEEnd</code> key</td><td>All prompts close</td></tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="media-row">
                                     <figure class="design-figure clip">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Parry and counter</span></div>
-                                        <figcaption>No parry, a parry, a counter-attack on the last hit and a mistimed parry.</figcaption>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="A hero parrying all three hits of a Boss attack and countering on the last one">
+                                            <source src="assets/videos/turn-based-3hit-parry-success.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>Three hits parried, then the counter.</figcaption>
                                     </figure>
                                     <figure class="design-figure clip">
-                                        <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">QTE</span></div>
-                                        <figcaption>Quick-time prompts during a hero skill.</figcaption>
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="A hero missing a parry against a three-hit Boss attack, with no counter">
+                                            <source src="assets/videos/turn-based-3hit-parry-counter-fail.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A missed parry: no counter.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Each of the three heroes parrying an enemy attack and countering">
+                                            <source src="assets/videos/turn-based-parry-counter-with-all-characters.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A counter from each hero.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="QTE prompts during a hero skill that hits three enemies">
+                                            <source src="assets/videos/turn-based-full-turn.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>QTE prompts during a hero skill.</figcaption>
                                     </figure>
                                 </div>
                             </div>
                             <div class="phase">
                                 <h5 class="phase-title">How I built it</h5>
-                                <p class="iteration-note">Enemy sequences carry <code>ParryWindowOpen</code> and <code>ParryWindowClosed</code> keys. <code>DamageLogic</code> decides each hit: damage, a block, or a half-speed counter on the last hit. <a class="graph-link" href="assets/images/turn-based-combat/graph-damage-logic.png" target="_blank" rel="noopener" data-lightbox data-alt="DamageLogic Blueprint graph with the parry and counter-attack branches" data-caption="BP_CharacterParent → DamageLogic.">See the graph →</a> The QTE widget sends its results through event dispatchers.</p>
+                                <p class="iteration-note">Enemy sequences carry <code>ParryWindowOpen</code> and <code>ParryWindowClosed</code> keys. <code>DamageLogic</code> decides each hit: damage, a block, or a half-speed counter on the last hit. The QTE widget sends its results through event dispatchers.</p>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-damage-logic.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-damage-logic.png" width="1937" height="913" alt="DamageLogic Blueprint graph with the parry and counter-attack branches" loading="lazy"></a>
+                                        <figcaption>DamageLogic: damage, block or counter.</figcaption>
+                                    </figure>
+                                </div>
                                 <p class="design-point"><span class="design-point-label">What I would change</span><strong>Multiple Counter Attack:</strong> When enemy is making a multitarget attack, on parry only the first player hero does the counter attack. I would add a new global counter attack sequence and make all heroes attack at the same time.</p>
                             </div>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Sequence events</span> Event keys run the game logic</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>Every mechanic happens during a sequence. If its timing is scripted separately from the animation, it goes out of sync when the animation changes.</p>
-                                </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>The Director Blueprint of every sequence inherits from <code>BP_MasterDirector</code>. Event keys on the sequence's event track call its events.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>Moving an event key moves the logic with the animation. Every sequence uses the same events, so nothing is scripted for a single skill.</p>
-                                </div>
-                            </div>
-                            <p class="iteration-note"><strong>The events.</strong> <code>BP_MasterDirector</code> has one event for each kind of key: skill steps, movement, QTE and the parry window. <a class="graph-link" href="assets/images/turn-based-combat/graph-master-director.png" target="_blank" rel="noopener" data-lightbox data-alt="BP_MasterDirector event graph with QTEStart, QTEEnd, ParryWindowOpen, ParryWindowClosed, ExecuteSkillStep and MoveToAttackPosition" data-caption="BP_MasterDirector → EventGraph.">See the graph →</a></p>
-                            <p class="iteration-note"><strong>Moving in.</strong> <code>MoveToAttackPosition</code> moves the attacker to its target in 0.2 s. Stationary and multi-target skills do not move. <a class="graph-link" href="assets/images/turn-based-combat/graph-move-to-attack-position.png" target="_blank" rel="noopener" data-lightbox data-alt="MoveToAttackPosition and ReturnToStartPosition Blueprint graph" data-caption="BP_CharacterParent → MoveToAttackPosition and ReturnToStartPosition.">See the graph →</a></p>
-                            <div class="media-row single">
-                                <figure class="design-figure">
-                                    <a href="assets/images/turn-based-combat/flow-event-keys.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-event-keys.png" width="2108" height="1268" alt="Diagram: two ExecuteSkillStep event keys on the Level Sequence go through BP_MasterDirector to the two steps of the Guardian's Blood skill, matched by step index" loading="lazy"></a>
-                                    <figcaption>Guardian's Blood: each <code>ExecuteSkillStep</code> key applies the steps with the same step index.</figcaption>
-                                </figure>
-                            </div>
-                            <div class="media-row">
-                                <figure class="design-figure clip">
-                                    <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Adding a skill</span></div>
-                                    <figcaption>Adding a skill: its event keys on the sequence and its steps in the data asset.</figcaption>
-                                </figure>
-                                <figure class="design-figure clip">
-                                    <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Result</span></div>
-                                    <figcaption>The same skill in game.</figcaption>
-                                </figure>
-                            </div>
-                        </section>
-
-                        <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Skill steps</span> A skill is a data asset with a list of steps</h4>
-                            <div class="design-brief">
-                                <div class="tech-block problem">
-                                    <span class="tech-block-label">Design problem</span>
-                                    <p>As a team we wanted skills that do several things in one attack: damage, a status, healing allies. With Blueprint logic for each skill, every new skill needs graph work.</p>
-                                </div>
-                                <div class="tech-block decision">
-                                    <span class="tech-block-label">Design decision</span>
-                                    <p>A skill is a data asset with a list of steps. A step sets who is targeted, what happens, on which key of the sequence, under which condition and how strongly.</p>
-                                </div>
-                                <div class="tech-block solution">
-                                    <span class="tech-block-label">Why this decision</span>
-                                    <p>Adding a skill to a character means creating one data asset and adding steps to it. The system is extended with data.</p>
-                                </div>
-                            </div>
-                            <div class="text-cols">
+                            <h4 class="section-heading"><span class="section-name">Skills</span> Skills that do more than damage</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design problem</span>We wanted skills with several effects in one attack, like self-damage plus a Shield for allies. A Blueprint per skill means new graph work every time.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I made each skill a list of steps in a data asset. Each step has its own target, effect, hit, condition and strength.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted new skills to cost data, not code. All 15 skills for three heroes run on this one system.</p>
                                 <div class="design-table-wrap">
                                     <table class="design-table">
                                         <thead>
@@ -1382,66 +1424,109 @@
                                         <tbody>
                                             <tr><td>Target rule</td><td>Self, allies, enemies or the chosen target</td></tr>
                                             <tr><td>Effect</td><td>Damage, heal, apply status, remove statuses, change stress, set type</td></tr>
-                                            <tr><td>Step index</td><td>Which <code>ExecuteSkillStep</code> key applies this step</td></tr>
+                                            <tr><td>Step index</td><td>Which hit in the sequence applies this step</td></tr>
                                             <tr><td>Condition</td><td>None, caster type, target has a status, perfect QTE hit</td></tr>
                                             <tr><td>Amount, scaling, stacks</td><td>How strong the effect is and how many status stacks it adds</td></tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="design-table-wrap">
-                                    <table class="design-table">
-                                        <thead>
-                                            <tr><th>Skill</th><th>Step</th><th>Target</th><th>Effect</th><th>Step index</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr><td>Life Leech</td><td>1</td><td>Single enemy</td><td>Damage 15</td><td>0</td></tr>
-                                            <tr><td>Life Leech</td><td>2</td><td>Self</td><td>Heal 10</td><td>0</td></tr>
-                                            <tr><td>Guardian's Blood</td><td>1</td><td>Self</td><td>Damage 10</td><td>0</td></tr>
-                                            <tr><td>Guardian's Blood</td><td>2</td><td>All allies</td><td>Shield, 1 stack</td><td>1</td></tr>
-                                        </tbody>
-                                    </table>
+                                <div class="media-row shots-data">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/turn-based-combat/skill-guardians-blood.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/skill-guardians-blood.png" width="1914" height="1632" alt="Skill data asset for Guardian's Blood with two steps: damage on the caster on step index 0 and the Shield status on all allies on step index 1" loading="lazy"></a>
+                                        <figcaption>Guardian's Blood: self-damage on 0, Shield on 1.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="Guardian's Blood in game: the caster takes damage, then every ally gets a Shield">
+                                            <source src="assets/videos/turn-based-skill-result.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A multi-step skill in game.</figcaption>
+                                    </figure>
                                 </div>
                             </div>
-                            <div class="media-row shots-data">
-                                <figure class="design-figure">
-                                    <a href="assets/images/turn-based-combat/skill-life-leech.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/skill-life-leech.png" width="1916" height="1604" alt="Skill data asset for Life Leech with two steps: damage on a single enemy and a heal on the caster, both on step index 0" loading="lazy"></a>
-                                    <figcaption>Life Leech: one key damages an enemy and heals the caster.</figcaption>
-                                </figure>
-                                <figure class="design-figure">
-                                    <a href="assets/images/turn-based-combat/skill-guardians-blood.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/skill-guardians-blood.png" width="1914" height="1632" alt="Skill data asset for Guardian's Blood with two steps: damage on the caster on step index 0 and the Shield status on all allies on step index 1" loading="lazy"></a>
-                                    <figcaption>Guardian's Blood: the first key damages the caster, the second gives Shield to all allies.</figcaption>
-                                </figure>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">Each hit is an <code>ExecuteSkillStep</code> key on the sequence. Through <code>BP_MasterDirector</code>, the character runs the steps with that index. Moving a key moves the hit. Every character inherits this from <code>BP_CharacterParent</code>.</p>
+                                <div class="media-row single">
+                                    <figure class="design-figure">
+                                        <a href="assets/images/turn-based-combat/flow-event-keys.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/flow-event-keys.png" width="2108" height="1268" alt="Diagram: two ExecuteSkillStep event keys on the Level Sequence go through BP_MasterDirector to the two steps of the Guardian's Blood skill, matched by step index" loading="lazy"></a>
+                                        <figcaption>Guardian's Blood: each key applies the steps with its index.</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/graph-master-director.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/graph-master-director.png" width="1913" height="909" alt="BP_MasterDirector event graph with QTEStart, QTEEnd, ParryWindowOpen, ParryWindowClosed, ExecuteSkillStep and MoveToAttackPosition" loading="lazy"></a>
+                                        <figcaption>BP_MasterDirector: one event per key type.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="A skill's event keys in Sequencer and its steps in the skill data asset">
+                                            <source src="assets/videos/turn-based-adding-skill.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A skill's keys and its steps.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                         </section>
 
                         <section class="iteration">
-                            <h4 class="section-heading"><span class="section-name">Preparing skills</span> A workflow written for the team</h4>
-                            <p class="iteration-note">My teammates also needed to create skills and their sequences. I wrote the workflow as a list of steps and went through it with them. After that they created new skills and skill sequences on their own.</p>
-                            <div class="design-table-wrap">
-                                <table class="design-table">
-                                    <thead>
-                                        <tr><th>Step</th><th>What to do</th><th>Where</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>1</td><td>Create a Level Sequence for the attack. Use the binding names <code>BP_Hero01</code> and <code>BP_Enemy01</code>, so any character can be bound to it.</td><td>Sequencer</td></tr>
-                                        <tr><td>2</td><td>Add the animation, the attack camera, effects and sound.</td><td>Sequencer</td></tr>
-                                        <tr><td>3</td><td>Add an <code>ExecuteSkillStep</code> event key on each hit. Mark the last one as the last attack.</td><td>Sequencer</td></tr>
-                                        <tr><td>4</td><td>Add the other event keys the attack needs: <code>MoveToAttackPosition</code>, <code>QTEStart</code> and <code>QTEEnd</code>, or the parry window keys for an enemy.</td><td>Sequencer</td></tr>
-                                        <tr><td>5</td><td>Create a skill data asset. Set its name, AP cost, targeting and type, and choose the new sequence.</td><td>Skill data asset</td></tr>
-                                        <tr><td>6</td><td>Add the steps: target rule, effect, step index and amount.</td><td>Skill data asset</td></tr>
-                                        <tr><td>7</td><td>Add the skill to the character's attack list.</td><td>Character data asset</td></tr>
-                                    </tbody>
-                                </table>
+                            <h4 class="section-heading"><span class="section-name">Tactics</span> Every turn is a choice</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Make the player think each turn, instead of always using the strongest skill.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>We gave every skill an AP cost and a type. Targets resist some types. Statuses change who the enemies attack.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>We wanted the player to weigh cost, resistances and statuses on every turn.</p>
+                                <ul class="modal-did">
+                                    <li><strong>AP:</strong> every skill costs AP, and the heroes share one AP pool.</li>
+                                    <li><strong>Loadout (my design):</strong> before a fight, the player picks 3 of each hero's 5 skills in the main menu.</li>
+                                    <li><strong>Types:</strong> Physical, White, Black and Blood. An enemy's health bar shows its type.</li>
+                                    <li><strong>Statuses:</strong> Shield protects allies. Taunt pulls enemy attacks onto one hero.</li>
+                                    <li><strong>Enemies:</strong> they attack a taunting hero first, otherwise a random one. Multi-target attacks hit every hero. Right after the dog shields itself, it uses a laser attack.</li>
+                                </ul>
                             </div>
-                            <div class="media-row">
-                                <figure class="design-figure fit fit-dark">
-                                    <a href="assets/images/turn-based-combat/hero-attack-list.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/hero-attack-list.png" width="898" height="870" alt="Character data asset DA_Hero1 with an Attacks list of six skill data assets and a counter-attack" loading="lazy"></a>
-                                    <figcaption>Step 7: the attack list of a hero. Each entry is a skill data asset.</figcaption>
-                                </figure>
-                                <figure class="design-figure clip crop">
-                                    <div class="video-slot"><span class="video-slot-label">Video coming soon</span><span class="video-slot-title">Creating a new skill</span></div>
-                                    <figcaption>A new skill from start to finish: sequence, event keys, data asset, then the skill in game.</figcaption>
-                                </figure>
+                            <div class="phase">
+                                <h5 class="phase-title">How I built it</h5>
+                                <p class="iteration-note">Enemy decisions live in <code>BP_CharacterParent</code>. Each enemy can override <code>EnemyPlayRandomAttack</code>, as the dog does. <code>PickEnemyTarget</code> takes a taunting hero first, otherwise a random one.</p>
+                            </div>
+                        </section>
+
+                        <section class="iteration">
+                            <h4 class="section-heading"><span class="section-name">Team workflow</span> Teammates add skills on their own</h4>
+                            <div class="phase">
+                                <p class="design-point problem"><span class="design-point-label">Design goal</span>Let my teammates create skills and sequences without waiting on me.</p>
+                                <p class="design-point decision"><span class="design-point-label">Design decision</span>I wrote the workflow as a 7-step checklist and went through it with them.</p>
+                                <p class="design-point reason"><span class="design-point-label">Why this decision</span>I wanted a list anyone can follow and check. After one walkthrough they created skills and sequences on their own.</p>
+                                <div class="design-table-wrap">
+                                    <table class="design-table">
+                                        <thead>
+                                            <tr><th>Step</th><th>What to do</th><th>Where</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>1</td><td>Create a Level Sequence for the attack. Use the binding names <code>Player</code> and <code>Enemy</code>.</td><td>Sequencer</td></tr>
+                                            <tr><td>2</td><td>Add the animation, the attack camera, effects and sound.</td><td>Sequencer</td></tr>
+                                            <tr><td>3</td><td>Add an <code>ExecuteSkillStep</code> key on each hit. Mark the last one as the last attack.</td><td>Sequencer</td></tr>
+                                            <tr><td>4</td><td>Add the other keys: <code>MoveToAttackPosition</code>, <code>QTEStart</code> and <code>QTEEnd</code>, or the parry window keys for an enemy.</td><td>Sequencer</td></tr>
+                                            <tr><td>5</td><td>Create a skill data asset. Set its name, AP cost, targeting and type, and choose the sequence.</td><td>Skill data asset</td></tr>
+                                            <tr><td>6</td><td>Add the steps: target rule, effect, step index and amount.</td><td>Skill data asset</td></tr>
+                                            <tr><td>7</td><td>Add the skill to the character's attack list.</td><td>Character data asset</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="media-row">
+                                    <figure class="design-figure fit fit-dark">
+                                        <a href="assets/images/turn-based-combat/hero-attack-list.png" target="_blank" rel="noopener"><img src="assets/images/turn-based-combat/hero-attack-list.png" width="898" height="870" alt="Character data asset DA_Hero1 with an Attacks list of six skill data assets and a counter-attack" loading="lazy"></a>
+                                        <figcaption>Step 7: a hero's attack list.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1920" height="1080" aria-label="Creating a new skill in the editor, from the sequence to the data assets">
+                                            <source src="assets/videos/turn-based-new-skill.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>A new skill, start to finish.</figcaption>
+                                    </figure>
+                                    <figure class="design-figure clip crop">
+                                        <video loop muted playsinline preload="none" data-lazy-video width="1280" height="720" aria-label="The new attack used in a fight against each hero">
+                                            <source src="assets/videos/turn-based-new-skill-result.mp4" type="video/mp4">
+                                        </video>
+                                        <figcaption>The new attack in game.</figcaption>
+                                    </figure>
+                                </div>
                             </div>
                         </section>
                     </div>
@@ -1583,7 +1668,7 @@
         <button class="lightbox-close" type="button" aria-label="Close image">×</button>
     </div>
 
-    <script src="script.js?v=20261022a"></script>
+    <script src="script.js?v=20261022b"></script>
 
 </body>
 </html>
