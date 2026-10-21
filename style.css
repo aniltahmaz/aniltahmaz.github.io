@@ -1329,14 +1329,30 @@ body {
     color: #c4c4c4;
 }
 
-/* Permission tables: narrow, centred tick columns; the last column holds a short time */
+/* Permission tables: narrow, centred tick columns, then a short time and a short reason */
 .perm-table th,
 .perm-table td { padding: 9px 8px; }
-.perm-table td:last-child { white-space: nowrap; }
+.perm-table td:first-child,
+.perm-table .perm-time { white-space: nowrap; }
 .perm-table th + th,
 .perm-table td + td { text-align: center; }
 .perm-table .perm-yes { color: #00ff88; font-weight: 700; }
 .perm-table .perm-no { color: #555; }
+
+/* The reason beside each row, pointed to by an arrow */
+.perm-table th.perm-note,
+.perm-table td.perm-note {
+    min-width: 22em;
+    padding-left: 12px;
+    text-align: left;
+}
+.perm-table td.perm-note { color: var(--text-dim); }
+.perm-table td.perm-note:not(:empty)::before {
+    content: "→";
+    margin-right: 6px;
+    color: var(--accent);
+    font-weight: 700;
+}
 .design-table td:first-child { color: #fff; }
 .design-table tr:last-child td { border-bottom: none; }
 .design-table td + td,
@@ -1515,7 +1531,8 @@ body {
     text-align: center;
 }
 
-.modal-body code {
+.modal-body code,
+.case-did code {
     background: rgba(0, 0, 0, 0.4);
     border: 1px solid var(--border);
     padding: 2px 7px;
