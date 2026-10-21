@@ -1,14 +1,25 @@
-﻿:root {
-    --bg:          #0a0a0a;
-    --sidebar-bg:  #111111;
-    --card-bg:     #141414;
-    --border:      #222;
-    --accent:      #00d4ff;
-    --accent-glow: rgba(0, 212, 255, 0.15);
-    --itch:        #fa5c5c;
-    --text:        #e0e0e0;
-    --text-dim:    #9c9c9c;
+﻿/* Minimal but framed: one readable typeface and one text colour on a dark grey page.
+   Cards, facts, tables and figures sit in thin frames with softly rounded corners.
+   One soft blue marks a few small things; no glows, shadows or emoji. */
+:root {
+    --bg:          #212226;
+    --panel-bg:    #1b1c1f;   /* the sidebar, a step darker than the page */
+    --surface:     #292a2f;   /* framed parts: cards, facts, tables, the contents panel */
+    --surface-2:   #313238;   /* table heads */
+    --text:        #e6e6e6;
+    --accent:      #7fb8d6;   /* soft blue, used sparingly */
+    --accent-soft: rgba(127, 184, 214, 0.14);
+    --line:        #37383e;   /* frames and rules */
+    --line-strong: #56585f;   /* a frame that is pointed at */
+    --code-bg:     rgba(255, 255, 255, 0.07);
     --radius:      10px;
+    --radius-sm:   6px;
+    --font:        'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono:        ui-monospace, 'Cascadia Code', Consolas, Menlo, monospace;
+    --page:        1400px;    /* the home page, right of the sidebar */
+    --panel:       230px;     /* the sidebar */
+    --case:        1080px;    /* a case study */
+    --gutter:      40px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -16,1546 +27,356 @@ html { scroll-behavior: smooth; }
 
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.7;
-    overflow: hidden;
-    height: 100vh;
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* The list behind an open project stays still */
+body.modal-open { overflow: hidden; }
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+a:hover {
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
+}
+
+strong { font-weight: 600; }
+img, video { max-width: 100%; }
+
+code {
+    padding: 1px 6px;
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.86em;
 }
 
 /* ══════════════════════════
-   LAYOUT
+   SIDEBAR — photo, skills and contact, fixed to the left edge
    ══════════════════════════ */
-.layout { display: flex; height: 100vh; }
+body { padding-left: var(--panel); }
 
-/* ══════════════════════════
-   SIDEBAR
-   ══════════════════════════ */
-.sidebar {
-    width: 280px;
-    flex-shrink: 0;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    height: 100vh;
-    overflow-x: hidden;
+.side-panel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    width: var(--panel);
     overflow-y: auto;
+    padding: 36px 24px 28px;
+    background: var(--panel-bg);
+    border-right: 1px solid var(--line);
+    font-size: 0.88rem;
+    line-height: 1.6;
     scrollbar-width: none;
 }
 
-.sidebar::-webkit-scrollbar { display: none; }
-
-.sidebar-inner {
-    height: 100%;
-    padding: 36px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
+.side-panel::-webkit-scrollbar { display: none; }
 
 .profile-photo {
-    width: 130px; height: 130px;
-    border-radius: 50%; overflow: hidden;
-    border: 3px solid var(--border);
-    flex-shrink: 0;
-    margin-bottom: 14px;
-    transition: border-color 0.4s;
-}
-.profile-photo:hover { border-color: var(--accent); }
-.profile-photo img {
-    width: 100%; height: 100%;
-    object-fit: cover; display: block;
+    display: block;
+    width: 112px;
+    height: 112px;
+    margin-bottom: 18px;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.name {
-    font-size: 1.3rem; font-weight: 900;
-    letter-spacing: 2px; margin: 0;
-    text-align: center; color: #fff;
-}
+.side-place { margin: 0; }
 
-.title {
-    color: var(--accent); font-size: 0.78rem;
-    font-weight: 600; text-transform: uppercase;
-    letter-spacing: 1px; margin: 4px 0 0;
-    text-align: center;
-}
-
-.title-focus {
-    color: #ccc; font-size: 0.75rem;
-    font-weight: 600; letter-spacing: 1px;
-    margin: 2px 0 0; text-align: center;
-}
-
-.divider {
-    width: 50px; height: 1px;
-    background: var(--border);
-    margin: 12px 0; flex-shrink: 0;
-}
-
-.info-block {
-    width: 100%; display: flex;
-    flex-direction: column; gap: 4px;
-}
-
-.info-item {
-    display: flex; align-items: center;
-    gap: 10px; font-size: 0.85rem; color: #ccc;
-}
-
-.info-icon {
-    font-size: 0.95rem; width: 22px;
-    text-align: center; flex-shrink: 0;
-}
-
-.sidebar-section { width: 100%; }
-
-.sidebar-section h3 {
-    font-size: 0.75rem; text-transform: uppercase;
-    letter-spacing: 2px; color: var(--text-dim);
-    margin: 0 0 6px;
-}
-
-.skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-
-.skill-tag {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--border);
-    padding: 3px 10px; font-size: 0.75rem;
-    border-radius: 4px; color: #ccc;
-    transition: border-color 0.3s, color 0.3s;
-}
-.skill-tag:hover { border-color: var(--accent); color: var(--accent); }
-
-.social-links { display: flex; flex-direction: column; gap: 3px; }
-
-.social-link {
-    display: flex; align-items: center; gap: 10px;
-    color: #ccc; text-decoration: none;
-    font-size: 0.82rem; padding: 3px 0;
-    transition: color 0.3s;
-}
-.social-link:hover { color: var(--accent); }
-
-.social-icon {
-    width: 26px; height: 26px; display: flex;
-    align-items: center; justify-content: center;
-    background: rgba(255,255,255,0.06);
-    border-radius: 6px; font-size: 0.75rem;
-    font-weight: 900; flex-shrink: 0;
-}
-
-.resume-btn {
-    display: block; width: 100%; margin-top: 14px;
-    padding: 12px 16px; background: var(--accent);
-    color: #000; text-align: center; text-decoration: none;
-    font-weight: 900; font-size: 0.78rem;
-    text-transform: uppercase; letter-spacing: 1.5px;
-    border-radius: var(--radius); flex-shrink: 0;
-    transition: transform 0.2s, box-shadow 0.3s;
-}
-.resume-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px var(--accent-glow);
-}
-
-/* ══════════════════════════
-   MAIN CONTENT
-   ══════════════════════════ */
-.content {
-    flex: 1; min-width: 0;
-    height: 100vh; overflow-y: auto;
-    padding: 36px 40px 0;
-}
-
-.content::-webkit-scrollbar { width: 6px; }
-.content::-webkit-scrollbar-track { background: var(--bg); }
-.content::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-.content::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-.section {
-    margin-bottom: 36px; padding-bottom: 36px;
-    border-bottom: 1px solid var(--border);
-}
-.section:last-of-type { border-bottom: none; }
-
-.section-title {
-    font-size: 1.5rem; font-weight: 900;
-    letter-spacing: -0.5px; margin: 0 0 14px; color: #fff;
-}
-
-/* ══════════════════════════
-   TOP GRID — ABOUT + HIGHLIGHTS
-   ══════════════════════════ */
-.top-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    align-items: start;
-}
-
-.about-card p {
+.side-title {
+    margin: 22px 0 8px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
     font-size: 0.95rem;
-    color: #bbb;
+    font-weight: 600;
+}
+
+.side-list {
     margin: 0;
-    line-height: 1.8;
+    padding: 0;
+    list-style: none;
 }
 
-.highlights {
+.side-list li + li { margin-top: 2px; }
+.side-links a { overflow-wrap: anywhere; }
+
+.resume-link {
+    display: block;
+    margin-top: 22px;
+    padding: 8px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.resume-link:hover {
+    background: var(--surface-2);
+    border-color: var(--text);
+}
+
+/* ══════════════════════════
+   HEADER AND PAGE — centred in the space right of the sidebar
+   ══════════════════════════ */
+.site-header,
+.layout,
+.site-footer {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding-right: var(--gutter);
+    padding-left: var(--gutter);
+}
+
+.site-header {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px 32px;
+    padding-top: 36px;
+    padding-bottom: 28px;
+}
+
+.site-name {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* The name, then "Technical Game Designer" after a thin rule; the same in a project's header */
+.site-name a,
+.modal-home {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 18px;
+    text-decoration: none;
+}
+
+.site-role {
+    padding-left: 18px;
+    border-left: 1px solid var(--line-strong);
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    font-weight: 500;
+}
+
+.site-nav a { text-decoration: none; }
+.site-nav a:hover { text-decoration: underline; }
+
+/* ══════════════════════════
+   INTRO — the About text, then the experience numbers in four frames
+   ══════════════════════════ */
+.intro { padding: 8px 0 56px; }
+
+.intro-text p {
+    max-width: 860px;
+    margin: 0 0 24px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* The experience numbers as small framed labels in one row */
+.intro-facts {
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-/* ── Current Focus ── */
-.focus-card {
-    background: rgba(0, 212, 255, 0.03);
-    border: 1px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 12px 16px;
+.intro-facts li {
+    padding: 6px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    line-height: 1.4;
 }
 
-.focus-header {
+.intro-facts strong {
+    margin-right: 4px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* ══════════════════════════
+   PROJECTS — two large framed cards per row
+   ══════════════════════════ */
+
+/* A label with a rule running out to the right */
+.section-title {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 3px;
+    gap: 16px;
+    margin: 0 0 24px;
+    font-size: 1.35rem;
+    font-weight: 600;
 }
 
-.current-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #00ff88;
-    animation: pulse 2s ease-in-out infinite;
+.section-title::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--line);
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
-    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,255,136,0); }
-}
-
-.focus-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #00ff88;
-}
-
-.focus-card h3 {
-    margin: 0 0 2px;
-    font-size: 0.9rem;
-    font-weight: 800;
-    color: #fff;
-}
-
-.focus-card p {
-    margin: 0;
-    font-size: 0.78rem;
-    color: #aaa;
-}
-
-/* ── Experience in numbers, beside the About text ── */
-.stat-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-}
-
-.stat {
-    padding: 12px 16px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-}
-
-.stat-value {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 900;
-    line-height: 1.1;
-    color: var(--accent);
-}
-
-.stat-label {
-    display: block;
-    margin-top: 4px;
-    font-size: 0.82rem;
-    line-height: 1.35;
-    color: #bbb;
-}
-
-/* ═══════════════════════════════════════
-   PROJECT CARDS — SIMPLIFIED TEASER
-   ═══════════════════════════════════════ */
 .projects-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
 }
 
 .project-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: border-color 0.2s;
 }
 
-.project-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px var(--accent-glow);
-}
+.project-card:hover { border-color: var(--accent); }
 
 /* The whole card is a link to the project's own address */
 .card-trigger {
-    all: unset;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
-    width: 100%;
     height: 100%;
-    box-sizing: border-box;
+    color: inherit;
+    text-decoration: none;
 }
 
-.card-trigger:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: -2px;
-}
+.card-trigger:focus-visible { outline-offset: -2px; }
 
-/* ── Video ── */
 .card-video {
     position: relative;
-    width: 100%;
-    height: 220px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #000;
+    border-bottom: 1px solid var(--line);
 }
 
 .card-video video {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    transition: transform 0.6s ease;
 }
 
-.project-card:hover .card-video video {
-    transform: scale(1.05);
+.card-video-overlay { display: none; }
+
+.card-shipped-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 2px 10px;
+    background: rgba(33, 34, 38, 0.88);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
 }
 
 /* Stand-in until a project's video is recorded */
 .video-placeholder {
-    width: 100%;
-    height: 100%;
-    min-height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    text-align: center;
-    background: linear-gradient(135deg, #101418 0%, #0a0a0a 100%);
-    color: var(--text-dim);
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
-
-.card-video-overlay {
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 12px;
-    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7) 100%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
-
-.project-card:hover .card-video-overlay {
-    opacity: 1;
-}
-
-.card-expand-hint {
-    display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 7px 14px;
-    background: var(--accent);
-    color: #000;
-    font-weight: 900;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 5px;
+    justify-content: center;
+    padding: 16px;
+    background: var(--surface);
+    font-size: 0.85rem;
+    text-align: center;
 }
 
-/* Always-visible "shipped" badge on a featured card video */
-.card-shipped-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 11px;
-    background: #00ff88;
-    color: #002915;
-    font-weight: 900;
-    font-size: 0.75rem;
-    letter-spacing: 0.3px;
-    border-radius: 5px;
-    box-shadow: 0 4px 14px rgba(0, 255, 136, 0.35);
-}
-
-/* Featured card — subtle highlight for the flagship shipped title */
-.project-card.is-featured {
-    border-color: rgba(0, 255, 136, 0.4);
-}
-
-.project-card.is-featured:hover {
-    border-color: #00ff88;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0, 255, 136, 0.25);
-}
-
-/* ── Card Summary ── */
 .card-summary {
-    padding: 14px 16px 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     flex: 1;
+    padding: 18px 20px 16px;
 }
 
 .card-summary h3 {
-    margin: 0;
+    margin: 0 0 6px;
     font-size: 1.15rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.3px;
-    line-height: 1.2;
+    font-weight: 600;
+    line-height: 1.35;
 }
 
 .card-pitch {
-    margin: 0;
-    font-size: 0.92rem;
-    color: #c4c4c4;
-    line-height: 1.5;
     flex: 1;
+    margin: 0 0 14px;
+    font-size: 0.95rem;
+    line-height: 1.55;
 }
 
-/* The same facts on every card: my role, the design areas I worked on, then engine, team and duration */
+/* My role, on a line of its own at the foot of the card. The design-area, engine,
+   team and duration tags stay in the markup for later category filters, but are not shown */
 .card-facts {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
-}
-
-.card-role {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.3;
-}
-
-.card-role-label {
-    margin-right: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--text-dim);
-}
-
-.project-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-
-.tag {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--border);
-    padding: 3px 9px; font-size: 0.75rem;
-    border-radius: 4px; color: #bbb;
-}
-
-/* Design areas I worked on in the project, set apart from the engine, team and duration */
-.tag.design {
-    background: rgba(0, 212, 255, 0.06);
-    border-color: rgba(0, 212, 255, 0.3);
-    color: #9fe8ff;
-}
-
-.duration-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 3px 9px;
-    background: rgba(0, 212, 255, 0.06);
-    border: 1px solid var(--accent);
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    white-space: nowrap;
-}
-
-/* ── Modal Body — metrics, what I did, how it works ── */
-.modal-body {
-    padding: 18px 22px 22px;
-}
-
-.modal-section-title {
-    margin: 0 0 10px;
-    font-size: 0.75rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-}
-
-.modal-did {
-    margin: 0;
-    padding: 0 0 0 14px;
-    list-style: none;
-}
-
-.modal-did li {
-    position: relative;
-    padding-left: 8px;
-    margin-bottom: 9px;
-    font-size: 0.95rem;
-    color: #c4c4c4;
-    line-height: 1.55;
-}
-
-.modal-did li::before {
-    content: '▸';
-    position: absolute;
-    left: -10px;
-    color: var(--accent);
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-.modal-did li strong { color: #fff; }
-
-.modal-hero-body .modal-section-title { margin: 6px 0 -2px; }
-.modal-hero-body .modal-did li:last-child { margin-bottom: 0; }
-
-.modal-note {
-    margin: 2px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
     font-size: 0.82rem;
-    font-style: italic;
-    color: var(--text-dim);
+    font-weight: 500;
 }
 
-.modal-note a {
-    color: var(--accent);
-    text-decoration: none;
-}
+.card-role-label,
+.project-tags { display: none; }
 
-.modal-note a:hover { text-decoration: underline; }
-
-.modal-details {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-}
-
-/* ── Long-form "How it works": iterations, design images, tables ── */
-.modal-lead {
-    margin: 0 0 18px;
-    font-size: 0.95rem;
-    color: #c4c4c4;
-    line-height: 1.55;
-}
-
-.iteration {
-    position: relative;
-    margin-left: 5px;
-    padding: 0 0 22px 20px;
-    border-left: 2px solid var(--border);
-}
-
-.iteration:last-of-type { padding-bottom: 4px; }
-
-/* Divider between iterations */
-.iteration + .iteration {
-    padding-top: 22px;
-    border-top: 1px solid #444;
-}
-
-.iteration + .iteration::before { top: 26px; }
-
-.iteration::before {
-    content: '';
-    position: absolute;
-    left: -7px;
-    top: 4px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--card-bg);
-    box-sizing: border-box;
-}
-
-.iteration-date {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--accent);
-}
-
-.iteration h4 {
-    margin: 2px 0 10px;
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.2px;
-}
-
-.iteration-signal,
-.iteration-note {
-    margin: 0 0 12px;
-    font-size: 0.95rem;
-    color: #c4c4c4;
-    line-height: 1.55;
-}
-
-.iteration-signal {
-    padding: 10px 14px;
-    background: rgba(255, 60, 60, 0.04);
-    border: 1px solid rgba(255, 60, 60, 0.15);
-    border-radius: 6px;
-}
-
-.iteration-signal strong { color: #ff6b6b; }
-.iteration-note strong { color: #fff; }
-
-.iteration .modal-did { margin-bottom: 12px; }
-
-/* Text and tables left, design images right */
-.iteration-cols {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: 28px;
-    align-items: start;
-}
-
-.design-figure {
-    margin: 0 0 14px;
-}
-
-.design-figure.is-narrow { max-width: 480px; }
-
-/* Two design images side by side */
-.figure-pair {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    align-items: start;
-}
-
-/* One explanation on the left, the screenshot or clip it describes on the right */
-.iteration-cols.explain-row {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    margin-bottom: 22px;
-}
-
-.iteration-cols.explain-row:last-child { margin-bottom: 0; }
-
-.explain-row .modal-did { margin-bottom: 0; }
-.explain-row .design-table-wrap { margin-bottom: 0; }
-
-/* One heading per section: its name in the accent colour, then what the section says */
-.iteration h4.section-heading {
-    margin: 0 0 12px;
-    line-height: 1.35;
-}
-
-.section-name { color: var(--accent); }
-
-.section-name::after {
-    content: '—';
-    margin: 0 8px;
-    font-weight: 400;
-    color: var(--text-dim);
-}
-
-/* Section layout: the explanation on top, its screenshots and clips in a row below */
-.iteration .design-brief { margin: 0 0 14px; }
-
-/* Cards laid out this way open in a narrower panel with wider side margins */
-@media (min-width: 901px) {
-    .modal-shell:has(.modal-body.is-stacked) { max-width: 1360px; }
-    .modal-body.is-stacked { padding: 24px 48px 30px; }
-}
-
-/* Case-study header: title, one-line summary, four facts, then the video beside what I did */
-.case-head {
-    padding: 30px 48px 28px;
-    border-bottom: 1px solid var(--border);
-}
-
-.case-head .modal-title { font-size: 1.9rem; }
-
-.case-head .modal-pitch {
-    max-width: 860px;
-    margin-top: 8px;
-}
-
-.case-facts {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 14px 24px;
-    margin: 22px 0 24px;
-    padding: 16px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.case-facts dt {
-    margin-bottom: 4px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-}
-
-.case-facts dd {
-    margin: 0;
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.35;
-}
-
-.case-intro {
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: 30px;
-    align-items: start;
-}
-
-.case-video {
-    aspect-ratio: 16 / 9;
-    background: #000;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.case-video video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.case-did .modal-did li:last-child { margin-bottom: 0; }
-.case-did .modal-note { margin-top: 14px; }
-.case-did .modal-play-btn { margin-top: 16px; }
-
-/* End of a project: back to the list, or on to the next project */
-.case-end {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-top: 28px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-}
-
-.case-end-all {
-    all: unset;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #bbb;
-    transition: color 0.2s;
-}
-
-.case-end-all:hover { color: var(--accent); }
-
-.case-end-all:focus-visible,
-.case-end-next:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-}
-
-.case-end-next {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-    padding: 12px 18px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-decoration: none;
-    text-align: right;
-    transition: border-color 0.2s;
-}
-
-.case-end-next:hover { border-color: var(--accent); }
-
-.case-end-next span {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-}
-
-.case-end-next strong {
-    font-size: 1rem;
-    font-weight: 900;
-    color: #fff;
-}
-
-.is-stacked > .modal-details:first-child {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
-}
-
-@media (max-width: 900px) {
-    .case-head { padding: 20px 16px 18px; }
-    .case-head .modal-title { padding-right: 44px; font-size: 1.35rem; }
-    .case-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 16px 0 18px; }
-    .case-intro { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-}
-
-/* Contents rail: the section list in the gap left of the panel, on wide screens.
-   A card that has it is wider and stays centred, so the gaps on both sides are equal.
-   The rail is a thin strip of numbers that opens to show the names when pointed at;
-   where the gap is wide enough the names are always shown */
-.section-rail {
-    display: none;
-    counter-reset: section;
-}
-
-.section-rail-label {
-    visibility: hidden;
-    overflow: hidden;
-    white-space: nowrap;
-    padding: 0 8px 8px 10px;
-    font-size: 0.75rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-}
-
-.section-rail .rail-text { display: none; }
-
-.section-rail button::before {
-    counter-increment: section;
-    content: counter(section, decimal-leading-zero);
-    flex: none;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--text-dim);
-}
-
-.section-rail button {
-    all: unset;
-    box-sizing: border-box;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    min-height: 32px;
-    padding: 7px 0;
-    border-left: 2px solid transparent;
-    border-radius: 0 6px 6px 0;
-    color: #c4c4c4;
+.site-footer {
+    padding-top: 56px;
+    padding-bottom: 36px;
     font-size: 0.82rem;
-    font-weight: 600;
-    line-height: 1.35;
-    cursor: pointer;
-    transition: color 0.2s, background 0.2s, border-color 0.2s;
 }
 
-.section-rail button:hover { color: #fff; background: rgba(255, 255, 255, 0.04); }
-
-.section-rail button.active {
-    color: var(--accent);
-    border-left-color: var(--accent);
-    background: rgba(0, 212, 255, 0.08);
-}
-
-.section-rail button.active::before { color: var(--accent); }
-
-.section-rail button:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: -2px;
-}
-
-@media (min-width: 1400px) {
-    .project-modal .modal-frame:has(.section-rail:not([hidden])) { padding: 0 48px; }
-    .project-modal .modal-shell:has(.section-rail:not([hidden])) { max-width: 1460px; }
-
-    .section-rail:not([hidden]) {
-        position: absolute;
-        top: 0;
-        left: -52px;
-        z-index: 20;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        width: 40px;
-        max-height: calc(100vh - 64px);
-        overflow-x: hidden;
-        overflow-y: auto;
-        scrollbar-width: none;
-        padding: 12px 0;
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        box-sizing: border-box;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Opened: pointed at, or reached with the keyboard */
-    .section-rail:not([hidden]):hover,
-    .section-rail:not([hidden]):has(button:focus-visible) {
-        width: max-content;
-        max-width: 340px;
-        padding: 12px 8px;
-    }
-
-    .section-rail:hover .section-rail-label,
-    .section-rail:has(button:focus-visible) .section-rail-label { visibility: visible; }
-
-    /* One line per name, so the items stay where they were when the strip opens */
-    .section-rail:hover .rail-text,
-    .section-rail:has(button:focus-visible) .rail-text {
-        display: inline;
-        white-space: nowrap;
-    }
-
-    .section-rail:hover button,
-    .section-rail:has(button:focus-visible) button {
-        justify-content: flex-start;
-        padding: 7px 8px 7px 10px;
-    }
-}
-
-/* Enough room beside the panel: the names are always shown */
-@media (min-width: 1808px) {
-    .section-rail:not([hidden]),
-    .section-rail:not([hidden]):hover,
-    .section-rail:not([hidden]):has(button:focus-visible) {
-        left: -162px;
-        width: 150px;
-        padding: 12px 8px;
-    }
-
-    .section-rail .section-rail-label { visibility: visible; }
-
-    .section-rail .rail-text,
-    .section-rail:hover .rail-text,
-    .section-rail:has(button:focus-visible) .rail-text {
-        display: inline;
-        white-space: normal;
-    }
-
-    .section-rail button {
-        justify-content: flex-start;
-        padding: 7px 8px 7px 10px;
-    }
-}
-
-/* Contents bar: the same list inside the panel, when there is no room for the rail.
-   It stays at the top of the panel while it scrolls */
-.section-nav {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0 0 18px;
-    padding: 10px 16px 10px 0;
-    background: var(--card-bg);
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.section-nav::-webkit-scrollbar { display: none; }
-
-.section-nav-label {
-    flex: none;
-    margin-right: 6px;
-    font-size: 0.75rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
-}
-
-.section-nav button {
-    flex: none;
-    padding: 5px 11px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: #c4c4c4;
-    font: inherit;
-    font-size: 0.78rem;
-    font-weight: 600;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
-}
-
-.section-nav button:hover { border-color: var(--accent); color: #fff; }
-
-.section-nav button.active {
-    background: rgba(0, 212, 255, 0.12);
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-@media (min-width: 1400px) {
-    .section-nav { display: none; }
-}
-
-/* Two blocks of text or two tables side by side */
-.text-cols {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 28px;
-    align-items: start;
-}
-
-.text-cols .design-table-wrap { margin-bottom: 10px; }
-
-.media-row {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 20px;
-    align-items: start;
-    margin-top: 14px;
-}
-
-/* A lone screenshot or clip sits in the middle */
-.media-row.single {
-    grid-template-columns: minmax(0, 860px);
-    justify-content: center;
-}
-
-.media-row.single.is-small { grid-template-columns: minmax(0, 640px); }
-
-.media-row.single figcaption { text-align: center; }
-
-.media-row .design-figure { margin-bottom: 0; }
-
-/* Screenshots in a row are cropped to one shape so they line up (the full image opens on click) */
-.media-row { --shot-ratio: 16 / 10; }
-.media-row.shots-tall { --shot-ratio: 1507 / 1235; }
-.media-row.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-/* A clip cropped to the same shape as the screenshot beside it */
-.media-row .clip.crop video {
-    aspect-ratio: var(--shot-ratio);
-    object-fit: cover;
-}
-
-.media-row:not(.single) .design-figure img {
-    aspect-ratio: var(--shot-ratio);
-    object-fit: cover;
-    object-position: top;
-}
-.media-row.single.is-wide { grid-template-columns: minmax(0, 1100px); }
-
-/* A table or flow chart drawn by hand. Wide screens show the drawing,
-   narrow screens show the same content as a table that can be read without zooming. */
-.table-slot {
-    position: relative;
-    margin: 0 0 14px;
-}
-
-.table-slot .drawn { margin: 0 auto; }
-
-@media (min-width: 769px) {
-    .table-slot .design-table-wrap {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        margin: 0;
-        border: 0;
-        overflow: hidden;
-        clip-path: inset(50%);
-    }
-}
-
-@media (max-width: 768px) {
-    .table-slot .drawn { display: none; }
-    .table-slot .design-table-wrap { margin: 0; }
-}
-
-.media-row.shots-data { --shot-ratio: 1914 / 1632; }
-
-/* A screenshot shown whole inside the row's shape instead of cropped to it */
-.media-row .design-figure.fit img { object-fit: contain; }
-.media-row .design-figure.fit-dark a { background: #242424; }
-
-/* A frame that holds the place of a clip that is not recorded yet */
-.video-slot {
-    aspect-ratio: 16 / 9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 16px;
-    text-align: center;
-    background: linear-gradient(135deg, #101418 0%, #0a0a0a 100%);
-    border: 1px dashed #4a5361;
-    border-radius: 6px;
-}
-
-.media-row:not(.single) .clip.crop .video-slot { aspect-ratio: var(--shot-ratio); }
-
-.video-slot-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-}
-
-.video-slot-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text);
-}
-
-.media-row .design-figure.focus-combo img { object-position: 0 67%; }
-.media-row .design-figure.focus-bottom img { object-position: bottom; }
-
-/* Quiet link from a row's text to the Blueprint graph behind it; opens in the lightbox */
-.graph-link-row { margin: 0; }
-.graph-link-row + .iteration-note { margin-top: 12px; }
-
-.graph-link {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-decoration: none;
-    cursor: zoom-in;
-}
-
-.graph-link:hover { text-decoration: underline; }
-
-/* A graph link in a caption is text, not a framed thumbnail */
-.design-figure figcaption a {
-    display: inline;
-    background: none;
-    border: 0;
-    border-radius: 0;
-}
-
-/* The link never breaks in the middle of its own words */
-.graph-link { white-space: nowrap; }
-
-/* Every visual is exactly as wide as its column. Tall screenshots show a 460px-high
-   window of themselves (the full image opens on click), so the column stays even. */
-.explain-row .design-figure img {
-    max-height: 460px;
-    object-fit: cover;
-    object-position: top;
-}
-
-/* The two data screenshots get a taller window: the table fits whole,
-   the weapon type shows its montages and combo steps */
-.explain-row .design-figure.is-tall img { max-height: 620px; }
-.explain-row .design-figure.focus-combo img { object-position: 0 67%; }
-.explain-row .design-figure.focus-bottom img { object-position: bottom; }
-
-.explain-row .design-figure:last-child,
-.explain-row .figure-pair .design-figure { margin-bottom: 0; }
-
-/* A clip that sits in the flow like a design image */
-.clip video {
-    display: block;
-    width: 100%;
-    height: auto;
-    background: #000;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-}
-
-/* Row of in-game screenshots */
-.shot-row-images {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-}
-
-/* A clip that fills the text column down to the bottom of the image column */
-.iteration-cols.is-stretch { align-items: stretch; }
-
-.iteration-fill {
-    display: flex;
-    flex-direction: column;
-}
-
-.clip-fill {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
-}
-
-.clip-fill-frame {
-    flex: 1;
-    position: relative;
-    min-height: 0;
-}
-
-.clip-fill-frame video {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    background: #000;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-}
-
-.clip-fill figcaption { text-align: center; }
-
-.shot-row-images video {
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    background: #000;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-}
-
-.design-figure a {
-    display: block;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-    cursor: zoom-in;
-    transition: border-color 0.3s;
-}
-
-.design-figure a:hover { border-color: var(--accent); }
-
-.design-figure img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-.design-figure figcaption {
-    margin-top: 6px;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    line-height: 1.4;
-}
-
-.design-table-wrap {
-    margin: 0 0 14px;
-    overflow-x: auto;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-}
-
-.design-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.88rem;
-    line-height: 1.45;
-}
-
-.design-table th,
-.design-table td {
-    padding: 9px 12px;
-    text-align: left;
-    vertical-align: top;
-    border-bottom: 1px solid var(--border);
-}
-
-.design-table th {
-    background: rgba(255,255,255,0.03);
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-dim);
-}
-
-.design-table td { color: #c4c4c4; }
-
-/* A short term that must stay on one line, such as a hyphenated name in a narrow column */
-.nowrap { white-space: nowrap; }
-
-/* The length of a timing window, under its column heading */
-.design-table .th-time {
-    display: block;
-    margin-top: 2px;
-    font-weight: 600;
-    letter-spacing: 0;
-    text-transform: none;
-    color: #c4c4c4;
-}
-
-/* Permission tables: narrow, centred tick columns, then a short time and a short reason */
-.perm-table th,
-.perm-table td { padding: 9px 8px; }
-.perm-table td:first-child,
-.perm-table .perm-time { white-space: nowrap; }
-.perm-table th + th,
-.perm-table td + td { text-align: center; }
-.perm-table .perm-yes { color: #00ff88; font-weight: 700; }
-.perm-table .perm-no { color: #555; }
-
-/* The reason beside each row, pointed to by an arrow */
-.perm-table th.perm-note,
-.perm-table td.perm-note {
-    min-width: 22em;
-    padding-left: 12px;
-    text-align: left;
-}
-.perm-table td.perm-note { color: var(--text-dim); }
-.perm-table td.perm-note:not(:empty)::before {
-    content: "→";
-    margin-right: 6px;
-    color: var(--accent);
-    font-weight: 700;
-}
-.design-table td:first-child { color: #fff; }
-.design-table tr:last-child td { border-bottom: none; }
-.design-table td + td,
-.design-table th + th { border-left: 1px solid var(--border); }
-
-.tech-block {
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-    line-height: 1.55;
-}
-
-.tech-block p {
-    margin: 0 0 4px;
-    color: #bbb;
-    max-width: none;
-}
-
-.tech-block p:last-child { margin-bottom: 0; }
-
-.tech-block strong { color: #fff; }
-
-.tech-block-label {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 3px 8px;
-    border-radius: 3px;
-    margin-bottom: 6px;
-}
-
-.tech-block.problem {
-    background: rgba(255, 60, 60, 0.04);
-    border: 1px solid rgba(255, 60, 60, 0.15);
-}
-
-.tech-block.problem .tech-block-label {
-    background: rgba(255, 60, 60, 0.2);
-    color: #ff6b6b;
-}
-
-.tech-block.solution {
-    background: rgba(0, 255, 136, 0.04);
-    border: 1px solid rgba(0, 255, 136, 0.15);
-}
-
-.tech-block.solution .tech-block-label {
-    background: rgba(0, 255, 136, 0.2);
-    color: #00ff88;
-}
-
-.tech-block.decision {
-    background: rgba(0, 212, 255, 0.04);
-    border: 1px solid rgba(0, 212, 255, 0.18);
-}
-
-.tech-block.decision .tech-block-label {
-    background: rgba(0, 212, 255, 0.2);
-    color: var(--accent);
-}
-
-/* A section in two parts: the design (problem, decision, reason, detail, visuals),
-   then how it was built (a short explanation and its visuals). Plain text, no boxes. */
-.phase { margin-top: 14px; }
-
-.phase + .phase {
-    margin-top: 28px;
-    padding-top: 22px;
-    border-top: 1px solid #2a2a2a;
-}
-
-.phase-title {
-    margin: 0 0 12px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-.design-point {
-    margin: 0 0 12px;
-    font-size: 0.95rem;
-    line-height: 1.55;
-    color: #c4c4c4;
-}
-
-/* Same size as the text it introduces, set apart by color */
-.design-point-label {
-    margin-right: 6px;
-    font-weight: 700;
-}
-
-.design-point-label::after { content: ":"; }
-
-.design-point.problem .design-point-label { color: #ff6b6b; }
-.design-point.decision .design-point-label { color: var(--accent); }
-.design-point.reason .design-point-label { color: #00ff88; }
-
-.phase .media-row:first-child { margin-top: 0; }
-
-/* Problem, decision and reasoning side by side, above the detail */
-.design-brief {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin-bottom: 4px;
-}
-
-.design-brief .tech-block { margin-bottom: 0; }
-
-.tech-metrics {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 18px;
-}
-
-.tech-metric {
-    flex: 1;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px 8px;
-    text-align: center;
-    transition: border-color 0.3s;
-}
-
-.tech-metric:hover { border-color: var(--accent); }
-
-.metric-value {
-    display: block;
-    font-size: 1.35rem;
-    font-weight: 900;
-    color: var(--accent);
-    line-height: 1;
-}
-
-.metric-label {
-    display: block;
-    margin-top: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #fff;
-}
-
-.metric-desc {
-    display: block;
-    margin-top: 3px;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    line-height: 1.3;
-}
-
-.role-badge {
-    margin-top: -6px;
-    color: var(--accent);
-    font-size: 0.8rem;
-    font-weight: 800;
-    line-height: 1.4;
-    letter-spacing: 0.3px;
-}
-
-.code-block {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 10px 14px;
-    margin: 8px 0;
-    font-family: 'Courier New', monospace;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-align: center;
-}
-
-.modal-body code,
-.case-did code {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid var(--border);
-    padding: 2px 7px;
-    border-radius: 3px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.88rem;
-    color: var(--accent);
-}
-
-/* ═══════════════════════════════════════
-   PROJECT DETAIL MODAL
-   ═══════════════════════════════════════ */
+.site-footer p { margin: 0; }
+
+/* ══════════════════════════
+   PROJECT — a full page over the list
+   ══════════════════════════ */
 .project-modal {
     position: fixed;
     inset: 0;
     z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px;
     opacity: 0;
-    transition: opacity 0.25s ease;
     pointer-events: none;
+    transition: opacity 0.2s ease;
 }
 
 .project-modal.open {
@@ -1566,185 +387,612 @@ body {
 .modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.78);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: var(--bg);
 }
 
-/* Centres the panel; clicks beside it fall through to the backdrop */
-.modal-frame {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    width: 100%;
-    box-sizing: border-box;
-    pointer-events: none;
-}
-
-.project-modal.open .modal-frame > * { pointer-events: auto; }
-
-/* The panel, its close button and, beside it, the contents rail */
+.modal-frame,
 .modal-shell {
     position: relative;
-    flex: 0 1 auto;
-    width: 100%;
-    max-width: 1600px;
-    min-width: 0;
+    height: 100%;
 }
 
 .modal-container {
     position: relative;
-    width: 100%;
-    max-width: 1600px;
-    max-height: calc(100vh - 64px);
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 14px;
+    height: 100vh;
+    height: 100dvh;
     overflow-y: auto;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
-    transform: translateY(12px) scale(0.98);
-    transition: transform 0.25s ease;
+    background: var(--bg);
 }
 
-.project-modal.open .modal-container {
-    transform: translateY(0) scale(1);
-}
-
-.modal-container::-webkit-scrollbar { width: 8px; }
-.modal-container::-webkit-scrollbar-track { background: transparent; }
-.modal-container::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-.modal-container::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-.modal-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 10;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.85);
-    border: 1px solid var(--border);
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1;
-    cursor: pointer;
+.modal-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: var(--case);
+    margin: 0 auto;
+    padding: 32px var(--gutter) 28px;
+}
+
+.modal-home,
+.modal-close,
+.case-end-all {
+    padding: 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.modal-home {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.modal-close {
+    flex: none;
+    padding: 5px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .modal-close:hover {
-    background: var(--accent);
-    color: #000;
-    border-color: var(--accent);
-    transform: rotate(90deg);
+    background: var(--surface-2);
+    border-color: var(--text);
 }
 
 .modal-content {
-    display: flex;
-    flex-direction: column;
+    max-width: var(--case);
+    margin: 0 auto;
+    padding: 0 var(--gutter) 64px;
 }
 
-/* ── Modal Hero — video left, details right ── */
-.modal-hero {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    border-bottom: 1px solid var(--border);
-    min-height: 480px;
-}
-
-.modal-video {
-    flex: 0 0 min(50%, 720px);
-    width: min(50%, 720px);
-    min-width: 0;
-    max-height: 560px;
-    background: #000;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-.modal-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.modal-hero-body {
-    flex: 1 1 0;
-    width: auto;
-    min-width: 0;
-    padding: 22px 26px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 12px;
-    box-sizing: border-box;
-}
-
+/* Case-study head: title, one-line summary, four facts, then the video beside what I did */
 .modal-title {
-    margin: 0;
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -0.5px;
-    line-height: 1.15;
+    margin: 0 0 10px;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
 }
 
 .modal-pitch {
+    max-width: 78ch;
     margin: 0;
-    font-size: 1rem;
-    color: #c4c4c4;
-    line-height: 1.55;
+    font-size: 1.05rem;
 }
 
-.modal-meta-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+/* The four facts in one frame, split by thin rules */
+.case-facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 24px 0 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.case-facts > div { padding: 14px 18px; }
+.case-facts > div + div { border-left: 1px solid var(--line); }
+.case-facts dt {
+    margin-bottom: 2px;
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.case-facts dd {
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.case-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.case-video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.case-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-section-title {
+    margin: 0 0 12px;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.modal-did {
+    max-width: 78ch;
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+}
+
+.modal-did li {
+    position: relative;
+    margin-bottom: 12px;
+    padding-left: 18px;
+    line-height: 1.65;
+}
+
+.modal-did li::before {
+    content: "";
+    position: absolute;
+    top: 0.68em;
+    left: 2px;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+.case-did .modal-did li:last-child { margin-bottom: 0; }
+
+.modal-note {
+    max-width: 78ch;
+    margin: 16px 0 0;
+    font-size: 0.88rem;
 }
 
 .modal-play-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 4px;
-    padding: 11px 20px;
-    background: var(--itch);
-    color: #fff;
+    display: inline-block;
+    margin-top: 18px;
+    padding: 7px 16px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
     text-decoration: none;
-    font-weight: 800;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 8px;
-    align-self: flex-start;
-    transition: transform 0.2s, box-shadow 0.3s;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .modal-play-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(250, 92, 92, 0.3);
+    background: var(--surface-2);
+    border-color: var(--text);
 }
 
-.modal-play-btn.is-github {
-    background: #f0f0f0;
-    color: #111;
+/* "How it works": the long part of a case study */
+.modal-body {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
 }
 
-.modal-play-btn.is-github:hover {
-    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.18);
+.modal-lead {
+    max-width: 78ch;
+    margin: 0 0 20px;
 }
-/* ═══════════════════════════════════════
-   IMAGE LIGHTBOX — sits above the project modal
-   ═══════════════════════════════════════ */
+
+/* Contents: the section names as small buttons in a framed panel that floats at the top
+   while the page scrolls. The script also fills a rail for wide screens, which this style does not use. */
+.section-rail,
+.section-rail:not([hidden]) { display: none; }
+
+.section-nav {
+    position: sticky;
+    top: 12px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 32px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
+.section-nav::-webkit-scrollbar { display: none; }
+
+.section-nav-label {
+    flex: none;
+    margin-right: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.section-nav button {
+    flex: none;
+    padding: 4px 12px;
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: inherit;
+    font: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.section-nav button:hover { border-color: var(--line-strong); }
+
+.section-nav button.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.iteration { padding-bottom: 56px; }
+
+.iteration + .iteration {
+    padding-top: 48px;
+    border-top: 1px solid var(--line);
+}
+
+.iteration:last-of-type { padding-bottom: 0; }
+
+/* One heading per section: its short name as a small label, then what the section says */
+.iteration h4 {
+    margin: 0 0 28px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.section-name {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+/* A heading that is only the section's name: the name is the heading itself */
+.section-heading.title-only .section-name {
+    display: inline;
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.iteration-note,
+.design-point {
+    max-width: 78ch;
+    margin: 0 0 24px;
+    line-height: 1.7;
+}
+
+.design-point p { margin: 0 0 12px; }
+.design-point .modal-did { margin: 4px 0 0; }
+.design-point > :last-child { margin-bottom: 0; }
+
+/* A section in two parts: the design, then how it was built */
+.phase + .phase { margin-top: 48px; }
+
+.phase-title {
+    margin: 0 0 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* "Design goal", "Design decision", "Why this decision", "What I would change"…:
+   each label is a short heading on its own line above its text */
+.design-point-label,
+.tech-block-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+/* The older layout of the same three points, shown the same way */
+.design-brief { margin: 0 0 8px; }
+
+.tech-block {
+    max-width: 78ch;
+    margin: 0 0 24px;
+    line-height: 1.7;
+}
+
+.tech-block p { margin: 0 0 12px; }
+.tech-block p:last-child { margin-bottom: 0; }
+
+/* The title line above a table */
+.table-title {
+    max-width: 78ch;
+    margin: 32px 0 10px;
+}
+
+.graph-link {
+    font-size: 0.9em;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: zoom-in;
+}
+
+/* Two blocks of text or two tables side by side */
+.text-cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 28px;
+    align-items: start;
+}
+
+/* ══════════════════════════
+   SCREENSHOTS AND CLIPS — each in a thin rounded frame
+   ══════════════════════════ */
+.design-figure { margin: 0 0 18px; }
+
+.design-figure a {
+    display: block;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    cursor: zoom-in;
+    transition: border-color 0.2s;
+}
+
+.design-figure a:hover { border-color: var(--line-strong); }
+
+.design-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.design-figure figcaption {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* A graph link in a caption is text, not a framed thumbnail */
+.design-figure figcaption a {
+    display: inline;
+    background: none;
+    border: 0;
+    border-radius: 0;
+}
+
+.clip video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #000;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+
+.media-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 24px;
+    align-items: start;
+    margin: 28px 0;
+}
+
+.phase .media-row:first-child { margin-top: 0; }
+.phase > .media-row:last-child { margin-bottom: 0; }
+.media-row .design-figure { margin-bottom: 0; }
+
+/* A lone screenshot or clip sits in the middle */
+.media-row.single {
+    grid-template-columns: minmax(0, 860px);
+    justify-content: center;
+}
+
+.media-row.single.is-small { grid-template-columns: minmax(0, 640px); }
+.media-row.single.is-wide { grid-template-columns: minmax(0, 1100px); }
+.media-row.single figcaption { text-align: center; }
+
+/* Screenshots in a row are cropped to one shape so they line up (the full image opens on click) */
+.media-row { --shot-ratio: 16 / 10; }
+.media-row.shots-tall { --shot-ratio: 1507 / 1235; }
+.media-row.shots-data { --shot-ratio: 1914 / 1632; }
+
+.media-row:not(.single) .design-figure img {
+    aspect-ratio: var(--shot-ratio);
+    object-fit: cover;
+    object-position: top;
+}
+
+.media-row .design-figure.focus-combo img { object-position: 0 67%; }
+.media-row .design-figure.focus-bottom img { object-position: bottom; }
+
+/* A screenshot shown whole inside the row's shape instead of cropped to it */
+.media-row .design-figure.fit img { object-fit: contain; }
+.media-row .design-figure.fit-dark a { background: #242424; }
+
+/* A clip cropped to the same shape as the screenshot beside it */
+.media-row .clip.crop video {
+    aspect-ratio: var(--shot-ratio);
+    object-fit: cover;
+}
+
+/* A frame that holds the place of a clip that is not recorded yet */
+.video-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    aspect-ratio: 16 / 9;
+    padding: 16px;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.media-row:not(.single) .clip.crop .video-slot { aspect-ratio: var(--shot-ratio); }
+
+.video-slot-label {
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.video-slot-title { font-weight: 500; }
+
+/* Row of in-game clips, two to a row */
+.shot-row-images {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.shot-row-images video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background: #000;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+
+/* A table or flow chart drawn by hand. Wide screens show the drawing,
+   narrow screens show the same content as a table that can be read without zooming */
+.table-slot {
+    position: relative;
+    margin: 0 0 28px;
+}
+
+.table-slot .drawn { margin: 0 auto; }
+
+@media (min-width: 769px) {
+    .table-slot .design-table-wrap {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        overflow: hidden;
+        border: 0;
+        clip-path: inset(50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .table-slot .drawn { display: none; }
+    .table-slot .design-table-wrap { margin: 0; }
+}
+
+/* ══════════════════════════
+   TABLES — in a frame, with a shaded head row and rules between rows
+   ══════════════════════════ */
+.design-table-wrap {
+    margin: 0 0 28px;
+    overflow-x: auto;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.design-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.design-table th,
+.design-table td {
+    padding: 11px 14px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+}
+
+.design-table th {
+    background: var(--surface-2);
+    font-size: 0.85rem;
+    font-weight: 600;
+    vertical-align: bottom;
+}
+
+.design-table tr:last-child td { border-bottom: none; }
+
+/* A short term that must stay on one line, such as a hyphenated name in a narrow column */
+.nowrap { white-space: nowrap; }
+
+/* The length of a timing window, under its column heading */
+.design-table .th-time {
+    display: block;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+/* Permission tables: centred tick columns, then a short time */
+.perm-table th,
+.perm-table td { padding: 11px 12px; }
+
+.perm-table th:first-child,
+.perm-table td:first-child { padding-left: 14px; }
+
+.perm-table td:first-child,
+.perm-table .perm-time { white-space: nowrap; }
+
+.perm-table th + th,
+.perm-table td + td { text-align: center; }
+
+.perm-table .perm-yes { font-weight: 700; }
+
+/* ══════════════════════════
+   END OF A PROJECT: back to the list, or on to the next project
+   ══════════════════════════ */
+.case-end {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+}
+
+.case-end-all {
+    font-weight: 500;
+}
+
+.case-end-all:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.case-end-next {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 12px 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-align: right;
+    text-decoration: none;
+    transition: border-color 0.2s;
+}
+
+.case-end-next:hover { border-color: var(--accent); }
+.case-end-next span { font-size: 0.85rem; }
+.case-end-next strong { font-weight: 600; }
+
+/* ══════════════════════════
+   IMAGE LIGHTBOX — sits above the project
+   ══════════════════════════ */
 .image-lightbox {
     position: fixed;
     inset: 0;
@@ -1753,36 +1001,35 @@ body {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: rgba(0, 0, 0, 0.92);
+    background: rgba(10, 10, 10, 0.94);
     cursor: zoom-out;
 }
 
 .image-lightbox[hidden] { display: none; }
 
 .lightbox-figure {
-    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     max-width: 100%;
     max-height: 100%;
+    margin: 0;
 }
 
 .lightbox-figure img {
     display: block;
-    max-width: 100%;
-    max-height: calc(100vh - 96px);
     width: auto;
     height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 96px);
     background: #fff;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     cursor: default;
 }
 
 .lightbox-figure figcaption {
     font-size: 0.85rem;
-    color: #bbb;
     text-align: center;
 }
 
@@ -1792,247 +1039,93 @@ body {
     right: 16px;
     width: 40px;
     height: 40px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
     border-radius: 50%;
-    background: rgba(0,0,0,0.85);
-    border: 1px solid var(--border);
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
+    color: var(--text);
+    font: inherit;
+    font-size: 1.4rem;
     line-height: 1;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, border-color 0.2s;
 }
 
-.lightbox-close:hover {
-    background: var(--accent);
-    color: #000;
-    border-color: var(--accent);
-}
+.lightbox-close:hover { border-color: var(--text); }
 
 /* ══════════════════════════
-   TIMELINE
+   NARROW SCREENS
    ══════════════════════════ */
-.timeline {
-    position: relative;
-    padding-left: 32px; margin-top: 8px;
-}
 
-.timeline::before {
-    content: ''; position: absolute;
-    left: 7px; top: 8px; bottom: 8px;
-    width: 2px; background: var(--border);
-}
-
-.timeline-item { position: relative; margin-bottom: 28px; }
-.timeline-item:last-child { margin-bottom: 0; }
-
-.timeline-dot {
-    position: absolute; left: -29px; top: 8px;
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--accent); border: 2px solid var(--bg);
-}
-
-.timeline-date {
-    font-size: 0.75rem; font-weight: 700;
-    color: var(--accent); text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.timeline-content h3 { margin: 4px 0 2px; font-size: 1rem; color: #fff; }
-
-.timeline-company { font-size: 0.8rem; color: var(--text-dim); margin: 0 0 4px; }
-
-.timeline-content p:last-child { font-size: 0.85rem; color: #aaa; margin: 0; }
-
-/* ══════════════════════════
-   FOOTER
-   ══════════════════════════ */
-footer {
-    text-align: center; padding: 28px 0;
-    font-size: 0.75rem; color: #444;
-}
-
-/* ══════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════ */
-
-@media (min-width: 1600px) {
-    .card-video { height: 260px; }
-}
-
-/* Roomier profile panel, only where the screen is also tall enough to show all of it */
-@media (min-width: 1600px) and (min-height: 900px) {
-    .sidebar { width: 320px; }
-    .sidebar-inner { padding: 36px 30px; }
-    .profile-photo { width: 140px; height: 140px; margin-bottom: 16px; }
-    .name { font-size: 1.5rem; }
-    .title { font-size: 0.85rem; margin-top: 8px; }
-    .divider { margin: 16px 0; }
-    .info-block { gap: 10px; }
-    .info-item { font-size: 0.9rem; }
-    .skill-tag { font-size: 0.78rem; padding: 4px 12px; }
-    .skill-tags { gap: 6px; }
-    .social-links { gap: 8px; }
-    .social-link { font-size: 0.88rem; }
-    .social-icon { width: 30px; height: 30px; font-size: 0.8rem; }
-    .sidebar-section h3 { font-size: 0.75rem; margin-bottom: 12px; }
-    .resume-btn { margin-top: 16px; padding: 14px 20px; font-size: 0.82rem; }
-}
-
+/* No room for the sidebar: it becomes a band above the About text,
+   with the photo beside the location and the lists flowing as text */
 @media (max-width: 1100px) {
-    .top-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr 1fr; }
+    :root { --gutter: 24px; }
+    body { padding-left: 0; }
+
+    .side-panel {
+        position: static;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 0 18px;
+        align-items: center;
+        width: auto;
+        margin: 0 calc(-1 * var(--gutter)) 32px;
+        padding: 20px var(--gutter);
+        overflow: visible;
+        border-top: 1px solid var(--line);
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .profile-photo { width: 72px; height: 72px; margin: 0; }
+
+    .side-title,
+    .side-list,
+    .resume-link { grid-column: 1 / -1; }
+
+    .side-title { margin-top: 16px; padding-top: 14px; }
+
+    .side-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px 20px;
+    }
+
+    .side-list li + li { margin-top: 0; }
+    .resume-link { justify-self: start; margin-top: 16px; }
 }
 
 @media (max-width: 900px) {
-    .content { padding: 28px 24px 0; }
-    .projects-grid { grid-template-columns: 1fr 1fr; }
-    .card-video { height: 200px; }
+    .case-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .case-facts > div:nth-child(3) { border-left: 0; }
+    .case-facts > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    .case-intro { grid-template-columns: minmax(0, 1fr); gap: 20px; }
 
-    .modal-hero { flex-direction: column; min-height: 0; }
-    .modal-video, .modal-hero-body { flex: 1 1 auto; width: 100%; }
-    .modal-video { aspect-ratio: 16 / 9; max-height: 260px; }
-
-    .iteration-cols { grid-template-columns: minmax(0, 1fr); gap: 0; }
-    .iteration-cols.explain-row { grid-template-columns: minmax(0, 1fr); margin-bottom: 26px; }
-    .design-brief { grid-template-columns: minmax(0, 1fr); }
-    .text-cols, .media-row, .media-row.single, .media-row.cols-3 { grid-template-columns: minmax(0, 1fr); }
-    .explain-row .design-figure:last-child { margin-top: 4px; }
-    .clip-fill { min-height: 0; }
-    .clip-fill-frame video {
-        position: static;
-        transform: none;
-        display: block;
-        width: min(100%, 360px);
-        height: auto;
-        margin: 0 auto;
-    }
-
-    .tech-metrics { flex-direction: column; gap: 6px; }
-    .tech-metric {
-        display: flex; align-items: center;
-        gap: 14px; text-align: left; padding: 10px 14px;
-    }
-    .metric-value { font-size: 1.1rem; min-width: 60px; }
-    .metric-label { margin-top: 0; }
-    .metric-desc { margin-top: 1px; }
+    .text-cols,
+    .media-row,
+    .media-row.single { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* Body scroll lock while modal is open */
-body.modal-open { overflow: hidden; }
+@media (max-width: 720px) {
+    :root { --gutter: 16px; }
 
-@media (max-width: 768px) {
-    body { overflow: auto; height: auto; }
-    .layout { flex-direction: column; height: auto; }
+    .site-header,
+    .modal-header { padding-top: 22px; padding-bottom: 18px; }
 
-    .sidebar {
-        width: 100%; height: auto; overflow: visible;
-        border-right: none; border-bottom: 1px solid var(--border);
+    .site-name,
+    .modal-home { font-size: 1.5rem; }
+
+    /* The role goes under the name */
+    .site-role {
+        flex-basis: 100%;
+        padding-left: 0;
+        border-left: 0;
+        font-size: 0.85rem;
     }
-    .sidebar-inner { padding: 24px 20px; justify-content: flex-start; }
-    .profile-photo { width: 100px; height: 100px; margin-bottom: 10px; }
-    .name { font-size: 1.15rem; }
-    .title { font-size: 0.75rem; }
-    .divider { margin: 10px 0; }
-    .info-item { font-size: 0.78rem; }
-    .info-block { gap: 4px; }
-    .skill-tag { font-size: 0.75rem; padding: 2px 8px; }
-    .skill-tags { gap: 3px; }
-    .social-link { font-size: 0.75rem; }
-    .social-icon { width: 22px; height: 22px; font-size: 0.75rem; }
-    .social-links { gap: 3px; }
-    .sidebar-section h3 { font-size: 0.75rem; margin-bottom: 6px; }
-    .resume-btn { margin-top: 10px; padding: 10px 14px; font-size: 0.75rem; }
 
-    .content { height: auto; overflow-y: visible; padding: 20px 16px 0; }
-    .section-title { font-size: 1.2rem; }
-    .top-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .card-video { height: 200px; }
-    .duration-badge { font-size: 0.75rem; }
+    .intro { padding-bottom: 40px; }
+    .intro-text p { font-size: 1rem; }
+    .projects-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
 
-    .project-modal { padding: 0; }
-    .modal-container {
-        max-height: 100vh;
-        border-radius: 0;
-        border: none;
-    }
-    .modal-close { top: 12px; right: 12px; }
-    .modal-hero-body { padding: 18px 18px 22px; }
-    .modal-title { font-size: 1.25rem; }
-    .modal-body { padding: 14px 16px 18px; }
-    .section-nav { margin-right: 40px; padding-right: 0; }
-}
-
-@media (max-width: 400px) {
-    .sidebar-inner { padding: 20px 16px; }
-    .content { padding: 16px 12px 0; }
-    .profile-photo { width: 80px; height: 80px; }
-    .name { font-size: 1rem; }
-    .card-summary h3 { font-size: 0.92rem; }
-    .card-video { height: 180px; }
-}
-
-@media (max-height: 780px) {
-    .sidebar-inner { padding: 10px 18px; height: auto; min-height: 100%; }
-    .profile-photo { width: 90px; height: 90px; margin-bottom: 8px; }
-    .name { font-size: 1.05rem; }
-    .title { font-size: 0.75rem; }
-    .divider { margin: 5px 0; }
-    .info-item { font-size: 0.75rem; }
-    .info-block { gap: 3px; }
-    .skill-tag { font-size: 0.75rem; padding: 2px 7px; }
-    .skill-tags { gap: 3px; }
-    .social-link { font-size: 0.75rem; }
-    .social-icon { width: 22px; height: 22px; font-size: 0.75rem; }
-    .social-links { gap: 2px; }
-    .sidebar-section h3 { font-size: 0.75rem; margin-bottom: 4px; }
-    .resume-btn { margin-top: 8px; padding: 8px 12px; font-size: 0.75rem; }
-}
-
-@media (min-height: 1000px) {
-    .sidebar-inner { padding: 40px 28px; }
-    .divider { margin: 18px 0; }
-    .profile-photo { width: 150px; height: 150px; margin-bottom: 16px; }
-    .name { font-size: 1.5rem; }
-    .title { font-size: 0.85rem; margin-top: 8px; }
-    .info-block { gap: 8px; }
-    .info-item { font-size: 0.9rem; }
-    .social-links { gap: 6px; }
-    .social-link { font-size: 0.88rem; }
-    .social-icon { width: 30px; height: 30px; }
-    .resume-btn { margin-top: 20px; padding: 14px 20px; font-size: 0.82rem; }
-    .skill-tag { font-size: 0.78rem; padding: 4px 12px; }
-    .skill-tags { gap: 6px; }
-    .sidebar-section h3 { font-size: 0.75rem; margin-bottom: 10px; }
-}
-
-/* Phones: the profile is a compact header, so the projects start within the first screen */
-@media (max-width: 768px) {
-    .sidebar-inner {
-        display: grid;
-        grid-template-columns: auto minmax(0, 1fr);
-        column-gap: 14px;
-        align-items: center;
-        height: auto;
-        padding: 16px;
-    }
-    .profile-photo { grid-row: 1 / span 3; width: 68px; height: 68px; margin-bottom: 0; }
-    .name { font-size: 1.1rem; text-align: left; }
-    .title { margin-top: 2px; font-size: 0.75rem; text-align: left; }
-    .title-focus { text-align: left; }
-    .sidebar .divider { display: none; }
-    .info-block, .sidebar-section, .resume-btn { grid-column: 1 / -1; }
-    .info-block { flex-direction: row; flex-wrap: wrap; gap: 4px 14px; margin-top: 12px; }
-    .info-item { gap: 5px; font-size: 0.78rem; }
-    .info-icon { width: auto; }
-    .sidebar-section { margin-top: 10px; }
-    .sidebar-section h3 { margin-bottom: 5px; }
-    .social-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 10px; }
-    .social-link { min-width: 0; }
-    .social-link span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .resume-btn { margin-top: 12px; padding: 10px 14px; }
+    .modal-title { font-size: 1.5rem; }
+    .iteration h4 { font-size: 1.2rem; }
 }
