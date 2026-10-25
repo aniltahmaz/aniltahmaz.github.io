@@ -46,6 +46,11 @@ var cardVideos = (function() {
 var stats = (function() {
     var waiting = [];
 
+    // The visit itself keeps the home page's title, even when it lands on a project
+    // and count.js loads after the project has renamed the page
+    window.goatcounter = window.goatcounter || {};
+    window.goatcounter.title = document.title;
+
     function send(data) {
         if (window.goatcounter && window.goatcounter.count) window.goatcounter.count(data);
         else waiting.push(data);

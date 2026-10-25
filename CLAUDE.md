@@ -48,6 +48,7 @@ The modal (`#project-modal`) starts empty. `script.js` clones the card's `<templ
   - Every project that opens counts as a page `/project/<id>` with the card title, whether it was opened by a click, a link or Back.
   - Clicks on the resume PDF links count as the event `resume-download`, and `mailto:` links as `email-click`.
   - Counts made before `count.js` has loaded wait for it.
+  - The page load always counts under the home page's title, even when the visit lands on a project.
   - GoatCounter does not count on localhost, so local previews stay out of the numbers.
 - **Scrolling.** The home page scrolls the window as normal. An open project is a full page over it that scrolls inside `.modal-container`, so scroll code for a case study must target that element. `body.modal-open` stops the list behind it from scrolling.
 
