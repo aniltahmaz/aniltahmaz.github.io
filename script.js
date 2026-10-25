@@ -41,6 +41,44 @@ var cardVideos = (function() {
     };
 })();
 
+// ── Visitor stats (GoatCounter, no cookies): page views, every project opened,
+//    resume downloads and email clicks. GoatCounter skips localhost ──
+var stats = (function() {
+    var waiting = [];
+
+    function send(data) {
+        if (window.goatcounter && window.goatcounter.count) window.goatcounter.count(data);
+        else waiting.push(data);
+    }
+
+    // count.js loads on its own, so a project opened from its address waits for it
+    var counter = document.querySelector('script[data-goatcounter]');
+    if (counter) {
+        counter.addEventListener('load', function() {
+            waiting.splice(0).forEach(send);
+        });
+    }
+
+    // Resume and email links anywhere on the page. The middle button opens a link too
+    function countLink(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (/Anil_Tahmaz_Resume\.pdf/.test(href)) send({ path: 'resume-download', title: 'Resume (PDF)', event: true });
+        else if (/^mailto:/.test(href)) send({ path: 'email-click', title: 'Email', event: true });
+    }
+
+    document.addEventListener('click', countLink);
+    document.addEventListener('auxclick', countLink);
+
+    return {
+        // A project counts as its own page, so the dashboard shows which ones were read
+        project: function(id, title) {
+            send({ path: '/project/' + id, title: title });
+        }
+    };
+})();
+
 // ── Project Detail Modal ───────────────────────────────────────
 (function() {
     var modal = document.getElementById('project-modal');
@@ -58,6 +96,7 @@ var cardVideos = (function() {
         currentCard = card;
         var cardTitle = card.querySelector('.card-summary h3');
         if (cardTitle) document.title = cardTitle.textContent + ' | Anil Tahmaz';
+        stats.project(card.dataset.projectId, cardTitle ? cardTitle.textContent : card.dataset.projectId);
 
         modalContent.innerHTML = '';
         modalContent.appendChild(template.content.cloneNode(true));

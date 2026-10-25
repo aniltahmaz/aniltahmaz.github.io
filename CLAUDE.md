@@ -44,6 +44,11 @@ The modal (`#project-modal`) starts empty. `script.js` clones the card's `<templ
 - **Lightbox.** Clicking `.design-figure a` or an `a[data-lightbox]` inside the modal opens the image. Text links can set `data-alt` and `data-caption`. Otherwise the caption comes from the `<figcaption>`.
 - **Video loading.** Card-front videos use `preload="none"` with a `poster`. They play only while on screen and pause while a modal is open. Modal videos autoplay. Add `data-lazy-video` (with `preload="none"`, no `autoplay`) to a clip further down a case study so it loads and plays only when scrolled into view.
 - **Full-screen clips.** When a modal opens, every video in a `.clip` figure or `.case-video` gets a `.clip-fullscreen` button in its top-right corner. Clicking the button or the video plays it full screen with the player controls, which matters for the long editor walkthroughs. Leaving full screen hides the controls and the clip keeps looping in place. iPhones use `webkitEnterFullscreen`. The desktop app's preview pane does not complete full-screen requests, so test this in Chrome.
+- **Visitor stats.** GoatCounter counts visits without cookies (added 25 October 2026). The dashboard is `aniltahmaz.goatcounter.com`, on Anil's account. `count.js` loads at the end of `index.html` and counts each page load. The `stats` module in `script.js` adds the rest:
+  - Every project that opens counts as a page `/project/<id>` with the card title, whether it was opened by a click, a link or Back.
+  - Clicks on the resume PDF links count as the event `resume-download`, and `mailto:` links as `email-click`.
+  - Counts made before `count.js` has loaded wait for it.
+  - GoatCounter does not count on localhost, so local previews stay out of the numbers.
 - **Scrolling.** The home page scrolls the window as normal. An open project is a full page over it that scrolls inside `.modal-container`, so scroll code for a case study must target that element. `body.modal-open` stops the list behind it from scrolling.
 
 ## Case study layout
