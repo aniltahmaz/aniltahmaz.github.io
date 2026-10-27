@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Anil Tahmaz — Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    /* One A4 page. Sizes are in pt so the print matches the 22 October PDF. */
+    @page { size: A4; margin: 0; }
+
+    :root {
+        --ink:  #1b1c1f;
+        --blue: #1f6a91;
+        --rule: #c9ccd2;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; background: #fff; }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        font-size: 8.89pt;
+        line-height: 1.3;
+        color: var(--ink);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 22pt 36.2pt 0 36.8pt;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .u {
+        text-decoration: underline;
+        text-decoration-color: var(--rule);
+        text-decoration-thickness: 0.75pt;
+        text-underline-offset: 2.4pt;
+    }
+
+    .sep { padding: 0 4.6pt; }
+
+    h1 {
+        margin: 0;
+        font-size: 20pt;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+    }
+
+    .role {
+        margin: 1pt 0 0;
+        font-size: 10.5pt;
+        font-weight: 600;
+        color: var(--blue);
+    }
+
+    .contact { margin: 5pt 0 0; line-height: 1.43; }
+
+    h2 {
+        margin: 9pt 0 4.2pt;
+        padding-bottom: 2.6pt;
+        border-bottom: 0.75pt solid var(--rule);
+        font-size: 10pt;
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--blue);
+    }
+
+    h2 .light { font-weight: 400; }
+
+    p { margin: 0; }
+
+    .item { margin-top: 5pt; }
+    .item:first-of-type { margin-top: 0; }
+
+    .head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12pt;
+    }
+
+    .head b { font-weight: 600; }
+
+    .tech { margin-top: 0.3pt; }
+
+    ul {
+        margin: 0.8pt 0 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        position: relative;
+        padding-left: 12.9pt;
+        margin-bottom: 0.7pt;
+    }
+
+    li::before {
+        content: "";
+        position: absolute;
+        left: 1.4pt;
+        top: 4.3pt;
+        width: 3pt;
+        height: 3pt;
+        border-radius: 50%;
+        background: var(--blue);
+    }
+
+    .also { margin-top: 4pt; }
+
+    .edu .head { margin-top: 4.2pt; }
+    .edu .head:first-child { margin-top: 0; }
+
+    .skills {
+        display: grid;
+        grid-template-columns: 77.4pt 1fr;
+        row-gap: 1.9pt;
+    }
+
+    .skills b { font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+
+    <h1>Anil Tahmaz</h1>
+    <p class="role">Technical Game Designer · Systems &amp; Combat</p>
+
+    <p class="contact">
+        Warsaw, Poland<span class="sep">·</span>+48 504 586 359<span class="sep">·</span><a class="u" href="mailto:anil.tahmaz@gmail.com">anil.tahmaz@gmail.com</a><br>
+        Portfolio: <a class="u" href="https://aniltahmaz.com/">aniltahmaz.com</a><span class="sep">·</span><a class="u" href="https://www.linkedin.com/in/aniltahmaz/">linkedin.com/in/aniltahmaz</a><span class="sep">·</span><a class="u" href="https://github.com/aniltahmaz">github.com/aniltahmaz</a><span class="sep">·</span><a class="u" href="https://aniltahmaz.itch.io/">aniltahmaz.itch.io</a>
+    </p>
+
+    <h2>Profile</h2>
+    <p>I am a technical game designer with 5+ years of experience in Unity and Unreal Engine. When I design a mechanic or a system, I work out its details and depth, prototype it and make my decisions from how it feels in play. I started with mobile games: 50+ designs at my own studio, Tolian Games, and one soft-launched management game, Fancy Restaurant, with 300K+ downloads. I now focus on PC and console games in Unreal Engine.</p>
+
+    <h2>Selected projects <span class="light">· case studies at <a href="https://aniltahmaz.com/">aniltahmaz.com</a></span></h2>
+
+    <div class="item">
+        <div class="head"><span><b>Cinematic Turn-Based Combat</b> · Technical &amp; Combat Designer</span><span>Team of 7 · 5 weeks</span></div>
+        <p class="tech">Unreal Engine 5 · Blueprints · Level Sequencer</p>
+        <ul>
+            <li>Made every phase of a turn a Level Sequence. One camera setup frames any attacker and target.</li>
+            <li>Designed the parry window on enemy attacks, the slow-motion counter on the last hit and the QTE multiplier.</li>
+            <li>Built skills as data assets whose steps fire on sequence event keys. All 15 skills run on it. I wrote a 7-step workflow so teammates add skills and sequences on their own.</li>
+        </ul>
+    </div>
+
+    <div class="item">
+        <div class="head"><span><b>Horde &amp; Boss Combat Design</b> · Combat &amp; Technical Designer</span><span>Team of 3 · 1 month</span></div>
+        <p class="tech">Unreal Engine 5 · Blueprints · Multiplayer</p>
+        <ul>
+            <li>Arranged move, attack and dodge windows with Anim Notifies. Each swing locks the player for only 0.2 s.</li>
+            <li>Designed the player moveset and the hit feel: hit-stop, particles and ragdolls pushed in the attack direction.</li>
+            <li>Put weapon stats, meshes and combos into a Data Table and Data Assets, so a new weapon is a row of data. Designed a three-phase boss fight with the team, built around arena objectives and enemy waves.</li>
+        </ul>
+    </div>
+
+    <div class="item">
+        <div class="head"><span><b>Parkour System &amp; Level</b> · Technical Designer</span><span>Solo · 1 week</span></div>
+        <p class="tech">Unity · C#</p>
+        <ul>
+            <li>Built each move as its own state and designed a level whose geometry shows each move before the player reaches it. A&nbsp;scripted camera move turns the 3D run into a side-scroller without a cut.</li>
+        </ul>
+    </div>
+
+    <p class="also">Also in the portfolio: Voxel Destruction System, Learn To Fly flight physics, Voice-Controlled Runner and Clean Energy.</p>
+
+    <h2>Experience</h2>
+
+    <div class="item">
+        <div class="head"><span><b>Tolian Games, Ankara, Turkey</b> · Co-Founder, Game Designer &amp; Developer</span><span>09/2021 – 12/2024</span></div>
+        <ul>
+            <li>Designed 50+ hybrid-casual mobile games with full design documents, and developed 10 of them (<a class="u" href="https://drive.google.com/drive/folders/1iVQqc9psGtf1iKugXBYhwbc8eBxj1_5s?usp=sharing">game list</a>).</li>
+            <li>Fancy Restaurant: built the core loop, upgrade system and economy. I reworked the design four times from funnel data and publisher feedback during a 7-month soft launch with 300K+ downloads.</li>
+            <li>Led a team of 6 developers and artists, and prepared the backlog for each project.</li>
+            <li>Designed the economy balance and monetization for every game. Tested games with the publishers Voodoo, Supersonic and CrazyLabs, and made the creative videos for each game I designed.</li>
+        </ul>
+    </div>
+
+    <div class="item">
+        <div class="head"><span><b>UDO Games, Ankara, Turkey</b> · Game Developer &amp; Designer</span><span>03/2021 – 11/2021</span></div>
+        <ul>
+            <li>Developed 11 hyper-casual games and worked on a hit game as co-developer.</li>
+            <li>Integrated third-party SDKs such as GameAnalytics and Facebook, and contributed to game design.</li>
+        </ul>
+    </div>
+
+    <div class="item">
+        <div class="head"><span><b>Indie, Ankara, Turkey</b> · Game Designer &amp; Developer</span><span>10/2019 – 03/2021</span></div>
+        <ul>
+            <li>Designed and developed a horror PC game in Unity and an RPG PC game in Unreal Engine with Blueprints.</li>
+            <li>Designed, developed and published 2 mobile games on Google Play, with AdMob and Google Play IAP.</li>
+        </ul>
+    </div>
+
+    <h2>Education</h2>
+    <div class="edu">
+        <div class="head"><span><b>Vistula University, Warsaw, Poland</b> · Master's Degree, Computer Science</span><span>In progress</span></div>
+        <div class="head"><span><b>Futuregames Warsaw, Poland</b> · Game Designer program</span><span>09/2025 – 06/2027 (expected)</span></div>
+        <div class="head"><span><b>Hacettepe University, Turkey</b> · Master's Degree, Computer Animation and Game Technologies</span><span>2021</span></div>
+        <div class="head"><span><b>Bilkent University, Turkey</b> · BS, Electrical and Electronics Engineering</span><span>2019</span></div>
+    </div>
+
+    <h2>Skills</h2>
+    <div class="skills">
+        <b>Design</b><span>Systems, combat, level and economy design · Game feel · Prototyping · Design documents · Data analysis</span>
+        <b>Unreal Engine 5</b><span>Blueprints · Level Sequencer · Anim Montages and Notifies · Data Assets and Data Tables · Multiplayer</span>
+        <b>Unity</b><span>C# · Mobile performance · Monetization SDKs (AdMob, Google Play IAP)</span>
+        <b>Other</b><span>C++ · Python · Git · Jira · Machinations.io</span>
+        <b>Languages</b><span>English: IELTS overall band 7.5 (March 2025) · Turkish: native</span>
+    </div>
+
+</div>
+</body>
+</html>
