@@ -173,7 +173,7 @@ These were deferred for later and will be done when we go through each card in d
 - **Parkour:** add a level design section showing how the geometry teaches each move. This needs a layout image and any metrics.
 - **Voice Runner:** decide whether the role becomes "Technical Designer" with an input-design focus, if Anil made those decisions, or whether the card moves to the bottom or is removed. It has no design-area tags until then.
 - **Clean Energy:** the design story is weak. Keep it as is, add the cable-cost balancing, or remove the card.
-- **Card order:** on 22 October 2026 Anil set it to turn-based, combat, parkour, curve bullet, Fancy Restaurant and voxel destruction. The rest follow in no particular order; they are now flight physics, voice runner and clean energy. The same order drives the "Next project" links. Revisit it together with category filters when more projects are added.
+- **Card order:** on 22 October 2026 Anil set it to turn-based, combat, parkour, curve bullet, Fancy Restaurant and voxel destruction. On 28 October combat moved to the top, ahead of turn-based, because he is applying to combat and 3C roles (Techland). The rest follow in no particular order; they are now flight physics, voice runner and clean energy. The same order drives the "Next project" links. Revisit it together with category filters when more projects are added.
 
 ## Content and assets
 
