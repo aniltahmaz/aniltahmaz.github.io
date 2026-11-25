@@ -188,19 +188,8 @@ body { padding-left: var(--panel); }
     text-transform: uppercase;
 }
 
-.site-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 24px;
-    font-weight: 500;
-}
-
-.site-nav a { text-decoration: none; }
-.site-nav a:hover { text-decoration: underline; }
-
 /* ══════════════════════════
-   HERO — what I do in one line, the About text, the numbers and the ways to reach me.
-   A recruiter who only scans the first screen gets all of it.
+   HERO — what I do in one line, then the About text
    ══════════════════════════ */
 .hero { padding: 16px 0 72px; }
 
@@ -216,68 +205,9 @@ body { padding-left: var(--panel); }
 
 .hero-text {
     max-width: 780px;
-    margin: 0 0 28px;
+    margin: 0;
     font-size: 1.08rem;
     line-height: 1.7;
-}
-
-.hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 32px;
-}
-
-.button {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 20px;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
-}
-
-.button:hover {
-    background: var(--surface-2);
-    border-color: var(--text);
-}
-
-.button.is-primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #111317;
-}
-
-.button.is-primary:hover {
-    background: #9ccbe3;
-    border-color: #9ccbe3;
-}
-
-/* The experience numbers as small framed labels in one row */
-.intro-facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.intro-facts li {
-    padding: 6px 14px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    font-size: 0.88rem;
-    line-height: 1.4;
-}
-
-.intro-facts strong {
-    margin-right: 4px;
-    color: var(--accent);
-    font-weight: 700;
 }
 
 /* ══════════════════════════
@@ -305,6 +235,9 @@ body { padding-left: var(--panel); }
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
 }
+
+/* A card marked hidden stays in the page, so its link still opens it, but leaves the list */
+.project-card[hidden] { display: none; }
 
 .project-card {
     display: flex;

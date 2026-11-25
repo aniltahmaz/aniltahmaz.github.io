@@ -130,8 +130,9 @@ var stats = (function() {
     }
 
     // ── End of a project: back to the list, or on to the next project ──
+    // Hidden cards are skipped; one opened from its link goes on to the first card
     function buildCaseEnd(card) {
-        var cards = Array.prototype.slice.call(document.querySelectorAll('.project-card'));
+        var cards = Array.prototype.slice.call(document.querySelectorAll('.project-card:not([hidden])'));
         var next = cards[(cards.indexOf(card) + 1) % cards.length];
         var body = modalContent.querySelector('.modal-body');
         if (!body || next === card) return;
